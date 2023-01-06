@@ -1,0 +1,43 @@
+.applicant-details {
+  padding: 30px 0px;
+  .applicant-details__title {
+    font-size: 20px;
+    color: #555;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .applicant-details__card--wrapper {
+    display: flex;
+    align-items: center;
+    .applicant-details__card {
+      border: 1px solid $primary-color;
+      width: 250px;
+      border-radius: 5px;
+      padding: 10px 13px;
+      .applicant-details__card--flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        .applicant-details__card--title {
+          color: #023b70;
+          font-weight: 500;
+          font-size: 18px;
+        }
+        .applicant-details__card--text {
+          color: #9b9b9b;
+          font-size: 12px;
+          margin-bottom: 6px;
+        }
+        .applicant-details__card--id {
+          color: #3c3c3c;
+          font-size: 14px;
+          margin-bottom: 0;
+        }
+        > img {
+          margin-top: 4px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

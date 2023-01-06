@@ -1,0 +1,35 @@
+.inner-header {
+  padding: 24px 0px;
+  .inner-header__logo {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    @media only screen and (max-width: 768px) {
+      height: 60px;
+    }
+  }
+  .inner-header__member {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    label {
+      font-size: 18px;
+      font-weight: 400;
+      color: #555;
+      margin-bottom: 4px;
+    }
+    .inner-header__input {
+      min-height: 48px;
+      color: #bcbcbc;
+      width: 254px;
+      border: 1px solid #b1b1b1;
+      &::placeholder {
+        color: #bcbcbc;
+      }
+      &:focus {
+        box-shadow: none;
+        outline: none !important;
+      }
+    }
+  }
+}

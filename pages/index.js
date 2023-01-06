@@ -18,7 +18,9 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import logo from "../public/images/logo.png";
-// import appointmentImg from "../public/images/appoint-img.png";
+import appointmentImg from "../public/images/appoint-img.png";
+import InnerHeader from "./InnerHeader";
+import AppointmentCalender from "./AppointmentCalender";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -41,7 +43,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="header">
+      {/* <header className="header">
         <Container>
           <Navbar>
             <NavbarBrand href="/">
@@ -49,11 +51,7 @@ export default function Home() {
             </NavbarBrand>
             <NavbarToggler onClick={navbarToggle} />
             <Collapse isOpen={isOpen} navbar>
-              <Nav className="me-auto" navbar>
-                {/* <NavItem>
-                  <NavLink href="/components/">Link</NavLink>
-                </NavItem> */}
-              </Nav>
+              <Nav className="me-auto" navbar></Nav>
             </Collapse>
           </Navbar>
         </Container>
@@ -63,7 +61,7 @@ export default function Home() {
           <Row className="appointment-form__row">
             <Col md={6} lg={6} xl={6}>
               <div className="appointment-form__img--wrapper">
-                {/* <div className="appointment-form__img"> */}
+                <div className="appointment-form__img"> 
                 <Image
                   alt="img"
                   src="/images/appoint-img.png"
@@ -74,7 +72,7 @@ export default function Home() {
                   //   objectFit: "contain",
                   // }}
                 />
-                {/* </div> */}
+                </div>
               </div>
             </Col>
             <Col md={6} lg={6} xl={6}>
@@ -93,7 +91,6 @@ export default function Home() {
                       defaultValue="khkhk"
                       onChange={setSelectedOption}
                       options={serviceOption}
-                      // menuIsOpen={true}
                       className="react-select-container"
                       classNamePrefix="react-select"
                     />
@@ -136,7 +133,10 @@ export default function Home() {
             </Col>
           </Row>
         </Container>
-      </section>
+      </section> */}
+
+      <InnerHeader />
+      <AppointmentCalender />
     </>
   );
 }
