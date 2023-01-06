@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
+import Link from "next/link";
 import Select from "react-select";
 import {
   Container,
@@ -21,14 +22,14 @@ import { useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const serviceOption = [
+  const serviceOptions = [
     { value: "Visa", label: "Visa" },
     { value: "BVN Enrollment", label: "BVN Enrollment" },
     { value: "Passport Services", label: "Passport Services" },
     { value: "Premium Lounge(DLA)", label: "Premium Lounge(DLA)" },
     { value: "NIN Enrollment", label: "NIN Enrollment" },
   ];
-  const nationality = [
+  const nationalityOptions = [
     { value: "Nigeria", label: "Nigeria" },
     { value: "India", label: "India" },
     { value: "Japan", label: "Japan" },
@@ -41,7 +42,34 @@ export default function Home() {
   ];
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(serviceOption[0]);
+  const [selectedService, setSelectedService] = useState(serviceOptions[1]);
+
+  const [inputFields, setInputFields] = useState({
+    application_id: "",
+    dob: "",
+    name: "",
+    nationality: "",
+    id_type: "",
+    id_number: "",
+  });
+  console.log("inputFields: ", inputFields);
+  const handle_change = (e) => {
+    const key = e.target.id;
+    const temp = { ...inputFields };
+    temp[key] = e.target.value;
+    setInputFields(temp);
+  };
+
+  const handle_select = (value, id) => {
+    const temp = { ...inputFields };
+    temp[id] = value;
+    setInputFields(temp);
+  };
+  const handle_date_change = (e) => {
+    const temp = { ...inputFields };
+    temp["dob"] = e.target.value;
+    setInputFields(temp);
+  };
 
   const navbarToggle = () => setIsOpen(!isOpen);
 
@@ -101,85 +129,105 @@ export default function Home() {
                   <FormGroup>
                     <Label for="exampleSelect">Select Service</Label>
                     <Select
-                      defaultValue={selectedOption}
-                      onChange={setSelectedOption}
-                      options={serviceOption}
+                      defaultValue={selectedService}
+                      onChange={setSelectedService}
+                      options={serviceOptions}
                       className="react-select-container"
                       classNamePrefix="react-select"
                     />
                   </FormGroup>
                   <Row>
-                    {/* <Col lg={6} xl={6}>
-                      <FormGroup>
-                        <Label for="Application ID">Application ID</Label>
-                        <Input
-                          id="applicationID"
-                          name="applicationID"
-                          placeholder="01234567789"
-                          type="text"
-                          className="appointment-form__input"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg={6} xl={6}>
-                      <FormGroup>
-                        <Label for="exampleDate">Date of Birth</Label>
-                        <Input
-                          id="dob"
-                          name="dob"
-                          placeholder="date placeholder"
-                          type="date"
-                          className="appointment-form__input"
-                        />
-                      </FormGroup>
-                    </Col> */}
-                    <Col lg={6} xl={6}>
-                      <FormGroup>
-                        <Label for="name">Name</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          type="text"
-                          className="appointment-form__input"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg={6} xl={6}>
-                      <FormGroup>
-                        <Label for="Nationality">Nationality</Label>
-                        <Select
-                          onChange={setSelectedOption}
-                          options={nationality}
-                          className="react-select-container"
-                          classNamePrefix="react-select"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg={6} xl={6}>
-                      <FormGroup>
-                        <Label for="idType">ID Type</Label>
-                        <Select
-                          onChange={setSelectedOption}
-                          options={idType}
-                          className="react-select-container"
-                          classNamePrefix="react-select"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col lg={6} xl={6}>
-                      <FormGroup>
-                        <Label for="IDNumber">ID Number</Label>
-                        <Input
-                          id="idNumber"
-                          name="idNumber"
-                          type="text"
-                          className="appointment-form__input"
-                        />
-                      </FormGroup>
-                    </Col>
+                    {selectedService.label == "Visa" ? (
+                      <>
+                        <Col lg={6} xl={6}>
+                          <FormGroup>
+                            <Label for="application_id">Application ID</Label>
+                            <Input
+                              id="application_id"
+                              name="application_id"
+                              placeholder="01234567789"
+                              type="text"
+                              onChange={handle_change}
+                              value={inputFields.application_id}
+                              className="appointment-form__input"
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col lg={6} xl={6}>
+                          <FormGroup>
+                            <Label for="exampleDate">Date of Birth</Label>
+                            <Input
+                              id="dob"
+                              name="dob"
+                              placeholder="date placeholder"
+                              type="date"
+                              className="appointment-form__input"
+                              onChange={handle_date_change}
+                              value={inputFields.dob}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </>
+                    ) : (
+                      <>
+                        <Col lg={6} xl={6}>
+                          <FormGroup>
+                            <Label for="name">Name</Label>
+                            <Input
+                              id="name"
+                              name="name"
+                              type="text"
+                              placeholder="eg: Jhone Doe"
+                              className="appointment-form__input"
+                              value={inputFields.name}
+                              onChange={handle_change}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col lg={6} xl={6}>
+                          <FormGroup>
+                            <Label for="Nationality">Nationality</Label>
+                            <Select
+                              onChange={(e) => handle_select(e, "nationality")}
+                              options={nationalityOptions}
+                              className="react-select-container"
+                              classNamePrefix="react-select"
+                              value={inputFields.nationality}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col lg={6} xl={6}>
+                          <FormGroup>
+                            <Label for="id_type">ID Type</Label>
+                            <Select
+                              onChange={(e) => handle_select(e, "id_type")}
+                              options={idType}
+                              className="react-select-container"
+                              classNamePrefix="react-select"
+                              value={inputFields.id_type}
+                            />
+                          </FormGroup>
+                        </Col>
+                        <Col lg={6} xl={6}>
+                          <FormGroup>
+                            <Label for="id_number">ID Number</Label>
+                            <Input
+                              id="id_number"
+                              name="id_number"
+                              type="text"
+                              className="appointment-form__input"
+                              onChange={handle_change}
+                              value={inputFields.id_number}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </>
+                    )}
                   </Row>
                   <FormGroup className="text-md-start text-center ">
-                    <Button className="cont-btn">Continue</Button>
+                    <Link className="cont-btn" href="/book-appointment">
+                      Continue
+                    </Link>
                   </FormGroup>
                 </form>
                 <p className="appointment-form_desc">

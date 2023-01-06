@@ -97,7 +97,7 @@
         }
         .appointment-form__input {
           min-height: 48px;
-          color: #bcbcbc;
+          // color: #bcbcbc;
           &::placeholder {
             color: #bcbcbc;
           }
@@ -109,6 +109,7 @@
         .cont-btn {
           @extend .primary-btn;
           margin-top: 8px;
+     
         }
       }
       .appointment-form_desc {

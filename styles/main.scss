@@ -9,6 +9,10 @@ $secondary-color: #023b72;
   font-weight: 500;
   padding: 10px 0px 11px 0px;
   width: 174px;
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
 }
 
 @import "./home-page.scss";
