@@ -9,11 +9,18 @@
   .applicant-details__card--wrapper {
     display: flex;
     align-items: center;
+    @media only screen and (max-width: 576px) {
+      display: block;
+    }
     .applicant-details__card {
       border: 1px solid $primary-color;
       width: 250px;
       border-radius: 5px;
       padding: 10px 13px;
+      @media only screen and (max-width: 576px) {
+        width: auto;
+        margin-bottom: 16px;
+      }
       .applicant-details__card--flex {
         display: flex;
         justify-content: space-between;

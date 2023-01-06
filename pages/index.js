@@ -31,6 +31,17 @@ export default function Home() {
     { value: "Premium Lounge(DLA)", label: "Premium Lounge(DLA)" },
     { value: "NIN Enrollment", label: "NIN Enrollment" },
   ];
+  const nationality = [
+    { value: "Nigeria", label: "Nigeria" },
+    { value: "India", label: "India" },
+    { value: "Japan", label: "Japan" },
+    { value: "Singapore", label: "Singapore" },
+    { value: "Switzerland", label: "Switzerland" },
+  ];
+  const idType = [
+    { value: "Driving Licence", label: "Driving Licence" },
+    { value: "Passport", label: "Passport" },
+  ];
   return (
     <>
       <Head>
@@ -43,7 +54,7 @@ export default function Home() {
         <Container>
           <Navbar>
             <NavbarBrand href="/">
-              <Image src="/images/logo.png" alt="" width={80} height={80} />
+              <Image src="/images/logo.png" className="header-img" alt="" width={80} height={80} />
             </NavbarBrand>
             <NavbarToggler onClick={navbarToggle} />
             <Collapse isOpen={isOpen} navbar>
@@ -64,9 +75,6 @@ export default function Home() {
                   className="appointment-form__img"
                   height={380}
                   width={490}
-                  // style={{
-                  //   objectFit: "contain",
-                  // }}
                 />
                 </div>
               </div>
@@ -92,7 +100,7 @@ export default function Home() {
                     />
                   </FormGroup>
                   <Row>
-                    <Col lg={6} xl={6}>
+                    {/* <Col lg={6} xl={6}>
                       <FormGroup>
                         <Label for="Application ID">Application ID</Label>
                         <Input
@@ -112,6 +120,50 @@ export default function Home() {
                           name="dob"
                           placeholder="date placeholder"
                           type="date"
+                          className="appointment-form__input"
+                        />
+                      </FormGroup>
+                    </Col> */}
+                    <Col lg={6} xl={6}>
+                      <FormGroup>
+                        <Label for="name">Name</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          type="text"
+                          className="appointment-form__input"
+                        />
+                      </FormGroup>
+                    </Col>
+                    <Col lg={6} xl={6}>
+                      <FormGroup>
+                      <Label for="Nationality">Nationality</Label>
+                      <Select
+                        onChange={setSelectedOption}
+                        options={nationality}
+                        className="react-select-container"
+                        classNamePrefix="react-select"
+                      />
+                      </FormGroup>
+                    </Col>
+                    <Col lg={6} xl={6}>
+                      <FormGroup>
+                      <Label for="idType">ID Type</Label>
+                      <Select
+                        onChange={setSelectedOption}
+                        options={idType}
+                        className="react-select-container"
+                        classNamePrefix="react-select"
+                      />
+                      </FormGroup>
+                    </Col>
+                    <Col lg={6} xl={6}>
+                      <FormGroup>
+                        <Label for="IDNumber">ID Number</Label>
+                        <Input
+                          id="idNumber"
+                          name="idNumber"
+                          type="text"
                           className="appointment-form__input"
                         />
                       </FormGroup>

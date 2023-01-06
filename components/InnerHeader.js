@@ -7,9 +7,7 @@ function InnerHeader() {
       <Container>
         <Row>
           <Col md={3} lg={3} xl={3}>
-            <div className="inner-header__logo">
-              <Image layout="fill" src="/images/logo.png" alt="" />
-            </div>
+              <Image className="inner-header__logo" width={80} height={80} src="/images/logo.png" alt="" />
           </Col>
           <Col md={9} lg={9} xl={9}>
             <div className="inner-header__member">
@@ -36,7 +34,6 @@ function InnerHeader() {
             </div>
           </Col>
         </Row>
-        {/* <div className="inner-header__flex"></div> */}
       </Container>
     </header>
   );

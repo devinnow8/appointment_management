@@ -1,10 +1,8 @@
 .inner-header {
   padding: 24px 0px;
   .inner-header__logo {
-    position: relative;
-    width: 80px;
-    height: 80px;
     @media only screen and (max-width: 768px) {
+      width: 60px;
       height: 60px;
     }
   }
@@ -12,6 +10,10 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    @media only screen and (max-width: 768px) {
+      display: block;
+      margin-top: 28px;
+    }
     label {
       font-size: 18px;
       font-weight: 400;
@@ -23,6 +25,9 @@
       color: #bcbcbc;
       width: 254px;
       border: 1px solid #b1b1b1;
+      @media only screen and (max-width: 768px) {
+        width: 100%;
+      }
       &::placeholder {
         color: #bcbcbc;
       }
