@@ -21,9 +21,6 @@ import { useState } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
-  const navbarToggle = () => setIsOpen(!isOpen);
-  const [selectedOption, setSelectedOption] = useState(null);
   const serviceOption = [
     { value: "Visa", label: "Visa" },
     { value: "BVN Enrollment", label: "BVN Enrollment" },
@@ -42,6 +39,12 @@ export default function Home() {
     { value: "Driving Licence", label: "Driving Licence" },
     { value: "Passport", label: "Passport" },
   ];
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(serviceOption[0]);
+
+  const navbarToggle = () => setIsOpen(!isOpen);
+
   return (
     <>
       <Head>
@@ -50,11 +53,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-       <header className="header">
+      <header className="header">
         <Container>
           <Navbar>
             <NavbarBrand href="/">
-              <Image src="/images/logo.png" className="header-img" alt="" width={80} height={80} />
+              <Image
+                src="/images/logo.png"
+                className="header-img"
+                alt=""
+                width={80}
+                height={80}
+              />
             </NavbarBrand>
             <NavbarToggler onClick={navbarToggle} />
             <Collapse isOpen={isOpen} navbar>
@@ -68,14 +77,14 @@ export default function Home() {
           <Row className="appointment-form__row">
             <Col md={6} lg={6} xl={6}>
               <div className="appointment-form__img--wrapper">
-                <div className="appointment-form__img"> 
-                <Image
-                  alt="img"
-                  src="/images/appoint-img.png"
-                  className="appointment-form__img"
-                  height={380}
-                  width={490}
-                />
+                <div className="appointment-form__img">
+                  <Image
+                    alt="img"
+                    src="/images/appoint-img.png"
+                    className="appointment-form__img"
+                    height={380}
+                    width={490}
+                  />
                 </div>
               </div>
             </Col>
@@ -92,7 +101,7 @@ export default function Home() {
                   <FormGroup>
                     <Label for="exampleSelect">Select Service</Label>
                     <Select
-                      defaultValue="khkhk"
+                      defaultValue={selectedOption}
                       onChange={setSelectedOption}
                       options={serviceOption}
                       className="react-select-container"
@@ -137,24 +146,24 @@ export default function Home() {
                     </Col>
                     <Col lg={6} xl={6}>
                       <FormGroup>
-                      <Label for="Nationality">Nationality</Label>
-                      <Select
-                        onChange={setSelectedOption}
-                        options={nationality}
-                        className="react-select-container"
-                        classNamePrefix="react-select"
-                      />
+                        <Label for="Nationality">Nationality</Label>
+                        <Select
+                          onChange={setSelectedOption}
+                          options={nationality}
+                          className="react-select-container"
+                          classNamePrefix="react-select"
+                        />
                       </FormGroup>
                     </Col>
                     <Col lg={6} xl={6}>
                       <FormGroup>
-                      <Label for="idType">ID Type</Label>
-                      <Select
-                        onChange={setSelectedOption}
-                        options={idType}
-                        className="react-select-container"
-                        classNamePrefix="react-select"
-                      />
+                        <Label for="idType">ID Type</Label>
+                        <Select
+                          onChange={setSelectedOption}
+                          options={idType}
+                          className="react-select-container"
+                          classNamePrefix="react-select"
+                        />
                       </FormGroup>
                     </Col>
                     <Col lg={6} xl={6}>
@@ -181,9 +190,7 @@ export default function Home() {
             </Col>
           </Row>
         </Container>
-      </section> 
-
-
+      </section>
     </>
   );
 }
