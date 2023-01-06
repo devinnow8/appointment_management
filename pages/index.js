@@ -18,7 +18,7 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import logo from "../public/images/logo.png";
-import appointmentImg from "../public/images/appoint-img.png";
+// import appointmentImg from "../public/images/appoint-img.png";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,7 +45,7 @@ export default function Home() {
         <Container>
           <Navbar>
             <NavbarBrand href="/">
-              <Image src={logo.src} alt="" width={80} height={80} />
+              <Image src="/images/logo.png" alt="" width={80} height={80} />
             </NavbarBrand>
             <NavbarToggler onClick={navbarToggle} />
             <Collapse isOpen={isOpen} navbar>
@@ -63,16 +63,18 @@ export default function Home() {
           <Row className="appointment-form__row">
             <Col md={6} lg={6} xl={6}>
               <div className="appointment-form__img--wrapper">
-                <div className="appointment-form__img">
-                  <Image
-                    alt="img"
-                    src={appointmentImg.src}
-                    layout="fill"
-                    style={{
-                      objectFit: "contain",
-                    }}
-                  />
-                </div>
+                {/* <div className="appointment-form__img"> */}
+                <Image
+                  alt="img"
+                  src="/images/appoint-img.png"
+                  className="appointment-form__img"
+                  height={380}
+                  width={490}
+                  // style={{
+                  //   objectFit: "contain",
+                  // }}
+                />
+                {/* </div> */}
               </div>
             </Col>
             <Col md={6} lg={6} xl={6}>
