@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Container, FormGroup, Label, Input, Row, Col } from "reactstrap";
-import logo from "../public/images/logo.png";
 
 function InnerHeader() {
   return (
@@ -9,7 +8,7 @@ function InnerHeader() {
         <Row>
           <Col md={3} lg={3} xl={3}>
             <div className="inner-header__logo">
-              <Image layout="fill" src={logo.src} alt="" />
+              <Image layout="fill" src="/images/logo.png" alt="" />
             </div>
           </Col>
           <Col md={9} lg={9} xl={9}>

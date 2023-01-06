@@ -17,10 +17,6 @@ import {
   Button,
 } from "reactstrap";
 import { useState } from "react";
-import logo from "../public/images/logo.png";
-import appointmentImg from "../public/images/appoint-img.png";
-import InnerHeader from "./InnerHeader";
-import AppointmentCalender from "./AppointmentCalender";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,7 +39,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <header className="header">
+       <header className="header">
         <Container>
           <Navbar>
             <NavbarBrand href="/">
@@ -133,10 +129,9 @@ export default function Home() {
             </Col>
           </Row>
         </Container>
-      </section> */}
+      </section> 
 
-      <InnerHeader />
-      <AppointmentCalender />
+
     </>
   );
 }

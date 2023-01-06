@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { Col, Container, Row } from "reactstrap";
-import delIcon from "../public/images/delete.png";
+import InnerHeader from "../components/InnerHeader";
 
-function AppointmentCalender() {
+export default ()=> {
   return (
+    <>
+    <InnerHeader />
     <div className="applicant-details">
       <Container>
         <Row>
@@ -21,7 +23,7 @@ function AppointmentCalender() {
                     </p>
                     <p className="applicant-details__card--id">OLK4746535</p>
                   </div>
-                  <Image src={delIcon.src} alt="" width={14} height={14} />
+                  <Image src="/images/delete.png" alt="" width={14} height={14} />
                 </div>
               </div>
               <div className="applicant-details__card">
@@ -35,7 +37,7 @@ function AppointmentCalender() {
                     </p>
                     <p className="applicant-details__card--id">OLK4746535</p>
                   </div>
-                  <Image src={delIcon.src} alt="" width={14} height={14} />
+                  <Image src="/images/delete.png" alt="" width={14} height={14} />
                 </div>
               </div>
             </div>
@@ -43,7 +45,7 @@ function AppointmentCalender() {
         </Row>
       </Container>
     </div>
+    </>
   );
 }
 
-export default AppointmentCalender;
