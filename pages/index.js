@@ -91,7 +91,10 @@ export default function Home() {
         inputFields.id_type.label.trim() !== "" &&
         inputFields.id_number.trim() !== ""
       ) {
-        push("/book-appointment");
+        push({
+          pathname: "/book-appointment",
+          query: { selectedService: selectedService.label },
+        });
       } else {
         let errors = { ...validationsError };
 
@@ -117,7 +120,10 @@ export default function Home() {
         inputFields.application_id.trim() !== "" &&
         inputFields.dob.trim() !== ""
       ) {
-        push("/book-appointment");
+        push({
+          pathname: "/book-appointment",
+          query: { selectedService: selectedService.label },
+        });
       } else {
         let errors = { ...validationsError };
 
