@@ -20,7 +20,7 @@ function InnerHeader() {
           </Col>
           <Col md={11} lg={11} xl={11}>
             <div className="inner-header__member">
-              <div className="me-0 me-md-3 mb-3 mb-md-0">
+              {/* <div className="me-0 me-md-3 mb-3 mb-md-0">
                 <Label for="Application ID">Application ID</Label>
                 <Input
                   id="applicationID"
@@ -39,8 +39,8 @@ function InnerHeader() {
                   type="date"
                   className="inner-header__input"
                 />
-              </div>
-              {/* <div className="me-0 me-md-3 mb-3 mb-md-0">
+              </div> */}
+              <div className="me-0 me-md-3 mb-3 mb-md-0">
                 <Label for="Application ID">Name</Label>
                 <Input
                   id="name"
@@ -76,7 +76,7 @@ function InnerHeader() {
                   className="inner-header__input"
                   value=""
                 />
-              </div> */}
+              </div>
               <Button className="inner-header__member--btn">Add Member</Button>
             </div>
           </Col>

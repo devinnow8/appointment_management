@@ -34,15 +34,12 @@
         min-height: 48px;
         cursor: pointer;
         width: 200px;
-        border: 1px solid #b1b1b1;
+        border: 1px solid #c0c0c0;
         color: #b1b1b1;
         @media (min-width: 769px) and (max-width: 992px) {
           width: 250px;
           margin-bottom: 12px;
         }
-        // @media only screen and (max-width: 992px) {
-        //   width: 168px;
-        // }
         @media only screen and (max-width: 768px) {
           width: 100%;
         }
@@ -54,8 +51,28 @@
           outline: none !important;
         }
       }
+      .react-select__control {
+        min-height: 48px !important;
+        border: 1px solid #c0c0c0;
+        width: 200px;
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+        }
+        @media (min-width: 769px) and (max-width: 992px) {
+          width: 250px;
+          margin-bottom: 12px;
+        }
+        cursor: pointer;
+        .react-select__indicator-separator {
+          width: 0;
+        }
+        &.react-select__control--is-focused {
+          box-shadow: none;
+        }
+      }
       .inner-header__member--btn {
         @extend .primary-btn; 
+        width: 140px;
       }
     }
   }

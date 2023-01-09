@@ -48,16 +48,33 @@
     }
   }
   .appointment-calender {
+    padding: 40px 0px;
+    .sel-time {
+      font-size: 16px;
+      color: #555;
+      font-weight: 500;
+      margin: 14px 0px;
+    }
     .appointment-calender__time--flex {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-direction: column;
       height: 500px;
+      @media only screen and (max-width: 768px) {
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        height: unset;
+      }
       .appointment-calender__time--box {
         border-radius: 5px;
         border: 1px solid #CACACA;
         padding: 11px 16px;
+        @media only screen and (max-width: 768px) {
+          margin-bottom: 11px;
+          margin-right: 11px;
+        }
         &.selected {
           border: 1px solid $primary-color;
         }
@@ -69,6 +86,16 @@
           &.active {
             color: $primary-color;
           }
+        }
+      }
+      .appointment-calender__time--arrow {
+        background-color: #003C72;
+        border-radius: 5px;
+        width: 43px;
+        height: 39px;
+        border: none;
+        @media only screen and (max-width: 768px) {
+          display: none;
         }
       }
     }

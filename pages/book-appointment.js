@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button, Col, Container, Row } from "reactstrap";
+import ConfirmModal from "../components/ConfirmModal";
 import InnerHeader from "../components/InnerHeader";
 
 export default () => {
@@ -57,11 +58,13 @@ export default () => {
             <Row>
               <Col md={10} lg={10} xl={10}>
                 <h1>Calender Here</h1>
+                <ConfirmModal />
+                <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>
               <Col md={2} lg={2} xl={2}>
                 <div className="appointment-calender__time">
                   <div className="appointment-calender__time--flex">
-                    <Button className="down-arrow">
+                    <Button className="appointment-calender__time--arrow">
                       <Image
                         src="/images/up-arrow.png"
                         alt=""
@@ -87,9 +90,9 @@ export default () => {
                     <div className="appointment-calender__time--box">
                       <p className="time">03:30 PM</p>
                     </div>
-                    <Button className="down-arrow">
+                    <Button className="appointment-calender__time--arrow">
                       <Image
-                        src="/images/up-arrow.png"
+                        src="/images/down-arrow.png"
                         alt=""
                         width={12}
                         height={9}
