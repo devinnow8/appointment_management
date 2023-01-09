@@ -66,8 +66,6 @@ export default () => {
     });
   };
 
-  console.log(applicantsData, "applicantsData");
-
   const handleAddMember = () => {
     setIsValidation(true);
     if (selectedService !== "Visa") {
