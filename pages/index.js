@@ -18,6 +18,7 @@ import {
   Button,
 } from "reactstrap";
 import { useState } from "react";
+import { idType, nationalityOptions } from "../constants";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,17 +29,6 @@ export default function Home() {
     { value: "Passport Services", label: "Passport Services" },
     { value: "Premium Lounge(DLA)", label: "Premium Lounge(DLA)" },
     { value: "NIN Enrollment", label: "NIN Enrollment" },
-  ];
-  const nationalityOptions = [
-    { value: "Nigeria", label: "Nigeria" },
-    { value: "India", label: "India" },
-    { value: "Japan", label: "Japan" },
-    { value: "Singapore", label: "Singapore" },
-    { value: "Switzerland", label: "Switzerland" },
-  ];
-  const idType = [
-    { value: "Driving Licence", label: "Driving Licence" },
-    { value: "Passport", label: "Passport" },
   ];
 
   const [isOpen, setIsOpen] = useState(false);
@@ -105,15 +95,13 @@ export default function Home() {
           <Row className="appointment-form__row">
             <Col md={6} lg={6} xl={6}>
               <div className="appointment-form__img--wrapper">
-                <div className="appointment-form__img">
-                  <Image
-                    alt="img"
-                    src="/images/appoint-img.png"
-                    className="appointment-form__img"
-                    height={380}
-                    width={490}
-                  />
-                </div>
+                <Image
+                  alt="img"
+                  src="/images/appoint-img.png"
+                  className="appointment-form__img"
+                  height={380}
+                  width={490}
+                />
               </div>
             </Col>
             <Col md={6} lg={6} xl={6}>
@@ -172,12 +160,14 @@ export default function Home() {
                       <>
                         <Col lg={6} xl={6}>
                           <FormGroup>
-                            <Label for="name">Name</Label>
+                            <Label for="name">
+                              Name <span className="star">*</span>
+                            </Label>
                             <Input
                               id="name"
                               name="name"
                               type="text"
-                              placeholder="eg: Jhone Doe"
+                              placeholder="eg: John Doe"
                               className="appointment-form__input"
                               value={inputFields.name}
                               onChange={handle_change}
@@ -186,7 +176,9 @@ export default function Home() {
                         </Col>
                         <Col lg={6} xl={6}>
                           <FormGroup>
-                            <Label for="Nationality">Nationality</Label>
+                            <Label for="Nationality">
+                              Nationality <span className="star">*</span>
+                            </Label>
                             <Select
                               onChange={(e) => handle_select(e, "nationality")}
                               options={nationalityOptions}
@@ -198,7 +190,9 @@ export default function Home() {
                         </Col>
                         <Col lg={6} xl={6}>
                           <FormGroup>
-                            <Label for="id_type">ID Type</Label>
+                            <Label for="id_type">
+                              ID Type <span className="star">*</span>
+                            </Label>
                             <Select
                               onChange={(e) => handle_select(e, "id_type")}
                               options={idType}
@@ -210,7 +204,9 @@ export default function Home() {
                         </Col>
                         <Col lg={6} xl={6}>
                           <FormGroup>
-                            <Label for="id_number">ID Number</Label>
+                            <Label for="id_number">
+                              ID Number <span className="star">*</span>
+                            </Label>
                             <Input
                               id="id_number"
                               name="id_number"

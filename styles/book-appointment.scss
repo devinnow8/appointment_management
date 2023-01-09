@@ -47,4 +47,30 @@
       }
     }
   }
+  .appointment-calender {
+    .appointment-calender__time--flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      height: 500px;
+      .appointment-calender__time--box {
+        border-radius: 5px;
+        border: 1px solid #CACACA;
+        padding: 11px 16px;
+        &.selected {
+          border: 1px solid $primary-color;
+        }
+        .time {
+          margin-bottom: 0;
+          font-size: 14px;
+          font-weight: 500;
+          color: #CACACA;
+          &.active {
+            color: $primary-color;
+          }
+        }
+      }
+    }
+  }
 }
