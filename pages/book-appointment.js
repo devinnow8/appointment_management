@@ -197,12 +197,6 @@ export default () => {
                       </p>
                       <p className="applicant-details__card--id">OLK4746535</p>
                     </div>
-                    <Image
-                      src="/images/delete.png"
-                      alt=""
-                      width={14}
-                      height={14}
-                    />
                   </div>
                 </div>
                 {applicantsData.length > 0 &&
