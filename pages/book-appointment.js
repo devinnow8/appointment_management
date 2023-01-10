@@ -12,6 +12,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default () => {
+  const arrayTime = [
+    { id: 1, time: "09:00 AM" },
+    { id: 2, time: "10:00 AM" },
+    { id: 3, time: "11:00 AM" },
+    { id: 4, time: "12:00 PM" },
+    { id: 5, time: "13:00 PM" },
+    { id: 6, time: "14:00 PM" },
+  ];
   const slider = useRef();
   const {
     query: { selectedService },
@@ -38,7 +46,7 @@ export default () => {
   });
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
-    time: "",
+    time: arrayTime[slideToShow].time,
     location: "",
     amount: "",
   });
@@ -54,26 +62,24 @@ export default () => {
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
-    fade: false,
     afterChange: (currentSlide) => setSlideToShow(currentSlide),
-
-    // responsive: [
-    //   {
-    //     breakpoint: 1366,
-    //     settings: {
-    //       slidesToShow: 2,
-    //       slidesToScroll: 1,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 992,
-    //     settings: {
-    //       slidesToShow: 1,
-    //       slidesToScroll: 1,
-    //       dots: true,
-    //     },
-    //   },
-    // ],
+    responsive: [
+      {
+        breakpoint: 1366,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+    ],
   };
 
   const modalToggle = () => setModal(!modal);
@@ -226,15 +232,6 @@ export default () => {
   const nextClick = () => {
     slider.current.slickNext();
   };
-
-  const arrayTime = [
-    { id: 1, time: "09:00 AM" },
-    { id: 2, time: "10:00 AM" },
-    { id: 3, time: "11:00 AM" },
-    { id: 4, time: "12:00 PM" },
-    { id: 5, time: "13:00 PM" },
-    { id: 6, time: "14:00 PM" },
-  ];
 
   return (
     <>

@@ -69,7 +69,7 @@
       }
       .appointment-calender__time--box {
         border-radius: 5px;
-        border: 1px solid #CACACA;
+        border: 1px solid #cacaca;
         padding: 11px 16px;
         @media only screen and (max-width: 768px) {
           margin-bottom: 11px;
@@ -82,14 +82,14 @@
           margin-bottom: 0;
           font-size: 14px;
           font-weight: 500;
-          color: #CACACA;
+          color: #cacaca;
           &.active {
             color: $primary-color;
           }
         }
       }
       .appointment-calender__time--arrow {
-        background-color: #003C72;
+        background-color: #003c72;
         border-radius: 5px;
         width: 43px;
         height: 39px;
