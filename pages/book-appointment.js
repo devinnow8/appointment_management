@@ -2,13 +2,44 @@ import Image from "next/image";
 import { Button, Col, Container, Row } from "reactstrap";
 import ConfirmModal from "../components/ConfirmModal";
 import InnerHeader from "../components/InnerHeader";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import loader from "../public/images/loader.gif";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default () => {
+  const settings = {
+    dots: false,
+    vertical: true,
+    verticalSwiping: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    fade: false,
+    // responsive: [
+    //   {
+    //     breakpoint: 1366,
+    //     settings: {
+    //       slidesToShow: 2,
+    //       slidesToScroll: 1,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 992,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
+    //       dots: true,
+    //     },
+    //   },
+    // ],
+  };
+
+  const slider = useRef();
   const {
     query: { selectedService },
   } = useRouter();
@@ -185,6 +216,25 @@ export default () => {
     toast.success("Applicant Deleted Successfully");
   };
 
+  const previousClick = () => {
+    slider.current.slickPrev();
+  };
+
+  const nextClick = () => {
+    slider.current.slickNext();
+  };
+
+  const arrayTime = [
+    { id: 1, time: "09:00 AM" },
+    { id: 2, time: "10:00 AM" },
+    { id: 3, time: "11:00 AM" },
+    { id: 4, time: "12:00 PM" },
+    { id: 5, time: "13:00 PM" },
+    { id: 6, time: "14:00 PM" },
+    // 1, 2, 3, 4, 5, 6, 7,
+  ];
+  console.log(slider, "sliderslider");
+
   return (
     <>
       <InnerHeader
@@ -273,7 +323,10 @@ export default () => {
               <Col md={2} lg={2} xl={2}>
                 <div className="appointment-calender__time">
                   <div className="appointment-calender__time--flex">
-                    <Button className="appointment-calender__time--arrow">
+                    <Button
+                      className="appointment-calender__time--arrow"
+                      onClick={previousClick}
+                    >
                       <Image
                         src="/images/up-arrow.png"
                         alt=""
@@ -281,25 +334,22 @@ export default () => {
                         height={9}
                       />
                     </Button>
-                    <div className="appointment-calender__time--box">
-                      <p className="time">09:00 AM</p>
-                    </div>
-                    <div className="appointment-calender__time--box">
-                      <p className="time">09:00 AM</p>
-                    </div>
-                    <div className="appointment-calender__time--box selected">
-                      <p className="time active">12:00 PM</p>
-                    </div>
-                    <div className="appointment-calender__time--box">
-                      <p className="time">01:30 PM</p>
-                    </div>
-                    <div className="appointment-calender__time--box">
-                      <p className="time">02:00 PM</p>
-                    </div>
-                    <div className="appointment-calender__time--box">
-                      <p className="time">03:30 PM</p>
-                    </div>
-                    <Button className="appointment-calender__time--arrow">
+                    <Slider ref={slider} {...settings}>
+                      {arrayTime.map((item) => {
+                        return (
+                          <div
+                            className="appointment-calender__time--box"
+                            key={item.id}
+                          >
+                            <p className="time">{item.time}</p>
+                          </div>
+                        );
+                      })}
+                    </Slider>
+                    <Button
+                      className="appointment-calender__time--arrow"
+                      onClick={nextClick}
+                    >
                       <Image
                         src="/images/down-arrow.png"
                         alt=""
