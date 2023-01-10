@@ -25,7 +25,6 @@ export default () => {
     query: { selectedService },
   } = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
-
   const [isValidation, setIsValidation] = useState(false);
   const [loaderConfirm, setLoaderConfirm] = useState(false);
   const [applicantDetail, setApplicantDetail] = useState({
@@ -57,29 +56,19 @@ export default () => {
 
   const settings = {
     dots: false,
-    vertical: true,
-    verticalSwiping: false,
-    speed: 500,
+    infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
-    afterChange: (currentSlide) => setSlideToShow(currentSlide),
-    responsive: [
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 1,
-          dots: true,
-        },
-      },
-    ],
+    vertical: true,
+    verticalSwiping: true,
+    beforeChange: function (currentSlide, nextSlide) {
+      console.log("before change", currentSlide, nextSlide, "changeeeeeee");
+      // setSlideToShow(nextSlide);
+    },
+    afterChange: function (currentSlide) {
+      console.log("after change", currentSlide, "changeeeeeee");
+      setSlideToShow(currentSlide);
+    },
   };
 
   const modalToggle = () => setModal(!modal);
