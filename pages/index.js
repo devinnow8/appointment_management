@@ -19,6 +19,7 @@ import {
 } from "reactstrap";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Header from "../components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -191,25 +192,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="header">
-        <Container>
-          <Navbar>
-            <NavbarBrand href="/">
-              <Image
-                src="/images/logo.png"
-                className="header-img"
-                alt=""
-                width={80}
-                height={80}
-              />
-            </NavbarBrand>
-            <NavbarToggler onClick={navbarToggle} />
-            <Collapse isOpen={isOpen} navbar>
-              <Nav className="me-auto" navbar></Nav>
-            </Collapse>
-          </Navbar>
-        </Container>
-      </header>
+      <Header />
       <section className="appointment-form">
         <Container>
           <Row className="appointment-form__row">
@@ -333,6 +316,7 @@ export default function Home() {
                               className="react-select-container"
                               classNamePrefix="react-select"
                               value={inputFields.nationality}
+                              // menuIsOpen={true}
                             />
                             <div className="error-msg">
                               {validationsError.nationality}
@@ -343,7 +327,7 @@ export default function Home() {
                           <FormGroup>
                             <Label for="id_type">
                               ID Type
-                              <span className="star">*</span>
+                              <span className="star"> *</span>
                             </Label>
                             <Select
                               onChange={(e) => handle_select(e, "id_type")}
@@ -361,7 +345,7 @@ export default function Home() {
                           <FormGroup>
                             <Label for="id_number">
                               ID Number
-                              <span className="star">*</span>
+                              <span className="star"> *</span>
                             </Label>
                             <Input
                               id="id_number"

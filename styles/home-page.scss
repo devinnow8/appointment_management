@@ -1,14 +1,4 @@
-.header {
-  .navbar-toggler {
-    display: none;
-  }
-  .header-img {
-    @media only screen and (max-width: 768px) {
-      width: 60px;
-      height: 60px;
-    }
-  }
-}
+
 
 .appointment-form {
   display: flex;
@@ -93,7 +83,6 @@
         .cont-btn {
           @extend .primary-btn;
           margin-top: 8px;
-     
         }
         .react-select__control {
           min-height: 48px !important;
@@ -112,6 +101,23 @@
           }
           &.react-select__control--is-focused {
             box-shadow: none;
+          }
+        }
+        .react-select__menu {
+          width: 100%;
+          top: 84%;
+          border: 1px solid #b1b1b1;
+          .react-select__option {
+            cursor: pointer;
+            color: #555;
+            &.react-select__option--is-focused {
+              background-color: $primary-color;
+              color: white;
+            }
+            &.css-tr4s17-option {
+              background-color: $primary-color;
+              color: white;
+            }
           }
         }
       }

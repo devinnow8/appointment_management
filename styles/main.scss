@@ -1,3 +1,4 @@
+
 $primary-color: #f1651c;
 $secondary-color: #023b72;
 
@@ -13,9 +14,14 @@ $secondary-color: #023b72;
   color: white;
   text-align: center;
   text-decoration: none;
+  cursor: pointer;
 }
 
 @import "./home-page.scss";
-@import "./common.scss";
 @import "./inner-header.scss";
 @import "./book-appointment.scss";
+@import "./variables.scss"
+
+
+
+

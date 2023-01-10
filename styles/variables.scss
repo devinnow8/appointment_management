@@ -1,0 +1,111 @@
+body {
+  font-family: "Roboto", sans-serif !important;
+}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+.error-msg {
+  color: #ff2222;
+}
+
+.header {
+  .navbar-toggler {
+    display: none;
+  }
+  .header-img {
+    @media only screen and (max-width: 768px) {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+.confirm-modal {
+  max-width: 700px !important;
+  .modal-content {
+    border-radius: 10px;
+    border: none;
+    .modal-header {
+      background-color: #ffe8dc;
+      border-radius: 10px;
+      justify-content: center;
+      padding: 30px 0px;
+      border: none;
+      .btn-close {
+        display: none;
+      }
+    }
+    .modal-body {
+      padding: 20px 0px 34px 0px;
+      .confirm-modal__title {
+        color: $secondary-color;
+        font-weight: 800;
+        font-size: 22px;
+        text-align: center;
+        margin: 0px 0px 32px 0px;
+        @media only screen and (max-width: 576px) {
+          font-size: 18px;
+        }
+      }
+      .confirm-modal__applicant--info {
+        border: 1px solid #cdcdcd;
+        border-radius: 5px;
+        width: 334px;
+        margin: 0 auto;
+        @media only screen and (max-width: 576px) {
+          width: auto;
+        }
+        .confirm-modal__applicant--flex {
+          display: flex;
+          align-items: center;
+          border-bottom: 1px solid #cdcdcd;
+          padding: 12px 10px;
+          &:last-child {
+            border-bottom: none;
+          }
+          .confirm-modal__applicant--data {
+            width: 56%;
+            .confirm-modal__applicant--heading {
+              color: #9b9b9b;
+              font-weight: 500;
+              font-size: 15px;
+              margin-bottom: 0;
+            }
+          }
+          .confirm-modal__applicant--value {
+            width: 44%;
+            .confirm-modal__applicant-desc {
+              font-size: 15px;
+              font-weight: 600;
+              opacity: 0.7;
+              color: black;
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  .confirm-modal__btn {
+    text-align: center;
+    margin-top: 30px;
+    .cancel {
+      @extend .primary-btn;
+      width: 190px;
+      margin-right: 20px;
+      background: none;
+      border: 1px solid $primary-color;
+      color: $primary-color;
+      @media only screen and (max-width: 576px) {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+    }
+    .confirm {
+      @extend .primary-btn;
+      width: 190px;
+      @media only screen and (max-width: 576px) {
+        width: 100%;
+      }
+    }
+  }
+}

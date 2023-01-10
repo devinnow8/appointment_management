@@ -70,6 +70,23 @@
           box-shadow: none;
         }
       }
+      .react-select__menu {
+        width: 100%;
+        top: 84%;
+        border: 1px solid #b1b1b1;
+        .react-select__option {
+          cursor: pointer;
+          color: #555;
+          &.react-select__option--is-focused {
+            background-color: $primary-color;
+            color: white;
+          }
+          &.css-tr4s17-option {
+            background-color: $primary-color;
+            color: white;
+          }
+        }
+      }
       .inner-header__member--btn {
         @extend .primary-btn; 
         width: 140px;

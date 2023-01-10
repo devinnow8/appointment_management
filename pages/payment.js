@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "../components/Header";
 
 const Payment = () => {
-  return <div>Payment</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 };
 
 export default Payment;
