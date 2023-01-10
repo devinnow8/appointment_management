@@ -32,7 +32,6 @@
       }
       .inner-header__input {
         min-height: 48px;
-        cursor: pointer;
         width: 200px;
         border: 1px solid #c0c0c0;
         color: #b1b1b1;
@@ -88,7 +87,7 @@
         }
       }
       .inner-header__member--btn {
-        @extend .primary-btn; 
+        @extend .primary-btn;
         width: 140px;
       }
     }

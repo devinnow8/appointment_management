@@ -4,6 +4,9 @@ import ConfirmModal from "../components/ConfirmModal";
 import InnerHeader from "../components/InnerHeader";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import loader from "../public/images/loader.gif";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 export default () => {
   const {
@@ -11,7 +14,7 @@ export default () => {
   } = useRouter();
 
   const [isValidation, setIsValidation] = useState(false);
-
+  const [loaderConfirm, setLoaderConfirm] = useState(false);
   const [applicantDetail, setApplicantDetail] = useState({
     application_id: "",
     dob: "",
@@ -37,6 +40,7 @@ export default () => {
   const modalToggle = () => setModal(!modal);
 
   const handleConfirm = () => {
+    setLoaderConfirm(true);
     setIsConfirm(true);
     if (selectedService === "Visa") {
       const obj = {
@@ -45,6 +49,8 @@ export default () => {
         dob: applicantDetail.dob,
       };
       setApplicantsData([...applicantsData, obj]);
+      setLoaderConfirm(false);
+      toast.success("Applicant Addedd Successfully");
     } else {
       const obj = {
         name: applicantDetail.name,
@@ -53,6 +59,8 @@ export default () => {
         id_number: applicantDetail.id_number,
       };
       setApplicantsData([...applicantsData, obj]);
+      setLoaderConfirm(false);
+      toast.success("Applicant Addedd Successfully");
     }
 
     setModal(false);
@@ -169,6 +177,7 @@ export default () => {
     const data = [...applicantsData];
     data.splice(i, 1);
     setApplicantsData(data);
+    toast.success("Applicant Deleted Successfully");
   };
 
   return (
@@ -182,11 +191,16 @@ export default () => {
       />
       <div className="applicant-details">
         <Container>
+          {loaderConfirm && (
+            <div className="loader">
+              <img src={loader.src} className="loader-img" alt="" />
+            </div>
+          )}
           <Row>
             <Col xs={12} sm={12}>
               <h2 className="applicant-details__title">Applicant Details</h2>
               <div className="applicant-details__card--wrapper">
-                <div className="applicant-details__card">
+                <div className="applicant-details__card me-0 me-sm-3">
                   <div className="applicant-details__card--flex">
                     <div className="applicant-details__card--info">
                       <h4 className="applicant-details__card--title">
@@ -203,7 +217,7 @@ export default () => {
                   applicantsData.map((data, index) => {
                     return (
                       <>
-                        <div className="applicant-details__card">
+                        <div className="applicant-details__card me-0 me-sm-3">
                           <div className="applicant-details__card--flex">
                             <div className="applicant-details__card--info">
                               <h4 className="applicant-details__card--title">

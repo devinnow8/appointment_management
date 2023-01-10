@@ -19,6 +19,20 @@ body {
   }
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .loader-img {
+    width: 60px;
+  }
+}
+
 .confirm-modal {
   max-width: 700px !important;
   .modal-content {
