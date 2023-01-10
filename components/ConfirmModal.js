@@ -6,6 +6,7 @@ function ConfirmModal({
   modalToggle,
   handleConfirm,
   applicantDetail,
+  applicantAppointment,
   selectedService,
 }) {
   return (

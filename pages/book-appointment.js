@@ -31,7 +31,12 @@ export default () => {
     id_type: "",
     id_number: "",
   });
-
+  const [applicantAppointment, setApplicantAppointment] = useState({
+    date: "",
+    time: "",
+    location: "",
+    amount: "",
+  });
   const [applicantsData, setApplicantsData] = useState([]);
 
   const [modal, setModal] = useState(false);
@@ -261,6 +266,7 @@ export default () => {
                   applicantDetail={applicantDetail}
                   handleConfirm={handleConfirm}
                   selectedService={selectedService}
+                  applicantAppointment={applicantAppointment}
                 />
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>
