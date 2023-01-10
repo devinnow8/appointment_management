@@ -64,7 +64,7 @@ const MakePayment = () => {
                 <div className="choose-gateway__option">
                   <div className="choose-gateway__option--box">
                     <FormGroup check>
-                      <Input name="radio1" type="radio" />{" "}
+                      <Input name="radio1" type="radio" checked />{" "}
                     </FormGroup>
                     <Image
                       src="/images/stripe.png"
@@ -84,7 +84,7 @@ const MakePayment = () => {
                       width={36}
                       height={36}
                     />
-                    <p className="choose-gateway__title">Stripe</p>
+                    <p className="choose-gateway__title">Paypal</p>
                   </div>
                   <div className="choose-gateway__option--box">
                     <FormGroup check>
@@ -96,7 +96,7 @@ const MakePayment = () => {
                       width={36}
                       height={36}
                     />
-                    <p className="choose-gateway__title">Stripe</p>
+                    <p className="choose-gateway__title">Amazon Pay</p>
                   </div>
                 </div>
                 <div className="choose-gateway__card">

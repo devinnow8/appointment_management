@@ -57,20 +57,30 @@
     }
     .appointment-calender__time--flex {
       display: flex;
-      justify-content: space-between;
       align-items: center;
       flex-direction: column;
-      height: 500px;
       @media only screen and (max-width: 768px) {
         flex-direction: row;
         justify-content: flex-start;
         flex-wrap: wrap;
         height: unset;
       }
+      .slick-list {
+        height: 380px !important;
+        .slick-slide {
+          display: flex;
+          justify-content: center;
+        }
+      }
       .appointment-calender__time--box {
         border-radius: 5px;
         border: 1px solid #cacaca;
         padding: 11px 16px;
+        margin-bottom: 14px;
+        margin-top: 14px;
+        cursor: pointer;
+        width: 120px !important;
+        text-align: center;
         @media only screen and (max-width: 768px) {
           margin-bottom: 11px;
           margin-right: 11px;
