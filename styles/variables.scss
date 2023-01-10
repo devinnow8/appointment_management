@@ -60,6 +60,13 @@ body {
           font-size: 18px;
         }
       }
+      .confirm-modal__subtitle {
+        font-size: 18px;
+        color: #9B9B9B;
+        text-align: center;
+        margin-top: -22px;
+        text-align: center;
+      }
       .confirm-modal__applicant--info {
         border: 1px solid #cdcdcd;
         border-radius: 5px;
@@ -102,6 +109,9 @@ body {
   .confirm-modal__btn {
     text-align: center;
     margin-top: 30px;
+    @media only screen and (max-width: 576px) {
+      margin: 20px;
+    }
     .cancel {
       @extend .primary-btn;
       width: 190px;
@@ -119,6 +129,13 @@ body {
       width: 190px;
       @media only screen and (max-width: 576px) {
         width: 100%;
+      }
+      &.payment-btn {
+        width: unset;
+        padding: 12px 22px;
+        @media only screen and (max-width: 576px) {
+          width: 100%;
+        }
       }
     }
   }

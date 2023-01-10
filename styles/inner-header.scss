@@ -77,8 +77,8 @@
           cursor: pointer;
           color: #555;
           &.react-select__option--is-focused {
-            background-color: $primary-color;
-            color: white;
+            background-color: white;
+            color: #555;
           }
           &.css-tr4s17-option {
             background-color: $primary-color;

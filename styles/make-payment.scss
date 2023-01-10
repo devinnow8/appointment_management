@@ -1,0 +1,131 @@
+
+.make-payment {
+  padding: 40px 0px;
+  .make-payment__title {
+    color: #023B72;
+    font-weight: 500;
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+  .make-payment__details {
+    .make-payment__details--title {
+      font-weight: 500;
+      font-size: 20px;
+      margin-bottom: 30px;
+      padding-left: 22px;
+    }
+  }
+  .make-payment__details--flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ADADAD;
+    padding: 22px 20px;
+    &:last-child {
+      border-bottom: none;
+    }
+    .make-payment__details--heading {
+      width: 50%;
+      > h4 {
+        font-weight: 500;
+        font-size: 18px;
+        color: #9B9B9B;
+        margin-bottom: 0;
+      }
+    }
+    .make-payment__details--value {
+      width: 50%;
+      text-align: center;
+      > p {
+        font-size: 18px;
+        font-weight: 500;
+        color: black;
+        opacity: 0.7;
+        margin-bottom: 0;
+      }
+    }
+    &.total-fee {
+      background-color: #FFE8DC;
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 44px;
+      }
+      h4 {
+        color: black;
+        font-weight: 600;
+        font-size: 20px;
+      }
+      p {
+        font-size: 20px;
+        opacity: 1;
+      }
+    }
+  }
+  .choose-gateway {
+    padding-left: 40px;
+    @media only screen and (max-width: 768px) {
+      padding-left: 0;
+    }
+    .choose-gateway__option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @media only screen and (max-width: 768px) {
+        display: block;
+      }
+      .choose-gateway__option--box {
+        max-width: 33.333333%;
+        flex: 0 0 33.333333%;
+        display: flex;
+        align-items: center;
+        @media only screen and (max-width: 768px) {
+          margin-bottom: 42px;
+          margin-left: 34px;
+        }
+        .choose-gateway__title {
+          font-size: 20px;
+          font-weight: 500;
+          color: black;
+          margin-bottom: 0;
+        }
+        input {
+          margin-right: 24px;
+          cursor: pointer;
+        }
+        img {
+          margin-right: 14px;
+          width: 28px;
+          height: 28px;
+          @media only screen and (max-width: 768px) {
+            width: 36px;
+            height: 36px;
+          }
+        }
+      }
+    }
+    .choose-gateway__card {
+      margin: 60px 0px 20px 0px;
+      .choose-gateway__card--title {
+        font-size: 24px;
+        font-weight: 400;
+        color: #555555;
+        margin-bottom: 38px;
+      }
+      label {
+        font-size: 17px;
+        font-weight: 400;
+        color: #555555;
+      }
+      input {
+        color: #555555;
+        padding: 12px;
+        &::placeholder {
+          color: #BCBCBC;
+        }
+      }
+      .pay-btn {
+        @extend .primary-btn;
+        margin-top: 40px;
+      }
+    }
+  }
+}

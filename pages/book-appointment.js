@@ -22,9 +22,12 @@ export default () => {
   ];
   const slider = useRef();
   const {
+    push,
     query: { selectedService },
   } = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
+
+  const [confirmCalendar, setConfirmCalendar] = useState(false);
   const [isValidation, setIsValidation] = useState(false);
   const [loaderConfirm, setLoaderConfirm] = useState(false);
   const [applicantDetail, setApplicantDetail] = useState({
@@ -222,6 +225,15 @@ export default () => {
     slider.current.slickNext();
   };
 
+  const handleAppointment = () => {
+    setModal(true);
+    setConfirmCalendar(true);
+  };
+
+  const handlePaymentProceed = () => {
+    push("/make-payment");
+  };
+
   return (
     <>
       <InnerHeader
@@ -304,6 +316,8 @@ export default () => {
                   handleConfirm={handleConfirm}
                   selectedService={selectedService}
                   applicantAppointment={applicantAppointment}
+                  confirmCalendar={confirmCalendar}
+                  handlePaymentProceed={handlePaymentProceed}
                 />
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>
@@ -351,6 +365,14 @@ export default () => {
                       />
                     </Button>
                   </div>
+                </div>
+              </Col>
+              <Col sm={12} md={12} className="text-end">
+                <div className="appointment-calender__buttons mt-4">
+                  <Button className="cancel me-0 me-sm-3">Cancel</Button>
+                  <Button className="continue" onClick={handleAppointment}>
+                    Continue
+                  </Button>
                 </div>
               </Col>
             </Row>

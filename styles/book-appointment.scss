@@ -99,5 +99,16 @@
         }
       }
     }
+    .appointment-calender__buttons {
+      .cancel {
+        @extend .primary-btn;
+        background-color: transparent;
+        border: 1px solid #484848;
+        color: #484848;
+      }
+      .continue {
+        @extend .primary-btn;
+      }
+    }
   }
 }
