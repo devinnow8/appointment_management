@@ -19,7 +19,7 @@ const MakePayment = () => {
   };
 
   const [paymentType, setPaymentType] = useState({
-    paymentMode: "",
+    paymentMode: "Stripe",
   });
 
   const handleType = (event) => {
