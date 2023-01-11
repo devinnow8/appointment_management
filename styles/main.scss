@@ -15,6 +15,10 @@ $secondary-color: #023b72;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  &:hover {
+    background: $primary-color;
+    color: white
+  }
 }
 
 @import "./home-page.scss";

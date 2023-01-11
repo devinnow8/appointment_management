@@ -140,3 +140,54 @@ body {
     }
   }
 }
+
+
+.apt-booked {
+  padding: 50px 0px;
+  .apt-booked__img {
+    margin-bottom: 60px;
+    max-width: 30%;
+    @media only screen and (max-width: 576px) {
+      max-width: 100%;
+    }
+  }
+  .apt-booked__title {
+    font-size: 40px;
+    font-weight: 600;
+    color: #003C70;
+    margin-bottom: 30px;
+    @media only screen and (max-width: 576px) {
+      font-size: 24px;
+    }
+  }
+  .apt-booked__para {
+    font-size: 16px;
+    font-weight: 400;
+    color: #585858;
+    padding: 0px 14%;
+    line-height: 30px;
+    @media only screen and (max-width: 768px) {
+      padding: 0;
+    }
+    > span {
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+  .slip-btn {
+    @extend .primary-btn;
+    margin-right: 18px;
+    @media only screen and (max-width: 576px) {
+      width: 100%;
+    }
+  }
+  .checklist-btn {
+    @extend .primary-btn;
+    background: none;
+    border: 1px solid $primary-color;
+    color: $primary-color;
+    @media only screen and (max-width: 576px) {
+      width: 100%;
+    }
+  }
+}
