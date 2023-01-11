@@ -53,7 +53,11 @@ export default () => {
     amount: "",
   });
   const [applicantsData, setApplicantsData] = useState([]);
-
+  // const [paymentDetails, setPaymentDetails] = useState({
+  //   appointMentDate: "",
+  //   appointmentId: "",
+  //   amount: "",
+  // });
   const [modal, setModal] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
 
@@ -74,7 +78,10 @@ export default () => {
     },
   };
 
-  const modalToggle = () => setModal(!modal);
+  const modalToggle = () => {
+    setModal(!modal);
+    setConfirmCalendar(false);
+  };
 
   const handleConfirm = () => {
     setLoaderConfirm(true);
@@ -232,7 +239,24 @@ export default () => {
 
   const handlePaymentProceed = () => {
     push("/make-payment");
+    // push({
+    //   pathname: "/make-payment",
+    //   query: {
+    //     appointmentId:
+    //       selectedService === "Visa"
+    //         ? applicantDetail.application_id
+    //         : applicantDetail.id_number,
+    //     appointmentDate: applicantAppointment.date,
+    //   },
+    // });
   };
+
+  useEffect(() => {
+    setApplicantAppointment((prev) => ({
+      ...prev,
+      time: arrayTime[slideToShow].time,
+    }));
+  }, [slideToShow]);
 
   return (
     <>

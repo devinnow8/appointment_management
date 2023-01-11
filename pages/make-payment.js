@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Col,
@@ -12,6 +12,25 @@ import {
 import Header from "../components/Header";
 
 const MakePayment = () => {
+  const paymentModeType = {
+    stripe: "Stripe",
+    payPal: "Paypal",
+    amazonPay: "Amazon Pay",
+  };
+
+  const [paymentType, setPaymentType] = useState({
+    paymentMode: "",
+  });
+
+  const handleType = (event) => {
+    setPaymentType((prev) => ({
+      ...prev,
+      paymentMode: event.target.value,
+    }));
+  };
+
+  console.log(paymentType, "paymentTypepaymentType");
+
   return (
     <>
       <Header />
@@ -61,11 +80,27 @@ const MakePayment = () => {
             <Col md={7} lg={8} xl={8}>
               <div className="choose-gateway">
                 <h3 className="make-payment__title">Choose Gateway</h3>
-                <div className="choose-gateway__option">
-                  <div className="choose-gateway__option--box">
-                    <FormGroup check>
-                      <Input name="radio1" type="radio" checked />{" "}
-                    </FormGroup>
+                <div
+                  className="choose-gateway__option"
+                  onChange={(e) => handleType(e)}
+                >
+                  <div
+                    className={`choose-gateway__option--box ${
+                      paymentType.paymentMode === paymentModeType.stripe
+                        ? "radio-active"
+                        : ""
+                    }`}
+                  >
+                    <div>
+                      <input
+                        type="radio"
+                        value={paymentModeType.stripe}
+                        name="type"
+                        checked={
+                          paymentType.paymentMode === paymentModeType.stripe
+                        }
+                      />{" "}
+                    </div>
                     <Image
                       src="/images/stripe.png"
                       alt=""
@@ -74,22 +109,48 @@ const MakePayment = () => {
                     />
                     <p className="choose-gateway__title">Stripe</p>
                   </div>
-                  <div className="choose-gateway__option--box">
-                    <FormGroup check>
-                      <Input name="radio1" type="radio" />{" "}
-                    </FormGroup>
+                  <div
+                    className={`choose-gateway__option--box ${
+                      paymentType.paymentMode === paymentModeType.payPal
+                        ? "radio-active"
+                        : ""
+                    }`}
+                  >
+                    <div>
+                      <input
+                        type="radio"
+                        value={paymentModeType.payPal}
+                        name="type"
+                        checked={
+                          paymentType.paymentMode === paymentModeType.payPal
+                        }
+                      />{" "}
+                    </div>
                     <Image
                       src="/images/pay-pal.png"
                       alt=""
                       width={36}
                       height={36}
                     />
-                    <p className="choose-gateway__title">Paypal</p>
+                    <p className="choose-gateway__title">PayPal</p>
                   </div>
-                  <div className="choose-gateway__option--box">
-                    <FormGroup check>
-                      <Input name="radio1" type="radio" />{" "}
-                    </FormGroup>
+                  <div
+                    className={`choose-gateway__option--box ${
+                      paymentType.paymentMode === paymentModeType.amazonPay
+                        ? "radio-active"
+                        : ""
+                    }`}
+                  >
+                    <div>
+                      <input
+                        type="radio"
+                        value={paymentModeType.amazonPay}
+                        name="type"
+                        checked={
+                          paymentType.paymentMode === paymentModeType.amazonPay
+                        }
+                      />{" "}
+                    </div>
                     <Image
                       src="/images/amazon-pay.png"
                       alt=""
@@ -99,6 +160,7 @@ const MakePayment = () => {
                     <p className="choose-gateway__title">Amazon Pay</p>
                   </div>
                 </div>
+
                 <div className="choose-gateway__card">
                   <h3 className="choose-gateway__card--title">
                     Fill your card details
@@ -143,7 +205,7 @@ const MakePayment = () => {
                         <Label for="name">
                           CVV<span className="star">*</span>
                         </Label>
-                        <Input id="name" name="name" type="text" />
+                        <Input id="name" name="name" type="password" />
                       </FormGroup>
                     </Col>
                     <Col md={12} lg={12} className="text-center">
