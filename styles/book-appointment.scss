@@ -55,21 +55,39 @@
       font-weight: 500;
       margin: 14px 0px;
     }
+    .appointment-calender__time {
+      @media only screen and (max-width: 576px) {
+        width: fit-content;
+      }
+    }
     .appointment-calender__time--flex {
       display: flex;
       align-items: center;
       flex-direction: column;
-      @media only screen and (max-width: 768px) {
-        flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        height: unset;
-      }
       .slick-list {
         height: 380px !important;
+        @media only screen and (max-width: 576px) {
+          height: 330px !important;
+          margin-left: -20px;
+        }
+        .slick-track {
+          @media only screen and (max-width: 576px) {
+            width: 360px !important;
+            display: flex;
+            justify-content: flex-start;
+            transform: translateX(57px) !important;
+            flex-wrap: wrap;
+            margin-left: -36px;
+          }
+          
+        }
         .slick-slide {
           display: flex;
           justify-content: center;
+          @media only screen and (max-width: 576px) {
+            width: 102px !important;
+            justify-content: flex-start;
+          }
         }
       }
       .appointment-calender__time--box {
@@ -79,11 +97,11 @@
         margin-bottom: 14px;
         margin-top: 14px;
         cursor: pointer;
-        width: 120px !important;
         text-align: center;
-        @media only screen and (max-width: 768px) {
-          margin-bottom: 11px;
-          margin-right: 11px;
+        @media only screen and (max-width: 576px) {
+          margin-bottom: 0px;
+          margin-right: 0px;
+          margin: 8px 0px 0px 0px;
         }
         &.selected {
           border: 1px solid $primary-color;
@@ -110,6 +128,10 @@
       }
     }
     .appointment-calender__buttons {
+      @media only screen and (max-width: 576px) {
+        display: flex;
+        justify-content: center;
+      }
       .cancel {
         @extend .primary-btn;
         background-color: transparent;
