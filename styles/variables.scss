@@ -7,6 +7,11 @@ body {
   color: #ff2222;
 }
 
+.pay-btn {
+  @extend .primary-btn;
+  margin-top: 40px;
+}
+
 .header {
   .navbar-toggler {
     display: none;
@@ -62,7 +67,7 @@ body {
       }
       .confirm-modal__subtitle {
         font-size: 18px;
-        color: #9B9B9B;
+        color: #9b9b9b;
         text-align: center;
         margin-top: -22px;
         text-align: center;

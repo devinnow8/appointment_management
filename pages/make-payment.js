@@ -10,6 +10,11 @@ import {
   Row,
 } from "reactstrap";
 import Header from "../components/Header";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./CheckoutForm";
+
+const stripePromise = loadStripe("pk_test_35p114pH8oNuHX72SmrvsFqh00Azv3ZaIA");
 
 const MakePayment = () => {
   const paymentModeType = {
@@ -162,6 +167,12 @@ const MakePayment = () => {
                 </div>
 
                 <div className="choose-gateway__card">
+                  <Elements stripe={stripePromise}>
+                    <CheckoutForm />
+                  </Elements>
+                </div>
+
+                {/* <div className="choose-gateway__card">
                   <h3 className="choose-gateway__card--title">
                     Fill your card details
                   </h3>
@@ -212,7 +223,7 @@ const MakePayment = () => {
                       <Button className="pay-btn">Pay Now</Button>
                     </Col>
                   </Row>
-                </div>
+                </div> */}
               </div>
             </Col>
           </Row>
