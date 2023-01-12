@@ -120,5 +120,132 @@
         @extend .primary-btn;
       }
     }
+    .calender-months {
+      width: 100%;
+      height: 100%;
+      .rdp-months {
+        width: 100%;
+        height: 100%;
+        .rdp-month {
+          width: 100%;
+          height: 100%;
+        }
+        .rdp-caption {
+          background-color: #FFE8DC;
+          border-radius: 5px 5px 0px 0px;
+          padding: 16px 0px;
+          justify-content: center;
+          .rdp-caption_label {
+            color: $secondary-color;
+            font-weight: 600;
+          }
+          .rdp-nav {
+            svg {
+              color: $secondary-color;
+            }
+          }
+        }
+      }
+      .rdp-table {
+        width: 100%;
+        max-width: unset !important;
+        .rdp-head_row{
+          .rdp-head_cell{
+            border: 1px solid #CDCDCD;
+            padding: 22px;
+            > span {
+              color: $primary-color;
+              font-weight: 700;
+              text-transform: capitalize;
+              font-size: 14px;
+            }
+          }
+        }
+        .rdp-cell {
+          border: 1px solid #CDCDCD;
+          .rdp-day {
+            font-weight: 500;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: inherit;
+            border-radius: 0px;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
   }
 }
+// .calender-months {
+// 	@media screen and (max-width: 767px) {
+// 		margin: 0 auto;
+// 		display: table !important;
+// 	}
+// 	.DayPicker-wrapper {
+// 		&:focus {
+// 			outline: none;
+// 		}
+// 	}
+// 
+// 	.DayPicker-NavButton {
+// 		width: 30px;
+// 		height: 30px;
+// 		box-shadow: 0px 5px 10px #0000001a;
+// 		border-radius: 50%;
+// 		top: 0;
+// 		right: 0;
+// 		margin: 0;
+// 		&:focus {
+// 			outline: none;
+// 		}
+// 	}
+// 	// .DayPicker-NavButton--next {
+// 	// 	background-image: url('../images/right.png');
+// 	// }
+// 	// .DayPicker-NavButton--prev {
+// 	// 	margin-right: 45px;
+// 	// 	background-image: url('../images/left.png');
+// 	// 	opacity: 0.5;
+// 	// }
+// 	.DayPicker-Month {
+// 		margin: 0;
+// 		.DayPicker-Weekday {
+// 			font-size: 13px;
+// 
+// 			letter-spacing: 0.65px;
+// 			color: black;
+// 			line-height: 16px;
+// 			font-weight: bold;
+// 		}
+// 		.DayPicker-Caption {
+// 			border-bottom: 1px solid #ffae75;
+// 			border-bottom: 1px solid #ffae75;
+// 			padding-bottom: 21.5px;
+// 			margin-bottom: 27.5px;
+// 			padding-right: 0;
+// 			padding-left: 0;
+// 			div {
+// 				font-size: 16px;
+// 				font-weight: 600;
+// 				line-height: 19px;
+// 			}
+// 		}
+// 		.DayPicker-Body {
+// 			.DayPicker-Day {
+// 				padding: 14.5px 14.5px;
+// 				letter-spacing: 0.8px;
+// 
+// 				text-transform: uppercase;
+// 				font-size: 16px;
+// 				line-height: 19px;
+// 				letter-spacing: 0.8px;
+// 				font-weight: bold;
+// 				@media screen and (max-width: 991px) {
+// 					padding: 9px 11px;
+// 					font-size: 13px;
+// 				}
+// 			}
+// 		}
+// 	}
+// }

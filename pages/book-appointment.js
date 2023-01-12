@@ -11,6 +11,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import Calendar from "../components/Calendar";
+
 export default () => {
   const arrayTime = [
     { id: 1, time: "09:00 AM" },
@@ -53,6 +55,7 @@ export default () => {
     amount: "",
   });
   const [applicantsData, setApplicantsData] = useState([]);
+
   // const [paymentDetails, setPaymentDetails] = useState({
   //   appointMentDate: "",
   //   appointmentId: "",
@@ -69,11 +72,9 @@ export default () => {
     vertical: true,
     verticalSwiping: true,
     beforeChange: function (currentSlide, nextSlide) {
-      console.log("before change", currentSlide, nextSlide, "changeeeeeee");
       // setSlideToShow(nextSlide);
     },
     afterChange: function (currentSlide) {
-      console.log("after change", currentSlide, "changeeeeeee");
       setSlideToShow(currentSlide);
     },
   };
@@ -292,47 +293,45 @@ export default () => {
                   </div>
                 </div>
                 {applicantsData.length > 0 &&
-                  applicantsData.map((data, index) => {
-                    return (
-                      <>
-                        <div className="applicant-details__card me-0 me-sm-3">
-                          <div className="applicant-details__card--flex">
-                            <div className="applicant-details__card--info">
-                              <h4 className="applicant-details__card--title">
-                                {selectedService === "Visa" ? "" : data.name}
-                              </h4>
-                              <p className="applicant-details__card--text">
-                                Application ID
+                  applicantsData.map((data, index) => (
+                    <>
+                      <div className="applicant-details__card me-0 me-sm-3">
+                        <div className="applicant-details__card--flex">
+                          <div className="applicant-details__card--info">
+                            <h4 className="applicant-details__card--title">
+                              {selectedService === "Visa" ? "" : data.name}
+                            </h4>
+                            <p className="applicant-details__card--text">
+                              Application ID
+                            </p>
+                            {selectedService === "Visa" ? (
+                              <p className="applicant-details__card--id">
+                                {data.application_id}
                               </p>
-                              {selectedService === "Visa" ? (
-                                <p className="applicant-details__card--id">
-                                  {data.application_id}
-                                </p>
-                              ) : (
-                                <p className="applicant-details__card--id">
-                                  {data.id_number}
-                                </p>
-                              )}
-                            </div>
-                            <Image
-                              src="/images/delete.png"
-                              alt=""
-                              width={14}
-                              height={14}
-                              onClick={() => handleDeleteApplicant(index)}
-                            />
+                            ) : (
+                              <p className="applicant-details__card--id">
+                                {data.id_number}
+                              </p>
+                            )}
                           </div>
+                          <Image
+                            src="/images/delete.png"
+                            alt=""
+                            width={14}
+                            height={14}
+                            onClick={() => handleDeleteApplicant(index)}
+                          />
                         </div>
-                      </>
-                    );
-                  })}
+                      </div>
+                    </>
+                  ))}
               </div>
             </Col>
           </Row>
           <div className="appointment-calender">
             <Row>
               <Col md={10} lg={10} xl={10}>
-                <h1>Calender Here</h1>
+                <Calendar />
                 <ConfirmModal
                   modal={modal}
                   modalToggle={modalToggle}
