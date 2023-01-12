@@ -79,6 +79,9 @@
             box-shadow: none;
             outline: none !important;
           }
+          &:internal-autofill-selected {
+            background-color: red !important;
+          }
         }
         .cont-btn {
           @extend .primary-btn;
@@ -92,7 +95,7 @@
             width: 100%;
           }
           @media (min-width: 769px) and (max-width: 992px) {
-            width: 250px;
+            width: 100%;
             margin-bottom: 12px;
           }
           cursor: pointer;

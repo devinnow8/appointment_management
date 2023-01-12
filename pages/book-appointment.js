@@ -68,6 +68,17 @@ export default () => {
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
+    responsive: [
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          vertical: false,
+          verticalSwiping: false,
+        },
+      },
+    ],
     beforeChange: function (currentSlide, nextSlide) {
       console.log("before change", currentSlide, nextSlide, "changeeeeeee");
       // setSlideToShow(nextSlide);
@@ -393,7 +404,7 @@ export default () => {
               </Col>
               <Col sm={12} md={12} className="text-end">
                 <div className="appointment-calender__buttons mt-4">
-                  <Button className="cancel me-0 me-sm-3">Cancel</Button>
+                  <Button className="cancel me-3">Cancel</Button>
                   <Button className="continue" onClick={handleAppointment}>
                     Continue
                   </Button>
