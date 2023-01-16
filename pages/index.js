@@ -20,10 +20,14 @@ import {
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
+import { getUserAppointment } from "../components/redux/action/index";
+import { useDispatch } from "react-redux";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const dispatch = useDispatch();
+
   const serviceOptions = [
     { value: "Visa", label: "Visa" },
     { value: "BVN Enrollment", label: "BVN Enrollment" },
@@ -84,6 +88,10 @@ export default function Home() {
   const navbarToggle = () => setIsOpen(!isOpen);
 
   const handleContinue = () => {
+    const obj = {
+      selectedService: selectedService,
+      appointmentDetails: inputFields,
+    };
     setIsValidation(true);
     if (selectedService.label !== "Visa") {
       if (
@@ -92,6 +100,7 @@ export default function Home() {
         inputFields.id_type.label.trim() !== "" &&
         inputFields.id_number.trim() !== ""
       ) {
+        dispatch(getUserAppointment(obj));
         push({
           pathname: "/book-appointment",
           query: { selectedService: selectedService.label },
@@ -121,6 +130,7 @@ export default function Home() {
         inputFields.application_id.trim() !== "" &&
         inputFields.dob.trim() !== ""
       ) {
+        dispatch(getUserAppointment(obj));
         push({
           pathname: "/book-appointment",
           query: { selectedService: selectedService.label },

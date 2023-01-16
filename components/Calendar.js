@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-day-picker/dist/style.css";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
+
 const DAYS_FORMAT = {
   0: "S",
   1: "M",
@@ -12,22 +13,50 @@ const DAYS_FORMAT = {
   6: "S",
 };
 
-const Calendar = () => {
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const Calendar = ({ setApplicantAppointment, applicantAppointment }) => {
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [availableDates, setAvailableDates] = useState([
-    new Date("2023 Jan 20"),
-    new Date("2023 Jan 21"),
-    new Date("2023 Jan 22"),
-  ]);
+  // const [availableDates, setAvailableDates] = useState([
+  //   new Date("2023 Jan 20"),
+  //   new Date("2023 Jan 21"),
+  //   new Date("2023 Jan 22"),
+  // ]);
 
+  console.log(selectedDate, "selectedDate", isDateSelected);
   const handleSelectDate = (value) => {
-    console.log("value: ", value);
     setSelectedDate(value);
+
+    setApplicantAppointment({
+      date: `${monthNames[value.getMonth()]}
+      ${value.getDate()}, ${value.getFullYear()}`,
+    });
     setDateSelected(true);
     // setSelectedSlot("");
     // fetchAvailableSlots(value);
   };
+
+  useEffect(() => {
+    setApplicantAppointment({
+      date: `${monthNames[selectedDate.getMonth()]}
+      ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
+    });
+  }, []);
+
   const isAvailableDate = (availableDatesList, day) => {
     return availableDatesList.includes(day.getDate());
   };

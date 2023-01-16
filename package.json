@@ -17,10 +17,13 @@
     "react": "18.2.0",
     "react-day-picker": "^8.4.1",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "react-select": "^5.7.0",
     "react-slick": "^0.29.0",
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.5",
+    "redux": "^4.2.0",
+    "redux-persist": "^6.0.0",
     "sass": "^1.57.1",
     "slick-carousel": "^1.8.1"
   },

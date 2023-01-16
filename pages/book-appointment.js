@@ -10,10 +10,17 @@ import { toast } from "react-toastify";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useSelector, useDispatch } from "react-redux";
+import { setMembers, setVisaMembers } from "../components/redux/action";
 
 import Calendar from "../components/Calendar";
 
 export default () => {
+  const { userAppointmentDetails, members, visaMembers } = useSelector(
+    (state) => state,
+  );
+  const dispatch = useDispatch();
+
   const arrayTime = [
     { id: 1, time: "09:00 AM" },
     { id: 2, time: "10:00 AM" },
@@ -54,13 +61,6 @@ export default () => {
     location: "",
     amount: "",
   });
-  const [applicantsData, setApplicantsData] = useState([]);
-
-  // const [paymentDetails, setPaymentDetails] = useState({
-  //   appointMentDate: "",
-  //   appointmentId: "",
-  //   amount: "",
-  // });
   const [modal, setModal] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
 
@@ -104,7 +104,8 @@ export default () => {
         application_id: applicantDetail.application_id,
         dob: applicantDetail.dob,
       };
-      setApplicantsData([...applicantsData, obj]);
+      // setApplicantsData([...applicantsData, obj]);
+      dispatch(setVisaMembers([...visaMembers, obj]));
       setLoaderConfirm(false);
       toast.success("Applicant Addedd Successfully");
     } else {
@@ -114,7 +115,9 @@ export default () => {
         id_type: applicantDetail.id_type,
         id_number: applicantDetail.id_number,
       };
-      setApplicantsData([...applicantsData, obj]);
+      dispatch(setMembers([...members, obj]));
+
+      // setApplicantsData([...applicantsData, obj]);
       setLoaderConfirm(false);
       toast.success("Applicant Addedd Successfully");
     }
@@ -230,9 +233,16 @@ export default () => {
   ]);
 
   const handleDeleteApplicant = (i) => {
-    const data = [...applicantsData];
-    data.splice(i, 1);
-    setApplicantsData(data);
+    if (selectedService === "Visa") {
+      const data = [...visaMembers];
+      data.splice(i, 1);
+      dispatch(setVisaMembers(data));
+    } else {
+      const data = [...members];
+      data.splice(i, 1);
+      dispatch(setMembers(data));
+    }
+    // setApplicantsData(data);
     toast.success("Applicant Deleted Successfully");
   };
 
@@ -270,6 +280,17 @@ export default () => {
     }));
   }, [slideToShow]);
 
+  const handleTime = (index) => {
+    setSlideToShow(index);
+    slider.current.slickGoTo(index);
+  };
+
+  console.log(
+    userAppointmentDetails,
+    "userAppointmentDetails",
+    members,
+    applicantAppointment,
+  );
   return (
     <>
       <InnerHeader
@@ -294,55 +315,88 @@ export default () => {
                   <div className="applicant-details__card--flex">
                     <div className="applicant-details__card--info">
                       <h4 className="applicant-details__card--title">
-                        Daisy Marry
+                        {userAppointmentDetails.appointmentDetails.name}
                       </h4>
                       <p className="applicant-details__card--text">
                         Application ID
                       </p>
-                      <p className="applicant-details__card--id">OLK4746535</p>
+                      <p className="applicant-details__card--id">
+                        {selectedService === "Visa"
+                          ? userAppointmentDetails.appointmentDetails
+                              .application_id
+                          : userAppointmentDetails.appointmentDetails.id_number}
+                      </p>
                     </div>
                   </div>
                 </div>
-                {applicantsData.length > 0 &&
-                  applicantsData.map((data, index) => (
-                    <>
-                      <div className="applicant-details__card me-0 me-sm-3">
-                        <div className="applicant-details__card--flex">
-                          <div className="applicant-details__card--info">
-                            <h4 className="applicant-details__card--title">
-                              {selectedService === "Visa" ? "" : data.name}
-                            </h4>
-                            <p className="applicant-details__card--text">
-                              Application ID
-                            </p>
-                            {selectedService === "Visa" ? (
-                              <p className="applicant-details__card--id">
-                                {data.application_id}
-                              </p>
-                            ) : (
-                              <p className="applicant-details__card--id">
-                                {data.id_number}
-                              </p>
-                            )}
+                {selectedService === "Visa" ? (
+                  <>
+                    {visaMembers.length > 0 &&
+                      visaMembers.map((data, index) => (
+                        <>
+                          <div className="applicant-details__card me-0 me-sm-3">
+                            <div className="applicant-details__card--flex">
+                              <div className="applicant-details__card--info">
+                                <p className="applicant-details__card--text">
+                                  Application ID
+                                </p>
+                                <p className="applicant-details__card--id">
+                                  {data.application_id}
+                                </p>
+                              </div>
+                              <Image
+                                src="/images/delete.png"
+                                alt=""
+                                width={14}
+                                height={14}
+                                onClick={() => handleDeleteApplicant(index)}
+                              />
+                            </div>
                           </div>
-                          <Image
-                            src="/images/delete.png"
-                            alt=""
-                            width={14}
-                            height={14}
-                            onClick={() => handleDeleteApplicant(index)}
-                          />
-                        </div>
-                      </div>
-                    </>
-                  ))}
+                        </>
+                      ))}
+                  </>
+                ) : (
+                  <>
+                    {members.length > 0 &&
+                      members.map((data, index) => (
+                        <>
+                          <div className="applicant-details__card me-0 me-sm-3">
+                            <div className="applicant-details__card--flex">
+                              <div className="applicant-details__card--info">
+                                <h4 className="applicant-details__card--title">
+                                  {data.name}
+                                </h4>
+                                <p className="applicant-details__card--text">
+                                  Application ID
+                                </p>
+                                <p className="applicant-details__card--id">
+                                  {data.id_number}
+                                </p>
+                              </div>
+                              <Image
+                                src="/images/delete.png"
+                                alt=""
+                                width={14}
+                                height={14}
+                                onClick={() => handleDeleteApplicant(index)}
+                              />
+                            </div>
+                          </div>
+                        </>
+                      ))}
+                  </>
+                )}
               </div>
             </Col>
           </Row>
           <div className="appointment-calender">
             <Row>
               <Col md={10} lg={10} xl={10}>
-                <Calendar />
+                <Calendar
+                  setApplicantAppointment={setApplicantAppointment}
+                  applicantAppointment={applicantAppointment}
+                />
                 <ConfirmModal
                   modal={modal}
                   modalToggle={modalToggle}
@@ -375,6 +429,7 @@ export default () => {
                           <div
                             className="appointment-calender__time--box"
                             key={item.id}
+                            onClick={() => handleTime(index)}
                           >
                             <p
                               className={`time ${
