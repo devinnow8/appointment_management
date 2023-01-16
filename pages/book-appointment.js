@@ -285,12 +285,6 @@ export default () => {
     slider.current.slickGoTo(index);
   };
 
-  console.log(
-    userAppointmentDetails,
-    "userAppointmentDetails",
-    members,
-    applicantAppointment,
-  );
   return (
     <>
       <InnerHeader

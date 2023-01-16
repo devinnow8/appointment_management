@@ -29,8 +29,6 @@ const MakePayment = () => {
     }));
   };
 
-  console.log(paymentType, "paymentTypepaymentType");
-
   return (
     <>
       <Header />

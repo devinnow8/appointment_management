@@ -37,7 +37,6 @@ const Calendar = ({ setApplicantAppointment, applicantAppointment }) => {
   //   new Date("2023 Jan 22"),
   // ]);
 
-  console.log(selectedDate, "selectedDate", isDateSelected);
   const handleSelectDate = (value) => {
     setSelectedDate(value);
 
