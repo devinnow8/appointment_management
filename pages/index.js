@@ -48,7 +48,7 @@ export default function Home() {
   ];
   const { push } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState(serviceOptions[1]);
+  const [selectedService, setSelectedService] = useState(serviceOptions[0]);
   const [isValidation, setIsValidation] = useState(false);
   const [validationsError, setValidationsError] = useState({
     application_id: "",
