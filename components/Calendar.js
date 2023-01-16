@@ -142,6 +142,21 @@ const Calendar = ({ setApplicantAppointment, applicantAppointment }) => {
           formatWeekdayShort: getFormattedDayTitle,
         }}
       />
+      <div className="calender-status">
+        <p className="calender-status__title">Legends:</p>
+        <div className="calender-status__box">
+          <div className="box"></div>
+          <p className="status">Available</p>
+        </div>
+        <div className="calender-status__box">
+          <div className="box not-avail"></div>
+          <p className="status">Not Available</p>
+        </div>
+        <div className="calender-status__box">
+          <div className="box selected"></div>
+          <p className="status">Selected</p>
+        </div>
+      </div>
     </>
   );
 };
