@@ -6,12 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "deploy": "next build && next export && firebase deploy --only hosting"
   },
   "dependencies": {
     "@next/font": "13.1.1",
     "bootstrap": "^5.2.3",
     "date-fns": "^2.29.3",
+    "firebase": "^9.15.0",
     "moment": "^2.29.4",
     "next": "13.1.1",
     "react": "18.2.0",
