@@ -10,3 +10,12 @@ export const idType = [
   { value: "Driving Licence", label: "Driving Licence" },
   { value: "Passport", label: "Passport" },
 ];
+
+export const arrayTime = [
+  { id: 1, time: "09:00 AM" },
+  { id: 2, time: "10:00 AM" },
+  { id: 3, time: "11:00 AM" },
+  { id: 4, time: "12:00 PM" },
+  { id: 5, time: "13:00 PM" },
+  { id: 6, time: "14:00 PM" },
+];

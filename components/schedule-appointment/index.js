@@ -15,13 +15,10 @@ function ScheduleAppointment({
   selectedService,
   confirmCalendar,
   handlePaymentProceed,
-  previousClick,
   slider,
   arrayTime,
-  handleTime,
   setSlideToShow,
   slideToShow,
-  nextClick,
   handleAppointment,
 }) {
   return (
@@ -49,7 +46,7 @@ function ScheduleAppointment({
             <div className="appointment-calender__time--flex">
               <Button
                 className="appointment-calender__time--arrow"
-                onClick={previousClick}
+                onClick={() => slider.current.slickPrev()}
               >
                 <Image
                   src="/images/up-arrow.png"
@@ -61,13 +58,12 @@ function ScheduleAppointment({
               <TimeSlider
                 slider={slider}
                 arrayTime={arrayTime}
-                handleTime={handleTime}
                 slideToShow={slideToShow}
                 setSlideToShow={setSlideToShow}
               />
               <Button
                 className="appointment-calender__time--arrow"
-                onClick={nextClick}
+                onClick={() => slider.current.slickNext()}
               >
                 <Image
                   src="/images/down-arrow.png"

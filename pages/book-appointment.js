@@ -9,24 +9,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { setMembers, setVisaMembers } from "../components/redux/action";
 import ApplicantDetails from "../components/applicant-details";
 import ScheduleAppointment from "../components/schedule-appointment";
+import { arrayTime } from "../constants/index";
+import { confirm } from "../components/schedule-appointment/utils";
+
 export default () => {
   const { userAppointmentDetails, members, visaMembers } = useSelector(
     (state) => state,
   );
   const dispatch = useDispatch();
-  const arrayTime = [
-    { id: 1, time: "09:00 AM" },
-    { id: 2, time: "10:00 AM" },
-    { id: 3, time: "11:00 AM" },
-    { id: 4, time: "12:00 PM" },
-    { id: 5, time: "13:00 PM" },
-    { id: 6, time: "14:00 PM" },
-  ];
   const slider = useRef();
   const {
     push,
     query: { selectedService },
   } = useRouter();
+
   const [slideToShow, setSlideToShow] = useState(0);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
   const [isValidation, setIsValidation] = useState(false);
@@ -62,41 +58,20 @@ export default () => {
   };
 
   const handleConfirm = () => {
-    setLoaderConfirm(true);
-    setIsConfirm(true);
-    if (selectedService === "Visa") {
-      const obj = {
-        name: applicantDetail.name,
-        application_id: applicantDetail.application_id,
-        dob: applicantDetail.dob,
-      };
-      // setApplicantsData([...applicantsData, obj]);
-      dispatch(setVisaMembers([...visaMembers, obj]));
-      setLoaderConfirm(false);
-      toast.success("Applicant Addedd Successfully");
-    } else {
-      const obj = {
-        name: applicantDetail.name,
-        nationality: applicantDetail.nationality,
-        id_type: applicantDetail.id_type,
-        id_number: applicantDetail.id_number,
-      };
-      dispatch(setMembers([...members, obj]));
-
-      // setApplicantsData([...applicantsData, obj]);
-      setLoaderConfirm(false);
-      toast.success("Applicant Addedd Successfully");
-    }
-
-    setModal(false);
-    setApplicantDetail({
-      application_id: "",
-      dob: "",
-      name: "",
-      nationality: "",
-      id_type: "",
-      id_number: "",
-    });
+    confirm(
+      setLoaderConfirm,
+      setIsConfirm,
+      selectedService,
+      applicantDetail,
+      dispatch,
+      setVisaMembers,
+      toast,
+      setMembers,
+      setModal,
+      setApplicantDetail,
+      visaMembers,
+      members,
+    );
   };
 
   const handleAddMember = () => {
@@ -211,14 +186,6 @@ export default () => {
     toast.success("Applicant Deleted Successfully");
   };
 
-  const previousClick = () => {
-    slider.current.slickPrev();
-  };
-
-  const nextClick = () => {
-    slider.current.slickNext();
-  };
-
   const handleAppointment = () => {
     setModal(true);
     setConfirmCalendar(true);
@@ -234,11 +201,6 @@ export default () => {
       time: arrayTime[slideToShow].time,
     }));
   }, [slideToShow]);
-
-  const handleTime = (index) => {
-    setSlideToShow(index);
-    slider.current.slickGoTo(index);
-  };
 
   return (
     <>
@@ -273,13 +235,10 @@ export default () => {
             selectedService={selectedService}
             confirmCalendar={confirmCalendar}
             handlePaymentProceed={handlePaymentProceed}
-            previousClick={previousClick}
             slider={slider}
             arrayTime={arrayTime}
-            handleTime={handleTime}
             setSlideToShow={setSlideToShow}
             slideToShow={slideToShow}
-            nextClick={nextClick}
             handleAppointment={handleAppointment}
           />
         </Container>

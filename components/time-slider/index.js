@@ -3,13 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function TimeSlider({
-  slider,
-  arrayTime,
-  handleTime,
-  slideToShow,
-  setSlideToShow,
-}) {
+function TimeSlider({ slider, arrayTime, slideToShow, setSlideToShow }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -41,7 +35,10 @@ function TimeSlider({
             <div
               className="appointment-calender__time--box"
               key={item.id}
-              onClick={() => handleTime(index)}
+              onClick={() => {
+                setSlideToShow(index);
+                slider.current.slickGoTo(index);
+              }}
             >
               <p className={`time ${index === slideToShow && "active"}`}>
                 {item.time}
