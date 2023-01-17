@@ -27,3 +27,28 @@ export const arrayTime = [
   { id: 5, time: "13:00 PM" },
   { id: 6, time: "14:00 PM" },
 ];
+
+export const DAYS_FORMAT = {
+  0: "S",
+  1: "M",
+  2: "T",
+  3: "W",
+  4: "T",
+  5: "F",
+  6: "S",
+};
+
+export const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];

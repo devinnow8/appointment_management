@@ -2,41 +2,11 @@ import React, { useState, useEffect } from "react";
 import "react-day-picker/dist/style.css";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
+import { DAYS_FORMAT, monthNames } from "../constants";
 
-const DAYS_FORMAT = {
-  0: "S",
-  1: "M",
-  2: "T",
-  3: "W",
-  4: "T",
-  5: "F",
-  6: "S",
-};
-
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-const Calendar = ({ setApplicantAppointment, applicantAppointment }) => {
+const Calendar = ({ setApplicantAppointment }) => {
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // const [availableDates, setAvailableDates] = useState([
-  //   new Date("2023 Jan 20"),
-  //   new Date("2023 Jan 21"),
-  //   new Date("2023 Jan 22"),
-  // ]);
-
   const handleSelectDate = (value) => {
     setSelectedDate(value);
 
@@ -45,8 +15,6 @@ const Calendar = ({ setApplicantAppointment, applicantAppointment }) => {
       ${value.getDate()}, ${value.getFullYear()}`,
     });
     setDateSelected(true);
-    // setSelectedSlot("");
-    // fetchAvailableSlots(value);
   };
 
   useEffect(() => {
