@@ -7,13 +7,10 @@ import { useRouter } from "next/router";
 import loader from "../public/images/loader.gif";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setMembers, setVisaMembers } from "../components/redux/action";
-
 import Calendar from "../components/Calendar";
+import TimeSlider from "../components/time-slider";
 
 export default () => {
   const { userAppointmentDetails, members, visaMembers } = useSelector(
@@ -35,7 +32,6 @@ export default () => {
     query: { selectedService },
   } = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
-
   const [confirmCalendar, setConfirmCalendar] = useState(false);
   const [isValidation, setIsValidation] = useState(false);
   const [loaderConfirm, setLoaderConfirm] = useState(false);
@@ -63,32 +59,6 @@ export default () => {
   });
   const [modal, setModal] = useState(false);
   const [isConfirm, setIsConfirm] = useState(false);
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    vertical: true,
-    verticalSwiping: true,
-    responsive: [
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          vertical: false,
-          verticalSwiping: false,
-        },
-      },
-    ],
-    beforeChange: function (currentSlide, nextSlide) {
-      // setSlideToShow(nextSlide);
-    },
-    afterChange: function (currentSlide) {
-      setSlideToShow(currentSlide);
-    },
-  };
 
   const modalToggle = () => {
     setModal(!modal);
@@ -261,16 +231,6 @@ export default () => {
 
   const handlePaymentProceed = () => {
     push("/make-payment");
-    // push({
-    //   pathname: "/make-payment",
-    //   query: {
-    //     appointmentId:
-    //       selectedService === "Visa"
-    //         ? applicantDetail.application_id
-    //         : applicantDetail.id_number,
-    //     appointmentDate: applicantAppointment.date,
-    //   },
-    // });
   };
 
   useEffect(() => {
@@ -417,25 +377,13 @@ export default () => {
                         height={9}
                       />
                     </Button>
-                    <Slider ref={slider} {...settings}>
-                      {arrayTime.map((item, index) => {
-                        return (
-                          <div
-                            className="appointment-calender__time--box"
-                            key={item.id}
-                            onClick={() => handleTime(index)}
-                          >
-                            <p
-                              className={`time ${
-                                index === slideToShow && "active"
-                              }`}
-                            >
-                              {item.time}
-                            </p>
-                          </div>
-                        );
-                      })}
-                    </Slider>
+                    <TimeSlider
+                      slider={slider}
+                      arrayTime={arrayTime}
+                      handleTime={handleTime}
+                      slideToShow={slideToShow}
+                      setSlideToShow={setSlideToShow}
+                    />
                     <Button
                       className="appointment-calender__time--arrow"
                       onClick={nextClick}
