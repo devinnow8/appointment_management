@@ -3,7 +3,7 @@ import { Container, Label, Input, Row, Col, Button } from "reactstrap";
 import Select from "react-select";
 import { idType, nationalityOptions } from "../../constants";
 
-function InnerHeader({
+function Header({
   setApplicantDetail,
   applicantDetail,
   modalToggle,
@@ -145,4 +145,4 @@ function InnerHeader({
   );
 }
 
-export default InnerHeader;
+export default Header;

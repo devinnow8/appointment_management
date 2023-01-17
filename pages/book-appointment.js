@@ -1,16 +1,21 @@
-import { Container } from "reactstrap";
-import InnerHeader from "../components/book-appointment/InnerHeader";
-import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import loader from "../public/images/loader.gif";
-import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { useSelector, useDispatch } from "react-redux";
-import { setMembers, setVisaMembers } from "../redux/action";
-import ApplicantDetails from "../components/book-appointment/applicant-details";
-import ScheduleAppointment from "../components/book-appointment/schedule-appointment";
-import { arrayTime } from "../constants/index";
+import "react-toastify/dist/ReactToastify.css";
+import { Button, Col, Container, Row } from "reactstrap";
+import {
+  Header,
+  Applicants,
+  Calendar,
+  ConfirmModal,
+  TimeSlots,
+} from "../components/book-appointment";
 import { confirm } from "../components/book-appointment/schedule-appointment/utils";
+import { arrayTime } from "../constants/index";
+import loader from "../public/images/loader.gif";
+import { setMembers, setVisaMembers } from "../redux/action";
 
 export default () => {
   const { userAppointmentDetails, members, visaMembers } = useSelector(
@@ -204,7 +209,7 @@ export default () => {
 
   return (
     <>
-      <InnerHeader
+      <Header
         setApplicantDetail={setApplicantDetail}
         applicantDetail={applicantDetail}
         modalToggle={handleAddMember}
@@ -218,29 +223,76 @@ export default () => {
               <img src={loader.src} className="loader-img" alt="" />
             </div>
           )}
-          <ApplicantDetails
+          <Applicants
             userAppointmentDetails={userAppointmentDetails}
             selectedService={selectedService}
             visaMembers={visaMembers}
             members={members}
             handleDeleteApplicant={handleDeleteApplicant}
           />
-          <ScheduleAppointment
-            setApplicantAppointment={setApplicantAppointment}
-            applicantAppointment={applicantAppointment}
-            modal={modal}
-            modalToggle={modalToggle}
-            applicantDetail={applicantDetail}
-            handleConfirm={handleConfirm}
-            selectedService={selectedService}
-            confirmCalendar={confirmCalendar}
-            handlePaymentProceed={handlePaymentProceed}
-            slider={slider}
-            arrayTime={arrayTime}
-            setSlideToShow={setSlideToShow}
-            slideToShow={slideToShow}
-            handleAppointment={handleAppointment}
-          />
+          <div className="appointment-calender">
+            <Row>
+              <Col md={10} lg={10} xl={10}>
+                <Calendar
+                  setApplicantAppointment={setApplicantAppointment}
+                  applicantAppointment={applicantAppointment}
+                />
+                <ConfirmModal
+                  modal={modal}
+                  modalToggle={modalToggle}
+                  applicantDetail={applicantDetail}
+                  handleConfirm={handleConfirm}
+                  selectedService={selectedService}
+                  applicantAppointment={applicantAppointment}
+                  confirmCalendar={confirmCalendar}
+                  handlePaymentProceed={handlePaymentProceed}
+                />
+                <h2 className="d-block d-md-none sel-time">Select Time</h2>
+              </Col>
+              <Col md={2} lg={2} xl={2}>
+                <div className="appointment-calender__time">
+                  <div className="appointment-calender__time--flex">
+                    <Button
+                      className="appointment-calender__time--arrow"
+                      onClick={() => slider.current.slickPrev()}
+                    >
+                      <Image
+                        src="/images/up-arrow.png"
+                        alt=""
+                        width={12}
+                        height={9}
+                      />
+                    </Button>
+                    <TimeSlots
+                      slider={slider}
+                      arrayTime={arrayTime}
+                      slideToShow={slideToShow}
+                      setSlideToShow={setSlideToShow}
+                    />
+                    <Button
+                      className="appointment-calender__time--arrow"
+                      onClick={() => slider.current.slickNext()}
+                    >
+                      <Image
+                        src="/images/down-arrow.png"
+                        alt=""
+                        width={12}
+                        height={9}
+                      />
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+              <Col sm={12} md={12} className="text-end">
+                <div className="appointment-calender__buttons mt-4">
+                  <Button className="cancel me-3">Cancel</Button>
+                  <Button className="continue" onClick={handleAppointment}>
+                    Continue
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </div>
         </Container>
       </div>
     </>

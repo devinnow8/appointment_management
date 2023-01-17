@@ -1,159 +1,31 @@
 import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import Header from "../components/Header";
-import { getUserAppointment } from "../redux/action/index";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { serviceOptions, nationalityOptions, idType } from "../constants/index";
-import AppointmentForm from "../components/home/appointment-form/index";
+import Select from "react-select";
+import { Col, Container, FormGroup, Label, Row } from "reactstrap";
+import Header from "../components/Header";
+import { Others, Visa } from "../components/home";
+import { serviceOptions } from "../constants/index";
+import { getUserAppointment } from "../redux/action/index";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { push } = useRouter();
+  const router = useRouter();
   const [selectedService, setSelectedService] = useState(serviceOptions[0]);
-  const [isValidation, setIsValidation] = useState(false);
-  const [validationsError, setValidationsError] = useState({
-    application_id: "",
-    dob: "",
-    name: "",
-    nationality: "",
-    id_type: "",
-    id_number: "",
-  });
-  const [inputFields, setInputFields] = useState({
-    application_id: "",
-    dob: "",
-    name: "",
-    nationality: "",
-    id_type: "",
-    id_number: "",
-  });
 
-  const handle_change = (e) => {
-    const key = e.target.id;
-    const temp = { ...inputFields };
-    temp[key] = e.target.value;
-    setInputFields(temp);
-  };
-
-  const handle_select = (value, id) => {
-    const temp = { ...inputFields };
-    temp[id] = value;
-    setInputFields(temp);
-  };
-
-  const handle_date_change = (e) => {
-    const temp = { ...inputFields };
-    temp["dob"] = e.target.value;
-    setInputFields(temp);
-  };
-
-  const handleContinue = () => {
+  const handleContinue = (values) => {
     const obj = {
       selectedService: selectedService,
-      appointmentDetails: inputFields,
+      appointmentDetails: values,
     };
-    setIsValidation(true);
-    if (selectedService.label !== "Visa") {
-      if (
-        inputFields.name.trim() !== "" &&
-        inputFields.nationality.label.trim() !== "" &&
-        inputFields.id_type.label.trim() !== "" &&
-        inputFields.id_number.trim() !== ""
-      ) {
-        dispatch(getUserAppointment(obj));
-        push({
-          pathname: "/book-appointment",
-          query: { selectedService: selectedService.label },
-        });
-      } else {
-        let errors = { ...validationsError };
-
-        if (!inputFields.name.trim()) errors.name = "This Field is required";
-        else errors.name = "";
-
-        if (!inputFields.nationality.label?.trim())
-          errors.nationality = "This Field is required";
-        else errors.nationality = "";
-
-        if (!inputFields.id_type.label?.trim())
-          errors.id_type = "This Field is required";
-        else errors.id_type = "";
-
-        if (!inputFields.id_number.trim())
-          errors.id_number = "This Field is required";
-        else errors.id_number = "";
-
-        setValidationsError(errors);
-      }
-    } else {
-      if (
-        inputFields.application_id.trim() !== "" &&
-        inputFields.dob.trim() !== ""
-      ) {
-        dispatch(getUserAppointment(obj));
-        push({
-          pathname: "/book-appointment",
-          query: { selectedService: selectedService.label },
-        });
-      } else {
-        let errors = { ...validationsError };
-
-        if (!inputFields.application_id.trim())
-          errors.application_id = "This Field is required";
-        else errors.application_id = "";
-
-        if (!inputFields.dob.trim()) errors.dob = "This Field is required";
-        else errors.dob = "";
-
-        setValidationsError(errors);
-      }
-    }
+    dispatch(getUserAppointment(obj));
+    router.push({
+      pathname: "/book-appointment",
+      query: { selectedService: selectedService.label },
+    });
   };
-
-  useEffect(() => {
-    if (isValidation) {
-      if (selectedService.label !== "Visa") {
-        let errors = { ...validationsError };
-
-        if (!inputFields.name.trim()) errors.name = "This Field is required";
-        else errors.name = "";
-
-        if (!inputFields.nationality.label?.trim())
-          errors.nationality = "This Field is required";
-        else errors.nationality = "";
-
-        if (!inputFields.id_type.label?.trim())
-          errors.id_type = "This Field is required";
-        else errors.id_type = "";
-
-        if (!inputFields.id_number.trim())
-          errors.id_number = "This Field is required";
-        else errors.id_number = "";
-
-        setValidationsError(errors);
-      } else {
-        let errors = { ...validationsError };
-
-        if (!inputFields.application_id.trim())
-          errors.application_id = "This Field is required";
-        else errors.application_id = "";
-
-        if (!inputFields.dob.trim()) errors.dob = "This Field is required";
-        else errors.dob = "";
-
-        setValidationsError(errors);
-      }
-    }
-  }, [
-    isValidation,
-    inputFields.application_id,
-    inputFields.dob,
-    inputFields.id_number,
-    inputFields.id_type,
-    inputFields.name,
-    inputFields.nationality,
-  ]);
 
   return (
     <>
@@ -164,21 +36,62 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <AppointmentForm
-        selectedService={selectedService}
-        setSelectedService={setSelectedService}
-        setIsValidation={setIsValidation}
-        setValidationsError={setValidationsError}
-        serviceOptions={serviceOptions}
-        handle_change={handle_change}
-        inputFields={inputFields}
-        validationsError={validationsError}
-        handle_date_change={handle_date_change}
-        handle_select={handle_select}
-        handleContinue={handleContinue}
-        nationalityOptions={nationalityOptions}
-        idType={idType}
-      />
+      <section className="appointment-form">
+        <Container>
+          <Row className="appointment-form__row">
+            <Col md={6} lg={6} xl={6}>
+              <div className="appointment-form__img--wrapper">
+                <div className="appointment-form__img">
+                  <Image
+                    alt="img"
+                    src="/images/appoint-img.png"
+                    className="appointment-form__img"
+                    height={380}
+                    width={490}
+                  />
+                </div>
+              </div>
+            </Col>
+            <Col md={6} lg={6} xl={6}>
+              <div className="appointment-form__content">
+                <h1 className="appointment-form__title">
+                  Welcome to <mark>OIS</mark> Appointment Booking System
+                </h1>
+                <p className="appointment-form__info">
+                  {" "}
+                  New Appointment / Reschedule Appointment / Cancel Appointment{" "}
+                </p>
+
+                <div className="appointment-form__fields">
+                  <FormGroup>
+                    <Label for="exampleSelect">Select Service</Label>
+                    <Select
+                      defaultValue={selectedService}
+                      onChange={(selected) => {
+                        setSelectedService(selected);
+                      }}
+                      options={serviceOptions}
+                      className="react-select-container"
+                      classNamePrefix="react-select"
+                    />
+                  </FormGroup>
+                  <Row>
+                    {selectedService.label == "Visa" ? (
+                      <Visa handleContinue={handleContinue} />
+                    ) : (
+                      <Others handleContinue={handleContinue} />
+                    )}
+                  </Row>
+                </div>
+                <p className="appointment-form_desc">
+                  If you have not yet completed your application, then you can
+                  <a href="#"> click here </a> and complete it.
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
     </>
   );
 }

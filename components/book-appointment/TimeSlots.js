@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function TimeSlider({ slider, arrayTime, slideToShow, setSlideToShow }) {
+function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
   const settings = {
     dots: false,
     infinite: true,
@@ -51,4 +51,4 @@ function TimeSlider({ slider, arrayTime, slideToShow, setSlideToShow }) {
   );
 }
 
-export default TimeSlider;
+export default TimeSlots;

@@ -2,7 +2,7 @@ import React from "react";
 import { Col, Row } from "reactstrap";
 import Image from "next/image";
 
-function ApplicantDetails({
+function Applicants({
   userAppointmentDetails,
   selectedService,
   visaMembers,
@@ -93,4 +93,4 @@ function ApplicantDetails({
   );
 }
 
-export default ApplicantDetails;
+export default Applicants;
