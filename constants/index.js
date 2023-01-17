@@ -1,3 +1,11 @@
+export const serviceOptions = [
+  { value: "Visa", label: "Visa" },
+  { value: "BVN Enrollment", label: "BVN Enrollment" },
+  { value: "Passport Services", label: "Passport Services" },
+  { value: "Premium Lounge(DLA)", label: "Premium Lounge(DLA)" },
+  { value: "NIN Enrollment", label: "NIN Enrollment" },
+];
+
 export const nationalityOptions = [
   { value: "Nigeria", label: "Nigeria" },
   { value: "India", label: "India" },
