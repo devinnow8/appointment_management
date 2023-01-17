@@ -1,5 +1,5 @@
 import { Container } from "reactstrap";
-import InnerHeader from "../components/InnerHeader";
+import InnerHeader from "../components/book-appointment/InnerHeader";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import loader from "../public/images/loader.gif";
@@ -7,10 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { setMembers, setVisaMembers } from "../components/redux/action";
-import ApplicantDetails from "../components/applicant-details";
-import ScheduleAppointment from "../components/schedule-appointment";
+import ApplicantDetails from "../components/book-appointment/applicant-details";
+import ScheduleAppointment from "../components/book-appointment/schedule-appointment";
 import { arrayTime } from "../constants/index";
-import { confirm } from "../components/schedule-appointment/utils";
+import { confirm } from "../components/book-appointment/schedule-appointment/utils";
 
 export default () => {
   const { userAppointmentDetails, members, visaMembers } = useSelector(

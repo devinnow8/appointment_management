@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import { getUserAppointment } from "../components/redux/action/index";
 import { useDispatch } from "react-redux";
 import { serviceOptions, nationalityOptions, idType } from "../constants/index";
-import AppointmentForm from "../components/appointment-form";
+import AppointmentForm from "../components/home/appointment-form/index";
 
 export default function Home() {
   const dispatch = useDispatch();

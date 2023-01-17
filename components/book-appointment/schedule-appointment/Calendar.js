@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "react-day-picker/dist/style.css";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
-import { DAYS_FORMAT, monthNames } from "../constants";
+import { DAYS_FORMAT, monthNames } from "../../../constants";
 
 const Calendar = ({ setApplicantAppointment }) => {
   const [isDateSelected, setDateSelected] = useState(false);

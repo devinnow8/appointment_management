@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Col, Row } from "reactstrap";
-import Calendar from "../Calendar";
+import Calendar from "./Calendar";
 import ConfirmModal from "../ConfirmModal";
-import TimeSlider from "../time-slider";
+import TimeSlider from "./time-slider";
 import Image from "next/image";
 
 function ScheduleAppointment({

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container, Label, Input, Row, Col, Button } from "reactstrap";
 import Select from "react-select";
-import { idType, nationalityOptions } from "../constants";
+import { idType, nationalityOptions } from "../../constants";
 
 function InnerHeader({
   setApplicantDetail,
