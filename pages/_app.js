@@ -2,7 +2,7 @@ import "../styles/main.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
-import { configureStore } from "../components/redux/store";
+import { configureStore } from "../redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
 

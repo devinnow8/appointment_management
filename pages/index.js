@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
-import { getUserAppointment } from "../components/redux/action/index";
+import { getUserAppointment } from "../redux/action/index";
 import { useDispatch } from "react-redux";
 import { serviceOptions, nationalityOptions, idType } from "../constants/index";
 import AppointmentForm from "../components/home/appointment-form/index";

@@ -6,7 +6,7 @@ import loader from "../public/images/loader.gif";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { setMembers, setVisaMembers } from "../components/redux/action";
+import { setMembers, setVisaMembers } from "../redux/action";
 import ApplicantDetails from "../components/book-appointment/applicant-details";
 import ScheduleAppointment from "../components/book-appointment/schedule-appointment";
 import { arrayTime } from "../constants/index";
