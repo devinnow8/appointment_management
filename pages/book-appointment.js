@@ -200,7 +200,7 @@ export default () => {
       ...prev,
       time: arrayTime[slideToShow].time,
     }));
-  }, [slideToShow]);
+  }, [slideToShow, applicantAppointment.time]);
 
   return (
     <>
