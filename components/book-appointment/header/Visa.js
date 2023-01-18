@@ -51,7 +51,11 @@ const Visa = ({ handleAddMember }) => {
           className="inner-header__input"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.dob}
+          value={
+            formik.values.dob
+              ? formik.values.dob
+              : `${new Date().toISOString().split("T")[0]}`
+          }
         />
         {formik.errors.dob && formik.touched.dob ? (
           <div className="error-msg">{formik.errors.dob}</div>

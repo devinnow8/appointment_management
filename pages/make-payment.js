@@ -10,8 +10,11 @@ import {
   Row,
 } from "reactstrap";
 import Header from "../components/Header";
+import { useRouter } from "next/router";
 
 const MakePayment = () => {
+  const { push } = useRouter();
+
   const paymentModeType = {
     stripe: "Stripe",
     payPal: "Paypal",
@@ -207,7 +210,12 @@ const MakePayment = () => {
                       </FormGroup>
                     </Col>
                     <Col md={12} lg={12} className="text-center">
-                      <Button className="pay-btn">Pay Now</Button>
+                      <Button
+                        className="pay-btn"
+                        onClick={() => push("/appointment-booked")}
+                      >
+                        Pay Now
+                      </Button>
                     </Col>
                   </Row>
                 </div>
