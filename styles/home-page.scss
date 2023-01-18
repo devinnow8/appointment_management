@@ -21,11 +21,8 @@
         width: auto;
         @media (max-width: $xLDesktop) {
           width: 20rem;
-          height: 21rem;
+          height: 18rem;
         }
-        // @media only screen and (max-width: 768px) {
-        //   height: 270px;
-        // }
       }
     }
 
@@ -38,13 +35,6 @@
         @media only screen and (max-width: $xLDesktop) {
           font-size: 1.5rem;
         }
-        // @media only screen and (max-width: 992px) {
-        //   font-size: 32px;
-        // }
-        // @media only screen and (max-width: 768px) {
-        //   font-size: 26px;
-        //   line-height: 1.4;
-        // }
         > mark {
           background: none;
           color: $primary-color;
