@@ -12,8 +12,9 @@ const Others = ({ handleAddMember }) => {
       id_type: "",
       id_number: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, onSubmitProps) => {
       handleAddMember(values);
+      onSubmitProps.resetForm();
     },
     validate: (values, props) => {
       const errors = {};

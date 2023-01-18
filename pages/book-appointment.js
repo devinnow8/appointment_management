@@ -11,11 +11,9 @@ import {
   TimeSlots,
 } from "../components/book-appointment";
 import { arrayTime } from "../constants/index";
-import { setMembers, setVisaMembers } from "../redux/action";
 
 export default () => {
-  const { userAppointmentDetails, members, visaMembers } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const { userAppointmentDetails } = useSelector((state) => state.user);
   const slider = useRef();
   const {
     push,
@@ -24,9 +22,9 @@ export default () => {
 
   const [slideToShow, setSlideToShow] = useState(0);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
-  const [loaderConfirm, setLoaderConfirm] = useState(false);
   const [applicantDetail, setApplicantDetail] = useState();
   const [modal, setModal] = useState(false);
+  const [members, setMembers] = useState([]);
 
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
@@ -46,21 +44,16 @@ export default () => {
   };
 
   const handleConfirm = () => {
-    dispatch(setMembers([...members, { ...applicantDetail }]));
-    toast.success("Applicant Addedd Successfully");
+    setMembers([...members, { ...applicantDetail }]);
     setModal(false);
+    toast.success("Applicant Addedd Successfully");
   };
 
   const handleDeleteApplicant = (i) => {
-    if (selectedService === "Visa") {
-      const data = [...visaMembers];
-      data.splice(i, 1);
-      dispatch(setVisaMembers(data));
-    } else {
-      const data = [...members];
-      data.splice(i, 1);
-      dispatch(setMembers(data));
-    }
+    const data = [...members];
+    data.splice(i, 1);
+    setMembers(data);
+
     toast.success("Applicant Deleted Successfully");
   };
 
@@ -92,7 +85,6 @@ export default () => {
           <Applicants
             userAppointmentDetails={userAppointmentDetails}
             selectedService={selectedService}
-            visaMembers={visaMembers}
             members={members}
             handleDeleteApplicant={handleDeleteApplicant}
           />
@@ -103,7 +95,6 @@ export default () => {
                   setApplicantAppointment={setApplicantAppointment}
                   applicantAppointment={applicantAppointment}
                 />
-
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>
               <Col md={2} lg={2} xl={2}>

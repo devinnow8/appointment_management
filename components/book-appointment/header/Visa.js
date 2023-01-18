@@ -8,8 +8,9 @@ const Visa = ({ handleAddMember }) => {
       application_id: "",
       dob: new Date().toISOString().split("T")[0],
     },
-    onSubmit: (values) => {
+    onSubmit: (values, onSubmitProps) => {
       handleAddMember(values);
+      onSubmitProps.resetForm();
     },
     validate: (values, props) => {
       const errors = {};
