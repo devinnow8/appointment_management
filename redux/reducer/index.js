@@ -1,22 +1,8 @@
-import { GET_USER_APPOINTMENT, GET_MEMBERS, GET_VISA_MEMBERS } from "../types";
+import { combineReducers } from "@reduxjs/toolkit";
+import user from "./user";
 
-const initialState = {
-  userAppointmentDetails: {},
-  members: [],
-  visaMembers: [],
-};
+const rootReducer = combineReducers({
+  user,
+});
 
-const reducer = (prevState = initialState, action) => {
-  switch (action.type) {
-    case GET_USER_APPOINTMENT:
-      return { ...prevState, userAppointmentDetails: action.payload };
-    case GET_MEMBERS:
-      return { ...prevState, members: action.payload };
-    case GET_VISA_MEMBERS:
-      return { ...prevState, visaMembers: action.payload };
-    default:
-      return prevState;
-  }
-};
-
-export default reducer;
+export default rootReducer;

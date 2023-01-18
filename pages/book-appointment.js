@@ -16,7 +16,7 @@ import { setMembers, setVisaMembers } from "../redux/action";
 
 export default () => {
   const { userAppointmentDetails, members, visaMembers } = useSelector(
-    (state) => state,
+    (state) => state.user,
   );
   const dispatch = useDispatch();
   const slider = useRef();
