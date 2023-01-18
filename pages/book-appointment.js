@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Button, Col, Container, Row } from "reactstrap";
 import {
   Applicants,
@@ -50,7 +49,6 @@ export default () => {
     setModal(true);
   };
   const [modal, setModal] = useState(false);
-  const [isConfirm, setIsConfirm] = useState(false);
 
   const modalToggle = () => {
     setModal(!modal);
@@ -59,7 +57,6 @@ export default () => {
 
   const handleConfirm = () => {
     setLoaderConfirm(true);
-    setIsConfirm(true);
     if (selectedService === "Visa") {
       const obj = {
         name: applicantDetail.name,
