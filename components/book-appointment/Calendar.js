@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import "react-day-picker/dist/style.css";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
-import { DAYS_FORMAT, monthNames } from "../../constants";
+import Select from "react-select";
+import { DAYS_FORMAT, monthNames, centers } from "../../constants";
 
 const Calendar = ({ setApplicantAppointment }) => {
   const [isDateSelected, setDateSelected] = useState(false);
+  const [selectedCenter, setSelectedCenter] = useState(centers[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const handleSelectDate = (value) => {
     setSelectedDate(value);
@@ -18,10 +20,12 @@ const Calendar = ({ setApplicantAppointment }) => {
   };
 
   useEffect(() => {
-    setApplicantAppointment({
+    setApplicantAppointment((prev) => ({
+      ...prev,
       date: `${monthNames[selectedDate.getMonth()]}
       ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
-    });
+      location: selectedCenter.label,
+    }));
   }, []);
 
   const isAvailableDate = (availableDatesList, day) => {
@@ -52,7 +56,6 @@ const Calendar = ({ setApplicantAppointment }) => {
   };
 
   const getFormattedDayTitle = (day = 0) => {
-    console.log("day: ", day);
     return DAYS_FORMAT[day] || "M";
   };
 
@@ -89,6 +92,21 @@ const Calendar = ({ setApplicantAppointment }) => {
 
   return (
     <>
+      <Select
+        options={centers}
+        className="react-select-container"
+        name="location"
+        classNamePrefix="react-select"
+        value={selectedCenter}
+        onChange={(selected) => {
+          setSelectedCenter(selected);
+          setApplicantAppointment((prev) => ({
+            ...prev,
+            location: selected.label,
+          }));
+        }}
+      />
+
       <DayPicker
         mode="single"
         className="calender-months"

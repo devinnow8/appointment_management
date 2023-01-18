@@ -52,3 +52,11 @@ export const monthNames = [
   "November",
   "December",
 ];
+
+export const centers = [
+  { value: "London UK", label: "London UK" },
+  { value: "Nigeria", label: "Nigeria" },
+  { value: "New Delhi, India", label: "New Delhi, India" },
+  { value: "Japan", label: "Japan" },
+  { value: "Singapore", label: "Singapore" },
+];
