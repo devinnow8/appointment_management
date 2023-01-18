@@ -52,7 +52,9 @@ const Others = ({ handleContinue }) => {
           />
           {formik.errors.name && formik.touched.name ? (
             <div className="error-msg">{formik.errors.name}</div>
-          ) : null}
+          ) : (
+            <div className="no-error-msg"></div>
+          )}
         </FormGroup>
       </Col>
       <Col lg={6} xl={6}>
@@ -74,7 +76,9 @@ const Others = ({ handleContinue }) => {
           />
           {formik.errors.nationality && formik.touched.nationality ? (
             <div className="error-msg">{formik.errors.nationality}</div>
-          ) : null}
+          ) : (
+            <div className="no-error-msg"></div>
+          )}
         </FormGroup>
       </Col>
       <Col lg={6} xl={6}>
@@ -97,7 +101,9 @@ const Others = ({ handleContinue }) => {
           />
           {formik.errors.id_type && formik.touched.id_type ? (
             <div className="error-msg">{formik.errors.id_type}</div>
-          ) : null}
+          ) : (
+            <div className="no-error-msg"></div>
+          )}
         </FormGroup>
       </Col>
       <Col lg={6} xl={6}>
@@ -115,10 +121,14 @@ const Others = ({ handleContinue }) => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.id_type && formik.touched.id_type ? (
-            <div className="error-msg">{formik.errors.id_type}</div>
-          ) : null}
+          {formik.errors.id_number && formik.touched.id_number ? (
+            <div className="error-msg">{formik.errors.id_number}</div>
+          ) : (
+            <div className="no-error-msg"></div>
+          )}
         </FormGroup>
+      </Col>
+      <Col>
         <FormGroup className="text-md-start text-center ">
           <div className="cont-btn" onClick={formik.handleSubmit}>
             Continue

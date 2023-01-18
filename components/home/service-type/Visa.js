@@ -44,7 +44,9 @@ const Visa = ({ handleContinue }) => {
           />
           {formik.errors.application_id && formik.touched.application_id ? (
             <div className="error-msg">{formik.errors.application_id}</div>
-          ) : null}
+          ) : (
+            <div className="no-error-msg"></div>
+          )}
         </FormGroup>
       </Col>
       <Col lg={6} xl={6}>
@@ -67,6 +69,8 @@ const Visa = ({ handleContinue }) => {
             <div className="error-msg">{formik.errors.dob}</div>
           ) : null}
         </FormGroup>
+      </Col>
+      <Col>
         <FormGroup className="text-md-start text-center ">
           <div className="cont-btn" onClick={formik.handleSubmit}>
             Continue

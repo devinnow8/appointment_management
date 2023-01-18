@@ -1,10 +1,16 @@
 .applicant-details {
   padding: 30px 0px;
+  @media (max-width: $xxLDesktop) {
+    padding: 0;
+  }
   .applicant-details__title {
     font-size: 20px;
     color: #555;
     font-weight: 400;
     margin-bottom: 16px;
+    @media (max-width: $xxLDesktop) {
+      font-size: 16px;
+    }
   }
   .applicant-details__card--wrapper {
     display: flex;
@@ -49,6 +55,36 @@
   }
   .appointment-calender {
     padding: 40px 0px;
+    .location-select {
+      border: none;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 26px;
+      width: 160px;
+      .react-select__control {
+        border: none;
+        .react-select__single-value {
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 26px;
+          margin: 0;
+          color: #f1651c;
+        }
+        .react-select__indicator-separator {
+          width: 0px;
+        }
+        .react-select__indicator {
+          padding: 5px;
+        }
+        svg {
+          color: #757575;
+        }
+        &.react-select__control--is-focused {
+          outline: none !important;
+          box-shadow: none !important;
+        }
+      }
+    }
     .sel-time {
       font-size: 16px;
       color: #555;
@@ -81,7 +117,6 @@
             flex-wrap: wrap;
             margin-left: -36px;
           }
-          
         }
         .slick-slide {
           display: flex;
@@ -100,6 +135,10 @@
         margin-top: 14px;
         cursor: pointer;
         text-align: center;
+        @media (max-width: $xLDesktop) {
+          padding: 10px 15px;
+        }
+
         @media only screen and (max-width: 576px) {
           margin-bottom: 0px;
           margin-right: 0px;
@@ -113,6 +152,9 @@
           font-size: 14px;
           font-weight: 500;
           color: #cacaca;
+          @media (max-width: $xLDesktop) {
+            font-size: 12px;
+          }
           &.active {
             color: $primary-color;
           }
@@ -136,7 +178,7 @@
       }
       .cancel {
         @extend .primary-btn;
-        background-color: transparent;
+        background-color: rgb(105, 105, 105) !important;
         border: 1px solid #484848;
         color: #484848;
       }
@@ -156,12 +198,16 @@
           height: 100%;
         }
         .rdp-caption {
-          background-color: #FFE8DC;
+          background-color: #ffe8dc;
           border-radius: 5px 5px 0px 0px;
           padding: 16px 0px;
-          border: 1px solid #CDCDCD;
+          border: 1px solid #cdcdcd;
           border-bottom: none;
           justify-content: center;
+          @media (max-width: $xxLDesktop) {
+            font-size: 12px;
+            padding: 0.2rem;
+          }
           .rdp-caption_label {
             color: $secondary-color;
             font-weight: 600;
@@ -169,6 +215,10 @@
           .rdp-nav {
             svg {
               color: $secondary-color;
+              color: #023b72;
+              @media (max-width: $xLDesktop) {
+                width: 12px;
+              }
             }
           }
         }
@@ -176,10 +226,13 @@
       .rdp-table {
         width: 100%;
         max-width: unset !important;
-        .rdp-head_row{
-          .rdp-head_cell{
-            border: 1px solid #CDCDCD;
+        .rdp-head_row {
+          .rdp-head_cell {
+            border: 1px solid #cdcdcd;
             padding: 22px;
+            @media (max-width: $xLDesktop) {
+              padding: 10px;
+            }
             @media screen and (max-width: 576px) {
               padding: 14px 0px;
             }
@@ -192,7 +245,7 @@
           }
         }
         .rdp-cell {
-          border: 1px solid #CDCDCD;
+          border: 1px solid #cdcdcd;
           .rdp-day {
             font-weight: 500;
             margin: 0 auto;
@@ -201,6 +254,10 @@
             border-radius: 0px;
             width: 100%;
             height: 100%;
+            @media (max-width: $xLDesktop) {
+              padding: 10px;
+              font-size: 14px;
+            }
             @media screen and (max-width: 576px) {
               padding: 10px 0px;
             }
@@ -239,7 +296,7 @@
             border: none;
           }
           &.not-avail {
-            background-color: #FFAFAF;
+            background-color: #ffafaf;
             border: none;
           }
         }
@@ -260,7 +317,7 @@
 // 			outline: none;
 // 		}
 // 	}
-// 
+//
 // 	.DayPicker-NavButton {
 // 		width: 30px;
 // 		height: 30px;
@@ -285,7 +342,7 @@
 // 		margin: 0;
 // 		.DayPicker-Weekday {
 // 			font-size: 13px;
-// 
+//
 // 			letter-spacing: 0.65px;
 // 			color: black;
 // 			line-height: 16px;
@@ -308,7 +365,7 @@
 // 			.DayPicker-Day {
 // 				padding: 14.5px 14.5px;
 // 				letter-spacing: 0.8px;
-// 
+//
 // 				text-transform: uppercase;
 // 				font-size: 16px;
 // 				line-height: 19px;

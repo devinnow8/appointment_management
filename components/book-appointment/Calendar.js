@@ -94,7 +94,7 @@ const Calendar = ({ setApplicantAppointment }) => {
     <>
       <Select
         options={centers}
-        className="react-select-container"
+        className="location-select"
         name="location"
         classNamePrefix="react-select"
         value={selectedCenter}

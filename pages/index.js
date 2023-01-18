@@ -45,7 +45,7 @@ export default function Home() {
                   <Image
                     alt="img"
                     src="/images/appoint-img.png"
-                    className="appointment-form__img"
+                    className="appointment-form__img img-fluid"
                     height={380}
                     width={490}
                   />

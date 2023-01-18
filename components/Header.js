@@ -21,8 +21,8 @@ function Header() {
               src="/images/logo.png"
               className="header-img"
               alt=""
-              width={80}
-              height={80}
+              width={60}
+              height={60}
             />
           </NavbarBrand>
           <NavbarToggler onClick={navbarToggle} />

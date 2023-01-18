@@ -16,9 +16,11 @@ function Applicants({
           <div className="applicant-details__card me-0 me-sm-3">
             <div className="applicant-details__card--flex">
               <div className="applicant-details__card--info">
-                <h4 className="applicant-details__card--title">
-                  {userAppointmentDetails.appointmentDetails.name}
-                </h4>
+                {selectedService !== "Visa" && (
+                  <h4 className="applicant-details__card--title">
+                    {userAppointmentDetails.appointmentDetails.name}
+                  </h4>
+                )}
                 <p className="applicant-details__card--text">Application ID</p>
                 <p className="applicant-details__card--id">
                   {selectedService === "Visa"

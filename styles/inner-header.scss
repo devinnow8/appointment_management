@@ -1,9 +1,9 @@
 .inner-header {
   padding: 24px 0px;
   .inner-header__logo {
-    @media only screen and (max-width: 768px) {
-      width: 60px;
-      height: 60px;
+    @media (max-width: $xLDesktop) {
+      width: 45px;
+      height: 45px;
     }
   }
   .inner-header__row {
@@ -12,7 +12,7 @@
     }
     .inner-header__member {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: flex-end;
       @media only screen and (max-width: 1200px) {
         margin-top: 102px;
@@ -25,16 +25,22 @@
         margin-top: 34px;
       }
       label {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 400;
         color: #555;
         margin-bottom: 4px;
+        @media (max-width: $xxLDesktop) {
+          font-size: 14px;
+        }
       }
       .inner-header__input {
-        min-height: 48px;
+        min-height: 38px;
         width: 200px;
         border: 1px solid #c0c0c0;
         color: #555 !important;
+        @media (max-width: $xLDesktop) {
+          font-size: 14px;
+        }
         @media (min-width: 769px) and (max-width: 992px) {
           width: 250px;
           margin-bottom: 12px;
@@ -51,9 +57,10 @@
         }
       }
       .react-select__control {
-        min-height: 48px !important;
+        min-height: 38px !important;
         border: 1px solid #c0c0c0;
         width: 200px;
+        font-size: 14px;
         @media only screen and (max-width: 768px) {
           width: 100%;
         }
@@ -89,6 +96,7 @@
       .inner-header__member--btn {
         @extend .primary-btn;
         width: 140px;
+        height: 38px;
       }
     }
   }

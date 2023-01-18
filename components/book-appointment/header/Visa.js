@@ -39,7 +39,9 @@ const Visa = ({ handleAddMember }) => {
         />
         {formik.errors.application_id && formik.touched.application_id ? (
           <div className="error-msg">{formik.errors.application_id}</div>
-        ) : null}
+        ) : (
+          <div className="no-error-msg"></div>
+        )}
       </div>
       <div className="me-0 me-md-3 mb-4 mb-md-0">
         <Label for="exampleDate">Date of Birth</Label>
@@ -55,7 +57,9 @@ const Visa = ({ handleAddMember }) => {
         />
         {formik.errors.dob && formik.touched.dob ? (
           <div className="error-msg">{formik.errors.dob}</div>
-        ) : null}
+        ) : (
+          <div className="no-error-msg"></div>
+        )}
       </div>
       <Button
         className="inner-header__member--btn"

@@ -49,7 +49,9 @@ const Others = ({ handleAddMember }) => {
         />
         {formik.errors.name && formik.touched.name ? (
           <div className="error-msg">{formik.errors.name}</div>
-        ) : null}
+        ) : (
+          <div className="no-error-msg"></div>
+        )}
       </div>
       <div className="me-0 me-md-3 mb-3 mb-md-0">
         <Label for="Nationality">Nationality</Label>
@@ -65,7 +67,9 @@ const Others = ({ handleAddMember }) => {
         />
         {formik.errors.nationality && formik.touched.nationality ? (
           <div className="error-msg">{formik.errors.nationality}</div>
-        ) : null}
+        ) : (
+          <div className="no-error-msg"></div>
+        )}
       </div>
       <div className="me-0 me-md-3 mb-3 mb-md-0">
         <Label for="Application ID">ID Type</Label>
@@ -81,7 +85,9 @@ const Others = ({ handleAddMember }) => {
         />
         {formik.errors.id_type && formik.touched.id_type ? (
           <div className="error-msg">{formik.errors.id_type}</div>
-        ) : null}
+        ) : (
+          <div className="no-error-msg"></div>
+        )}
       </div>
       <div className="me-0 me-md-3 mb-3 mb-md-0">
         <Label for="id_number">ID Number</Label>
@@ -94,9 +100,11 @@ const Others = ({ handleAddMember }) => {
           onBlur={formik.handleBlur}
           className="inner-header__input"
         />
-        {formik.errors.id_type && formik.touched.id_type ? (
-          <div className="error-msg">{formik.errors.id_type}</div>
-        ) : null}
+        {formik.errors.id_number && formik.touched.id_number ? (
+          <div className="error-msg">{formik.errors.id_number}</div>
+        ) : (
+          <div className="no-error-msg"></div>
+        )}
       </div>
       <Button
         className="inner-header__member--btn"
