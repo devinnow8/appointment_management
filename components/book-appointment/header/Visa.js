@@ -6,17 +6,16 @@ const Visa = ({ handleAddMember }) => {
   const formik = useFormik({
     initialValues: {
       application_id: "",
-      dob: "",
+      dob: new Date().toISOString().split("T")[0],
     },
     onSubmit: (values) => {
       handleAddMember(values);
     },
     validate: (values, props) => {
       const errors = {};
-
       if (values.application_id == "") {
         errors.application_id = "Required";
-      } /*  */
+      }
       if (values.dob == "") {
         errors.dob = "Required";
       }
@@ -51,11 +50,7 @@ const Visa = ({ handleAddMember }) => {
           className="inner-header__input"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={
-            formik.values.dob
-              ? formik.values.dob
-              : `${new Date().toISOString().split("T")[0]}`
-          }
+          value={formik.values.dob}
         />
         {formik.errors.dob && formik.touched.dob ? (
           <div className="error-msg">{formik.errors.dob}</div>

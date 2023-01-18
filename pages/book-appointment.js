@@ -11,13 +11,10 @@ import {
   TimeSlots,
 } from "../components/book-appointment";
 import { arrayTime } from "../constants/index";
-import loader from "../public/images/loader.gif";
 import { setMembers, setVisaMembers } from "../redux/action";
 
 export default () => {
-  const { userAppointmentDetails, members, visaMembers } = useSelector(
-    (state) => state.user,
-  );
+  const { userAppointmentDetails, members, visaMembers } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const slider = useRef();
   const {
@@ -28,14 +25,8 @@ export default () => {
   const [slideToShow, setSlideToShow] = useState(0);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
   const [loaderConfirm, setLoaderConfirm] = useState(false);
-  const [applicantDetail, setApplicantDetail] = useState({
-    application_id: "",
-    dob: "",
-    name: "",
-    nationality: "",
-    id_type: "",
-    id_number: "",
-  });
+  const [applicantDetail, setApplicantDetail] = useState();
+  const [modal, setModal] = useState(false);
 
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
@@ -48,7 +39,6 @@ export default () => {
     setApplicantDetail(values);
     setModal(true);
   };
-  const [modal, setModal] = useState(false);
 
   const modalToggle = () => {
     setModal(!modal);
@@ -56,36 +46,9 @@ export default () => {
   };
 
   const handleConfirm = () => {
-    setLoaderConfirm(true);
-    if (selectedService === "Visa") {
-      const obj = {
-        name: applicantDetail.name,
-        application_id: applicantDetail.application_id,
-        dob: applicantDetail.dob,
-      };
-      dispatch(setVisaMembers([...visaMembers, obj]));
-      setLoaderConfirm(false);
-      toast.success("Applicant Addedd Successfully");
-    } else {
-      const obj = {
-        name: applicantDetail.name,
-        nationality: applicantDetail.nationality,
-        id_type: applicantDetail.id_type,
-        id_number: applicantDetail.id_number,
-      };
-      dispatch(setMembers([...members, obj]));
-      setLoaderConfirm(false);
-      toast.success("Applicant Addedd Successfully");
-    }
+    dispatch(setMembers([...members, { ...applicantDetail }]));
+    toast.success("Applicant Addedd Successfully");
     setModal(false);
-    setApplicantDetail({
-      application_id: "",
-      dob: "",
-      name: "",
-      nationality: "",
-      id_type: "",
-      id_number: "",
-    });
   };
 
   const handleDeleteApplicant = (i) => {
@@ -126,11 +89,6 @@ export default () => {
       />
       <div className="applicant-details calendar-time">
         <Container>
-          {loaderConfirm && (
-            <div className="loader">
-              <img src={loader.src} className="loader-img" alt="" />
-            </div>
-          )}
           <Applicants
             userAppointmentDetails={userAppointmentDetails}
             selectedService={selectedService}
@@ -168,16 +126,18 @@ export default () => {
           </div>
         </Container>
       </div>
-      <ConfirmModal
-        modal={modal}
-        modalToggle={modalToggle}
-        applicantDetail={applicantDetail}
-        handleConfirm={handleConfirm}
-        selectedService={selectedService}
-        applicantAppointment={applicantAppointment}
-        confirmCalendar={confirmCalendar}
-        handlePaymentProceed={handlePaymentProceed}
-      />
+      {modal && (
+        <ConfirmModal
+          modal={modal}
+          modalToggle={modalToggle}
+          applicantDetail={applicantDetail}
+          handleConfirm={handleConfirm}
+          selectedService={selectedService}
+          applicantAppointment={applicantAppointment}
+          confirmCalendar={confirmCalendar}
+          handlePaymentProceed={handlePaymentProceed}
+        />
+      )}
     </>
   );
 };

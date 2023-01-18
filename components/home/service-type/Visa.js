@@ -6,7 +6,7 @@ const Visa = ({ handleContinue }) => {
   const formik = useFormik({
     initialValues: {
       application_id: "",
-      dob: "",
+      dob: new Date().toISOString().split("T")[0],
     },
     onSubmit: (values) => {
       handleContinue(values);
@@ -61,11 +61,7 @@ const Visa = ({ handleContinue }) => {
             className="appointment-form__input"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={
-              formik.values.dob
-                ? formik.values.dob
-                : `${new Date().toISOString().split("T")[0]}`
-            }
+            value={formik.values.dob}
           />
           {formik.errors.dob && formik.touched.dob ? (
             <div className="error-msg">{formik.errors.dob}</div>
