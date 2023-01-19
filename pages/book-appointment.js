@@ -89,7 +89,7 @@ export default () => {
             handleDeleteApplicant={handleDeleteApplicant}
           />
           <div className="appointment-calender">
-            <Row>
+            <Row className="align-items-center">
               <Col md={10} lg={10} xl={10}>
                 <Calendar
                   setApplicantAppointment={setApplicantAppointment}

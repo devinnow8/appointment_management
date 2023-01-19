@@ -1,7 +1,7 @@
 .inner-header {
-  padding: 24px 0px;
+  padding: 1rem 0px;
   .inner-header__logo {
-    @media (max-width: $xLDesktop) {
+    @media (max-width: $xxLDesktop) {
       width: 45px;
       height: 45px;
     }
@@ -15,7 +15,7 @@
       align-items: center;
       justify-content: flex-end;
       label {
-        font-size: 16px;
+        font-size: 1rem;
         font-weight: 400;
         color: #555;
         margin-bottom: 4px;
@@ -28,7 +28,7 @@
         width: 200px;
         border: 1px solid #c0c0c0;
         color: #555 !important;
-        @media (max-width: $xLDesktop) {
+        @media (max-width: $xxLDesktop) {
           font-size: 14px;
         }
         @media (min-width: 769px) and (max-width: 992px) {

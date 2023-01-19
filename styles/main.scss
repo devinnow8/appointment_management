@@ -10,9 +10,9 @@ $secondary-color: #023b72;
   background-color: $primary-color;
   border: none;
   border-radius: 5px;
-  font-size: 17px;
-  font-weight: 500;
-  padding: 7px 0px 7px 0px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 0;
   width: 174px;
   display: inline-block;
   color: white;
@@ -23,7 +23,7 @@ $secondary-color: #023b72;
     background: $primary-color;
     color: white;
   }
-  @media (max-width: $xLDesktop) {
+  @media (max-width: $xxLDesktop) {
     font-size: 14px;
   }
 }
