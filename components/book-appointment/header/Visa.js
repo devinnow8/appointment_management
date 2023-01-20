@@ -54,6 +54,7 @@ const Visa = ({ handleAddMember }) => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.dob}
+          max={new Date().toISOString().split("T")[0]}
         />
         {formik.errors.dob && formik.touched.dob ? (
           <div className="error-msg">{formik.errors.dob}</div>
