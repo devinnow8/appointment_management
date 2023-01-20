@@ -106,12 +106,14 @@ const Others = ({ handleAddMember }) => {
           <div className="no-error-msg"></div>
         )}
       </div>
-      <Button
-        className="inner-header__member--btn mb-5 mt-4 mt-md-0 mb-md-0"
-        onClick={formik.handleSubmit}
-      >
-        Add Member
-      </Button>
+      <div className="me-0 me-md-3 mb-0 mb-md-3">
+        <Button
+          className="inner-header__member--btn2 mb-5 mt-4 mt-md-0 mb-md-0"
+          onClick={formik.handleSubmit}
+        >
+          Add Member
+        </Button>
+      </div>
     </>
   );
 };

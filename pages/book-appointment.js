@@ -20,7 +20,7 @@ export default () => {
     push,
     query: { selectedService },
   } = useRouter();
-
+  const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
   const [applicantDetail, setApplicantDetail] = useState();
@@ -120,7 +120,12 @@ export default () => {
               </Col>
               <Col sm={12} md={12} className="text-end">
                 <div className="appointment-calender__buttons">
-                  <Button className="cancel-btn me-3">Cancel</Button>
+                  <Button
+                    className="cancel-btn me-3"
+                    onClick={() => router.back()}
+                  >
+                    Cancel
+                  </Button>
                   <Button className="continue" onClick={handleAppointment}>
                     Continue
                   </Button>

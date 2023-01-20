@@ -8,6 +8,10 @@ function Applicants({
   members = [],
   handleDeleteApplicant,
 }) {
+  console.log(
+    userAppointmentDetails,
+    "userAppointmentDetailsuserAppointmentDetails",
+  );
   return (
     <Row>
       <Col xs={12} sm={12}>
@@ -15,18 +19,43 @@ function Applicants({
         <div className="applicant-details__card--wrapper">
           <div className="applicant-details__card me-0 me-sm-3">
             <div className="applicant-details__card--flex">
-              <div className="applicant-details__card--info">
-                {selectedService !== "Visa" && (
+              <div className="applicant-details__card--info w-100">
+                {
                   <h4 className="applicant-details__card--title">
-                    {userAppointmentDetails.appointmentDetails.name}
+                    {userAppointmentDetails.appointmentDetails.name || "Chris"}
                   </h4>
+                }
+                {selectedService === "Visa" ? (
+                  <>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <p className="applicant-details__card--text">
+                        Application ID
+                      </p>
+                      <span className="applicant-details__card--id">
+                        {" "}
+                        {
+                          userAppointmentDetails.appointmentDetails
+                            .application_id
+                        }{" "}
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <p className="applicant-details__card--text">
+                        Nationality
+                      </p>
+                      <span className="applicant-details__card--id">
+                        {" "}
+                        {
+                          userAppointmentDetails.appointmentDetails.nationality
+                            .label
+                        }{" "}
+                      </span>
+                    </div>
+                  </>
                 )}
-                <p className="applicant-details__card--text">Application ID</p>
-                <p className="applicant-details__card--id">
-                  {selectedService === "Visa"
-                    ? userAppointmentDetails.appointmentDetails.application_id
-                    : userAppointmentDetails.appointmentDetails.id_number}
-                </p>
               </div>
             </div>
           </div>

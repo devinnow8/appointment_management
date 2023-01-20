@@ -43,7 +43,7 @@
         .applicant-details__card--text {
           color: #9b9b9b;
           font-size: 12px;
-          margin-bottom: 6px;
+          margin-bottom: 0px;
         }
         .applicant-details__card--id {
           color: #3c3c3c;
@@ -275,6 +275,7 @@
             color: $secondary-color;
             font-weight: 600;
             font-size: 18px;
+            z-index: 0;
           }
           .rdp-nav {
             svg {
