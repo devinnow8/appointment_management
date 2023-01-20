@@ -141,7 +141,7 @@
           height: 14rem !important;
         }
         @media only screen and (max-width: 576px) {
-          height: 330px !important;
+          height: 306px !important;
           box-shadow: none;
           margin: 1rem 0px 0px -17px;
         }
@@ -214,9 +214,9 @@
       }
       .cancel-btn {
         @extend .primary-btn;
-        background: none !important;
-        border: 1px solid #484848 !important;
-        color: #484848 !important;
+        background: #6c757d !important;
+        border: none;
+        color: #fff;
       }
       .continue {
         @extend .primary-btn;

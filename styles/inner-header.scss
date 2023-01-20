@@ -103,6 +103,7 @@
       }
       .inner-header__member--btn {
         @extend .primary-btn;
+        width: 132px !important;
         height: 40px;
         position: relative;
         top: -3px;

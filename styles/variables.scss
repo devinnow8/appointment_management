@@ -10,6 +10,10 @@ $tablet: 767.98px;
 $phone: 575.98px;
 $laptop: 1280px;
 
+.form-control {
+  border-radius: 5px !important;
+}
+
 .error-msg {
   color: #ff2222;
   font-size: 0.812rem;
@@ -136,8 +140,7 @@ $laptop: 1280px;
       @extend .primary-btn;
       width: 190px;
       margin-right: 20px;
-      border: 1px solid $primary-color;
-      color: $primary-color;
+      background: #6c757d !important;
       @media only screen and (max-width: 576px) {
         width: 100%;
         margin-bottom: 16px;
@@ -151,7 +154,7 @@ $laptop: 1280px;
       }
       &.payment-btn {
         width: unset;
-        padding: 7px 22px;
+        padding: 11px 22px;
         @media only screen and (max-width: 576px) {
           width: 100%;
         }
@@ -222,6 +225,9 @@ $laptop: 1280px;
 // delete modal
 .del-modal {
   max-width: 300px;
+  @media only screen and (max-width: 576px) {
+    margin: 0 auto !important;
+  }
   .modal-content {
     border: none;
     .modal-header {

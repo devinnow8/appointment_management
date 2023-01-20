@@ -88,6 +88,10 @@
         .cont-btn {
           @extend .primary-btn;
           margin-top: 8px;
+          margin-bottom: 14px;
+          @media only screen and (max-width: 992px) {
+            margin-top: 20px;
+          }
         }
         .react-select__control {
           min-height: 38px !important;
@@ -141,6 +145,9 @@
         @media (max-width: $xxLDesktop) {
           font-size: 13px;
           margin: 0.5rem 0;
+        }
+        @media (max-width: 768px) {
+          margin-bottom: 32px;
         }
       }
     }
