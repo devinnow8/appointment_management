@@ -10,6 +10,7 @@ import {
   Header,
   TimeSlots,
 } from "../components/book-appointment";
+import DeleteModal from "../components/book-appointment/DeleteModal";
 import { arrayTime } from "../constants/index";
 
 export default () => {
@@ -24,6 +25,9 @@ export default () => {
   const [confirmCalendar, setConfirmCalendar] = useState(false);
   const [applicantDetail, setApplicantDetail] = useState();
   const [modal, setModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteId, setDeleteId] = useState(false);
+
   const [members, setMembers] = useState([]);
 
   const [applicantAppointment, setApplicantAppointment] = useState({
@@ -50,10 +54,15 @@ export default () => {
   };
 
   const handleDeleteApplicant = (i) => {
+    setDeleteModal(true);
+    setDeleteId(i);
+  };
+
+  const deleteConfirmation = () => {
     const data = [...members];
     data.splice(i, 1);
     setMembers(data);
-
+    setDeleteModal(false);
     toast.success("Applicant Deleted Successfully");
   };
 
@@ -129,6 +138,8 @@ export default () => {
           handlePaymentProceed={handlePaymentProceed}
         />
       )}
+
+      {deleteModal && <DeleteModal />}
     </>
   );
 };
