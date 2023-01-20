@@ -8,10 +8,6 @@ function Applicants({
   members = [],
   handleDeleteApplicant,
 }) {
-  console.log(
-    userAppointmentDetails,
-    "userAppointmentDetailsuserAppointmentDetails",
-  );
   return (
     <Row>
       <Col xs={12} sm={12}>
