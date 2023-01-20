@@ -1,8 +1,10 @@
 import { Button, Col, Container, Row } from "reactstrap";
 import Header from "../components/Header";
 import jsPDF from "jspdf";
+import { useRouter } from "next/router";
 
 function AppointmentBooked() {
+  const { push } = useRouter();
   const printDocument = () => {
     const pdf = new jsPDF();
     pdf.text(
@@ -40,13 +42,14 @@ function AppointmentBooked() {
                 buttons given below.
               </p>
               <p className="apt-booked__para">
-                In case you want to reschedule, Please <span>click here</span>.
+                In case you want to reschedule, Please{" "}
+                <span style={{ cursor: "pointer" }} onClick={() => push("/")}>
+                  click here
+                </span>
+                .
               </p>
               <div className="d-flex justify-content-center align-items-center">
-                <Button
-                  className="slip-btn mb-sm-0"
-                  onClick={handlePrintSlip}
-                >
+                <Button className="slip-btn mb-sm-0" onClick={handlePrintSlip}>
                   Print Booking Slip
                 </Button>
                 <Button className="checklist-btn" onClick={printDocument}>

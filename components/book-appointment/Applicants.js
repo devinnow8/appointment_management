@@ -46,7 +46,7 @@ function Applicants({
                         {" "}
                         {
                           userAppointmentDetails.appointmentDetails.nationality
-                            .label
+                            ?.label
                         }{" "}
                       </span>
                     </div>
