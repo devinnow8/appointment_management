@@ -20,7 +20,7 @@ function ConfirmModal({
         className="confirm-modal"
       >
         <ModalHeader toggle={modalToggle}>
-          <img src="/images/modal-img.png" className="img-fluid" alt="" />
+          <img src="/images/modal-img.png" className="img-fluid confirm-modal__img" alt="" />
         </ModalHeader>
         <ModalBody>
           {confirmCalendar ? (
