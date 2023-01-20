@@ -136,7 +136,6 @@ $laptop: 1280px;
       @extend .primary-btn;
       width: 190px;
       margin-right: 20px;
-      background-color: rgb(105, 105, 105) !important;
       border: 1px solid $primary-color;
       color: $primary-color;
       @media only screen and (max-width: 576px) {

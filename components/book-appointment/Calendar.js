@@ -105,6 +105,7 @@ const Calendar = ({ setApplicantAppointment }) => {
             location: selected.label,
           }));
         }}
+        // menuIsOpen={true}
       />
 
       <DayPicker

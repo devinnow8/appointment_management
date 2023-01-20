@@ -35,7 +35,7 @@ const Others = ({ handleAddMember }) => {
   });
   return (
     <>
-      <div className="me-0 me-md-3 mb-3 mb-md-0">
+      <div className="me-0 me-md-3 mb-0 mb-md-3">
         <Label for="Application ID">Name</Label>
         <Input
           id="name"
@@ -53,7 +53,7 @@ const Others = ({ handleAddMember }) => {
           <div className="no-error-msg"></div>
         )}
       </div>
-      <div className="me-0 me-md-3 mb-3 mb-md-0">
+      <div className="me-0 me-md-3 mb-0 mb-md-3">
         <Label for="Nationality">Nationality</Label>
         <Select
           options={nationalityOptions}
@@ -71,7 +71,7 @@ const Others = ({ handleAddMember }) => {
           <div className="no-error-msg"></div>
         )}
       </div>
-      <div className="me-0 me-md-3 mb-3 mb-md-0">
+      <div className="me-0 me-md-3 mb-0 mb-md-3">
         <Label for="Application ID">ID Type</Label>
         <Select
           options={idType}
@@ -89,7 +89,7 @@ const Others = ({ handleAddMember }) => {
           <div className="no-error-msg"></div>
         )}
       </div>
-      <div className="me-0 me-md-3 mb-3 mb-md-0">
+      <div className="me-0 me-md-3 mb-0 mb-md-3">
         <Label for="id_number">ID Number</Label>
         <Input
           id="id_number"
@@ -107,7 +107,7 @@ const Others = ({ handleAddMember }) => {
         )}
       </div>
       <Button
-        className="inner-header__member--btn"
+        className="inner-header__member--btn mb-5 mt-4 mt-md-0 mb-md-0"
         onClick={formik.handleSubmit}
       >
         Add Member

@@ -36,7 +36,7 @@ const Others = ({ handleContinue }) => {
   return (
     <>
       <Col lg={6} xl={6}>
-        <FormGroup>
+        <div className="mb-0">
           <Label for="name">
             Name <span className="star">*</span>
           </Label>
@@ -55,10 +55,10 @@ const Others = ({ handleContinue }) => {
           ) : (
             <div className="no-error-msg"></div>
           )}
-        </FormGroup>
+        </div>
       </Col>
       <Col lg={6} xl={6}>
-        <FormGroup>
+        <div>
           <Label for="nationality">
             Nationality <span className="star">*</span>
           </Label>
@@ -79,10 +79,10 @@ const Others = ({ handleContinue }) => {
           ) : (
             <div className="no-error-msg"></div>
           )}
-        </FormGroup>
+        </div>
       </Col>
       <Col lg={6} xl={6}>
-        <FormGroup>
+        <div>
           <Label for="id_type">
             ID Type
             <span className="star"> *</span>
@@ -104,10 +104,10 @@ const Others = ({ handleContinue }) => {
           ) : (
             <div className="no-error-msg"></div>
           )}
-        </FormGroup>
+        </div>
       </Col>
       <Col lg={6} xl={6}>
-        <FormGroup>
+        <div>
           <Label for="id_number">
             ID Number
             <span className="star"> *</span>
@@ -126,14 +126,14 @@ const Others = ({ handleContinue }) => {
           ) : (
             <div className="no-error-msg"></div>
           )}
-        </FormGroup>
+        </div>
       </Col>
       <Col>
-        <FormGroup className="text-md-start text-center ">
+        <div className="text-md-start text-center ">
           <div className="cont-btn" onClick={formik.handleSubmit}>
             Continue
           </div>
-        </FormGroup>
+        </div>
       </Col>
     </>
   );

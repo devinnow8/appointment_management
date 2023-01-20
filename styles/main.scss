@@ -6,6 +6,7 @@ $secondary-color: #023b72;
 @import "./inner-header.scss";
 @import "./book-appointment.scss";
 @import "./make-payment.scss";
+
 .primary-btn {
   background-color: $primary-color;
   border: none;
@@ -16,6 +17,7 @@ $secondary-color: #023b72;
   width: 174px;
   display: inline-block;
   color: white;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
   cursor: pointer;

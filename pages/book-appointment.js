@@ -107,7 +107,7 @@ export default () => {
               </Col>
               <Col sm={12} md={12} className="text-end">
                 <div className="appointment-calender__buttons mt-4">
-                  <Button className="cancel me-3">Cancel</Button>
+                  <Button className="cancel-btn me-3">Cancel</Button>
                   <Button className="continue" onClick={handleAppointment}>
                     Continue
                   </Button>
