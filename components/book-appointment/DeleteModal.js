@@ -17,7 +17,7 @@ function DeleteModal({
       <ModalHeader toggle={deleteToggle}></ModalHeader>
       <ModalBody>
         <h2 className="del-modal__title">Delete Applicant</h2>
-        <p className="del-modal__para">Are you sure to delete this</p>
+        <p className="del-modal__para">Are you sure to delete this?</p>
         <Button
           className="del-btn"
           onClick={() => deleteConfirmation(deleteId)}

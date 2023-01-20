@@ -25,7 +25,7 @@ const Visa = ({ handleAddMember }) => {
   });
   return (
     <>
-      <div className="me-0 me-md-3 mb-3 mb-md-0">
+      <div className="me-0 me-md-3 mb-md-0">
         <Label for="Application ID">Application ID</Label>
         <Input
           id="application_id"
@@ -43,7 +43,7 @@ const Visa = ({ handleAddMember }) => {
           <div className="no-error-msg"></div>
         )}
       </div>
-      <div className="me-0 me-md-3 mb-4 mb-md-0">
+      <div className="me-0 me-md-3 mb-md-0">
         <Label for="exampleDate">Date of Birth</Label>
         <Input
           id="dob"
@@ -63,7 +63,7 @@ const Visa = ({ handleAddMember }) => {
         )}
       </div>
       <Button
-        className="inner-header__member--btn"
+        className="inner-header__member--btn2"
         onClick={formik.handleSubmit}
       >
         Add Member

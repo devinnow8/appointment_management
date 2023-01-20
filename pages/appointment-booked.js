@@ -39,18 +39,20 @@ function AppointmentBooked() {
                 sent to your email. Optionally you can download it by click the
                 buttons given below.
               </p>
-              <p className="apt-booked__para mb-5">
+              <p className="apt-booked__para">
                 In case you want to reschedule, Please <span>click here</span>.
               </p>
-              <Button
-                className="slip-btn mb-3 mb-sm-0"
-                onClick={handlePrintSlip}
-              >
-                Print Booking Slip
-              </Button>
-              <Button className="checklist-btn" onClick={printDocument}>
-                Print Checklist
-              </Button>
+              <div className="d-flex justify-content-center align-items-center">
+                <Button
+                  className="slip-btn mb-sm-0"
+                  onClick={handlePrintSlip}
+                >
+                  Print Booking Slip
+                </Button>
+                <Button className="checklist-btn" onClick={printDocument}>
+                  Print Checklist
+                </Button>
+              </div>
             </Col>
           </Row>
         </Container>

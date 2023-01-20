@@ -142,15 +142,15 @@ $laptop: 1280px;
       margin-right: 20px;
       background: #6c757d !important;
       @media only screen and (max-width: 576px) {
-        width: 100%;
-        margin-bottom: 16px;
+        width: 130px !important;
+        margin-bottom: 0px;
       }
     }
     .confirm {
       @extend .primary-btn;
       width: 190px;
       @media only screen and (max-width: 576px) {
-        width: 100%;
+        width: 130px !important;
       }
       &.payment-btn {
         width: unset;
@@ -166,20 +166,23 @@ $laptop: 1280px;
 .apt-booked {
   padding: 50px 0px;
   .apt-booked__img {
-    margin-bottom: 60px;
+    margin-bottom: 32px;
     max-width: 30%;
     @media (max-width: $xxLDesktop) {
       max-width: 22%;
     }
-    @media only screen and (max-width: 576px) {
-      max-width: 100%;
+    @media only screen and (max-width: 992px) {
+      max-width: 60%;
+    }
+    @media only screen and (max-width: 768px) {
+      max-width: 80%;
     }
   }
   .apt-booked__title {
     font-size: 40px;
     font-weight: 600;
     color: #003c70;
-    margin-bottom: 30px;
+    margin-bottom: 14px;
     @media (max-width: $xxLDesktop) {
       font-size: 25px;
     }
@@ -198,6 +201,7 @@ $laptop: 1280px;
     }
     @media only screen and (max-width: 768px) {
       padding: 0;
+      line-height: 24px;
     }
     > span {
       color: $primary-color;
@@ -208,23 +212,26 @@ $laptop: 1280px;
     @extend .primary-btn;
     margin-right: 18px;
     @media only screen and (max-width: 576px) {
-      width: 100%;
+      width: 140px !important;
     }
   }
   .checklist-btn {
     @extend .primary-btn;
-    background: none;
-    border: 1px solid $primary-color;
-    color: $primary-color;
+    background: none !important;
+    border: 1px solid $primary-color !important;
+    color: $primary-color !important;
     @media only screen and (max-width: 576px) {
-      width: 100%;
+      width: 140px !important;
+      margin: 0;
     }
   }
 }
 
+
+
 // delete modal
 .del-modal {
-  max-width: 300px;
+  max-width: 360px !important;
   @media only screen and (max-width: 576px) {
     margin: 0 auto !important;
   }

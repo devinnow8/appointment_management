@@ -138,7 +138,7 @@ function ConfirmModal({
                   </div>
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
-                      <h5 className="confirm-modal__applicant--heading">DOB</h5>
+                      <h5 className="confirm-modal__applicant--heading">Date of Birth</h5>
                     </div>
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">

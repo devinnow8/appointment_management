@@ -101,12 +101,15 @@
           }
         }
       }
-      .inner-header__member--btn {
+      .inner-header__member--btn2 {
         @extend .primary-btn;
         width: 132px !important;
         height: 40px;
         position: relative;
-        top: -3px;
+        top: 3px;
+        @media (min-width: 769px) and (max-width: 992px) {
+          top: -2px;
+        }
       }
     }
   }

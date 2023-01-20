@@ -70,7 +70,7 @@ const MakePayment = () => {
                 </div>
                 <div className="make-payment__details--flex total-fee">
                   <div className="make-payment__details--heading">
-                    <h4>Application Fee</h4>
+                    <h4>Total Fee</h4>
                   </div>
                   <div className="make-payment__details--value">
                     <p>&#163;20</p>
