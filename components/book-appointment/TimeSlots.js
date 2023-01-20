@@ -33,7 +33,7 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
     <div className="appointment-calender__time">
       <div className="appointment-calender__time--flex">
         <Button
-          className="appointment-calender__time--arrow"
+          className="appointment-calender__time--arrowPrev"
           onClick={() => slider.current.slickPrev()}
         >
           <Image src="/images/up-arrow.png" alt="" width={12} height={9} />
@@ -59,7 +59,7 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
           </Slider>
         </div>
         <Button
-          className="appointment-calender__time--arrow"
+          className="appointment-calender__time--arrowNext"
           onClick={() => slider.current.slickNext()}
         >
           <Image src="/images/down-arrow.png" alt="" width={12} height={9} />
