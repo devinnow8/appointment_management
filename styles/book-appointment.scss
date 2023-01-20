@@ -132,9 +132,15 @@
       display: flex;
       align-items: center;
       flex-direction: column;
+      .slick-slider {
+        @media (max-width: $xxLDesktop) {
+          width: 7rem;
+        }
+      }
       .slick-list {
-        height: 20rem !important;
+        height: 22.2rem !important;
         box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
         @media (max-height: 660px) {
           height: 14rem !important;
         }
@@ -142,6 +148,10 @@
           height: 306px !important;
           box-shadow: none;
           margin: 1rem 0px 0px -17px;
+        }
+        @media (max-width: $xxLDesktop) {
+          padding: 15px 0;
+          height: 13rem !important;
         }
         .slick-track {
           @media only screen and (max-width: 576px) {
@@ -169,8 +179,9 @@
         margin: 10px 0;
         cursor: pointer;
         text-align: center;
-        @media (max-width: $xLDesktop) {
+        @media (max-width: $xxLDesktop) {
           padding: 10px 15px;
+          margin: 0.5rem 0;
         }
 
         @media only screen and (max-width: 576px) {

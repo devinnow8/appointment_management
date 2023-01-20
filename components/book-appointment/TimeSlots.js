@@ -13,6 +13,8 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
+    centerMode: true,
+    centerPadding: "60px",
     responsive: [
       {
         breakpoint: 480,
