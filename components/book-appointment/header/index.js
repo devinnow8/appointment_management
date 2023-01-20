@@ -1,7 +1,5 @@
 import Image from "next/image";
-import { Container, Label, Input, Row, Col, Button } from "reactstrap";
-import Select from "react-select";
-import { idType, nationalityOptions } from "../../../constants";
+import { Container, Row, Col } from "reactstrap";
 import Visa from "./Visa";
 import Others from "./Others";
 

@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { Label, Input, Button } from "reactstrap";
 import Select from "react-select";
-import { idType, nationalityOptions } from "../../../constants";
+import { idType, countries } from "../../../constants";
 
 const Others = ({ handleAddMember }) => {
   const formik = useFormik({
@@ -56,7 +56,7 @@ const Others = ({ handleAddMember }) => {
       <div className="me-0 me-md-3 mb-0 mb-md-3">
         <Label for="Nationality">Nationality</Label>
         <Select
-          options={nationalityOptions}
+          options={countries}
           className="react-select-container"
           classNamePrefix="react-select"
           value={formik.values.nationality}

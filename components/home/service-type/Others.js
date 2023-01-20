@@ -1,8 +1,8 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Col, FormGroup, Label, Input } from "reactstrap";
+import { Col, Label, Input } from "reactstrap";
 import Select from "react-select";
-import { nationalityOptions, idType } from "../../../constants/index";
+import { idType, countries } from "../../../constants/index";
 
 const Others = ({ handleContinue }) => {
   const formik = useFormik({
@@ -63,8 +63,7 @@ const Others = ({ handleContinue }) => {
             Nationality <span className="star">*</span>
           </Label>
           <Select
-            // onChange={(e) => handle_select(e, "nationality")}
-            options={nationalityOptions}
+            options={countries}
             className="react-select-container"
             name="nationality"
             classNamePrefix="react-select"
@@ -88,7 +87,6 @@ const Others = ({ handleContinue }) => {
             <span className="star"> *</span>
           </Label>
           <Select
-            // onChange={(e) => handle_select(e, "id_type")}
             options={idType}
             className="react-select-container"
             classNamePrefix="react-select"
