@@ -25,7 +25,7 @@
     .applicant-details__card {
       border: 1px solid $primary-color;
       width: 250px;
-      height: 114px;
+      max-height: 114px;
       border-radius: 5px;
       padding: 10px 13px;
       @media only screen and (max-width: 576px) {
