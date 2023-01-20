@@ -3,7 +3,7 @@
   @media (max-width: $xxLDesktop) {
     padding: 0;
   }
-  @media (max-height: 600px) {
+  @media (max-height: 660px) {
     padding: 0;
   }
   .applicant-details__title {
@@ -60,7 +60,7 @@
   }
   .appointment-calender {
     padding: 40px 0px;
-    @media (max-height: 600px) {
+    @media (max-height: 660px) {
       padding: 0px 0px 32px 0px;
     }
     .location-select {
@@ -137,7 +137,7 @@
         margin: 1rem 0px;
         height: 20rem !important;
         box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.1);
-        @media (max-height: 600px) {
+        @media (max-height: 660px) {
           height: 14rem !important;
         }
         @media only screen and (max-width: 576px) {
@@ -272,10 +272,13 @@
           .rdp-head_cell {
             border: 1px solid #cdcdcd;
             padding: 18px;
+            @media (max-height: 660px) {
+              height: 36px;
+            }
             @media (max-width: $xxLDesktop) {
               padding: 10px;
             }
-            @media (max-height: 600px) {
+            @media (max-height: 660px) {
               padding: 4px;
             }
             @media screen and (max-width: 576px) {
@@ -291,6 +294,9 @@
         }
         .rdp-cell {
           border: 1px solid #cdcdcd;
+          @media (max-height: 660px) {
+            height: 36px;
+          }
           .rdp-day {
             font-weight: 500;
             margin: 0 auto;
@@ -303,7 +309,7 @@
             @media (max-width: $xxLDesktop) {
               padding: 10px;
             }
-            @media (max-height: 600px) {
+            @media (max-height: 660px) {
               padding: 4px;
             }
             @media screen and (max-width: 576px) {
