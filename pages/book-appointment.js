@@ -58,7 +58,11 @@ export default () => {
     setDeleteId(i);
   };
 
-  const deleteConfirmation = () => {
+  const deleteToggle = () => {
+    setDeleteModal(!deleteModal);
+  };
+
+  const deleteConfirmation = (i) => {
     const data = [...members];
     data.splice(i, 1);
     setMembers(data);
@@ -139,7 +143,14 @@ export default () => {
         />
       )}
 
-      {deleteModal && <DeleteModal />}
+      {deleteModal && (
+        <DeleteModal
+          deleteModal={deleteModal}
+          deleteId={deleteId}
+          deleteConfirmation={deleteConfirmation}
+          deleteToggle={deleteToggle}
+        />
+      )}
     </>
   );
 };
