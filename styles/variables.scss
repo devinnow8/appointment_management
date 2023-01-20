@@ -218,3 +218,32 @@ $laptop: 1280px;
     }
   }
 }
+
+// delete modal
+.del-modal {
+  max-width: 300px;
+  .modal-content {
+    border: none;
+    .modal-body {
+      text-align: center;
+      padding: 6px 0px 34px 0px;
+      .modal-header {
+        border-bottom: none !important;
+        border-width: 0 !important;
+      }
+      .del-modal__title {
+        font-size: 24px;
+        color: $primary-color;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+      .del-modal__para {
+        color: #555;
+      }
+      .del-btn {
+        @extend .primary-btn;
+        width: 120px !important;
+      }
+    }
+  }
+}
