@@ -52,7 +52,7 @@ function ConfirmModal({
                     </div>
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">
-                        {applicantAppointment.date || "May 25,2022"}
+                        {applicantAppointment.date}
                       </p>
                     </div>
                   </div>
