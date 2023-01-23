@@ -15,7 +15,6 @@ import { arrayTime } from "../constants/index";
 import { centerListFetchRequest} from '../redux/reducer/center-list'
 import { holidayListFetchRequest} from '../redux/reducer/holiday-list'
 
-
 export default () => {
   const dispatch = useDispatch();
   const { userAppointmentDetails } = useSelector((state) => state.user);
@@ -33,7 +32,9 @@ export default () => {
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(false);
-  const [countriesCenterList, setCountriesCenterList] = useState([])
+  const [countriesCenterList, setCountriesCenterList] = useState([{
+    value: 'New Delhi', label: 'New Delhi'
+  }])
   const [members, setMembers] = useState([]);
   const [centersDetails, setCentersDetails] = useState({})
   const [applicantAppointment, setApplicantAppointment] = useState({
@@ -97,7 +98,7 @@ export default () => {
   }, [])
 
   useEffect(() => {
-    const updatedCenterList = centerList && centerList.map((centers) => {
+    const updatedCenterList = centerList.map((centers) => {
       return {
         value: centers?.centerName, label: centers?.centerName
       }

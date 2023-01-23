@@ -9,7 +9,7 @@ const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, se
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCenter, setSelectedCenter] = useState(countriesCenterList[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  
+
   const handleSelectDate = (value) => {
     setSelectedDate(value);
     setApplicantAppointment({
@@ -20,6 +20,8 @@ const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, se
   };
 
   useEffect(() => {
+    const filteredCenter = centerList.filter((center) => center.centerName === selectedCenter?.label)
+    setCentersDetails(filteredCenter[0])
     setApplicantAppointment((prev) => ({
       ...prev,
       date: `${monthNames[selectedDate.getMonth()]}
@@ -99,7 +101,7 @@ const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, se
         classNamePrefix="react-select"
         value={selectedCenter}
         onChange={(selected) => {
-          const filteredCenter = centerList.filter((center)=> center.centerName === selected?.label)
+          const filteredCenter = centerList.filter((center) => center.centerName === selected?.label)
           setCentersDetails(filteredCenter[0])
           setSelectedCenter(selected);
           setApplicantAppointment((prev) => ({
