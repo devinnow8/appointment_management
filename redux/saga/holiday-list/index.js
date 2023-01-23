@@ -5,10 +5,9 @@ import {
 } from '../../reducer/holiday-list';
 import * as services from '../../../services';
 
-function* getHolidayListRequest() {
+function* getHolidayListRequest(action) {
   try {
-    const response = yield call(services.getHolidayList);
-    console.log(response, 'responseresponse');
+    const response = yield call(services.getHolidayList,action.payload.requestBody);
     const { status, statusText, data = [] } = response || {};
     if (status === 200) {
       yield put(holidayListFetchSuccess(data));

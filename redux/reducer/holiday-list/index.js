@@ -8,8 +8,13 @@ export const holidayListSlice = createSlice({
   name: 'holidayListSlice',
   initialState,
   reducers: {
-    holidayListFetchRequest: (state, action) => {
-      state.holidayList.push(action.payload);
+    holidayListFetchRequest: {
+      reducer: state => {},
+      prepare: requestBody => {
+        return {
+          payload: { requestBody }
+        };
+      }
     },
     holidayListFetchSuccess: (state, action) => {
       state.holidayList = action.payload;

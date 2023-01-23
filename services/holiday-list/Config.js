@@ -1,6 +1,7 @@
-export default {
+export const Config = (id) => {
+  return {
     getHolidayList: {
-      path: 'center/1/holiday-list'
+      path: `center/${id}/holiday-list`
     }
-  };
-  
+  }
+};

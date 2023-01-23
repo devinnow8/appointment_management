@@ -94,8 +94,11 @@ export default () => {
 
   useEffect(() => {
     dispatch(centerListFetchRequest())
-    dispatch(holidayListFetchRequest())
   }, [])
+  
+  useEffect(()=> {
+    centersDetails?.centerId !== '' && dispatch(holidayListFetchRequest(centersDetails?.centerId))
+  }, [centersDetails.centerId])
 
   useEffect(() => {
     const updatedCenterList = centerList.map((centers) => {

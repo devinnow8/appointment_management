@@ -1,7 +1,7 @@
-import config from './Config';
+import {Config} from './Config';
 import { getDataApi } from '../ApiCaller';
 
-export const getHolidayList = () => {
-  const request = config.getHolidayList;
+export const getHolidayList = (centerId) => {
+  const request = Config(centerId).getHolidayList;
   return getDataApi(request);
 };

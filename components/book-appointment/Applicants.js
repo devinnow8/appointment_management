@@ -18,7 +18,7 @@ function Applicants({
               <div className="applicant-details__card--info w-100">
                 {
                   <h4 className="applicant-details__card--title">
-                    {userAppointmentDetails.appointmentDetails.name || "Chris"}
+                    {userAppointmentDetails.appointmentDetails?.name || "Chris"}
                   </h4>
                 }
                 {selectedService === "Visa" ? (
@@ -31,7 +31,7 @@ function Applicants({
                         {" "}
                         {
                           userAppointmentDetails.appointmentDetails
-                            .application_id
+                            ?.application_id
                         }{" "}
                       </span>
                     </div>
