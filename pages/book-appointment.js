@@ -14,6 +14,7 @@ import DeleteModal from "../components/book-appointment/DeleteModal";
 import { arrayTime } from "../constants/index";
 import { centerListFetchRequest} from '../redux/reducer/center-list'
 import { holidayListFetchRequest} from '../redux/reducer/holiday-list'
+import { appointmentScheduleFetchRequest} from '../redux/reducer/appointment'
 
 export default () => {
   const dispatch = useDispatch();
@@ -82,6 +83,19 @@ export default () => {
   };
 
   const handlePaymentProceed = () => {
+    const details = {
+      "application_id":selectedService === "Visa" ? userAppointmentDetails.appointmentDetails
+      ?.application_id: userAppointmentDetails.appointmentDetails
+      ?.id_number,
+      "center_id": centersDetails?.centerId,
+      "appointment_date":"",
+      "appointment_time":applicantAppointment.time,
+      "applicant_fullname":userAppointmentDetails.appointmentDetails?.name || "Chris",
+      "category":"",
+      "service_type":selectedService,
+      "status":centersDetails?.status
+    }
+    dispatch(appointmentScheduleFetchRequest(details))
     push("/make-payment");
   };
 

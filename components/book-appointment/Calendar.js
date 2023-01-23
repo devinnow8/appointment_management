@@ -20,7 +20,7 @@ const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, se
   };
 
   useEffect(() => {
-    const filteredCenter = centerList.filter((center) => center.centerName === selectedCenter?.label)
+    const filteredCenter = centerList.filter((center) => center?.centerName === selectedCenter?.label)
     setCentersDetails(filteredCenter[0])
     setApplicantAppointment((prev) => ({
       ...prev,

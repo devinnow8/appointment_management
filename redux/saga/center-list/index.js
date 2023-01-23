@@ -8,7 +8,6 @@ import * as services from '../../../services';
 function* getCenterListRequest() {
   try {
     const response = yield call(services.getCenterList);
-    console.log(response, 'responseresponse');
     const { status, statusText, data = [] } = response || {};
     if (status === 200) {
       yield put(centerListFetchSuccess(data));
