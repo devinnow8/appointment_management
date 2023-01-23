@@ -12,9 +12,15 @@ import {
 } from "../components/book-appointment";
 import DeleteModal from "../components/book-appointment/DeleteModal";
 import { arrayTime } from "../constants/index";
+import { centerListFetchRequest} from '../redux/reducer/center-list'
+import { holidayListFetchRequest} from '../redux/reducer/holiday-list'
+
 
 export default () => {
+  const dispatch = useDispatch();
   const { userAppointmentDetails } = useSelector((state) => state.user);
+  const { centerList } = useSelector((state) => state.centerList);
+  const { holidayList } = useSelector((state) => state.holidayList);
   const slider = useRef();
   const {
     push,
@@ -27,16 +33,15 @@ export default () => {
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(false);
-
+  const [countriesCenterList, setCountriesCenterList] = useState([])
   const [members, setMembers] = useState([]);
-
+  const [centersDetails, setCentersDetails] = useState({})
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
     time: arrayTime[slideToShow].time,
     location: "",
     amount: "",
   });
-
   const handleAddMember = (values) => {
     setApplicantDetail(values);
     setModal(true);
@@ -86,6 +91,20 @@ export default () => {
     }));
   }, [slideToShow, applicantAppointment.time]);
 
+  useEffect(() => {
+    dispatch(centerListFetchRequest())
+    dispatch(holidayListFetchRequest())
+  }, [])
+
+  useEffect(() => {
+    const updatedCenterList = centerList && centerList.map((centers) => {
+      return {
+        value: centers?.centerName, label: centers?.centerName
+      }
+    })
+    setCountriesCenterList(updatedCenterList)
+  }, [centerList])
+
   return (
     <>
       <Header
@@ -107,6 +126,9 @@ export default () => {
                 <Calendar
                   setApplicantAppointment={setApplicantAppointment}
                   applicantAppointment={applicantAppointment}
+                  countriesCenterList={countriesCenterList}
+                  centerList={centerList}
+                  setCentersDetails={setCentersDetails}
                 />
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>

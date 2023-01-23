@@ -9,12 +9,10 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
   const settings = {
     dots: false,
     infinite: true,
-    slidesToShow: 5,
     slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
     centerMode: true,
-    centerPadding: "60px",
     responsive: [
       {
         breakpoint: 480,

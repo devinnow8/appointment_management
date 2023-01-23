@@ -5,13 +5,13 @@ import moment from "moment";
 import Select from "react-select";
 import { DAYS_FORMAT, monthNames, centers } from "../../constants";
 
-const Calendar = ({ setApplicantAppointment }) => {
+const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, setCentersDetails }) => {
   const [isDateSelected, setDateSelected] = useState(false);
-  const [selectedCenter, setSelectedCenter] = useState(centers[0]);
+  const [selectedCenter, setSelectedCenter] = useState(countriesCenterList[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  
   const handleSelectDate = (value) => {
     setSelectedDate(value);
-
     setApplicantAppointment({
       date: `${monthNames[value.getMonth()]}
       ${value.getDate()}, ${value.getFullYear()}`,
@@ -24,7 +24,7 @@ const Calendar = ({ setApplicantAppointment }) => {
       ...prev,
       date: `${monthNames[selectedDate.getMonth()]}
       ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
-      location: selectedCenter.label,
+      location: selectedCenter?.label,
     }));
   }, []);
 
@@ -93,19 +93,20 @@ const Calendar = ({ setApplicantAppointment }) => {
   return (
     <>
       <Select
-        options={centers}
+        options={countriesCenterList}
         className="location-select"
         name="location"
         classNamePrefix="react-select"
         value={selectedCenter}
         onChange={(selected) => {
+          const filteredCenter = centerList.filter((center)=> center.centerName === selected?.label)
+          setCentersDetails(filteredCenter[0])
           setSelectedCenter(selected);
           setApplicantAppointment((prev) => ({
             ...prev,
-            location: selected.label,
+            location: selected?.label,
           }));
         }}
-        // menuIsOpen={true}
       />
 
       <DayPicker

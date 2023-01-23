@@ -1,47 +1,56 @@
-import { createStore } from "redux";
+import storage from 'redux-persist/lib/storage';
+import { configureStore} from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import { createLogger } from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
 
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import rootReducer from "../reducer";
+import RootReducer from '../reducer';
+import sagas from '../saga';
 
-let store = null;
-let persistor = null;
-const persistConfig = {
-  key: "root",
-  storage,
+const config = {
+  key: 'root',
+  storage: storage,
+  // blacklist: ['userReducer'],
+  debug: true
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const middleware = [];
 
-export const configureStore = () => {
+const sagaMiddleware = createSagaMiddleware();
 
+middleware.push(sagaMiddleware);
 
-  store = createStore(
-    persistedReducer,
+if (true) {
+  middleware.push(
+    createLogger({
+      collapsed: true,
+      duration: true,
+      timestamp: true,
+      colors: {
+        title: () => '#F2789F',
+        prevState: () => '#de6f0d',
+        action: () => '#CAB8FF',
+        nextState: () => '#1a9134'
+      }
+    })
   );
-  const dispatch = (...args) => store.dispatch(...args);
-  persistor = persistStore(store);
-  return { store, persistor, dispatch };
-};
+}
 
-/**
- * Get store
- */
-export const getStore = () => store;
+const persistedReducer = persistReducer(config, RootReducer);
 
-/**
- * Get persistor
- */
-export const getPersistor = () => persistor;
+const enhancers = [...middleware];
 
-/**
- * Dispatch an action
- */
-export const dispatch = (...args) => store.dispatch(...args);
+const persistConfig = { ...enhancers };
 
-export default {
-  dispatch,
-  getStore,
-  configureStore,
-  persistor,
-};
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: enhancers
+});
+
+const persistor = persistStore(store, persistConfig, () => {
+  console.debug('Redux Store: ', store.getState());
+});
+
+sagaMiddleware.run(sagas);
+
+export { store, persistor };
