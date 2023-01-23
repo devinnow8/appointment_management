@@ -111,7 +111,7 @@ export default () => {
   }, [])
   
   useEffect(()=> {
-    centersDetails?.centerId !== '' && dispatch(holidayListFetchRequest(centersDetails?.centerId))
+    Object.keys(centersDetails).length > 0 && dispatch(holidayListFetchRequest(centersDetails?.centerId))
   }, [centersDetails.centerId])
 
   useEffect(() => {
