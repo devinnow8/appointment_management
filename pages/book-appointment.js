@@ -27,6 +27,8 @@ export default () => {
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(false);
+  const [familyMember, setFamilyMember] = useState([]);
+  const [deleteMember, setDeleteMember] = useState();
 
   const [members, setMembers] = useState([]);
 
@@ -38,8 +40,14 @@ export default () => {
   });
 
   const handleAddMember = (values) => {
-    setApplicantDetail(values);
-    setModal(true);
+    console.log(familyMember.length, "familyMemberfamilyMember");
+    if (familyMember.length > 3) {
+      toast.success("family mamber ");
+    } else {
+      setApplicantDetail(values);
+      setFamilyMember([...familyMember, { ...values }]);
+      setModal(true);
+    }
   };
 
   const modalToggle = () => {
@@ -53,7 +61,9 @@ export default () => {
     toast.success("Applicant Addedd Successfully");
   };
 
-  const handleDeleteApplicant = (i) => {
+  const handleDeleteApplicant = (data, i) => {
+    console.log(data, "datadata==>");
+    setDeleteMember(data);
     setDeleteModal(true);
     setDeleteId(i);
   };
@@ -85,7 +95,7 @@ export default () => {
       time: arrayTime[slideToShow].time,
     }));
   }, [slideToShow, applicantAppointment.time]);
-
+  console.log(familyMember, "familyMemberfamilyMember==>");
   return (
     <>
       <Header
@@ -140,6 +150,7 @@ export default () => {
           modal={modal}
           modalToggle={modalToggle}
           applicantDetail={applicantDetail}
+          familyMember={familyMember}
           handleConfirm={handleConfirm}
           selectedService={selectedService}
           applicantAppointment={applicantAppointment}
@@ -151,6 +162,8 @@ export default () => {
       {deleteModal && (
         <DeleteModal
           deleteModal={deleteModal}
+          setDeleteModal={setDeleteModal}
+          deleteMember={deleteMember}
           deleteId={deleteId}
           deleteConfirmation={deleteConfirmation}
           deleteToggle={deleteToggle}

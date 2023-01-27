@@ -3,12 +3,13 @@ import "react-day-picker/dist/style.css";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
 import Select from "react-select";
-import { DAYS_FORMAT, monthNames, centers } from "../../constants";
+import { DAYS_FORMAT, monthNames, centers, countries } from "../../constants";
 
 const Calendar = ({ setApplicantAppointment }) => {
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCenter, setSelectedCenter] = useState(centers[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedCountry, setSelectedCountry] = useState("");
   const handleSelectDate = (value) => {
     setSelectedDate(value);
 
@@ -89,17 +90,34 @@ const Calendar = ({ setApplicantAppointment }) => {
     };
   };
   // const availableDays = getAvailableDays(availableDates);
+  const optionData = () => {
+    let value = centers.map((item, index) => {
+      return { value: item[index] || {}, label: item[index] };
+    });
+  };
+  optionData();
+
+  const formatOptionLabel = (item) => {
+    if (item.country === selectedCountry.label) {
+      return (
+        <>
+          <div style={{ marginLeft: "10px", color: "#ccc" }}>{item.center}</div>
+        </>
+      );
+    }
+  };
 
   return (
     <>
       <Select
-        options={centers}
+        options={countries}
         className="location-select"
         name="location"
         classNamePrefix="react-select"
-        value={selectedCenter}
+        value={selectedCountry}
         onChange={(selected) => {
-          setSelectedCenter(selected);
+          setSelectedCountry(selected);
+          // setSelectedCenter(selected);
           setApplicantAppointment((prev) => ({
             ...prev,
             location: selected.label,
@@ -107,7 +125,24 @@ const Calendar = ({ setApplicantAppointment }) => {
         }}
         // menuIsOpen={true}
       />
-
+      {selectedCountry !== "" && (
+        <Select
+          options={centers}
+          className="location-select"
+          name="location"
+          classNamePrefix="react-select"
+          value={selectedCenter}
+          formatOptionLabel={formatOptionLabel}
+          onChange={(selected) => {
+            setSelectedCenter(selected);
+            setApplicantAppointment((prev) => ({
+              ...prev,
+              location: selected.label,
+            }));
+          }}
+          // menuIsOpen={true}
+        />
+      )}
       <DayPicker
         mode="single"
         className="calender-months"

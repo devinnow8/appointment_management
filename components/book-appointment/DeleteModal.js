@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 
 function DeleteModal({
+  deleteMember,
   deleteModal,
   deleteId,
   deleteConfirmation,
   deleteToggle,
+  setDeleteModal,
 }) {
   return (
     <Modal
@@ -16,13 +18,17 @@ function DeleteModal({
     >
       <ModalHeader toggle={deleteToggle}></ModalHeader>
       <ModalBody>
-        <h2 className="del-modal__title">Delete Applicant</h2>
-        <p className="del-modal__para">Are you sure to delete this?</p>
+        <h3 className="confirm-modal__title">Delete Applicant</h3>
+        <p>{deleteMember.application_id}</p>
+        <p>{deleteMember.dob}</p>
+        <Button className="del-btn" onClick={() => setDeleteModal(false)}>
+          Cancel
+        </Button>
         <Button
           className="del-btn"
           onClick={() => deleteConfirmation(deleteId)}
         >
-          Okay
+          Confirm
         </Button>
       </ModalBody>
     </Modal>

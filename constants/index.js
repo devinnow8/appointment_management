@@ -45,24 +45,57 @@ export const monthNames = [
   "December",
 ];
 
+// export const centers = [
+//   { value: "Ankara, Turkey", label: "Ankara, Turkey" },
+//   { value: "Atlanta, USA", label: "Atlanta, USA" },
+//   { value: "Beijing, China", label: "Beijing, China" },
+//   { value: "Beirut, Lebanon", label: "Beirut, Lebanon" },
+//   { value: "Dubai, UAE", label: "Dubai, UAE" },
+//   { value: "Guangzhou, China", label: "Guangzhou, China" },
+//   { value: "Johannesburg, SA", label: "Johannesburg, SA" },
+//   { value: "Kuala Lumpur, Malaysia", label: "Kuala Lumpur, Malaysia" },
+//   { value: "London, UK", label: "London, UK" },
+//   { value: "Los Angeles, USA", label: "Los Angeles, USA" },
+//   { value: "New Delhi, India", label: "New Delhi, India" },
+//   { value: "New York, US", label: "New York, US" },
+//   { value: "Paris, France", label: "Paris, France" },
+//   { value: "Rome, Italy", label: "Rome, Italy" },
+//   { value: "Shanghai, China", label: "Shanghai, China" },
+//   { value: "The Hague, Netherlands", label: "The Hague, Netherlands" },
+//   { value: "Washington DC, USA", label: "Washington DC, USA" },
+// ];
+
 export const centers = [
-  { value: "Ankara, Turkey", label: "Ankara, Turkey" },
-  { value: "Atlanta, USA", label: "Atlanta, USA" },
-  { value: "Beijing, China", label: "Beijing, China" },
-  { value: "Beirut, Lebanon", label: "Beirut, Lebanon" },
-  { value: "Dubai, UAE", label: "Dubai, UAE" },
-  { value: "Guangzhou, China", label: "Guangzhou, China" },
-  { value: "Johannesburg, SA", label: "Johannesburg, SA" },
-  { value: "Kuala Lumpur, Malaysia", label: "Kuala Lumpur, Malaysia" },
-  { value: "London, UK", label: "London, UK" },
-  { value: "Los Angeles, USA", label: "Los Angeles, USA" },
-  { value: "New Delhi, India", label: "New Delhi, India" },
-  { value: "New York, US", label: "New York, US" },
-  { value: "Paris, France", label: "Paris, France" },
-  { value: "Rome, Italy", label: "Rome, Italy" },
-  { value: "Shanghai, China", label: "Shanghai, China" },
-  { value: "The Hague, Netherlands", label: "The Hague, Netherlands" },
-  { value: "Washington DC, USA", label: "Washington DC, USA" },
+  {
+    country: "India",
+    center: "New Delhi",
+    value: "Ankara, Turkey",
+    label: "Ankara, Turkey",
+  },
+  {
+    country: "India",
+    center: "Mumbai",
+    value: "Ankara, Turkey",
+    label: "Ankara, Turkey",
+  },
+  {
+    country: "India",
+    center: "Mohali",
+    value: "Ankara, Turkey",
+    label: "Ankara, Turkey",
+  },
+  {
+    country: "Pakistan",
+    center: "Islamabad",
+    value: "Ankara, Turkey",
+    label: "Ankara, Turkey",
+  },
+  {
+    country: "Pakistan",
+    center: "Karachi",
+    value: "Ankara, Turkey",
+    label: "Ankara, Turkey",
+  },
 ];
 
 export const countries = [
