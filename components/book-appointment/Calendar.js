@@ -4,6 +4,7 @@ import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
 import Select from "react-select";
 import { DAYS_FORMAT, monthNames, centers, countries } from "../../constants";
+import { Col, Row } from "reactstrap";
 
 const Calendar = ({ setApplicantAppointment }) => {
   const [isDateSelected, setDateSelected] = useState(false);
@@ -101,7 +102,7 @@ const Calendar = ({ setApplicantAppointment }) => {
     if (item.country === selectedCountry.label) {
       return (
         <>
-          <div style={{ marginLeft: "10px", color: "#ccc" }}>{item.center}</div>
+          <div>{item.center}</div>
         </>
       );
     }
@@ -109,6 +110,8 @@ const Calendar = ({ setApplicantAppointment }) => {
 
   return (
     <>
+    <Row>
+      <Col md="2">
       <Select
         options={countries}
         className="location-select"
@@ -123,8 +126,9 @@ const Calendar = ({ setApplicantAppointment }) => {
             location: selected.label,
           }));
         }}
-        // menuIsOpen={true}
-      />
+         menuIsOpen={true}
+      /></Col>
+      <Col md="2">
       {selectedCountry !== "" && (
         <Select
           options={centers}
@@ -140,9 +144,13 @@ const Calendar = ({ setApplicantAppointment }) => {
               location: selected.label,
             }));
           }}
-          // menuIsOpen={true}
+          menuIsOpen={true}
         />
       )}
+      </Col>
+    </Row>
+     
+  
       <DayPicker
         mode="single"
         className="calender-months"
