@@ -101,13 +101,10 @@ const Calendar = ({ setApplicantAppointment }) => {
   const formatOptionLabel = (item) => {
     if (item.country === selectedCountry.label) {
       return (
-        <>
-          <div>{item.center}</div>
-        </>
+        <>{item.label}</>
       );
     }
   };
-
   return (
     <>
     <Row>

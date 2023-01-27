@@ -68,34 +68,29 @@ export const monthNames = [
 export const centers = [
   {
     country: "India",
-    center: "New Delhi",
-    value: "Ankara, Turkey",
-    label: "Ankara, Turkey",
+    value: "New Delhi",
+    label: "New Delhi"
   },
   {
     country: "India",
-    center: "Mumbai",
-    value: "Ankara, Turkey",
-    label: "Ankara, Turkey",
-  },
+    value: "Mumbai",
+  label: "Mumbai",
+ },
   {
     country: "India",
-    center: "Mohali",
-    value: "Ankara, Turkey",
-    label: "Ankara, Turkey",
+    value: "Mohali",
+  label: "Mohali",
+ },
+  {
+    country: "Pakistan",
+    value: "Islamabad",
+    label: "Islamabad"
   },
   {
     country: "Pakistan",
-    center: "Islamabad",
-    value: "Ankara, Turkey",
-    label: "Ankara, Turkey",
-  },
-  {
-    country: "Pakistan",
-    center: "Karachi",
-    value: "Ankara, Turkey",
-    label: "Ankara, Turkey",
-  },
+    value: "Karachi",
+ label: "Karachi",
+ },
 ];
 
 export const countries = [
