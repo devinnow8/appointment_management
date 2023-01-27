@@ -126,7 +126,6 @@ const Calendar = ({ setApplicantAppointment }) => {
             location: selected.label,
           }));
         }}
-         menuIsOpen={true}
       /></Col>
       <Col md="2">
       {selectedCountry !== "" && (
@@ -144,7 +143,6 @@ const Calendar = ({ setApplicantAppointment }) => {
               location: selected.label,
             }));
           }}
-          menuIsOpen={true}
         />
       )}
       </Col>

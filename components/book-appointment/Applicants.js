@@ -95,7 +95,7 @@ function Applicants({
                           {data?.application_id}
                         </p>
                         {/* ) : ( */}
-                        <p className="applicant-details__card--id">
+                        <p className="applicant-details__card--text">
                           {data?.id_number}
                         </p>
                         {/* )} */}
