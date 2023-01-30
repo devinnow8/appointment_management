@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import moment from "moment";
 
 function ConfirmModal({
   modal,
@@ -10,7 +11,10 @@ function ConfirmModal({
   selectedService,
   confirmCalendar,
   handlePaymentProceed,
+  members,
 }) {
+  const totalMember = members && members.length;
+  const totalValue = 350 * totalMember;
   return (
     <div>
       <Modal
@@ -20,7 +24,11 @@ function ConfirmModal({
         className="confirm-modal"
       >
         <ModalHeader toggle={modalToggle}>
-          <img src="/images/modal-img.png" className="img-fluid confirm-modal__img" alt="" />
+          <img
+            src="/images/modal-img.png"
+            className="img-fluid confirm-modal__img"
+            alt=""
+          />
         </ModalHeader>
         <ModalBody>
           {confirmCalendar ? (
@@ -52,7 +60,7 @@ function ConfirmModal({
                     </div>
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">
-                        {applicantAppointment.date}
+                        {moment(applicantAppointment.date).format("DD/MM/YYYY")}
                       </p>
                     </div>
                   </div>
@@ -96,12 +104,29 @@ function ConfirmModal({
                           className="me-2"
                           alt=""
                         />{" "}
+                        Amount
+                      </h5>
+                    </div>
+                    <div className="confirm-modal__applicant--value">
+                      <p className="confirm-modal__applicant-desc">
+                        {applicantAppointment.amount || "350"} per Member
+                      </p>
+                    </div>
+                  </div>
+                  <div className="confirm-modal__applicant--flex">
+                    <div className="confirm-modal__applicant--data">
+                      <h5 className="confirm-modal__applicant--heading">
+                        <img
+                          src="/images/currency.png"
+                          className="me-2"
+                          alt=""
+                        />{" "}
                         Total Amount
                       </h5>
                     </div>
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">
-                        {applicantAppointment.amount || "350"}
+                        {totalValue}
                       </p>
                     </div>
                   </div>
@@ -138,11 +163,13 @@ function ConfirmModal({
                   </div>
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
-                      <h5 className="confirm-modal__applicant--heading">Date of Birth</h5>
+                      <h5 className="confirm-modal__applicant--heading">
+                        Date of Birth
+                      </h5>
                     </div>
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">
-                        {applicantDetail.dob}
+                        {moment(applicantDetail.dob).format("DD/MM/YYYY")}
                       </p>
                     </div>
                   </div>

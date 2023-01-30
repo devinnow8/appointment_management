@@ -3,12 +3,26 @@ import "react-day-picker/dist/style.css";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
 import Select from "react-select";
-import { DAYS_FORMAT, monthNames, centers } from "../../constants";
+import { DAYS_FORMAT, monthNames, centers, countries } from "../../constants";
+import { Col, Row } from "reactstrap";
 
-const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, setCentersDetails }) => {
+const holidays = [
+  new Date(2023, 1, 18),
+  new Date(2023, 1, 22),
+  new Date(2023, 1, 27),
+  new Date(2023, 1, 28),
+];
+
+const Calendar = ({
+  setApplicantAppointment,
+  centerList,
+  countriesCenterList,
+  setCentersDetails,
+}) => {
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCenter, setSelectedCenter] = useState(countriesCenterList[0]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedCountry, setSelectedCountry] = useState("");
 
   const handleSelectDate = (value) => {
     setSelectedDate(value);
@@ -20,8 +34,10 @@ const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, se
   };
 
   useEffect(() => {
-    const filteredCenter = centerList.filter((center) => center?.centerName === selectedCenter?.label)
-    setCentersDetails(filteredCenter[0])
+    const filteredCenter = centerList.filter(
+      (center) => center?.centerName === selectedCenter?.label,
+    );
+    setCentersDetails(filteredCenter[0]);
     setApplicantAppointment((prev) => ({
       ...prev,
       date: `${monthNames[selectedDate.getMonth()]}
@@ -88,50 +104,127 @@ const Calendar = ({ setApplicantAppointment, centerList, countriesCenterList, se
         color: "white",
         backgroundColor: "#f1651c",
       },
+      holidays: {
+        color: "#000000",
+        backgroundColor: "#FFAFAF",
+      },
+      weekend: {
+        color: "#000000",
+        backgroundColor: "#D7D7D7",
+      },
     };
   };
   // const availableDays = getAvailableDays(availableDates);
+  const optionData = () => {
+    let value = centers.map((item, index) => {
+      return { value: item[index] || {}, label: item[index] };
+    });
+  };
+  optionData();
 
+  const formatOptionLabel = (item) => {
+    if (item.country === selectedCountry.label) {
+      return <>{item.label}</>;
+    }
+    // else {
+    //   return "No Record Found";
+    // }
+  };
+
+  const getSundays = (date) => {
+    var d = date || new Date(),
+      month = d.getMonth(),
+      sundays = [];
+
+    d.setDate(1);
+
+    // Get the first Sunday in the month
+    while (d.getDay() !== 0) {
+      d.setDate(d.getDate() + 1);
+    }
+    // Get all the other Sundays in the month
+    while (d.getMonth() === month) {
+      sundays.push(new Date(d.getTime()));
+      d.setDate(d.getDate() + 7);
+    }
+
+    return sundays;
+  };
+
+  const weekends = getSundays();
+
+  const selectedDaysToDisable = holidays;
   return (
     <>
-      <Select
-        options={countriesCenterList}
-        className="location-select"
-        name="location"
-        classNamePrefix="react-select"
-        value={selectedCenter}
-        onChange={(selected) => {
-          const filteredCenter = centerList.filter((center) => center.centerName === selected?.label)
-          setCentersDetails(filteredCenter[0])
-          setSelectedCenter(selected);
-          setApplicantAppointment((prev) => ({
-            ...prev,
-            location: selected?.label,
-          }));
-        }}
-      />
+      <Row>
+        <Col md="2">
+          <Select
+            options={countries}
+            className="location-select"
+            name="location"
+            classNamePrefix="react-select"
+            value={selectedCountry}
+            onChange={(selected) => {
+              setSelectedCountry(selected);
+              // setSelectedCenter(selected);
+              setApplicantAppointment((prev) => ({
+                ...prev,
+                location: selected.label,
+              }));
+            }}
+          />
+        </Col>
+        <Col md="2">
+          {selectedCountry !== "" && (
+            <Select
+              options={centers}
+              className="location-select"
+              name="location"
+              classNamePrefix="react-select"
+              value={selectedCenter}
+              formatOptionLabel={formatOptionLabel}
+              onChange={(selected) => {
+                setSelectedCenter(selected);
+                setApplicantAppointment((prev) => ({
+                  ...prev,
+                  location: selected.label,
+                }));
+              }}
+            />
+          )}
+        </Col>
+      </Row>
 
       <DayPicker
-        mode="single"
+        mode="range"
+        max={60}
         className="calender-months"
         selected={selectedDate}
         defaultMonth={new Date()}
         disabled={[
           { before: new Date() },
-          // ...selectedDaysToDisable,
+          {
+            after: new Date(2023, 2, 24),
+          },
+          ...selectedDaysToDisable,
         ]}
-        // modifiers={getModifiers(availableDays)}
+        modifiers={{ holidays: holidays, weekend: weekends }}
+        // onMonthChange={(month) => setMonthChange(month)}
         modifiersStyles={getModifierStyles()}
-        onDayClick={(day, modifiers) => {
-          if (!modifiers.disabled) {
-            handleSelectDate(day);
-          }
+        // onDayClick={(day, modifiers) => {
+        //   if (!modifiers.disabled) {
+        //     handleSelectDate(day);
+        //   }
+        // }}
+        onDayClick={(day) => {
+          handleSelectDate(day);
         }}
         localeUtils={{
           ...LocaleUtils,
           formatWeekdayShort: getFormattedDayTitle,
         }}
       />
+
       <div className="calender-status">
         <p className="calender-status__title">Legends:</p>
         <div className="calender-status__box">

@@ -67,14 +67,13 @@ $laptop: 1280px;
       }
       .modal-title {
         display: flex;
-            justify-content: center;
+        justify-content: center;
         .confirm-modal__img {
           @media (max-height: 660px) {
             max-width: 50%;
           }
         }
       }
-      
     }
     .modal-body {
       padding: 20px 0px 34px 0px;
@@ -243,11 +242,9 @@ $laptop: 1280px;
   }
 }
 
-
-
 // delete modal
 .del-modal {
-  max-width: 360px !important;
+  max-width: 444px !important;
   @media only screen and (max-width: 576px) {
     margin: 0 auto !important;
   }
@@ -261,10 +258,11 @@ $laptop: 1280px;
       text-align: center;
       padding: 6px 0px 34px 0px;
       .del-modal__title {
-        font-size: 24px;
-        color: $primary-color;
-        font-weight: 600;
-        margin-bottom: 18px;
+        color: $secondary-color;
+        font-weight: 800;
+        font-size: 18px;
+        text-align: center;
+        margin: 18px 0px 22px 0px;
       }
       .del-modal__para {
         color: #555;
@@ -273,6 +271,9 @@ $laptop: 1280px;
       .del-btn {
         @extend .primary-btn;
         width: 120px !important;
+      }
+      .confirm-modal__applicant--data {
+        text-align: left;
       }
     }
   }

@@ -12,9 +12,9 @@ import {
 } from "../components/book-appointment";
 import DeleteModal from "../components/book-appointment/DeleteModal";
 import { arrayTime } from "../constants/index";
-import { centerListFetchRequest} from '../redux/reducer/center-list'
-import { holidayListFetchRequest} from '../redux/reducer/holiday-list'
-import { appointmentScheduleFetchRequest} from '../redux/reducer/appointment'
+import { centerListFetchRequest } from "../redux/reducer/center-list";
+import { holidayListFetchRequest } from "../redux/reducer/holiday-list";
+import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 
 export default () => {
   const dispatch = useDispatch();
@@ -33,11 +33,11 @@ export default () => {
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(false);
-  const [countriesCenterList, setCountriesCenterList] = useState([{
-    value: 'New Delhi', label: 'New Delhi'
-  }])
+  const [familyMember, setFamilyMember] = useState([]);
+  const [deleteMember, setDeleteMember] = useState();
+
   const [members, setMembers] = useState([]);
-  const [centersDetails, setCentersDetails] = useState({})
+  const [centersDetails, setCentersDetails] = useState({});
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
     time: arrayTime[slideToShow].time,
@@ -45,8 +45,13 @@ export default () => {
     amount: "",
   });
   const handleAddMember = (values) => {
-    setApplicantDetail(values);
-    setModal(true);
+    if (familyMember.length === 4) {
+      toast.warn("You can't add more than 4 members ");
+    } else {
+      setApplicantDetail(values);
+      setFamilyMember([...familyMember, { ...values }]);
+      setModal(true);
+    }
   };
 
   const modalToggle = () => {
@@ -60,7 +65,9 @@ export default () => {
     toast.success("Applicant Addedd Successfully");
   };
 
-  const handleDeleteApplicant = (i) => {
+  const handleDeleteApplicant = (data, i) => {
+    console.log(data, "datadata==>");
+    setDeleteMember(data);
     setDeleteModal(true);
     setDeleteId(i);
   };
@@ -84,18 +91,20 @@ export default () => {
 
   const handlePaymentProceed = () => {
     const details = {
-      "application_id":selectedService === "Visa" ? userAppointmentDetails.appointmentDetails
-      ?.application_id: userAppointmentDetails.appointmentDetails
-      ?.id_number,
-      "center_id": centersDetails?.centerId,
-      "appointment_date":"",
-      "appointment_time":applicantAppointment.time,
-      "applicant_fullname":userAppointmentDetails.appointmentDetails?.name || "Chris",
-      "category":"",
-      "service_type":selectedService,
-      "status":centersDetails?.status
-    }
-    dispatch(appointmentScheduleFetchRequest(details))
+      application_id:
+        selectedService === "Visa"
+          ? userAppointmentDetails.appointmentDetails?.application_id
+          : userAppointmentDetails.appointmentDetails?.id_number,
+      center_id: centersDetails?.centerId,
+      appointment_date: "",
+      appointment_time: applicantAppointment.time,
+      applicant_fullname:
+        userAppointmentDetails.appointmentDetails?.name || "Chris",
+      category: "",
+      service_type: selectedService,
+      status: centersDetails?.status,
+    };
+    dispatch(appointmentScheduleFetchRequest(details));
     push("/make-payment");
   };
 
@@ -107,21 +116,23 @@ export default () => {
   }, [slideToShow, applicantAppointment.time]);
 
   useEffect(() => {
-    dispatch(centerListFetchRequest())
-  }, [])
-  
-  useEffect(()=> {
-    Object.keys(centersDetails).length > 0 && dispatch(holidayListFetchRequest(centersDetails?.centerId))
-  }, [centersDetails.centerId])
+    dispatch(centerListFetchRequest());
+  }, []);
+
+  useEffect(() => {
+    Object.keys(centersDetails).length > 0 &&
+      dispatch(holidayListFetchRequest(centersDetails?.centerId));
+  }, [centersDetails.centerId]);
 
   useEffect(() => {
     const updatedCenterList = centerList.map((centers) => {
       return {
-        value: centers?.centerName, label: centers?.centerName
-      }
-    })
-    setCountriesCenterList(updatedCenterList)
-  }, [centerList])
+        value: centers?.centerName,
+        label: centers?.centerName,
+      };
+    });
+    setCountriesCenterList(updatedCenterList);
+  }, [centerList]);
 
   return (
     <>
@@ -185,12 +196,15 @@ export default () => {
           applicantAppointment={applicantAppointment}
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
+          members={members}
         />
       )}
 
       {deleteModal && (
         <DeleteModal
           deleteModal={deleteModal}
+          setDeleteModal={setDeleteModal}
+          deleteMember={deleteMember}
           deleteId={deleteId}
           deleteConfirmation={deleteConfirmation}
           deleteToggle={deleteToggle}
