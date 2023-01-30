@@ -100,59 +100,62 @@ const Calendar = ({ setApplicantAppointment }) => {
 
   const formatOptionLabel = (item) => {
     if (item.country === selectedCountry.label) {
-      return (
-        <>{item.label}</>
-      );
+      return <>{item.label}</>;
     }
   };
+
   return (
     <>
-    <Row>
-      <Col md="2">
-      <Select
-        options={countries}
-        className="location-select"
-        name="location"
-        classNamePrefix="react-select"
-        value={selectedCountry}
-        onChange={(selected) => {
-          setSelectedCountry(selected);
-          // setSelectedCenter(selected);
-          setApplicantAppointment((prev) => ({
-            ...prev,
-            location: selected.label,
-          }));
-        }}
-      /></Col>
-      <Col md="2">
-      {selectedCountry !== "" && (
-        <Select
-          options={centers}
-          className="location-select"
-          name="location"
-          classNamePrefix="react-select"
-          value={selectedCenter}
-          formatOptionLabel={formatOptionLabel}
-          onChange={(selected) => {
-            setSelectedCenter(selected);
-            setApplicantAppointment((prev) => ({
-              ...prev,
-              location: selected.label,
-            }));
-          }}
-        />
-      )}
-      </Col>
-    </Row>
-     
-  
+      <Row>
+        <Col md="2">
+          <Select
+            options={countries}
+            className="location-select"
+            name="location"
+            classNamePrefix="react-select"
+            value={selectedCountry}
+            onChange={(selected) => {
+              setSelectedCountry(selected);
+              // setSelectedCenter(selected);
+              setApplicantAppointment((prev) => ({
+                ...prev,
+                location: selected.label,
+              }));
+            }}
+          />
+        </Col>
+        <Col md="2">
+          {selectedCountry !== "" && (
+            <Select
+              options={centers}
+              className="location-select"
+              name="location"
+              classNamePrefix="react-select"
+              value={selectedCenter}
+              formatOptionLabel={formatOptionLabel}
+              onChange={(selected) => {
+                setSelectedCenter(selected);
+                setApplicantAppointment((prev) => ({
+                  ...prev,
+                  location: selected.label,
+                }));
+              }}
+            />
+          )}
+        </Col>
+      </Row>
+
       <DayPicker
-        mode="single"
+        mode="range"
+        max={60}
         className="calender-months"
         selected={selectedDate}
         defaultMonth={new Date()}
         disabled={[
           { before: new Date() },
+          {
+            after: new Date(2023, 2, 24),
+          },
           // ...selectedDaysToDisable,
         ]}
         // modifiers={getModifiers(availableDays)}

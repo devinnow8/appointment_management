@@ -7,13 +7,13 @@ function ConfirmModal({
   modalToggle,
   handleConfirm,
   applicantDetail,
-  familyMember,
   applicantAppointment,
   selectedService,
   confirmCalendar,
   handlePaymentProceed,
+  members,
 }) {
-  const totalMember = familyMember && familyMember.length + 1;
+  const totalMember = members && members.length;
   const totalValue = 350 * totalMember;
   return (
     <div>

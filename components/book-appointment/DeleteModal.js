@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
+import moment from "moment";
 
 function DeleteModal({
   deleteMember,
@@ -12,24 +13,69 @@ function DeleteModal({
   return (
     <Modal
       centered
-      className="del-modal"
+      className="confirm-modal del-modal"
       isOpen={deleteModal}
       toggle={deleteToggle}
     >
-      <ModalHeader toggle={deleteToggle}></ModalHeader>
+      <ModalHeader toggle={deleteToggle}>
+        <img
+          src="/images/modal-img.png"
+          className="img-fluid confirm-modal__img"
+          alt=""
+        />
+      </ModalHeader>
       <ModalBody>
-        <h3 className="confirm-modal__title">Delete Applicant</h3>
-        <p>{deleteMember.application_id}</p>
-        <p>{deleteMember.dob}</p>
-        <Button className="cancel" onClick={() => setDeleteModal(false)}>
-              Cancel
-            </Button>
-        <Button
-          className="del-btn"
-          onClick={() => deleteConfirmation(deleteId)}
-        >
-          Confirm
-        </Button>
+        <h3 className="del-modal__title">Are you sure to delete this?</h3>
+        <div className="confirm-modal__applicant--info">
+          <>
+            <div className="confirm-modal__applicant--flex">
+              <div className="confirm-modal__applicant--data">
+                <h5 className="confirm-modal__applicant--heading">Name</h5>
+              </div>
+              <div className="confirm-modal__applicant--value">
+                <p className="confirm-modal__applicant-desc">Firoz Ahmed</p>
+              </div>
+            </div>
+
+            <div className="confirm-modal__applicant--flex">
+              <div className="confirm-modal__applicant--data">
+                <h5 className="confirm-modal__applicant--heading">
+                  Application ID
+                </h5>
+              </div>
+              <div className="confirm-modal__applicant--value">
+                <p className="confirm-modal__applicant-desc">
+                  {deleteMember.application_id}
+                </p>
+              </div>
+            </div>
+            <div className="confirm-modal__applicant--flex">
+              <div className="confirm-modal__applicant--data">
+                <h5 className="confirm-modal__applicant--heading">
+                  Date of Birth
+                </h5>
+              </div>
+              <div className="confirm-modal__applicant--value">
+                <p className="confirm-modal__applicant-desc">
+                  {moment(deleteMember.dob).format("DD/MM/YYYY")}
+                </p>
+              </div>
+            </div>
+          </>
+        </div>
+
+        <div className="confirm-modal__btn">
+          <Button className="cancel" onClick={() => setDeleteModal(false)}>
+            Cancel
+          </Button>
+
+          <Button
+            className="confirm"
+            onClick={() => deleteConfirmation(deleteId)}
+          >
+            Delete
+          </Button>
+        </div>
       </ModalBody>
     </Modal>
   );

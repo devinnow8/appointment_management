@@ -2,11 +2,6 @@ import React, { useEffect } from "react";
 import { Col, Row } from "reactstrap";
 import Image from "next/image";
 
-const fakeMember = {
-  name: "dgdf",
-  application_id: "3456666",
-  id_number: "345",
-};
 function Applicants({
   userAppointmentDetails,
   selectedService,
@@ -16,14 +11,13 @@ function Applicants({
   useEffect(() => {
     if (members.length < 1) {
       members.push({
-        // name: "dgdf",
         application_id:
           userAppointmentDetails.appointmentDetails.application_id,
         id_number: userAppointmentDetails.selectedService.label,
       });
     }
   }, []);
-  console.log("====selectedService", selectedService);
+  console.log("====selectedService", selectedService, members);
   return (
     <Row>
       <Col xs={12} sm={12}>

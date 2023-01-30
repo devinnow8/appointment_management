@@ -40,9 +40,8 @@ export default () => {
   });
 
   const handleAddMember = (values) => {
-    console.log(familyMember.length, "familyMemberfamilyMember");
-    if (familyMember.length > 3) {
-      toast.success("family mamber ");
+    if (familyMember.length === 4) {
+      toast.warn("You can't add more than 4 members ");
     } else {
       setApplicantDetail(values);
       setFamilyMember([...familyMember, { ...values }]);
@@ -95,7 +94,7 @@ export default () => {
       time: arrayTime[slideToShow].time,
     }));
   }, [slideToShow, applicantAppointment.time]);
-  console.log(familyMember, "familyMemberfamilyMember==>");
+
   return (
     <>
       <Header
@@ -150,12 +149,12 @@ export default () => {
           modal={modal}
           modalToggle={modalToggle}
           applicantDetail={applicantDetail}
-          familyMember={familyMember}
           handleConfirm={handleConfirm}
           selectedService={selectedService}
           applicantAppointment={applicantAppointment}
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
+          members={members}
         />
       )}
 
