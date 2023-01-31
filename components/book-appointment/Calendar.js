@@ -164,6 +164,7 @@ const Calendar = ({
         <Col md="2">
           <Select
             options={countries}
+            isDisabled={true}
             className="location-select"
             name="location"
             classNamePrefix="react-select"
