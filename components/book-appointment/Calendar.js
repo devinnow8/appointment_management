@@ -16,12 +16,11 @@ const holidays = [
 const Calendar = ({
   setApplicantAppointment,
   centerList,
-  countriesCenterList,
   setCentersDetails,
   defaultCountry,
 }) => {
   const [isDateSelected, setDateSelected] = useState(false);
-  const [selectedCenter, setSelectedCenter] = useState(countriesCenterList[0]);
+  const [selectedCenter, setSelectedCenter] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedCountry, setSelectedCountry] = useState({
     label: defaultCountry,
@@ -38,10 +37,10 @@ const Calendar = ({
   };
 
   useEffect(() => {
-    // const filteredCenter = centerList.filter(
-    //   (center) => center?.centerName === selectedCenter?.label,
-    // );
-    // setCentersDetails(filteredCenter[0]);
+    const filteredCenter = centerList.filter(
+      (center) => center?.centerName === selectedCenter?.centerName,
+    );
+    setCentersDetails(filteredCenter[0]);
     setApplicantAppointment((prev) => ({
       ...prev,
       date: `${monthNames[selectedDate.getMonth()]}
@@ -128,11 +127,8 @@ const Calendar = ({
 
   const formatOptionLabel = (item) => {
     if (item.country === selectedCountry.label) {
-      return <>{item.label}</>;
+      return <>{item.centerName}</>;
     }
-    // else {
-    //   return "No Record Found";
-    // }
   };
 
   const getSundays = (date) => {
@@ -164,7 +160,7 @@ const Calendar = ({
         <Col md="2">
           <Select
             options={countries}
-            isDisabled={true}
+            // isDisabled={true}
             className="location-select"
             name="location"
             classNamePrefix="react-select"
@@ -182,7 +178,7 @@ const Calendar = ({
         <Col md="2">
           {selectedCountry !== "" && (
             <Select
-              options={centers}
+              options={centerList}
               className="location-select"
               name="location"
               classNamePrefix="react-select"
@@ -192,8 +188,12 @@ const Calendar = ({
                 setSelectedCenter(selected);
                 setApplicantAppointment((prev) => ({
                   ...prev,
-                  location: selected.label,
+                  location: selected.centerName,
                 }));
+                const filteredCenter = centerList.filter(
+                  (center) => center?.centerName === selected?.centerName,
+                );
+                setCentersDetails(filteredCenter[0]);
               }}
             />
           )}

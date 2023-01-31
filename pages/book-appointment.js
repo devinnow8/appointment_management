@@ -43,7 +43,6 @@ export default () => {
   const [deleteId, setDeleteId] = useState(false);
   const [familyMember, setFamilyMember] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
-  const [countriesCenterList, setCountriesCenterList] = useState([]);
   const [members, setMembers] = useState([]);
   const [centersDetails, setCentersDetails] = useState({});
   const [applicantAppointment, setApplicantAppointment] = useState({
@@ -57,6 +56,9 @@ export default () => {
     applicationDetails,
     "applicationDetailsapplicationDetails",
     memberDetails,
+    holidayList,
+    centerList,
+    centersDetails,
   );
 
   const handleAddMember = (values) => {
@@ -150,17 +152,7 @@ export default () => {
   useEffect(() => {
     Object.keys(centersDetails).length > 0 &&
       dispatch(holidayListFetchRequest(centersDetails?.centerId));
-  }, [centersDetails.centerId]);
-
-  useEffect(() => {
-    const updatedCenterList = centerList.map((centers) => {
-      return {
-        value: centers?.centerName,
-        label: centers?.centerName,
-      };
-    });
-    setCountriesCenterList(updatedCenterList);
-  }, [centerList]);
+  }, [centersDetails?.centerId]);
 
   return (
     <>
@@ -182,7 +174,6 @@ export default () => {
                 <Calendar
                   setApplicantAppointment={setApplicantAppointment}
                   applicantAppointment={applicantAppointment}
-                  countriesCenterList={countriesCenterList}
                   centerList={centerList}
                   setCentersDetails={setCentersDetails}
                   defaultCountry={applicationDetails.countryName}
