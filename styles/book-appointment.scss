@@ -27,33 +27,46 @@
       max-height: 114px;
       border-radius: 5px;
       padding: 10px 13px;
+      position: relative;
       @media only screen and (max-width: 576px) {
         width: auto;
         margin-bottom: 16px;
       }
       .applicant-details__card--flex {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        // display: flex;
+        // align-items: flex-start;
         .applicant-details__card--title {
           color: #023b70;
           font-weight: 500;
           font-size: 18px;
         }
-        .applicant-details__card--text {
-          color: #9b9b9b;
-          font-size: 12px;
-          margin-bottom: 0px;
+        .applicant-details__card--div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 6px 0px;
+          .applicant-details__card--text {
+            color: #9b9b9b;
+            font-size: 12px;
+            margin-bottom: 0px;
+            font-weight: 500;
+            width: 100%;
+          }
+          .applicant-details__card--id {
+            font-size: 12px;
+            margin-bottom: 0;
+            color: #000;
+            font-weight: 600;
+            width: 100%;
+          }
         }
-        .applicant-details__card--id {
-          font-size: 12px;
-          margin-bottom: 0;
-          color: #000000;
-          font-weight: 700;
-        }
+
         > img {
           margin-top: 4px;
           cursor: pointer;
+          position: absolute;
+          right: 10px;
+          top: 10px;
         }
       }
     }

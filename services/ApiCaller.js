@@ -1,14 +1,14 @@
-import customAxios from '../api';
+import customAxios from "../api";
 
-export const getDataApi = ({ path = 'no-path-provided', data = {} }) => {
+export const getDataApi = ({ path = "no-path-provided", data = {} }) => {
   try {
     return new Promise((resolve, reject) => {
       return customAxios
         .get(path, { data })
-        .then(response => {
+        .then((response) => {
           resolve(response);
         })
-        .catch(error => {
+        .catch((error) => {
           reject(error);
         });
     });
@@ -17,16 +17,15 @@ export const getDataApi = ({ path = 'no-path-provided', data = {} }) => {
   }
 };
 
-
-export const postDataApi = ({ path = 'no-path-provided', data = {} }) => {
+export const postDataApi = ({ path = "no-path-provided", data = {} }) => {
   try {
     return new Promise((resolve, reject) => {
       customAxios
         .post(path, data)
-        .then(response => {
+        .then((response) => {
           resolve(response);
         })
-        .catch(error => {
+        .catch((error) => {
           reject({ message: error.response?.data?.error || error.message });
         });
     });

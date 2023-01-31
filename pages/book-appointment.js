@@ -15,12 +15,20 @@ import { arrayTime } from "../constants/index";
 import { centerListFetchRequest } from "../redux/reducer/center-list";
 import { holidayListFetchRequest } from "../redux/reducer/holiday-list";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
+import {
+  applicationDetailsFetchRequest,
+  applicationDetailsFetchMemberSuccess,
+} from "../redux/reducer/application-detail";
 
 export default () => {
   const dispatch = useDispatch();
   const { userAppointmentDetails } = useSelector((state) => state.user);
   const { centerList } = useSelector((state) => state.centerList);
   const { holidayList } = useSelector((state) => state.holidayList);
+  const { applicationDetails, memberDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
+
   const slider = useRef();
   const {
     push,
@@ -35,7 +43,7 @@ export default () => {
   const [deleteId, setDeleteId] = useState(false);
   const [familyMember, setFamilyMember] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
-
+  const [countriesCenterList, setCountriesCenterList] = useState([]);
   const [members, setMembers] = useState([]);
   const [centersDetails, setCentersDetails] = useState({});
   const [applicantAppointment, setApplicantAppointment] = useState({
@@ -44,6 +52,13 @@ export default () => {
     location: "",
     amount: "",
   });
+
+  console.log(
+    applicationDetails,
+    "applicationDetailsapplicationDetails",
+    memberDetails,
+  );
+
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
       toast.warn("You can't add more than 4 members ");
@@ -60,13 +75,26 @@ export default () => {
   };
 
   const handleConfirm = () => {
-    setMembers([...members, { ...applicantDetail }]);
     setModal(false);
-    toast.success("Applicant Addedd Successfully");
+    const details = {
+      applicationId: applicantDetail.application_id,
+      dob: applicantDetail.dob,
+      serviceType: selectedService,
+    };
+    dispatch(
+      applicationDetailsFetchRequest(details, (success) => {
+        if (applicationDetails.countryName === success.data.countryName) {
+          dispatch(applicationDetailsFetchMemberSuccess(success.data));
+          setMembers([...members, { ...memberDetails }]);
+          toast.success("Applicant Addedd Successfully");
+        } else {
+          toast.warn("Member not same");
+        }
+      }),
+    );
   };
 
   const handleDeleteApplicant = (data, i) => {
-    console.log(data, "datadata==>");
     setDeleteMember(data);
     setDeleteModal(true);
     setDeleteId(i);
@@ -144,8 +172,7 @@ export default () => {
       <div className="applicant-details calendar-time">
         <Container>
           <Applicants
-            userAppointmentDetails={userAppointmentDetails}
-            selectedService={selectedService}
+            applicationDetails={applicationDetails}
             members={members}
             handleDeleteApplicant={handleDeleteApplicant}
           />
@@ -158,6 +185,7 @@ export default () => {
                   countriesCenterList={countriesCenterList}
                   centerList={centerList}
                   setCentersDetails={setCentersDetails}
+                  defaultCountry={applicationDetails.countryName}
                 />
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>

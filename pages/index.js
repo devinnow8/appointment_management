@@ -9,6 +9,11 @@ import Header from "../components/Header";
 import { Others, Visa } from "../components/home";
 import { serviceOptions } from "../constants/index";
 import { getUserAppointment } from "../redux/action/index";
+import {
+  applicationDetailsFetchRequest,
+  applicationDetailsFetchSuccess,
+} from "../redux/reducer/application-detail";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -21,10 +26,25 @@ export default function Home() {
       appointmentDetails: values,
     };
     dispatch(getUserAppointment(obj));
-    router.push({
-      pathname: "/book-appointment",
-      query: { selectedService: selectedService.label },
-    });
+
+    const details = {
+      applicationId: values.application_id,
+      dob: values.dob,
+      serviceType: selectedService.label,
+    };
+    dispatch(
+      applicationDetailsFetchRequest(details, (success) => {
+        dispatch(applicationDetailsFetchSuccess(success.data));
+        if (success.status === 200) {
+          router.push({
+            pathname: "/book-appointment",
+            query: { selectedService: selectedService.label },
+          });
+        } else {
+          toast.error("Something went wrong");
+        }
+      }),
+    );
   };
 
   return (

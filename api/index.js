@@ -1,18 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
-import { store } from '../redux/store';
+import { store } from "../redux/store";
 // const NEXT_APP_BASE_URL = 'https://ois-be.azurewebsites.net/admin/';
-const NEXT_APP_BASE_URL = 'https://1b12-103-68-20-78.in.ngrok.io/user/';
+const NEXT_APP_BASE_URL = "https://0709-103-68-20-78.in.ngrok.io/user/";
 
 const customAxios = axios.create({
   baseURL: `${NEXT_APP_BASE_URL}`,
   headers: {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  }
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
 });
 
-const requestHandler = request => {
+const requestHandler = (request) => {
   const accessToken = store?.getState().auth.userData.jwt;
   if (accessToken) {
     request.headers.Authorization = `Bearer ${accessToken}`;
@@ -20,14 +20,14 @@ const requestHandler = request => {
   return request;
 };
 
-const responseHandler = response => {
+const responseHandler = (response) => {
   if (response?.data?.status === 401) {
   }
 
   return response;
 };
 
-const errorHandler = error => {
+const errorHandler = (error) => {
   return Promise.reject(error);
 };
 
@@ -41,8 +41,8 @@ const errorHandler = error => {
 // );
 
 customAxios.interceptors.response.use(
-  response => responseHandler(response),
-  error => errorHandler(error)
+  (response) => responseHandler(response),
+  (error) => errorHandler(error),
 );
 
 // Step-4: Export the newly created Axios instance to be used in different locations.
