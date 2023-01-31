@@ -1,24 +1,32 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { Col, Container, FormGroup, Label, Row } from "reactstrap";
 import Header from "../components/Header";
 import { Others, Visa } from "../components/home";
-import { serviceOptions } from "../constants/index";
 import { getUserAppointment } from "../redux/action/index";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchSuccess,
 } from "../redux/reducer/application-detail";
+import { categoryServiceListFetchRequest } from "../redux/reducer/category-service";
 import { toast } from "react-toastify";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const { categoryServiceList } = useSelector(
+    (state) => state.categoryServiceList,
+  );
   const router = useRouter();
-  const [selectedService, setSelectedService] = useState(serviceOptions[0]);
+
+  const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
+  const [selectedService, setSelectedService] = useState({
+    value: "Visa",
+    label: "Visa",
+  });
 
   const handleContinue = (values) => {
     const obj = {
@@ -46,6 +54,24 @@ export default function Home() {
       }),
     );
   };
+
+  useEffect(() => {
+    dispatch(categoryServiceListFetchRequest());
+  }, []);
+
+  useEffect(() => {
+    const obtainedList = categoryServiceList.map((service) => {
+      return {
+        value:
+          service?.categoryName.charAt(0).toUpperCase() +
+          service?.categoryName.slice(1),
+        label:
+          service?.categoryName.charAt(0).toUpperCase() +
+          service?.categoryName.slice(1),
+      };
+    });
+    setCategoryServiceOptions(obtainedList);
+  }, []);
 
   return (
     <>
@@ -90,13 +116,13 @@ export default function Home() {
                       onChange={(selected) => {
                         setSelectedService(selected);
                       }}
-                      options={serviceOptions}
+                      options={categoryServiceOptions}
                       className="react-select-container"
                       classNamePrefix="react-select"
                     />
                   </FormGroup>
                   <Row>
-                    {selectedService.label == "Visa" ? (
+                    {selectedService?.label == "Visa" ? (
                       <Visa handleContinue={handleContinue} />
                     ) : (
                       <Others handleContinue={handleContinue} />
