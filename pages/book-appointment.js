@@ -88,7 +88,9 @@ export default () => {
         (success) => {
           if (applicationDetails.country === success.data.country) {
             setIsLoader(false);
-            dispatch(applicationDetailsFetchMemberSuccess(success.data));
+            const tempArray = [];
+            tempArray.push(success.data);
+            dispatch(applicationDetailsFetchMemberSuccess(tempArray));
             // dispatch(
             setMembers([...members, success.data]);
             // );
@@ -134,8 +136,8 @@ export default () => {
     const data = [...members];
     // data.splice(i,1)
     // setMembers(data);
-
-    // dispatch(applicationDetailsFetchMemberSuccess(memberDetailsData));
+    data.filter((member)=>member.id !== deleteMember.id)
+    dispatch(applicationDetailsFetchMemberSuccess(data));
     // dispatch(
     // );
     setDeleteModal(false);

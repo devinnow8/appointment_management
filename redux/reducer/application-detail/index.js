@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   applicationDetails: {},
-
   memberDetails: [],
 };
 
@@ -22,9 +21,7 @@ export const applicationDetailsSlice = createSlice({
       state.applicationDetails = action.payload;
     },
     applicationDetailsFetchMemberSuccess: (state, action) => {
-      let data = [];
-      data.push(...state.memberDetails, action.payload);
-      state.memberDetails = data;
+      state.memberDetails = action.payload;
     },
     applicationDetailsFetchFailure: (state) => {
       state.applicationDetails = [];
