@@ -44,7 +44,9 @@ const Visa = ({ handleAddMember }) => {
         )}
       </div>
       <div className="me-0 me-md-3 mb-md-0">
-        <Label for="exampleDate">Date of Birth</Label>
+        <Label for="exampleDate">
+          Date of Birth <span>(dd/mm/yyyy)</span>
+        </Label>
         <Input
           id="dob"
           name="dob"

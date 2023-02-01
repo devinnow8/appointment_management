@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import { Col, FormGroup, Label, Input } from "reactstrap";
 
-const Visa = ({ handleContinue }) => {
+const Visa = ({ handleContinue, isLoader }) => {
   const formik = useFormik({
     initialValues: {
       application_id: "",
@@ -52,7 +52,7 @@ const Visa = ({ handleContinue }) => {
       <Col lg={6} xl={6}>
         <div>
           <Label for="exampleDate">
-            Date of Birth
+            Date of Birth <span>(dd/mm/yyyy)</span>
             <span className="star">*</span>
           </Label>
           <Input
@@ -73,9 +73,13 @@ const Visa = ({ handleContinue }) => {
       </Col>
       <Col>
         <FormGroup className="text-md-start text-center ">
-          <div className="cont-btn" onClick={formik.handleSubmit}>
+          <button
+            className={isLoader ? "cont-btn-disabled cont-btn" : "cont-btn"}
+            onClick={formik.handleSubmit}
+            disabled={isLoader}
+          >
             Continue
-          </div>
+          </button>
         </FormGroup>
       </Col>
     </>

@@ -9,7 +9,9 @@ function* getApplicationDetailsRequest(action) {
       action.payload.requestBody,
     );
     action.payload.successCalback(response);
-  } catch (e) {}
+  } catch (e) {
+    action.payload.errorCallback(e);
+  }
 }
 
 function* applicationDetailsSaga() {

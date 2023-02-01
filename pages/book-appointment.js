@@ -19,6 +19,7 @@ import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
 } from "../redux/reducer/application-detail";
+import loaderImg from "../public/images/loader-new.gif";
 
 export default () => {
   const dispatch = useDispatch();
@@ -28,7 +29,6 @@ export default () => {
   const { applicationDetails, memberDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-
   const slider = useRef();
   const {
     push,
@@ -45,21 +45,13 @@ export default () => {
   const [deleteMember, setDeleteMember] = useState();
   const [members, setMembers] = useState([]);
   const [centersDetails, setCentersDetails] = useState({});
+  const [isLoader, setIsLoader] = useState(false);
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
     time: arrayTime[slideToShow].time,
     location: "",
     amount: "",
   });
-
-  console.log(
-    applicationDetails,
-    "applicationDetailsapplicationDetails",
-    memberDetails,
-    holidayList,
-    centerList,
-    centersDetails,
-  );
 
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
@@ -77,6 +69,7 @@ export default () => {
   };
 
   const handleConfirm = () => {
+    setIsLoader(true);
     setModal(false);
     const details = {
       applicationId: applicantDetail.application_id,
@@ -84,17 +77,31 @@ export default () => {
       serviceType: selectedService,
     };
     dispatch(
-      applicationDetailsFetchRequest(details, (success) => {
-        if (applicationDetails.countryName === success.data.countryName) {
-          dispatch(applicationDetailsFetchMemberSuccess(success.data));
-          setMembers([...members, { ...memberDetails }]);
-          toast.success("Applicant Addedd Successfully");
-        } else {
-          toast.warn("Member not same");
-        }
-      }),
+      applicationDetailsFetchRequest(
+        details,
+        (success) => {
+          if (applicationDetails.country === success.data.country) {
+            setIsLoader(false);
+            dispatch(applicationDetailsFetchMemberSuccess(success.data));
+            setMembers([...members, success.data]);
+            toast.success("Applicant Addedd Successfully");
+          } else {
+            toast.warn("Member not same");
+          }
+        },
+        (error) => {
+          setIsLoader(false);
+          toast.error(error.message);
+        },
+      ),
     );
   };
+
+  useEffect(() => {
+    const tempArray = [];
+    tempArray.push(applicationDetails);
+    setMembers(tempArray);
+  }, [applicationDetails]);
 
   const handleDeleteApplicant = (data, i) => {
     setDeleteMember(data);
@@ -176,7 +183,7 @@ export default () => {
                   applicantAppointment={applicantAppointment}
                   centerList={centerList}
                   setCentersDetails={setCentersDetails}
-                  defaultCountry={applicationDetails.countryName}
+                  defaultCountry={applicationDetails.country}
                 />
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>
@@ -204,6 +211,9 @@ export default () => {
             </Row>
           </div>
         </Container>
+      </div>
+      <div className={isLoader && "loader"}>
+        {isLoader && <img className="loader-img" src={loaderImg.src} alt="" />}
       </div>
       {modal && (
         <ConfirmModal

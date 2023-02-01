@@ -18,11 +18,11 @@ function Header() {
         <Navbar>
           <NavbarBrand href="/">
             <Image
-              src="/images/logo.png"
+              src="/images/logo.svg"
               className="header-img"
               alt=""
-              width={60}
-              height={60}
+              width={156}
+              height={56}
             />
           </NavbarBrand>
           <NavbarToggler onClick={navbarToggle} />

@@ -2,22 +2,7 @@ import React, { useEffect } from "react";
 import { Col, Row } from "reactstrap";
 import Image from "next/image";
 
-function Applicants({
-  applicationDetails,
-  members = [],
-  handleDeleteApplicant,
-}) {
-  useEffect(() => {
-    if (members.length < 1) {
-      members.push({
-        application_id: applicationDetails.applicationId,
-        country_name: applicationDetails.countryName,
-        name: applicationDetails.name,
-        service_type: applicationDetails.serviceType,
-      });
-    }
-  }, []);
-
+function Applicants({ members = [], handleDeleteApplicant }) {
   return (
     <Row>
       <Col xs={12} sm={12}>
@@ -42,7 +27,7 @@ function Applicants({
                             Application ID
                           </p>
                           <p className="applicant-details__card--id">
-                            {data?.application_id}
+                            {data?.applicationId}
                           </p>
                         </div>
                         <div className="applicant-details__card--div">
@@ -50,7 +35,7 @@ function Applicants({
                             Service Type
                           </p>
                           <p className="applicant-details__card--id">
-                            {data?.service_type}
+                            {data?.category}
                           </p>
                         </div>
                       </div>

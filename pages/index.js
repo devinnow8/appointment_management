@@ -8,6 +8,7 @@ import { Col, Container, FormGroup, Label, Row } from "reactstrap";
 import Header from "../components/Header";
 import { Others, Visa } from "../components/home";
 import { getUserAppointment } from "../redux/action/index";
+import loaderImg from "../public/images/loader-new.gif";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchSuccess,
@@ -27,8 +28,10 @@ export default function Home() {
     value: "Visa",
     label: "Visa",
   });
+  const [isLoader, setIsLoader] = useState(false);
 
   const handleContinue = (values) => {
+    setIsLoader(true);
     const obj = {
       selectedService: selectedService,
       appointmentDetails: values,
@@ -41,17 +44,23 @@ export default function Home() {
       serviceType: selectedService.label,
     };
     dispatch(
-      applicationDetailsFetchRequest(details, (success) => {
-        dispatch(applicationDetailsFetchSuccess(success.data));
-        if (success.status === 200) {
-          router.push({
-            pathname: "/book-appointment",
-            query: { selectedService: selectedService.label },
-          });
-        } else {
-          toast.error("Something went wrong");
-        }
-      }),
+      applicationDetailsFetchRequest(
+        details,
+        (success) => {
+          dispatch(applicationDetailsFetchSuccess(success.data));
+          if (success.status === 200) {
+            setIsLoader(false);
+            router.push({
+              pathname: "/book-appointment",
+              query: { selectedService: selectedService.label },
+            });
+          }
+        },
+        (error) => {
+          setIsLoader(false);
+          toast.error(error.message);
+        },
+      ),
     );
   };
 
@@ -123,20 +132,35 @@ export default function Home() {
                   </FormGroup>
                   <Row>
                     {selectedService?.label == "Visa" ? (
-                      <Visa handleContinue={handleContinue} />
+                      <Visa
+                        handleContinue={handleContinue}
+                        isLoader={isLoader}
+                      />
                     ) : (
-                      <Others handleContinue={handleContinue} />
+                      <Others
+                        handleContinue={handleContinue}
+                        isLoader={isLoader}
+                      />
                     )}
                   </Row>
                 </div>
                 <p className="appointment-form_desc">
-                  If you have not yet completed your application, then you can
-                  <a href="#"> click here </a> and complete it.
+                  If you have not completed your visa application, please{" "}
+                  <a href="https://portal.immigration.gov.ng/visa/freshVisa">
+                    visit
+                  </a>{" "}
+                  to complete your application, before returning to OIS to book
+                  your appointment.
                 </p>
               </div>
             </Col>
           </Row>
         </Container>
+        <div className={isLoader && "loader"}>
+          {isLoader && (
+            <img className="loader-img" src={loaderImg.src} alt="" />
+          )}
+        </div>
       </section>
     </>
   );

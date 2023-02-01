@@ -4,7 +4,7 @@ import { Col, Label, Input } from "reactstrap";
 import Select from "react-select";
 import { idType, countries } from "../../../constants/index";
 
-const Others = ({ handleContinue }) => {
+const Others = ({ handleContinue, isLoader }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -128,9 +128,13 @@ const Others = ({ handleContinue }) => {
       </Col>
       <Col>
         <div className="text-md-start text-center ">
-          <div className="cont-btn" onClick={formik.handleSubmit}>
+          <button
+            className={isLoader ? "cont-btn-disabled cont-btn" : "cont-btn"}
+            onClick={formik.handleSubmit}
+            disabled={isLoader}
+          >
             Continue
-          </div>
+          </button>
         </div>
       </Col>
     </>

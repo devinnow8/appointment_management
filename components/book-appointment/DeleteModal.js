@@ -33,7 +33,9 @@ function DeleteModal({
                 <h5 className="confirm-modal__applicant--heading">Name</h5>
               </div>
               <div className="confirm-modal__applicant--value">
-                <p className="confirm-modal__applicant-desc">Firoz Ahmed</p>
+                <p className="confirm-modal__applicant-desc">
+                  {deleteMember.name}
+                </p>
               </div>
             </div>
 
@@ -45,14 +47,14 @@ function DeleteModal({
               </div>
               <div className="confirm-modal__applicant--value">
                 <p className="confirm-modal__applicant-desc">
-                  {deleteMember.application_id}
+                  {deleteMember.applicationId}
                 </p>
               </div>
             </div>
             <div className="confirm-modal__applicant--flex">
               <div className="confirm-modal__applicant--data">
                 <h5 className="confirm-modal__applicant--heading">
-                  Date of Birth
+                  Date of Birth (dd/mm/yyyy)
                 </h5>
               </div>
               <div className="confirm-modal__applicant--value">

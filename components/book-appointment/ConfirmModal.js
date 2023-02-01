@@ -55,7 +55,7 @@ function ConfirmModal({
                           className="me-2"
                           alt=""
                         />{" "}
-                        Date
+                        Date <span>(dd/mm/yyyy)</span>
                       </h5>
                     </div>
                     <div className="confirm-modal__applicant--value">
@@ -100,6 +100,24 @@ function ConfirmModal({
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
                         <img
+                          src="/images/location.png"
+                          className="me-2"
+                          alt=""
+                        />{" "}
+                        Service Name
+                      </h5>
+                    </div>
+                    <div className="confirm-modal__applicant--value">
+                      <p className="confirm-modal__applicant-desc">
+                        {selectedService}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="confirm-modal__applicant--flex">
+                    <div className="confirm-modal__applicant--data">
+                      <h5 className="confirm-modal__applicant--heading">
+                        <img
                           src="/images/currency.png"
                           className="me-2"
                           alt=""
@@ -109,7 +127,7 @@ function ConfirmModal({
                     </div>
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">
-                        {applicantAppointment.amount || "350"} per Member
+                        {applicantAppointment.amount || "350"} / member
                       </p>
                     </div>
                   </div>
@@ -164,7 +182,7 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        Date of Birth
+                        Date of Birth <span>(dd/mm/yyyy)</span>
                       </h5>
                     </div>
                     <div className="confirm-modal__applicant--value">

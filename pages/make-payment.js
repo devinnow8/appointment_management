@@ -54,7 +54,9 @@ const MakePayment = () => {
                 </div>
                 <div className="make-payment__details--flex">
                   <div className="make-payment__details--heading">
-                    <h4>Appointment Date</h4>
+                    <h4>
+                      Appointment Date <span>(dd/mm/yyyy)</span>
+                    </h4>
                   </div>
                   <div className="make-payment__details--value">
                     <p>11/12/2022</p>

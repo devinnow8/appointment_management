@@ -12,9 +12,9 @@ export const applicationDetailsSlice = createSlice({
   reducers: {
     applicationDetailsFetchRequest: {
       reducer: (state) => {},
-      prepare: (requestBody, successCalback) => {
+      prepare: (requestBody, successCalback, errorCallback) => {
         return {
-          payload: { requestBody, successCalback },
+          payload: { requestBody, successCalback, errorCallback },
         };
       },
     },

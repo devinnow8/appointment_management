@@ -34,6 +34,9 @@
         font-size: 18px;
         color: #9b9b9b;
         margin-bottom: 0;
+        > span {
+          font-size: 13px;
+        }
       }
     }
     .make-payment__details--value {

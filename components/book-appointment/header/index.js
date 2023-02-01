@@ -12,8 +12,8 @@ const index = ({ handleAddMember, selectedService }) => {
             <Image
               className="inner-header__logo"
               width={60}
-              height={60}
-              src="/images/logo.png"
+              height={56}
+              src="/images/logo.svg"
               alt=""
             />
           </Col>
