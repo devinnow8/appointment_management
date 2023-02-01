@@ -19,11 +19,15 @@ import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
 } from "../redux/reducer/application-detail";
+// import { setMembers } from "../redux/action/index";
 import loaderImg from "../public/images/loader-new.gif";
 
 export default () => {
   const dispatch = useDispatch();
-  const { userAppointmentDetails } = useSelector((state) => state.user);
+  const {
+    userAppointmentDetails,
+    //  members
+  } = useSelector((state) => state.user);
   const { centerList } = useSelector((state) => state.centerList);
   const { holidayList } = useSelector((state) => state.holidayList);
   const { applicationDetails, memberDetails } = useSelector(
@@ -63,6 +67,8 @@ export default () => {
     }
   };
 
+  console.log(members, "membersmembersmembers", memberDetails);
+
   const modalToggle = () => {
     setModal(!modal);
     setConfirmCalendar(false);
@@ -83,7 +89,9 @@ export default () => {
           if (applicationDetails.country === success.data.country) {
             setIsLoader(false);
             dispatch(applicationDetailsFetchMemberSuccess(success.data));
+            // dispatch(
             setMembers([...members, success.data]);
+            // );
             toast.success("Applicant Addedd Successfully");
           } else {
             toast.warn("Member not same");
@@ -99,9 +107,18 @@ export default () => {
 
   useEffect(() => {
     const tempArray = [];
-    tempArray.push(applicationDetails);
-    setMembers(tempArray);
-  }, [applicationDetails]);
+    if (memberDetails.length === 0) {
+      tempArray.push(applicationDetails);
+      // dispatch(
+      setMembers(tempArray);
+      // );
+    } else {
+      tempArray.push(applicationDetails);
+      // dispatch(
+      setMembers([...tempArray, ...memberDetails]);
+      // );
+    }
+  }, [applicationDetails, memberDetails]);
 
   const handleDeleteApplicant = (data, i) => {
     setDeleteMember(data);
@@ -115,8 +132,12 @@ export default () => {
 
   const deleteConfirmation = (i) => {
     const data = [...members];
-    data.splice(i, 1);
-    setMembers(data);
+    // data.splice(i,1)
+    // setMembers(data);
+
+    // dispatch(applicationDetailsFetchMemberSuccess(memberDetailsData));
+    // dispatch(
+    // );
     setDeleteModal(false);
     toast.success("Applicant Deleted Successfully");
   };
