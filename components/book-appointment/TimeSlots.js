@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -29,6 +29,28 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
       setSlideToShow(currentSlide);
     },
   };
+
+  const scroll = useCallback(
+    (y) => {
+      if (y > 0) {
+        return slider?.current?.slickNext();
+      } else {
+        return slider?.current?.slickPrev();
+      }
+    },
+    [slider],
+  );
+
+  useEffect(() => {
+    if (document.getElementById("slider-scroll")) {
+      document
+        .getElementById("slider-scroll")
+        .addEventListener("wheel", (e) => {
+          scroll(e.deltaY);
+        });
+    }
+  }, [scroll]);
+
   return (
     <div className="appointment-calender__time">
       <div className="appointment-calender__time--flex">
@@ -38,7 +60,7 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
         >
           <Image src="/images/up-arrow.png" alt="" width={12} height={9} />
         </Button>
-        <div>
+        <div id="slider-scroll">
           <Slider ref={slider} {...settings}>
             {arrayTime.map((item, index) => {
               return (
