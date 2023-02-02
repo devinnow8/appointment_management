@@ -99,11 +99,7 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        <img
-                          src="/images/location.png"
-                          className="me-2"
-                          alt=""
-                        />{" "}
+                        <img src="/images/s-name.png" className="me-2" alt="" />{" "}
                         Service Name
                       </h5>
                     </div>
