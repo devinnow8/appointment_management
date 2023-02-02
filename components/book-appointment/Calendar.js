@@ -164,7 +164,7 @@ const Calendar = ({
             </label>
             <Select
               options={countries}
-              // isDisabled={true}
+              isDisabled={true}
               className="location-select"
               name="location"
               classNamePrefix="react-select"
@@ -187,7 +187,9 @@ const Calendar = ({
                 Center
               </label>
               <Select
-                options={centerList}
+                options={centerList.filter(
+                  (center) => center?.centerName !== null,
+                )}
                 className="location-select"
                 name="location"
                 classNamePrefix="react-select"

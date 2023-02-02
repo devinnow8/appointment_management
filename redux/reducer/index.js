@@ -5,6 +5,7 @@ import holidayList from "./holiday-list";
 import appointmentSchedule from "./appointment";
 import applicationDetails from "./application-detail";
 import categoryServiceList from "./category-service";
+import appointmentSlotList from "./appointment-slot";
 
 const rootReducer = combineReducers({
   user,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   appointmentSchedule,
   applicationDetails,
   categoryServiceList,
+  appointmentSlotList,
 });
 
 export default rootReducer;

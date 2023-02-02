@@ -14,6 +14,7 @@ import DeleteModal from "../components/book-appointment/DeleteModal";
 import { arrayTime } from "../constants/index";
 import { centerListFetchRequest } from "../redux/reducer/center-list";
 import { holidayListFetchRequest } from "../redux/reducer/holiday-list";
+import { appointmentSlotListFetchRequest } from "../redux/reducer/appointment-slot";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 import {
   applicationDetailsFetchRequest,
@@ -26,6 +27,10 @@ export default () => {
   const { userAppointmentDetails } = useSelector((state) => state.user);
   const { centerList } = useSelector((state) => state.centerList);
   const { holidayList } = useSelector((state) => state.holidayList);
+  const { appointmentSlotList } = useSelector(
+    (state) => state.appointmentSlotList,
+  );
+
   const { applicationDetails, memberDetails } = useSelector(
     (state) => state.applicationDetails,
   );
@@ -161,7 +166,10 @@ export default () => {
   useEffect(() => {
     Object.keys(centersDetails).length > 0 &&
       dispatch(holidayListFetchRequest(centersDetails?.centerId));
+    dispatch(appointmentSlotListFetchRequest(centersDetails?.centerId));
   }, [centersDetails?.centerId]);
+
+  console.log("centrecentre==>", appointmentSlotList);
 
   return (
     <>
