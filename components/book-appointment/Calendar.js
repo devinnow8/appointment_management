@@ -160,8 +160,8 @@ const Calendar = ({
     const obtainedArray = centerList.map((centre) => {
       return {
         ...centre,
-        value: centre.centerId,
-        label: centre.centerName,
+        value: centre?.centerId,
+        label: centre?.centerName,
       };
     });
     setNewCenterList(obtainedArray);

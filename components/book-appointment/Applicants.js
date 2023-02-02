@@ -30,14 +30,6 @@ function Applicants({ members = [], handleDeleteApplicant }) {
                             {data?.applicationId}
                           </p>
                         </div>
-                        <div className="applicant-details__card--div">
-                          <p className="applicant-details__card--text">
-                            Service Type
-                          </p>
-                          <p className="applicant-details__card--id">
-                            {data?.category}
-                          </p>
-                        </div>
                       </div>
                       {members.length > 1 && (
                         <Image
