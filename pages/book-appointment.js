@@ -19,15 +19,11 @@ import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
 } from "../redux/reducer/application-detail";
-// import { setMembers } from "../redux/action/index";
-import loaderImg from "../public/images/loader-new.gif";
+import Loader from "../components/loader";
 
 export default () => {
   const dispatch = useDispatch();
-  const {
-    userAppointmentDetails,
-    //  members
-  } = useSelector((state) => state.user);
+  const { userAppointmentDetails } = useSelector((state) => state.user);
   const { centerList } = useSelector((state) => state.centerList);
   const { holidayList } = useSelector((state) => state.holidayList);
   const { applicationDetails, memberDetails } = useSelector(
@@ -84,7 +80,10 @@ export default () => {
       applicationDetailsFetchRequest(
         details,
         (success) => {
-          if (applicationDetails.country === success.data.country) {
+          if (
+            applicationDetails.country === success.data.country &&
+            success.data.category === selectedService
+          ) {
             setIsLoader(false);
             dispatch(
               applicationDetailsFetchMemberSuccess([
@@ -167,14 +166,12 @@ export default () => {
   return (
     <>
       <Header
-        setApplicantDetail={setApplicantDetail}
         handleAddMember={handleAddMember}
         selectedService={selectedService}
       />
       <div className="applicant-details calendar-time">
         <Container>
           <Applicants
-            applicationDetails={applicationDetails}
             members={memberDetails}
             handleDeleteApplicant={handleDeleteApplicant}
           />
@@ -183,7 +180,6 @@ export default () => {
               <Col md={10} lg={10} xl={10}>
                 <Calendar
                   setApplicantAppointment={setApplicantAppointment}
-                  applicantAppointment={applicantAppointment}
                   centerList={centerList}
                   setCentersDetails={setCentersDetails}
                   defaultCountry={applicationDetails.country}
@@ -215,9 +211,7 @@ export default () => {
           </div>
         </Container>
       </div>
-      <div className={isLoader && "loader"}>
-        {isLoader && <img className="loader-img" src={loaderImg.src} alt="" />}
-      </div>
+      <Loader isLoader={isLoader} />
       {modal && (
         <ConfirmModal
           modal={modal}

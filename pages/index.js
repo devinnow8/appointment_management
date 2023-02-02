@@ -8,7 +8,6 @@ import { Col, Container, FormGroup, Label, Row } from "reactstrap";
 import Header from "../components/Header";
 import { Others, Visa } from "../components/home";
 import { getUserAppointment } from "../redux/action/index";
-import loaderImg from "../public/images/loader-new.gif";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchSuccess,
@@ -16,6 +15,7 @@ import {
 } from "../redux/reducer/application-detail";
 import { categoryServiceListFetchRequest } from "../redux/reducer/category-service";
 import { toast } from "react-toastify";
+import Loader from "../components/loader";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -48,16 +48,21 @@ export default function Home() {
       applicationDetailsFetchRequest(
         details,
         (success) => {
-          const tempArray = [];
-          tempArray.push(success.data);
-          dispatch(applicationDetailsFetchMemberSuccess(tempArray));
-          dispatch(applicationDetailsFetchSuccess(success.data));
-          if (success.status === 200) {
+          if (success.data.category !== selectedService.label) {
             setIsLoader(false);
-            router.push({
-              pathname: "/book-appointment",
-              query: { selectedService: selectedService.label },
-            });
+            toast.error("Application Id is not of selected service");
+          } else {
+            const tempArray = [];
+            tempArray.push(success.data);
+            dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+            dispatch(applicationDetailsFetchSuccess(success.data));
+            if (success.status === 200) {
+              setIsLoader(false);
+              router.push({
+                pathname: "/book-appointment",
+                query: { selectedService: selectedService.label },
+              });
+            }
           }
         },
         (error) => {
@@ -160,11 +165,7 @@ export default function Home() {
             </Col>
           </Row>
         </Container>
-        <div className={isLoader && "loader"}>
-          {isLoader && (
-            <img className="loader-img" src={loaderImg.src} alt="" />
-          )}
-        </div>
+        <Loader isLoader={isLoader} />
       </section>
     </>
   );
