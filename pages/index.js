@@ -12,6 +12,7 @@ import loaderImg from "../public/images/loader-new.gif";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchSuccess,
+  applicationDetailsFetchMemberSuccess,
 } from "../redux/reducer/application-detail";
 import { categoryServiceListFetchRequest } from "../redux/reducer/category-service";
 import { toast } from "react-toastify";
@@ -47,6 +48,9 @@ export default function Home() {
       applicationDetailsFetchRequest(
         details,
         (success) => {
+          const tempArray = [];
+          tempArray.push(success.data);
+          dispatch(applicationDetailsFetchMemberSuccess(tempArray));
           dispatch(applicationDetailsFetchSuccess(success.data));
           if (success.status === 200) {
             setIsLoader(false);

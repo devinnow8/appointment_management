@@ -67,8 +67,6 @@ export default () => {
     }
   };
 
-  console.log(members, "membersmembersmembers", memberDetails);
-
   const modalToggle = () => {
     setModal(!modal);
     setConfirmCalendar(false);
@@ -88,15 +86,16 @@ export default () => {
         (success) => {
           if (applicationDetails.country === success.data.country) {
             setIsLoader(false);
-            const tempArray = [];
-            tempArray.push(success.data);
-            dispatch(applicationDetailsFetchMemberSuccess(tempArray));
-            // dispatch(
-            setMembers([...members, success.data]);
-            // );
+            dispatch(
+              applicationDetailsFetchMemberSuccess([
+                ...memberDetails,
+                success.data,
+              ]),
+            );
             toast.success("Applicant Addedd Successfully");
           } else {
             toast.warn("Member not same");
+            setIsLoader(false);
           }
         },
         (error) => {
@@ -106,21 +105,6 @@ export default () => {
       ),
     );
   };
-
-  useEffect(() => {
-    const tempArray = [];
-    if (memberDetails.length === 0) {
-      tempArray.push(applicationDetails);
-      // dispatch(
-      setMembers(tempArray);
-      // );
-    } else {
-      tempArray.push(applicationDetails);
-      // dispatch(
-      setMembers([...tempArray, ...memberDetails]);
-      // );
-    }
-  }, [applicationDetails, memberDetails]);
 
   const handleDeleteApplicant = (data, i) => {
     setDeleteMember(data);
@@ -133,13 +117,9 @@ export default () => {
   };
 
   const deleteConfirmation = (i) => {
-    const data = [...members];
-    // data.splice(i,1)
-    // setMembers(data);
-    data.filter((member)=>member.id !== deleteMember.id)
+    const data = [...memberDetails];
+    data.splice(i, 1);
     dispatch(applicationDetailsFetchMemberSuccess(data));
-    // dispatch(
-    // );
     setDeleteModal(false);
     toast.success("Applicant Deleted Successfully");
   };
@@ -195,7 +175,7 @@ export default () => {
         <Container>
           <Applicants
             applicationDetails={applicationDetails}
-            members={members}
+            members={memberDetails}
             handleDeleteApplicant={handleDeleteApplicant}
           />
           <div className="appointment-calender">
