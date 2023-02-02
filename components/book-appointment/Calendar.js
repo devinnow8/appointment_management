@@ -17,14 +17,14 @@ const Calendar = ({
   setApplicantAppointment,
   centerList,
   setCentersDetails,
-  defaultCountry,
+  applicationDetails,
 }) => {
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCenter, setSelectedCenter] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedCountry, setSelectedCountry] = useState({
-    label: defaultCountry,
-    value: defaultCountry,
+    label: applicationDetails.country,
+    value: applicationDetails.country,
   });
 
   const handleSelectDate = (value) => {
@@ -212,7 +212,7 @@ const Calendar = ({
           <label htmlFor="" className="service-label p-0">
             Service
           </label>
-          <p className="service-name mb-0">BVN Enrolment</p>
+          <p className="service-name mb-0">{applicationDetails.category}</p>
         </div>
       </div>
 

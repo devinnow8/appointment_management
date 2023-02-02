@@ -182,7 +182,7 @@ export default () => {
                   setApplicantAppointment={setApplicantAppointment}
                   centerList={centerList}
                   setCentersDetails={setCentersDetails}
-                  defaultCountry={applicationDetails.country}
+                  applicationDetails={applicationDetails}
                 />
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>

@@ -91,7 +91,7 @@ function ConfirmModal({
                     </div>
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">
-                        {applicantAppointment.location || "London, UK"}
+                        {applicantAppointment.location || "-"}
                       </p>
                     </div>
                   </div>
