@@ -12,12 +12,12 @@ export const idType = [
 ];
 
 export const arrayTime = [
-  { id: 1, time: "09:00 AM" },
-  { id: 2, time: "10:00 AM" },
-  { id: 3, time: "11:00 AM" },
-  { id: 4, time: "12:00 PM" },
-  { id: 5, time: "13:00 PM" },
-  { id: 6, time: "14:00 PM" },
+  { id: 1, fromTime: "09:00 AM" },
+  { id: 2, fromTime: "10:00 AM" },
+  { id: 3, fromTime: "11:00 AM" },
+  { id: 4, fromTime: "12:00 PM" },
+  { id: 5, fromTime: "13:00 PM" },
+  { id: 6, fromTime: "14:00 PM" },
 ];
 
 export const DAYS_FORMAT = {
@@ -69,28 +69,28 @@ export const centers = [
   {
     country: "India",
     value: "New Delhi",
-    label: "New Delhi"
+    label: "New Delhi",
   },
   {
     country: "India",
     value: "Mumbai",
-  label: "Mumbai",
- },
+    label: "Mumbai",
+  },
   {
     country: "India",
     value: "Mohali",
-  label: "Mohali",
- },
+    label: "Mohali",
+  },
   {
     country: "Pakistan",
     value: "Islamabad",
-    label: "Islamabad"
+    label: "Islamabad",
   },
   {
     country: "Pakistan",
     value: "Karachi",
- label: "Karachi",
- },
+    label: "Karachi",
+  },
 ];
 
 export const countries = [

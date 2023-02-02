@@ -73,7 +73,7 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
                   }}
                 >
                   <p className={`time ${index === slideToShow && "active"}`}>
-                    {item.time}
+                    {item.fromTime}
                   </p>
                 </div>
               );

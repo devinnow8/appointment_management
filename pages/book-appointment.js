@@ -53,7 +53,10 @@ export default () => {
   const [isLoader, setIsLoader] = useState(false);
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
-    time: arrayTime[slideToShow].time,
+    time:
+      appointmentSlotList.length > 0
+        ? appointmentSlotList[slideToShow]?.fromTime
+        : arrayTime[slideToShow].fromTime,
     location: "",
     amount: "",
   });
@@ -155,7 +158,10 @@ export default () => {
   useEffect(() => {
     setApplicantAppointment((prev) => ({
       ...prev,
-      time: arrayTime[slideToShow].time,
+      time:
+        appointmentSlotList.length > 0
+          ? appointmentSlotList[slideToShow]?.fromTime
+          : arrayTime[slideToShow].fromTime,
     }));
   }, [slideToShow, applicantAppointment.time]);
 
@@ -168,8 +174,6 @@ export default () => {
       dispatch(holidayListFetchRequest(centersDetails?.centerId));
     dispatch(appointmentSlotListFetchRequest(centersDetails?.centerId));
   }, [centersDetails?.centerId]);
-
-  console.log("centrecentre==>", appointmentSlotList);
 
   return (
     <>
@@ -197,7 +201,12 @@ export default () => {
               <Col md={2} lg={2} xl={2}>
                 <TimeSlots
                   slider={slider}
-                  arrayTime={arrayTime}
+                  // arrayTime={arrayTime}
+                  arrayTime={
+                    appointmentSlotList.length > 0
+                      ? appointmentSlotList
+                      : arrayTime
+                  }
                   slideToShow={slideToShow}
                   setSlideToShow={setSlideToShow}
                 />

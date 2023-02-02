@@ -171,13 +171,11 @@ const Calendar = ({
               value={selectedCountry}
               onChange={(selected) => {
                 setSelectedCountry(selected);
-                // setSelectedCenter(selected);
                 setApplicantAppointment((prev) => ({
                   ...prev,
                   location: selected.label,
                 }));
               }}
-              // menuIsOpen={true}
             />
           </div>
 
