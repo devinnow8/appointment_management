@@ -19,6 +19,7 @@ const Calendar = ({
   setCentersDetails,
   applicationDetails,
 }) => {
+  const [newCenterList, setNewCenterList] = useState([]);
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCenter, setSelectedCenter] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -154,6 +155,17 @@ const Calendar = ({
   const weekends = getSundays();
 
   const selectedDaysToDisable = holidays;
+
+  useEffect(() => {
+    const obtainedArray = centerList.map((centre) => {
+      return {
+        ...centre,
+        value: centre.centerId,
+        label: centre.centerName,
+      };
+    });
+    setNewCenterList(obtainedArray);
+  });
   return (
     <>
       <div className="appointment-calender__center">
@@ -185,9 +197,7 @@ const Calendar = ({
                 Center
               </label>
               <Select
-                options={centerList.filter(
-                  (center) => center?.centerName !== null,
-                )}
+                options={newCenterList}
                 className="location-select"
                 name="location"
                 classNamePrefix="react-select"
