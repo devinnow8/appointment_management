@@ -48,7 +48,6 @@ export default () => {
   const [deleteId, setDeleteId] = useState(false);
   const [familyMember, setFamilyMember] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
-  const [members, setMembers] = useState([]);
   const [centersDetails, setCentersDetails] = useState({});
   const [isLoader, setIsLoader] = useState(false);
   const [applicantAppointment, setApplicantAppointment] = useState({
@@ -82,7 +81,7 @@ export default () => {
     const details = {
       applicationId: applicantDetail.application_id,
       dob: applicantDetail.dob,
-      serviceType: selectedService,
+      serviceType: applicationDetails.category,
     };
     dispatch(
       applicationDetailsFetchRequest(
@@ -90,7 +89,7 @@ export default () => {
         (success) => {
           if (
             applicationDetails.country === success.data.country &&
-            success.data.category === selectedService
+            success.data.category === applicationDetails.category
           ) {
             setIsLoader(false);
             dispatch(
@@ -179,7 +178,7 @@ export default () => {
     <>
       <Header
         handleAddMember={handleAddMember}
-        selectedService={selectedService}
+        selectedService={applicationDetails.category}
       />
       <div className="applicant-details calendar-time">
         <Container>
@@ -235,11 +234,11 @@ export default () => {
           modalToggle={modalToggle}
           applicantDetail={applicantDetail}
           handleConfirm={handleConfirm}
-          selectedService={selectedService}
+          selectedService={applicationDetails.category}
           applicantAppointment={applicantAppointment}
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
-          members={members}
+          members={memberDetails}
         />
       )}
 
