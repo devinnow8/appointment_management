@@ -156,49 +156,65 @@ const Calendar = ({
   const selectedDaysToDisable = holidays;
   return (
     <>
-      <Row>
-        <Col md="2">
-          <Select
-            options={countries}
-            isDisabled={true}
-            className="location-select"
-            name="location"
-            classNamePrefix="react-select"
-            value={selectedCountry}
-            onChange={(selected) => {
-              setSelectedCountry(selected);
-              // setSelectedCenter(selected);
-              setApplicantAppointment((prev) => ({
-                ...prev,
-                location: selected.label,
-              }));
-            }}
-          />
-        </Col>
-        <Col md="2">
-          {selectedCountry !== "" && (
+      <div className="appointment-calender__center">
+        <div className="appointment-calender__center--country">
+          <div>
+            <label htmlFor="" className="label">
+              Country
+            </label>
             <Select
-              options={centerList}
+              options={countries}
+              // isDisabled={true}
               className="location-select"
               name="location"
               classNamePrefix="react-select"
-              value={selectedCenter}
-              formatOptionLabel={formatOptionLabel}
+              value={selectedCountry}
               onChange={(selected) => {
-                setSelectedCenter(selected);
+                setSelectedCountry(selected);
+                // setSelectedCenter(selected);
                 setApplicantAppointment((prev) => ({
                   ...prev,
-                  location: selected.centerName,
+                  location: selected.label,
                 }));
-                const filteredCenter = centerList.filter(
-                  (center) => center?.centerName === selected?.centerName,
-                );
-                setCentersDetails(filteredCenter[0]);
               }}
+              // menuIsOpen={true}
             />
+          </div>
+
+          {selectedCountry !== "" && (
+            <div>
+              <label htmlFor="" className="label">
+                Center
+              </label>
+              <Select
+                options={centerList}
+                className="location-select"
+                name="location"
+                classNamePrefix="react-select"
+                value={selectedCenter}
+                formatOptionLabel={formatOptionLabel}
+                onChange={(selected) => {
+                  setSelectedCenter(selected);
+                  setApplicantAppointment((prev) => ({
+                    ...prev,
+                    location: selected.centerName,
+                  }));
+                  const filteredCenter = centerList.filter(
+                    (center) => center?.centerName === selected?.centerName,
+                  );
+                  setCentersDetails(filteredCenter[0]);
+                }}
+              />
+            </div>
           )}
-        </Col>
-      </Row>
+        </div>
+        <div>
+          <label htmlFor="" className="service-label p-0">
+            Service
+          </label>
+          <p className="service-name mb-0">BVN Enrolment</p>
+        </div>
+      </div>
 
       <DayPicker
         mode="range"
