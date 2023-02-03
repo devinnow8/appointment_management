@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   categoryServiceList: [],
+  isLoading: false
 };
 
 export const categoryServiceListSlice = createSlice({
@@ -9,13 +10,16 @@ export const categoryServiceListSlice = createSlice({
   initialState,
   reducers: {
     categoryServiceListFetchRequest: (state, action) => {
-      state.categoryServiceList.push(action.payload);
+      state.categoryServiceList = [];
+      state.isLoading = false
     },
     categoryServiceListFetchSuccess: (state, action) => {
       state.categoryServiceList = action.payload;
+      state.isLoading = false
     },
     categoryServiceListFetchFailure: (state) => {
       state.categoryServiceList = [];
+      state.isLoading = false
     },
   },
 });

@@ -23,7 +23,6 @@ import moment from "moment";
 
 export default () => {
   const dispatch = useDispatch();
-  const { userAppointmentDetails } = useSelector((state) => state.user);
   const { centerList } = useSelector((state) => state.centerList);
   const { holidayList } = useSelector((state) => state.holidayList);
   const { appointmentSlotList } = useSelector(
@@ -146,7 +145,7 @@ export default () => {
       application_id:
         applicationDetails.category === "Visa"
           ? applicationDetails.applicationId
-          : userAppointmentDetails.appointmentDetails?.id_number,
+          : applicationDetails.appointmentDetails?.id_number,
       center_id: selectedCenter?.centerId,
       appointment_date: applicantAppointment.date,
       appointment_time: applicantAppointment.time,

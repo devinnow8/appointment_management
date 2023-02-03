@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   applicationDetails: {},
   memberDetails: [],
+  isLoading: false
 };
 
 export const applicationDetailsSlice = createSlice({
@@ -10,21 +11,27 @@ export const applicationDetailsSlice = createSlice({
   initialState,
   reducers: {
     applicationDetailsFetchRequest: {
-      reducer: (state) => {},
-      prepare: (requestBody, successCalback, errorCallback) => {
+      reducer: (state) => {
+        state.isLoading = true
+      },
+      prepare: (requestBody, successCallback) => {
         return {
-          payload: { requestBody, successCalback, errorCallback },
+          payload: { requestBody, successCallback},
         };
       },
     },
     applicationDetailsFetchSuccess: (state, action) => {
       state.applicationDetails = action.payload;
+      state.isLoading = false
     },
     applicationDetailsFetchMemberSuccess: (state, action) => {
       state.memberDetails = action.payload;
+      state.isLoading = false
     },
     applicationDetailsFetchFailure: (state) => {
-      state.applicationDetails = [];
+      state.applicationDetails = {};
+      state.memberDetails = [];
+      state.isLoading = false
     },
   },
 });

@@ -12,8 +12,11 @@ function* getCategoryServiceListRequest() {
     if (status === 200) {
       yield put(categoryServiceListFetchSuccess(data));
     } else {
+      yield put(categoryServiceListFetchFailure())
     }
-  } catch (e) {}
+  } catch (e) {
+    yield put(categoryServiceListFetchFailure())
+  }
 }
 
 function* categoryServiceListSaga() {
