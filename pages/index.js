@@ -62,7 +62,6 @@ export default function Home() {
         },
         (error) => {
           setIsLoader(false);
-          console.log(error, "errror==>");
           if (error.message.includes("Network Error")) {
             toast.error(error.message);
           } else {
