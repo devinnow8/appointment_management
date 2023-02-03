@@ -10,10 +10,10 @@ export const appointmentSlotListSlice = createSlice({
   reducers: {
     appointmentSlotListFetchRequest: {
       reducer: (state) => {},
-      prepare: (requestBody) => {
+      prepare: (requestBody, successCallback) => {
         console.log(requestBody,'requestBodyrequestBody');
         return {
-          payload: { requestBody },
+          payload: { requestBody, successCallback },
         };
       },
     },

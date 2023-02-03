@@ -4,8 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import { Button } from "reactstrap";
+import Loader from "../loader";
 
-function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
+function TimeSlots({
+  slider,
+  arrayTime,
+  slideToShow,
+  setSlideToShow,
+  isLoader,
+}) {
   const settings = {
     dots: false,
     infinite: true,
@@ -62,22 +69,40 @@ function TimeSlots({ slider, arrayTime, slideToShow, setSlideToShow }) {
         </Button>
         <div id="slider-scroll">
           <Slider ref={slider} {...settings}>
-            {arrayTime.map((item, index) => {
-              return (
-                <div
-                  className="appointment-calender__time--box"
-                  key={item.id}
-                  onClick={() => {
-                    setSlideToShow(index);
-                    slider.current.slickGoTo(index);
-                  }}
-                >
-                  <p className={`time ${index === slideToShow && "active"}`}>
-                    {item.fromTime}
-                  </p>
-                </div>
-              );
-            })}
+            {isLoader ? (
+              <>
+                <Loader isLoader={isLoader} />
+              </>
+            ) : (
+              <>
+                {arrayTime.length > 0 ? (
+                  arrayTime.map((item, index) => {
+                    return (
+                      <div
+                        className="appointment-calender__time--box"
+                        key={item.id}
+                        onClick={() => {
+                          setSlideToShow(index);
+                          slider.current.slickGoTo(index);
+                        }}
+                      >
+                        <p
+                          className={`time ${
+                            index === slideToShow && "active"
+                          }`}
+                        >
+                          {item.fromTime}
+                        </p>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <>
+                    <div>No Slots Available</div>
+                  </>
+                )}
+              </>
+            )}
           </Slider>
         </div>
         <Button

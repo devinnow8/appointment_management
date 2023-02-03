@@ -11,6 +11,8 @@ function* getAppointmentSlotListRequest(action) {
       services.getAppointmentSlotList,
       action.payload.requestBody,
     );
+    action.payload.successCallback(response);
+    console.log(response, 'responseresponse');
     const { status, statusText, data = [] } = response || {};
     if (status === 200) {
       yield put(appointmentSlotListFetchSuccess(data));

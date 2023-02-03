@@ -57,7 +57,7 @@ export default () => {
     amount: "",
   });
 
-  console.log(selectedCenter, 'selectedCenter==>', arrayTime, 'arrayTime==>');
+  console.log(selectedCenter, 'selectedCenter==>', arrayTime, 'arrayTime==>', isLoader, 'isLoaderisLoader');
 
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
@@ -177,9 +177,13 @@ export default () => {
 
   useEffect(() => {
     if(selectedCenter != undefined){
+      setIsLoader(true)
       Object.keys(selectedCenter).length > 0 &&
         dispatch(holidayListFetchRequest(selectedCenter?.centerId));
-      dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
+      dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId, (success) => {
+        console.log(success.status, 'success===>>>');
+        setIsLoader(false)
+      }));
     }
   }, [centerList, selectedCenter?.centerId]);
 
@@ -226,6 +230,7 @@ export default () => {
                   arrayTime={arrayTime}
                   slideToShow={slideToShow}
                   setSlideToShow={setSlideToShow}
+          isLoader={isLoader}
                 />
               </Col>
               <Col sm={12} md={12} className="text-end">
