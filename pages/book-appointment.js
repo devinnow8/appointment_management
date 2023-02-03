@@ -57,7 +57,6 @@ export default () => {
     amount: "",
   });
 
-  console.log(selectedCenter, 'selectedCenter==>', arrayTime, 'arrayTime==>', isLoader, 'isLoaderisLoader');
 
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
@@ -181,7 +180,6 @@ export default () => {
       Object.keys(selectedCenter).length > 0 &&
         dispatch(holidayListFetchRequest(selectedCenter?.centerId));
       dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId, (success) => {
-        console.log(success.status, 'success===>>>');
         setIsLoader(false)
       }));
     }
@@ -197,11 +195,6 @@ export default () => {
     setArrayTime(filderdSlot)
    },[selectedDate,selectedCenter?.centerId, appointmentSlotList])
 
-   useEffect(()=>{
-    console.log(slideToShow, 'slideToShow==>', arrayTime, 'arrayTime==>', selectedDate);
-   }, [selectedDate])
-
-   console.log("applicantAppointment",arrayTime.length, applicantAppointment.time)
   return (
     <>
       <Header

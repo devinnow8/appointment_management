@@ -11,14 +11,12 @@ export const appointmentSlotListSlice = createSlice({
     appointmentSlotListFetchRequest: {
       reducer: (state) => {},
       prepare: (requestBody, successCallback) => {
-        console.log(requestBody,'requestBodyrequestBody');
         return {
           payload: { requestBody, successCallback },
         };
       },
     },
     appointmentSlotListFetchSuccess: (state, action) => {
-      console.log(action,'actionactionaction');
       state.appointmentSlotList = action.payload;
     },
     appointmentSlotListFetchFailure: (state) => {

@@ -17,7 +17,6 @@ function ConfirmModal({
 }) {
   const totalMember = members && members.length;
   const totalValue = 350 * totalMember;
-  console.log("applicantAppointment.date",applicantAppointment.time)
   return (
     <div>
       <Modal

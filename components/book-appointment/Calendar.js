@@ -35,7 +35,6 @@ const Calendar = ({
   });
 
   const handleSelectDate = (value) => {
-    console.log(value, 'valuevalue');
     setSelectedDate(value);
     setApplicantAppointment((prev) => ({
       ...prev,

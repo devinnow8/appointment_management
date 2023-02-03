@@ -12,7 +12,6 @@ function ApplicationForm({
   handleContinue,
   isLoader,
 }) {
-  console.log(selectedService,'selectedServiceselectedService');
   return (
     <Container>
       <Row className="appointment-form__row">

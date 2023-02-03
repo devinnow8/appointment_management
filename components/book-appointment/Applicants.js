@@ -12,10 +12,6 @@ function Applicants({ members = [], handleDeleteApplicant }) {
             {members &&
               members.length > 0 &&
               members.map((data, index) => {
-                console.log(
-                  data?.name?.length,
-                  "data?.name?.lengthdata?.name?.length",
-                );
                 return (
                   <>
                     <div
