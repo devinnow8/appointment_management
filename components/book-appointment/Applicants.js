@@ -11,39 +11,47 @@ function Applicants({ members = [], handleDeleteApplicant }) {
           <>
             {members &&
               members.length > 0 &&
-              members.map((data, index) => (
-                <>
-                  <div
-                    className="applicant-details__card me-0 me-sm-3"
-                    key={index}
-                  >
-                    <div className="applicant-details__card--flex">
-                      <div className="applicant-details__card--info">
-                        <h4 className="applicant-details__card--title">
-                          {data?.name}
-                        </h4>
-                        <div className="applicant-details__card--div">
-                          <p className="applicant-details__card--text">
-                            Application ID
-                          </p>
-                          <p className="applicant-details__card--id">
-                            {data?.applicationId}
-                          </p>
+              members.map((data, index) => {
+                console.log(
+                  data?.name?.length,
+                  "data?.name?.lengthdata?.name?.length",
+                );
+                return (
+                  <>
+                    <div
+                      className={`applicant-details__card me-0 me-sm-3 ${
+                        data?.name?.length < 15 ? "width15" : "width-greater"
+                      }`}
+                      key={index}
+                    >
+                      <div className="applicant-details__card--flex">
+                        <div className="applicant-details__card--info">
+                          <h4 className="applicant-details__card--title">
+                            {data?.name}
+                          </h4>
+                          <div className="applicant-details__card--div">
+                            <p className="applicant-details__card--text">
+                              Application ID
+                            </p>
+                            <p className="applicant-details__card--id">
+                              {data?.applicationId}
+                            </p>
+                          </div>
                         </div>
+                        {members.length > 1 && (
+                          <Image
+                            src="/images/delete.png"
+                            alt=""
+                            width={14}
+                            height={14}
+                            onClick={() => handleDeleteApplicant(data, index)}
+                          />
+                        )}
                       </div>
-                      {members.length > 1 && (
-                        <Image
-                          src="/images/delete.png"
-                          alt=""
-                          width={14}
-                          height={14}
-                          onClick={() => handleDeleteApplicant(data, index)}
-                        />
-                      )}
                     </div>
-                  </div>
-                </>
-              ))}
+                  </>
+                );
+              })}
           </>
         </div>
       </Col>

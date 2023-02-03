@@ -23,11 +23,16 @@
     }
     .applicant-details__card {
       border: 1px solid $primary-color;
-      width: 204px;
       max-height: 114px;
       border-radius: 5px;
       padding: 10px 13px;
       position: relative;
+      &.width15 {
+        width: 204px;
+      }
+      &.width-greater {
+        width: 260px;
+      }
       @media only screen and (max-width: 576px) {
         width: auto;
         margin-bottom: 16px;
@@ -102,7 +107,7 @@
           border: none;
           font-weight: 500;
           font-size: 14px;
-          line-height: 26px;
+          line-height: 0px;
           margin-right: 20px;
           // width: 140px;
           .react-select__control {
