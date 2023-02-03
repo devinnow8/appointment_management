@@ -165,7 +165,8 @@ const Calendar = ({
       };
     });
     setNewCenterList(obtainedArray);
-  });
+    setSelectedCenter(obtainedArray[0])
+  },[]);
   return (
     <>
       <div className="appointment-calender__center">

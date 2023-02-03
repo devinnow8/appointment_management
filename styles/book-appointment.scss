@@ -125,6 +125,7 @@
               line-height: 26px;
               margin: 0;
               color: #f1651c;
+              text-transform: capitalize;
             }
             .react-select__indicator-separator {
               width: 0px;
@@ -148,6 +149,7 @@
             .react-select__option {
               cursor: pointer;
               color: #555;
+              text-transform: capitalize;
               &.react-select__option--is-focused {
                 background-color: rgb(230, 245, 255);
                 color: #555;
