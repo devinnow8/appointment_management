@@ -22,9 +22,6 @@ const Calendar = ({
   selectedDate,
   setSelectedDate
 }) => {
-  const { appointmentSlotList } = useSelector(
-    (state) => state.appointmentSlotList,
-  );
   const [newCenterList, setNewCenterList] = useState([]);
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
@@ -168,7 +165,7 @@ const Calendar = ({
     });
     setNewCenterList(obtainedArray);
     setSelectedCenter(obtainedArray[0]);
-  }, [applicationDetails, appointmentSlotList]);
+  }, [applicationDetails, centerList]);
 
   return (
     <>
