@@ -169,7 +169,7 @@ export default () => {
       ...prev,
       time: arrayTime[slideToShow]?.fromTime,
     }));
-  }, [slideToShow, applicantAppointment.time]);
+  }, [slideToShow, arrayTime]);
 
   useEffect(() => {
     dispatch(centerListFetchRequest());
@@ -197,7 +197,11 @@ export default () => {
     setArrayTime(filderdSlot)
    },[selectedDate,selectedCenter?.centerId, appointmentSlotList])
 
-   console.log(slideToShow, 'slideToShow==>', arrayTime, 'arrayTime==>');
+   useEffect(()=>{
+    console.log(slideToShow, 'slideToShow==>', arrayTime, 'arrayTime==>', selectedDate);
+   }, [selectedDate])
+
+   console.log("applicantAppointment",arrayTime.length, applicantAppointment.time)
   return (
     <>
       <Header
@@ -230,7 +234,7 @@ export default () => {
                   arrayTime={arrayTime}
                   slideToShow={slideToShow}
                   setSlideToShow={setSlideToShow}
-          isLoader={isLoader}
+                  isLoader={isLoader}
                 />
               </Col>
               <Col sm={12} md={12} className="text-end">
@@ -241,7 +245,7 @@ export default () => {
                   >
                     Cancel
                   </Button>
-                  <Button className="continue" onClick={handleAppointment}>
+                  <Button className="continue" onClick={handleAppointment} disabled ={!applicantAppointment.time?.length }>
                     Continue
                   </Button>
                 </div>
