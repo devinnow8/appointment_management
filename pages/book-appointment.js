@@ -49,14 +49,13 @@ export default () => {
   const [isLoader, setIsLoader] = useState(false);
   const [selectedCenter, setSelectedCenter] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [arrayTime,setArrayTime]= useState([])
+  const [arrayTime, setArrayTime] = useState([]);
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
     time: "",
     location: "",
     amount: "",
   });
-
 
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
@@ -137,20 +136,24 @@ export default () => {
     setConfirmCalendar(true);
   };
 
+  console.log(
+    applicationDetails,
+    "applicationDetailsapplicationDetails",
+    applicantAppointment,
+  );
   const handlePaymentProceed = () => {
     const details = {
       application_id:
-        selectedService === "Visa"
-          ? userAppointmentDetails.appointmentDetails?.application_id
+        applicationDetails.category === "Visa"
+          ? applicationDetails.applicationId
           : userAppointmentDetails.appointmentDetails?.id_number,
-      // center_id: centersDetails?.centerId,
-      appointment_date: "",
+      center_id: selectedCenter?.centerId,
+      appointment_date: applicantAppointment.date,
       appointment_time: applicantAppointment.time,
-      applicant_fullname:
-        userAppointmentDetails.appointmentDetails?.name || "Chris",
-      category: "",
-      service_type: selectedService,
-      // status: centersDetails?.status,
+      applicant_fullname: applicationDetails.name || "Chris",
+      category: applicationDetails.category,
+      service_type: applicationDetails.category,
+      status: selectedCenter?.status,
     };
     dispatch(appointmentScheduleFetchRequest(details));
     push("/make-payment");
@@ -168,27 +171,29 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    if(selectedCenter != undefined){
-      setIsLoader(true)
+    if (selectedCenter != undefined) {
+      setIsLoader(true);
       Object.keys(selectedCenter).length > 0 &&
         dispatch(holidayListFetchRequest(selectedCenter?.centerId));
-      dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId, (success) => {
-        if(success.status === 200) {
-          setIsLoader(false)
-        }
-      }));
+      dispatch(
+        appointmentSlotListFetchRequest(selectedCenter?.centerId, (success) => {
+          if (success.status === 200) {
+            setIsLoader(false);
+          }
+        }),
+      );
     }
   }, [centerList, selectedCenter?.centerId]);
 
-  useEffect(()=>{
-    let day = moment(selectedDate).format('dddd')
-    let filderdSlot = appointmentSlotList.filter((item)=> { 
-      if(item.day === day && item.centerId === selectedCenter?.centerId){
-        return item
+  useEffect(() => {
+    let day = moment(selectedDate).format("dddd");
+    let filderdSlot = appointmentSlotList.filter((item) => {
+      if (item.day === day && item.centerId === selectedCenter?.centerId) {
+        return item;
       }
-      })
-    setArrayTime(filderdSlot)
-   },[selectedDate,selectedCenter?.centerId, appointmentSlotList])
+    });
+    setArrayTime(filderdSlot);
+  }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
 
   return (
     <>
@@ -233,7 +238,11 @@ export default () => {
                   >
                     Cancel
                   </Button>
-                  <Button className="continue" onClick={handleAppointment} disabled ={!applicantAppointment.time?.length }>
+                  <Button
+                    className="continue"
+                    onClick={handleAppointment}
+                    disabled={!applicantAppointment.time?.length}
+                  >
                     Continue
                   </Button>
                 </div>
