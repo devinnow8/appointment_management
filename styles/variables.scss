@@ -123,6 +123,14 @@ $laptop: 1280px;
               font-weight: 500;
               font-size: 15px;
               margin-bottom: 0;
+              display: flex;
+              align-items: center;
+              .img-box {
+                width: 16%;
+                .curr-img {
+                  margin-left: 4px;
+                }
+              }
               @media (max-width: $xxLDesktop) {
                 font-size: 14px;
               }
@@ -152,6 +160,9 @@ $laptop: 1280px;
   .confirm-modal__btn {
     text-align: center;
     margin-top: 30px;
+    @media (max-height: 660px) {
+      margin-top: 18px;
+    }
     @media only screen and (max-width: 576px) {
       margin: 20px;
     }
