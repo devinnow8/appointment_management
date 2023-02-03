@@ -45,7 +45,7 @@ export default function Home() {
         (success) => {
           if (success.data.category !== selectedService.label) {
             setIsLoader(false);
-            toast.error("Application Id is not of selected service");
+            toast.error("Application not found");
           } else {
             const tempArray = [];
             tempArray.push(success.data);
@@ -62,7 +62,11 @@ export default function Home() {
         },
         (error) => {
           setIsLoader(false);
-          toast.error(error.message);
+          if (error.message.includes("Network Error")) {
+            toast.error(error.message);
+          } else {
+            toast.error("Application not found");
+          }
         },
       ),
     );

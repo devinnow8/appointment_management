@@ -48,7 +48,7 @@ const Calendar = ({
       ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
       location: selectedCenter?.label,
     }));
-  }, []);
+  }, [centerList]);
 
   const isAvailableDate = (availableDatesList, day) => {
     return availableDatesList.includes(day.getDate());
@@ -165,8 +165,8 @@ const Calendar = ({
       };
     });
     setNewCenterList(obtainedArray);
-    setSelectedCenter(obtainedArray[0])
-  },[]);
+    setSelectedCenter(obtainedArray[0]);
+  }, []);
   return (
     <>
       <div className="appointment-calender__center">

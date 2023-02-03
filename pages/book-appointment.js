@@ -100,13 +100,17 @@ export default () => {
             );
             toast.success("Applicant Addedd Successfully");
           } else {
-            toast.warn("Member not same");
+            toast.warn("Application not found");
             setIsLoader(false);
           }
         },
         (error) => {
           setIsLoader(false);
-          toast.error(error.message);
+          if (error.message.includes("Network Error")) {
+            toast.error(error.message);
+          } else {
+            toast.error("Application not found");
+          }
         },
       ),
     );
