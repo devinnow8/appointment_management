@@ -18,7 +18,7 @@ function Header() {
         <Navbar>
           <NavbarBrand href="/">
             <Image
-              src="/images/logo.svg"
+              src="/images/logo.png"
               className="header-img"
               alt=""
               width={156}

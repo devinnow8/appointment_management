@@ -126,9 +126,9 @@ $laptop: 1280px;
               display: flex;
               align-items: center;
               .img-box {
-                width: 16%;
+                width: 17%;
                 .curr-img {
-                  margin-left: 4px;
+                  margin-left: 6px;
                 }
               }
               @media (max-width: $xxLDesktop) {

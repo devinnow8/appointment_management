@@ -24,6 +24,8 @@ $secondary-color: #023b72;
   &:hover {
     background: $primary-color;
     color: white;
+    opacity: 0.85;
+    transition: 0.4s ease-in-out all;
   }
   @media (max-width: $xxLDesktop) {
     font-size: 14px;

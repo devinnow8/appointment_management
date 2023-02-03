@@ -126,18 +126,22 @@
           width: 100%;
           top: 84%;
           border: 1px solid #b1b1b1;
-          .react-select__option {
-            cursor: pointer;
-            color: #555;
-            &.react-select__option--is-focused {
-              background-color: rgb(230, 245, 255);
+          .react-select__menu-list {
+            padding: 0;
+            .react-select__option {
+              cursor: pointer;
               color: #555;
-            }
-            &.css-tr4s17-option {
-              background-color: $primary-color;
-              color: white;
+              &.react-select__option--is-focused {
+                background-color: rgb(230, 245, 255);
+                color: #555;
+              }
+              &.css-tr4s17-option {
+                background-color: $primary-color;
+                color: white;
+              }
             }
           }
+          
         }
       }
       .appointment-form_desc {
