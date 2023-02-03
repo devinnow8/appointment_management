@@ -4,6 +4,7 @@ import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
 import Select from "react-select";
 import { DAYS_FORMAT, monthNames, centers, countries } from "../../constants";
+import { useSelector } from "react-redux";
 
 const holidays = [
   new Date(2023, 1, 18),
@@ -21,6 +22,9 @@ const Calendar = ({
   selectedDate,
   setSelectedDate
 }) => {
+  const { appointmentSlotList } = useSelector(
+    (state) => state.appointmentSlotList,
+  );
   const [newCenterList, setNewCenterList] = useState([]);
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
@@ -164,7 +168,7 @@ const Calendar = ({
     });
     setNewCenterList(obtainedArray);
     setSelectedCenter(obtainedArray[0]);
-  }, [applicationDetails]);
+  }, [applicationDetails, appointmentSlotList]);
 
   return (
     <>
