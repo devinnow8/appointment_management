@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import moment from "moment";
+import Loader from "../loader";
 
 function ConfirmModal({
   modal,
@@ -12,6 +13,7 @@ function ConfirmModal({
   confirmCalendar,
   handlePaymentProceed,
   members,
+  isLoader
 }) {
   const totalMember = members && members.length;
   const totalValue = 350 * totalMember;
@@ -268,6 +270,7 @@ function ConfirmModal({
             ) : (
               <Button className="confirm" onClick={handleConfirm}>
                 Confirm
+              <Loader isLoader={isLoader} />
               </Button>
             )}
           </div>

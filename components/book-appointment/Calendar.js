@@ -5,6 +5,7 @@ import moment from "moment";
 import Select from "react-select";
 import { DAYS_FORMAT, monthNames, centers, countries } from "../../constants";
 import { Col, Row } from "reactstrap";
+import { useDispatch, useSelector } from "react-redux";
 
 const holidays = [
   new Date(2023, 1, 18),
@@ -18,37 +19,40 @@ const Calendar = ({
   centerList,
   setCentersDetails,
   applicationDetails,
+  selectedCenter,
+  setSelectedCenter,
+  selectedDate,
+  setSelectedDate
 }) => {
+  const { appointmentSlotList } = useSelector(
+    (state) => state.appointmentSlotList,
+  );
   const [newCenterList, setNewCenterList] = useState([]);
   const [isDateSelected, setDateSelected] = useState(false);
-  const [selectedCenter, setSelectedCenter] = useState();
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedCountry, setSelectedCountry] = useState({
     label: applicationDetails.country,
     value: applicationDetails.country,
   });
 
   const handleSelectDate = (value) => {
+    console.log(value, 'valuevalue');
     setSelectedDate(value);
-    setApplicantAppointment({
+    setApplicantAppointment((prev) => ({
+      ...prev,
       date: `${monthNames[value.getMonth()]}
       ${value.getDate()}, ${value.getFullYear()}`,
-    });
+    }));
     setDateSelected(true);
   };
 
   useEffect(() => {
-    const filteredCenter = centerList.filter(
-      (center) => center?.centerName === selectedCenter?.centerName,
-    );
-    setCentersDetails(filteredCenter[0]);
     setApplicantAppointment((prev) => ({
       ...prev,
       date: `${monthNames[selectedDate.getMonth()]}
       ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
       location: selectedCenter?.label,
     }));
-  }, [centerList]);
+  }, [centerList, applicationDetails]);
 
   const isAvailableDate = (availableDatesList, day) => {
     return availableDatesList.includes(day.getDate());
@@ -157,7 +161,8 @@ const Calendar = ({
   const selectedDaysToDisable = holidays;
 
   useEffect(() => {
-    const obtainedArray = centerList.map((centre) => {
+    const filteredArray = centerList.filter((centre)=>selectedCountry.label === centre.country)
+    const obtainedArray = filteredArray.map((centre) => {
       return {
         ...centre,
         value: centre?.centerId,
@@ -166,7 +171,8 @@ const Calendar = ({
     });
     setNewCenterList(obtainedArray);
     setSelectedCenter(obtainedArray[0]);
-  }, []);
+  }, [applicationDetails]);
+
   return (
     <>
       <div className="appointment-calender__center">
@@ -184,10 +190,10 @@ const Calendar = ({
               value={selectedCountry}
               onChange={(selected) => {
                 setSelectedCountry(selected);
-                setApplicantAppointment((prev) => ({
-                  ...prev,
-                  location: selected.label,
-                }));
+                // setApplicantAppointment((prev) => ({
+                //   ...prev,
+                //   location: selected.label,
+                // }));
               }}
             />
           </div>
@@ -210,10 +216,10 @@ const Calendar = ({
                     ...prev,
                     location: selected.centerName,
                   }));
-                  const filteredCenter = centerList.filter(
-                    (center) => center?.centerName === selected?.centerName,
-                  );
-                  setCentersDetails(filteredCenter[0]);
+                  // const filteredCenter = centerList.filter(
+                  //   (center) => center?.centerName === selected?.centerName,
+                  // );
+                  // setCentersDetails(filteredCenter[0]);
                 }}
               />
             </div>

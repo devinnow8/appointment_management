@@ -11,7 +11,6 @@ import {
 } from "../redux/reducer/application-detail";
 import { categoryServiceListFetchRequest } from "../redux/reducer/category-service";
 import { toast } from "react-toastify";
-import Loader from "../components/loader";
 import ApplicationForm from "../components/home/application-form";
 
 export default function Home() {
@@ -21,10 +20,7 @@ export default function Home() {
   );
   const router = useRouter();
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
-  const [selectedService, setSelectedService] = useState({
-    value: "Visa",
-    label: "Visa",
-  });
+  const [selectedService, setSelectedService] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
 
   const handleContinue = (values) => {
@@ -52,11 +48,11 @@ export default function Home() {
             dispatch(applicationDetailsFetchMemberSuccess(tempArray));
             dispatch(applicationDetailsFetchSuccess(success.data));
             if (success.status === 200) {
-              setIsLoader(false);
               router.push({
                 pathname: "/book-appointment",
                 query: { selectedService: selectedService.label },
               });
+              setIsLoader(false);
             }
           }
         },
@@ -74,9 +70,6 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(categoryServiceListFetchRequest());
-  }, []);
-
-  useEffect(() => {
     const obtainedList = categoryServiceList.map((service) => {
       return {
         value:
@@ -88,6 +81,7 @@ export default function Home() {
       };
     });
     setCategoryServiceOptions(obtainedList);
+    setSelectedService(obtainedList[0])
   }, []);
 
   return (
@@ -107,7 +101,6 @@ export default function Home() {
           handleContinue={handleContinue}
           isLoader={isLoader}
         />
-        <Loader isLoader={isLoader} />
       </section>
     </>
   );

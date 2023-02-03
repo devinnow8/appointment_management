@@ -20,9 +20,9 @@ const index = ({ handleAddMember, selectedService }) => {
           <Col md={11} lg={11} xl={11}>
             <div className="inner-header__member">
               {selectedService === "Visa" ? (
-                <Visa handleAddMember={handleAddMember} />
+                <Visa handleAddMember={handleAddMember}/>
               ) : (
-                <Others handleAddMember={handleAddMember} />
+                <Others handleAddMember={handleAddMember}/>
               )}
             </div>
           </Col>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Col, FormGroup, Label, Input } from "reactstrap";
+import Loader from "../../loader";
 
 const Visa = ({ handleContinue, isLoader }) => {
   const formik = useFormik({
@@ -79,6 +80,7 @@ const Visa = ({ handleContinue, isLoader }) => {
             disabled={isLoader}
           >
             Continue
+            <Loader isLoader={isLoader} />
           </button>
         </FormGroup>
       </Col>

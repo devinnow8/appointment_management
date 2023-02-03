@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { Col, Label, Input } from "reactstrap";
 import Select from "react-select";
 import { idType, countries } from "../../../constants/index";
+import Loader from "../../loader";
 
 const Others = ({ handleContinue, isLoader }) => {
   const formik = useFormik({
@@ -134,6 +135,7 @@ const Others = ({ handleContinue, isLoader }) => {
             disabled={isLoader}
           >
             Continue
+            <Loader isLoader={isLoader} />
           </button>
         </div>
       </Col>

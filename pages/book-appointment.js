@@ -11,7 +11,6 @@ import {
   TimeSlots,
 } from "../components/book-appointment";
 import DeleteModal from "../components/book-appointment/DeleteModal";
-import { arrayTime } from "../constants/index";
 import { centerListFetchRequest } from "../redux/reducer/center-list";
 import { holidayListFetchRequest } from "../redux/reducer/holiday-list";
 import { appointmentSlotListFetchRequest } from "../redux/reducer/appointment-slot";
@@ -20,7 +19,7 @@ import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
 } from "../redux/reducer/application-detail";
-import Loader from "../components/loader";
+import moment from "moment";
 
 export default () => {
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ export default () => {
   const { appointmentSlotList } = useSelector(
     (state) => state.appointmentSlotList,
   );
-
   const { applicationDetails, memberDetails } = useSelector(
     (state) => state.applicationDetails,
   );
@@ -48,17 +46,18 @@ export default () => {
   const [deleteId, setDeleteId] = useState(false);
   const [familyMember, setFamilyMember] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
-  const [centersDetails, setCentersDetails] = useState({});
   const [isLoader, setIsLoader] = useState(false);
+  const [selectedCenter, setSelectedCenter] = useState();
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [arrayTime,setArrayTime]= useState([])
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
-    time:
-      appointmentSlotList.length > 0
-        ? appointmentSlotList[slideToShow]?.fromTime
-        : arrayTime[slideToShow].fromTime,
+    time: "",
     location: "",
     amount: "",
   });
+
+  console.log(selectedCenter, 'selectedCenter==>', arrayTime, 'arrayTime==>');
 
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
@@ -145,14 +144,14 @@ export default () => {
         selectedService === "Visa"
           ? userAppointmentDetails.appointmentDetails?.application_id
           : userAppointmentDetails.appointmentDetails?.id_number,
-      center_id: centersDetails?.centerId,
+      // center_id: centersDetails?.centerId,
       appointment_date: "",
       appointment_time: applicantAppointment.time,
       applicant_fullname:
         userAppointmentDetails.appointmentDetails?.name || "Chris",
       category: "",
       service_type: selectedService,
-      status: centersDetails?.status,
+      // status: centersDetails?.status,
     };
     dispatch(appointmentScheduleFetchRequest(details));
     push("/make-payment");
@@ -161,10 +160,14 @@ export default () => {
   useEffect(() => {
     setApplicantAppointment((prev) => ({
       ...prev,
-      time:
-        appointmentSlotList.length > 0
-          ? appointmentSlotList[slideToShow]?.fromTime
-          : arrayTime[slideToShow].fromTime,
+      time: arrayTime[slideToShow]?.fromTime,
+    }));
+  }, [centerList, applicationDetails]);
+
+  useEffect(() => {
+    setApplicantAppointment((prev) => ({
+      ...prev,
+      time: arrayTime[slideToShow]?.fromTime,
     }));
   }, [slideToShow, applicantAppointment.time]);
 
@@ -173,11 +176,24 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    Object.keys(centersDetails).length > 0 &&
-      dispatch(holidayListFetchRequest(centersDetails?.centerId));
-    dispatch(appointmentSlotListFetchRequest(centersDetails?.centerId));
-  }, [centersDetails?.centerId]);
+    if(selectedCenter != undefined){
+      Object.keys(selectedCenter).length > 0 &&
+        dispatch(holidayListFetchRequest(selectedCenter?.centerId));
+      dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
+    }
+  }, [centerList, selectedCenter?.centerId]);
 
+  useEffect(()=>{
+    let day = moment(selectedDate).format('dddd')
+    let filderdSlot = appointmentSlotList.filter((item)=> { 
+      if(item.day === day && item.centerId === selectedCenter?.centerId){
+        return item
+      }
+      })
+    setArrayTime(filderdSlot)
+   },[selectedDate,selectedCenter?.centerId, appointmentSlotList])
+
+   console.log(slideToShow, 'slideToShow==>', arrayTime, 'arrayTime==>');
   return (
     <>
       <Header
@@ -196,20 +212,18 @@ export default () => {
                 <Calendar
                   setApplicantAppointment={setApplicantAppointment}
                   centerList={centerList}
-                  setCentersDetails={setCentersDetails}
                   applicationDetails={applicationDetails}
+                  selectedCenter={selectedCenter}
+                  setSelectedCenter={setSelectedCenter}
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
                 />
                 <h2 className="d-block d-md-none sel-time">Select Time</h2>
               </Col>
               <Col md={2} lg={2} xl={2}>
                 <TimeSlots
                   slider={slider}
-                  // arrayTime={arrayTime}
-                  arrayTime={
-                    appointmentSlotList.length > 0
-                      ? appointmentSlotList
-                      : arrayTime
-                  }
+                  arrayTime={arrayTime}
                   slideToShow={slideToShow}
                   setSlideToShow={setSlideToShow}
                 />
@@ -231,7 +245,6 @@ export default () => {
           </div>
         </Container>
       </div>
-      <Loader isLoader={isLoader} />
       {modal && (
         <ConfirmModal
           modal={modal}
@@ -243,6 +256,7 @@ export default () => {
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
           members={memberDetails}
+          isLoader={isLoader}
         />
       )}
 

@@ -12,6 +12,7 @@ function ApplicationForm({
   handleContinue,
   isLoader,
 }) {
+  console.log(selectedService,'selectedServiceselectedService');
   return (
     <Container>
       <Row className="appointment-form__row">
@@ -42,7 +43,7 @@ function ApplicationForm({
               <FormGroup>
                 <Label for="exampleSelect">Select Service</Label>
                 <Select
-                  defaultValue={selectedService}
+                  value={selectedService}
                   onChange={(selected) => {
                     setSelectedService(selected);
                   }}

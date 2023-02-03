@@ -32,21 +32,10 @@ $laptop: 1280px;
   }
 }
 
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.2);
-  width: 100%;
   .loader-img {
-    width: 100px;
+    width: 32px;
+    margin-left: 8px;
   }
-}
 
 .confirm-modal {
   max-width: 600px !important;
