@@ -1,6 +1,12 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { applicationDetailsFetchRequest } from "../../reducer/application-detail";
+import {
+  applicationDetailsFetchRequest,
+  applicationDetailsFetchSuccess,
+  applicationDetailsFetchMemberSuccess,
+  applicationDetailsFetchFailure,
+} from "../../reducer/application-detail";
 import * as services from "../../../services";
+import { toast } from "react-toastify";
 
 function* getApplicationDetailsRequest(action) {
   try {
@@ -8,9 +14,28 @@ function* getApplicationDetailsRequest(action) {
       services.applicationDetails,
       action.payload.requestBody,
     );
-    action.payload.successCalback(response);
+    const { status, statusText, data } = response || {};
+    if (status === 200) {
+      if (data.category !== action.payload.requestBody.serviceType) {
+        yield put(applicationDetailsFetchFailure());
+        toast.error("Application not found");
+      } else {
+        yield put(applicationDetailsFetchSuccess(data));
+        const tempArray = [];
+        tempArray.push(data);
+        yield put(applicationDetailsFetchMemberSuccess(tempArray));
+        action.payload.successCallback(true);
+      }
+    } else {
+      yield put(applicationDetailsFetchFailure());
+    }
   } catch (e) {
-    action.payload.errorCallback(e);
+    yield put(applicationDetailsFetchFailure());
+    if (e.message.includes("Network Error")) {
+      toast.error(e.message);
+    } else {
+      toast.error("Application not found");
+    }
   }
 }
 
