@@ -6,7 +6,7 @@ function Applicants({ members = [], handleDeleteApplicant }) {
   return (
     <Row>
       <Col xs={12} sm={12}>
-        <h2 className="applicant-details__title">Applicant Detail</h2>
+        <h2 className="applicant-details__title">Applicant Details</h2>
         <div className="applicant-details__card--wrapper">
           <>
             {members &&

@@ -14,6 +14,9 @@
     @media (max-width: $xxLDesktop) {
       font-size: 1rem;
     }
+    @media only screen and (max-width: 768px) {
+      margin-top: 20px;
+    }
   }
   .applicant-details__card--wrapper {
     display: flex;
@@ -23,10 +26,12 @@
     }
     .applicant-details__card {
       border: 1px solid $primary-color;
-      max-height: 114px;
       border-radius: 5px;
       padding: 10px 13px;
       position: relative;
+      @media only screen and (max-width: 576px) {
+        padding: 5px 13px;
+      }
       &.width15 {
         width: 204px;
       }
@@ -191,6 +196,9 @@
       color: #555;
       font-weight: 500;
       margin: 14px 0px;
+      @media only screen and (max-width: 576px) {
+        margin: 0;
+      }
     }
     .appointment-calender__time {
       margin-top: 57px;
@@ -200,6 +208,7 @@
       @media only screen and (max-width: 576px) {
         width: fit-content;
         // display: none;
+        margin-top: 0;
       }
     }
     .appointment-calender__time--flex {
@@ -210,6 +219,9 @@
         @media (max-width: $xxLDesktop) {
           width: 7rem;
         }
+        @media only screen and (max-width: 576px) {
+          width: 20rem;
+        }
       }
       .slick-list {
         height: 20.9rem !important;
@@ -218,15 +230,16 @@
         @media (max-height: 660px) {
           height: 14rem !important;
         }
-        @media only screen and (max-width: 576px) {
-          height: 306px !important;
-          box-shadow: none;
-          margin: 1rem 0px 0px -17px;
-        }
         @media (max-width: $xxLDesktop) {
           padding: 15px 0;
           height: 13rem !important;
         }
+        @media only screen and (max-width: 576px) {
+          height: 11rem !important;
+          box-shadow: none;
+          margin: 0rem 0px 0px -17px;
+        }
+        
         .slick-track {
           @media only screen and (max-width: 576px) {
             width: 360px !important;
@@ -241,7 +254,7 @@
           display: flex;
           justify-content: center;
           @media only screen and (max-width: 576px) {
-            width: 102px !important;
+            width: 92px !important;
             justify-content: flex-start;
           }
         }
@@ -249,12 +262,13 @@
       .appointment-calender__time--box {
         border-radius: 5px;
         border: 1px solid #000;
-        padding: 9px 16px;
+        padding: 9px 0px;
+        width: 80px !important;
         margin: 10px 0 6px 0px;
         cursor: pointer;
         text-align: center;
         @media (max-width: $xxLDesktop) {
-          padding: 6.5px 15px;
+          padding: 6.5px 0px;
           margin: 0.5rem 0;
         }
 
