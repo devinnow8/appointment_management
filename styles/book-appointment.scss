@@ -152,15 +152,27 @@
                 background-color: rgb(230, 245, 255);
                 color: #555;
               }
-              &.css-tr4s17-option {
+              &.react-select__option--is-selected {
                 background-color: $primary-color;
                 color: white;
+                &:hover {
+                  background-color: $primary-color !important;
+                  color: white !important;
+                }
+              }
+            }
+            .react-select__menu-list {
+              background-color: transparent;
+              .react-select__option {
+                &:hover {
+                  background-color: rgb(230, 245, 255);
+                  color: #555;
+                }
               }
             }
           }
         }
       }
-      
     }
     .sel-time {
       font-size: 13px;
