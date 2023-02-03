@@ -50,11 +50,13 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        <img
-                          src="/images/calender.png"
-                          className="me-2"
-                          alt=""
-                        />{" "}
+                        <div className="img-box">
+                          <img
+                            src="/images/calender.png"
+                            className="me-2"
+                            alt=""
+                          />
+                        </div>{" "}
                         Date <span>(dd/mm/yyyy)</span>
                       </h5>
                     </div>
@@ -68,7 +70,9 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        <img src="/images/time.png" className="me-2" alt="" />{" "}
+                        <div className="img-box">
+                          <img src="/images/time.png" alt="" />
+                        </div>{" "}
                         Time
                       </h5>
                     </div>
@@ -81,11 +85,9 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        <img
-                          src="/images/location.png"
-                          className="me-2"
-                          alt=""
-                        />{" "}
+                        <div className="img-box">
+                          <img src="/images/location.png" alt="" />
+                        </div>{" "}
                         Location
                       </h5>
                     </div>
@@ -99,7 +101,9 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        <img src="/images/s-name.png" className="me-2" alt="" />{" "}
+                        <div className="img-box">
+                          <img src="/images/s-name.png" alt="" />
+                        </div>{" "}
                         Service Name
                       </h5>
                     </div>
@@ -113,11 +117,13 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        <img
-                          src="/images/currency.png"
-                          className="me-2"
-                          alt=""
-                        />{" "}
+                        <div className="img-box">
+                          <img
+                            src="/images/currency.png"
+                            className="curr-img"
+                            alt=""
+                          />
+                        </div>{" "}
                         Amount
                       </h5>
                     </div>
@@ -130,11 +136,13 @@ function ConfirmModal({
                   <div className="confirm-modal__applicant--flex">
                     <div className="confirm-modal__applicant--data">
                       <h5 className="confirm-modal__applicant--heading">
-                        <img
-                          src="/images/currency.png"
-                          className="me-2"
-                          alt=""
-                        />{" "}
+                        <div className="img-box">
+                          <img
+                            src="/images/currency.png"
+                            className="curr-img"
+                            alt=""
+                          />
+                        </div>{" "}
                         Total Amount
                       </h5>
                     </div>
