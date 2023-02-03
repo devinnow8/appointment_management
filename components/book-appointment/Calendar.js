@@ -4,8 +4,6 @@ import { LocaleUtils, DayPicker } from "react-day-picker";
 import moment from "moment";
 import Select from "react-select";
 import { DAYS_FORMAT, monthNames, centers, countries } from "../../constants";
-import { Col, Row } from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
 
 const holidays = [
   new Date(2023, 1, 18),
@@ -17,16 +15,12 @@ const holidays = [
 const Calendar = ({
   setApplicantAppointment,
   centerList,
-  setCentersDetails,
   applicationDetails,
   selectedCenter,
   setSelectedCenter,
   selectedDate,
   setSelectedDate
 }) => {
-  const { appointmentSlotList } = useSelector(
-    (state) => state.appointmentSlotList,
-  );
   const [newCenterList, setNewCenterList] = useState([]);
   const [isDateSelected, setDateSelected] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
@@ -160,7 +154,7 @@ const Calendar = ({
   const selectedDaysToDisable = holidays;
 
   useEffect(() => {
-    const filteredArray = centerList.filter((centre)=>selectedCountry.label === centre.country)
+    const filteredArray = centerList.filter((centre)=>selectedCountry.label === centre?.country)
     const obtainedArray = filteredArray.map((centre) => {
       return {
         ...centre,

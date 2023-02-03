@@ -161,14 +161,7 @@ export default () => {
       ...prev,
       time: arrayTime[slideToShow]?.fromTime,
     }));
-  }, [centerList, applicationDetails]);
-
-  useEffect(() => {
-    setApplicantAppointment((prev) => ({
-      ...prev,
-      time: arrayTime[slideToShow]?.fromTime,
-    }));
-  }, [slideToShow, arrayTime]);
+  }, [centerList, applicationDetails, slideToShow, arrayTime]);
 
   useEffect(() => {
     dispatch(centerListFetchRequest());
@@ -180,7 +173,9 @@ export default () => {
       Object.keys(selectedCenter).length > 0 &&
         dispatch(holidayListFetchRequest(selectedCenter?.centerId));
       dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId, (success) => {
-        setIsLoader(false)
+        if(success.status === 200) {
+          setIsLoader(false)
+        }
       }));
     }
   }, [centerList, selectedCenter?.centerId]);
