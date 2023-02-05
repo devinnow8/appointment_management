@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -27,7 +27,6 @@ export default () => {
   const { appointmentSlotList } = useSelector(
     (state) => state.appointmentSlotList,
   );
-  const slider = useRef();
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
@@ -163,11 +162,9 @@ export default () => {
     <>
       <Header
         handleAddMember={handleAddMember}
-        selectedService={applicationDetails.category}
       />
       <DetailSection
         handleDeleteApplicant={handleDeleteApplicant}
-        slider={slider}
         arrayTime={arrayTime}
         slideToShow={slideToShow}
         setSlideToShow={setSlideToShow}

@@ -18,10 +18,7 @@ export default function Home() {
     (state) => state.categoryServiceList,
   );
   const router = useRouter();
-  const [categoryServiceOptions, setCategoryServiceOptions] = useState([{
-    value: 'Visa',
-    label: 'Visa'
-  }]);
+  const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
 

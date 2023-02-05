@@ -5,7 +5,6 @@ import { Container } from "reactstrap";
 
 const DetailSection = (
   handleDeleteApplicant,
-  slider,
   arrayTime,
   slideToShow,
   setSlideToShow,
@@ -24,7 +23,6 @@ const DetailSection = (
       <Container>
         <Applicants handleDeleteApplicant={handleDeleteApplicant} />
         <CalendarTime
-          slider={slider}
           arrayTime={arrayTime}
           slideToShow={slideToShow}
           setSlideToShow={setSlideToShow}

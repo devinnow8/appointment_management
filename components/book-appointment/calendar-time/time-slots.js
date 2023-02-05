@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback,useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,12 +7,12 @@ import { Button } from "reactstrap";
 import Loader from "../../loader";
 
 function TimeSlots({
-  slider,
   arrayTime,
   slideToShow,
   setSlideToShow,
   isLoader,
 }) {
+  const slider = useRef();
   const settings = {
     dots: false,
     infinite: true,

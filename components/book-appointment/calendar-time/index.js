@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 import Calendar from "./calendar";
 
 const CalendarTime = ({
-  slider,
   arrayTime,
   slideToShow,
   setSlideToShow,
@@ -36,7 +35,6 @@ const CalendarTime = ({
         </Col>
         <Col md={2} lg={2} xl={2}>
           <TimeSlots
-            slider={slider}
             arrayTime={arrayTime}
             slideToShow={slideToShow}
             setSlideToShow={setSlideToShow}

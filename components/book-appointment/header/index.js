@@ -2,8 +2,12 @@ import Image from "next/image";
 import { Container, Row, Col } from "reactstrap";
 import Visa from "./Visa";
 import Others from "./Others";
+import { useSelector } from "react-redux";
 
-const index = ({ handleAddMember, selectedService }) => {
+const index = ({ handleAddMember }) => {
+  const { applicationDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
   return (
     <header className="inner-header">
       <Container>
@@ -19,7 +23,7 @@ const index = ({ handleAddMember, selectedService }) => {
           </Col>
           <Col md={11} lg={11} xl={11}>
             <div className="inner-header__member">
-              {selectedService === "Visa" ? (
+              {applicationDetails.category === "Visa" ? (
                 <Visa handleAddMember={handleAddMember}/>
               ) : (
                 <Others handleAddMember={handleAddMember}/>
