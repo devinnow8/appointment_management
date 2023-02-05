@@ -7,7 +7,6 @@ function DeleteModal({
   deleteModal,
   deleteId,
   deleteConfirmation,
-  deleteToggle,
   setDeleteModal,
 }) {
   return (
@@ -15,9 +14,9 @@ function DeleteModal({
       centered
       className="confirm-modal del-modal"
       isOpen={deleteModal}
-      toggle={deleteToggle}
+      toggle={() => setDeleteModal(false)}
     >
-      <ModalHeader toggle={deleteToggle}>
+      <ModalHeader toggle={() => setDeleteModal(false)}>
         <img
           src="/images/modal-img.png"
           className="img-fluid confirm-modal__img"

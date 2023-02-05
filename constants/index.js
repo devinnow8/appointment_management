@@ -338,3 +338,9 @@ export const countries = [
   { label: "Zambia", value: "ZM" },
   { label: "Zimbabwe", value: "ZW" },
 ];
+
+export const paymentModeType = {
+  stripe: "Stripe",
+  payPal: "Paypal",
+  amazonPay: "Amazon Pay",
+};

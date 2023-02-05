@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
-import { getUserAppointment } from "../redux/action/index";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchSuccess,
@@ -19,17 +18,15 @@ export default function Home() {
     (state) => state.categoryServiceList,
   );
   const router = useRouter();
-  const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
+  const [categoryServiceOptions, setCategoryServiceOptions] = useState([{
+    value: 'Visa',
+    label: 'Visa'
+  }]);
   const [selectedService, setSelectedService] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
 
   const handleContinue = (values) => {
     setIsLoader(true);
-    const obj = {
-      selectedService: selectedService,
-      appointmentDetails: values,
-    };
-    dispatch(getUserAppointment(obj));
     const details = {
       applicationId: values.application_id,
       dob: values.dob,
@@ -70,18 +67,20 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(categoryServiceListFetchRequest());
-    const obtainedList = categoryServiceList.map((service) => {
-      return {
-        value:
-          service?.categoryName.charAt(0).toUpperCase() +
-          service?.categoryName.slice(1),
-        label:
-          service?.categoryName.charAt(0).toUpperCase() +
-          service?.categoryName.slice(1),
-      };
-    });
-    setCategoryServiceOptions(obtainedList);
-    setSelectedService(obtainedList[0])
+    if(categoryServiceList.length > 0){
+      const obtainedList = categoryServiceList.map((service) => {
+        return {
+          value:
+            service?.categoryName.charAt(0).toUpperCase() +
+            service?.categoryName.slice(1),
+          label:
+            service?.categoryName.charAt(0).toUpperCase() +
+            service?.categoryName.slice(1),
+        };
+      });
+      setCategoryServiceOptions(obtainedList);
+      setSelectedService(obtainedList[0])
+    }
   }, []);
 
   return (

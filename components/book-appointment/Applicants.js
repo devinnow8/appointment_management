@@ -1,17 +1,22 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Col, Row } from "reactstrap";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
-function Applicants({ members = [], handleDeleteApplicant }) {
+function Applicants({ handleDeleteApplicant }) {
+  const {memberDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
+  
   return (
     <Row>
       <Col xs={12} sm={12}>
         <h2 className="applicant-details__title">Applicant Details</h2>
         <div className="applicant-details__card--wrapper">
           <>
-            {members &&
-              members.length > 0 &&
-              members.map((data, index) => {
+            {memberDetails &&
+              memberDetails.length > 0 &&
+              memberDetails.map((data, index) => {
                 return (
                   <>
                     <div
@@ -34,7 +39,7 @@ function Applicants({ members = [], handleDeleteApplicant }) {
                             </p>
                           </div>
                         </div>
-                        {members.length > 1 && (
+                        {memberDetails.length > 1 && (
                           <Image
                             src="/images/delete.png"
                             alt=""

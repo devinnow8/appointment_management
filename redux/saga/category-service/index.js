@@ -2,8 +2,10 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import {
   categoryServiceListFetchRequest,
   categoryServiceListFetchSuccess,
+  categoryServiceListFetchFailure
 } from "../../reducer/category-service";
 import * as services from "../../../services";
+import { toast } from "react-toastify";
 
 function* getCategoryServiceListRequest() {
   try {
@@ -12,8 +14,12 @@ function* getCategoryServiceListRequest() {
     if (status === 200) {
       yield put(categoryServiceListFetchSuccess(data));
     } else {
+      yield put(categoryServiceListFetchFailure());
     }
-  } catch (e) {}
+  } catch (e) {
+    yield put(categoryServiceListFetchFailure());
+    toast.error('No Service Available')
+  }
 }
 
 function* categoryServiceListSaga() {

@@ -2,19 +2,15 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { Button, Col, Container, Row } from "reactstrap";
 import {
-  Applicants,
-  Calendar,
   ConfirmModal,
   Header,
-  TimeSlots,
+  DetailSection,
+  DeleteModal,
 } from "../components/book-appointment";
-import DeleteModal from "../components/book-appointment/DeleteModal";
 import { centerListFetchRequest } from "../redux/reducer/center-list";
 import { holidayListFetchRequest } from "../redux/reducer/holiday-list";
 import { appointmentSlotListFetchRequest } from "../redux/reducer/appointment-slot";
-import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
@@ -23,20 +19,15 @@ import moment from "moment";
 
 export default () => {
   const dispatch = useDispatch();
-  const { userAppointmentDetails } = useSelector((state) => state.user);
   const { centerList } = useSelector((state) => state.centerList);
+  const { applicationDetails, memberDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
   const { holidayList } = useSelector((state) => state.holidayList);
   const { appointmentSlotList } = useSelector(
     (state) => state.appointmentSlotList,
   );
-  const { applicationDetails, memberDetails } = useSelector(
-    (state) => state.applicationDetails,
-  );
   const slider = useRef();
-  const {
-    push,
-    query: { selectedService },
-  } = useRouter();
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
@@ -65,11 +56,6 @@ export default () => {
       setFamilyMember([...familyMember, { ...values }]);
       setModal(true);
     }
-  };
-
-  const modalToggle = () => {
-    setModal(!modal);
-    setConfirmCalendar(false);
   };
 
   const handleConfirm = () => {
@@ -119,10 +105,6 @@ export default () => {
     setDeleteId(i);
   };
 
-  const deleteToggle = () => {
-    setDeleteModal(!deleteModal);
-  };
-
   const deleteConfirmation = (i) => {
     const data = [...memberDetails];
     data.splice(i, 1);
@@ -131,32 +113,15 @@ export default () => {
     toast.success("Applicant Deleted Successfully");
   };
 
-  const handleAppointment = () => {
-    setModal(true);
-    setConfirmCalendar(true);
-  };
-
-  console.log(
-    applicationDetails,
-    "applicationDetailsapplicationDetails",
-    applicantAppointment,
-  );
   const handlePaymentProceed = () => {
-    const details = {
-      application_id:
-        applicationDetails.category === "Visa"
-          ? applicationDetails.applicationId
-          : userAppointmentDetails.appointmentDetails?.id_number,
-      center_id: selectedCenter?.centerId,
-      appointment_date: applicantAppointment.date,
-      appointment_time: applicantAppointment.time,
-      applicant_fullname: applicationDetails.name || "Chris",
-      category: applicationDetails.category,
-      service_type: applicationDetails.category,
-      status: selectedCenter?.status,
-    };
-    dispatch(appointmentScheduleFetchRequest(details));
-    push("/make-payment");
+    router.push({
+      pathname: "/make-payment",
+      query: {
+        centreId: selectedCenter?.centerId,
+        date: moment(applicantAppointment.date).format("DD/MM/YYYY"),
+        time: applicantAppointment.time,
+      },
+    });
   };
 
   useEffect(() => {
@@ -194,78 +159,42 @@ export default () => {
     });
     setArrayTime(filderdSlot);
   }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
-
   return (
     <>
       <Header
         handleAddMember={handleAddMember}
         selectedService={applicationDetails.category}
       />
-      <div className="applicant-details calendar-time">
-        <Container>
-          <Applicants
-            members={memberDetails}
-            handleDeleteApplicant={handleDeleteApplicant}
-          />
-          <div className="appointment-calender">
-            <Row>
-              <Col md={10} lg={10} xl={10}>
-                <Calendar
-                  setApplicantAppointment={setApplicantAppointment}
-                  centerList={centerList}
-                  applicationDetails={applicationDetails}
-                  selectedCenter={selectedCenter}
-                  setSelectedCenter={setSelectedCenter}
-                  selectedDate={selectedDate}
-                  setSelectedDate={setSelectedDate}
-                />
-                <h2 className="d-block d-md-none sel-time">Select Time</h2>
-              </Col>
-              <Col md={2} lg={2} xl={2}>
-                <TimeSlots
-                  slider={slider}
-                  arrayTime={arrayTime}
-                  slideToShow={slideToShow}
-                  setSlideToShow={setSlideToShow}
-                  isLoader={isLoader}
-                />
-              </Col>
-              <Col sm={12} md={12} className="text-end">
-                <div className="appointment-calender__buttons">
-                  <Button
-                    className="cancel-btn me-3"
-                    onClick={() => router.back()}
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    className="continue"
-                    onClick={handleAppointment}
-                    disabled={!applicantAppointment.time?.length}
-                  >
-                    Continue
-                  </Button>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </Container>
-      </div>
+      <DetailSection
+        handleDeleteApplicant={handleDeleteApplicant}
+        slider={slider}
+        arrayTime={arrayTime}
+        slideToShow={slideToShow}
+        setSlideToShow={setSlideToShow}
+        isLoader={isLoader}
+        applicantAppointment={applicantAppointment}
+        setApplicantAppointment={setApplicantAppointment}
+        selectedCenter={selectedCenter}
+        setSelectedCenter={setSelectedCenter}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+        setModal={setModal}
+        setConfirmCalendar={setConfirmCalendar}
+      />
       {modal && (
         <ConfirmModal
           modal={modal}
-          modalToggle={modalToggle}
+          setModal={setModal}
+          setConfirmCalendar={setConfirmCalendar}
           applicantDetail={applicantDetail}
           handleConfirm={handleConfirm}
           selectedService={applicationDetails.category}
           applicantAppointment={applicantAppointment}
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
-          members={memberDetails}
           isLoader={isLoader}
         />
       )}
-
       {deleteModal && (
         <DeleteModal
           deleteModal={deleteModal}
@@ -273,7 +202,6 @@ export default () => {
           deleteMember={deleteMember}
           deleteId={deleteId}
           deleteConfirmation={deleteConfirmation}
-          deleteToggle={deleteToggle}
         />
       )}
     </>

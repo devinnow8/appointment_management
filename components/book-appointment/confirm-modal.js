@@ -1,31 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import moment from "moment";
 import Loader from "../loader";
+import { useSelector } from "react-redux";
 
 function ConfirmModal({
   modal,
-  modalToggle,
   handleConfirm,
   applicantDetail,
   applicantAppointment,
   selectedService,
   confirmCalendar,
   handlePaymentProceed,
-  members,
-  isLoader
+  isLoader,
+  setModal,
+  setConfirmCalendar,
 }) {
-  const totalMember = members && members.length;
+  const { memberDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
+  const totalMember = memberDetails && memberDetails.length;
   const totalValue = 350 * totalMember;
   return (
     <div>
       <Modal
         centered
         isOpen={modal}
-        toggle={modalToggle}
+        toggle={() => {
+          setModal(!modal);
+          setConfirmCalendar(false);
+        }}
         className="confirm-modal"
       >
-        <ModalHeader toggle={modalToggle}>
+        <ModalHeader
+          toggle={() => {
+            setModal(!modal);
+            setConfirmCalendar(false);
+          }}
+        >
           <img
             src="/images/modal-img.png"
             className="img-fluid confirm-modal__img"
@@ -255,7 +267,13 @@ function ConfirmModal({
             </div>
           )}
           <div className="confirm-modal__btn">
-            <Button className="cancel" onClick={modalToggle}>
+            <Button
+              className="cancel"
+              onClick={() => {
+                setModal(!modal);
+                setConfirmCalendar(false);
+              }}
+            >
               Cancel
             </Button>
             {confirmCalendar ? (
@@ -270,7 +288,7 @@ function ConfirmModal({
             ) : (
               <Button className="confirm" onClick={handleConfirm}>
                 Confirm
-              <Loader isLoader={isLoader} />
+                <Loader isLoader={isLoader} />
               </Button>
             )}
           </div>

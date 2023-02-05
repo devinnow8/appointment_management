@@ -9,7 +9,7 @@ export const categoryServiceListSlice = createSlice({
   initialState,
   reducers: {
     categoryServiceListFetchRequest: (state, action) => {
-      state.categoryServiceList.push(action.payload);
+      state.categoryServiceList = [];
     },
     categoryServiceListFetchSuccess: (state, action) => {
       state.categoryServiceList = action.payload;
