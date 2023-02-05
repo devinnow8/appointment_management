@@ -185,7 +185,6 @@ export default () => {
           setConfirmCalendar={setConfirmCalendar}
           applicantDetail={applicantDetail}
           handleConfirm={handleConfirm}
-          selectedService={applicationDetails.category}
           applicantAppointment={applicantAppointment}
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
