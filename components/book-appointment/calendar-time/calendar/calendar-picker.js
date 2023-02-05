@@ -1,7 +1,9 @@
+import "react-day-picker/dist/style.css";
 import React from "react";
 import { LocaleUtils, DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
 import { DAYS_FORMAT } from "../../../../constants/index";
+import { useSelector } from "react-redux";
+
 const holidays = [
   new Date(2023, 1, 18),
   new Date(2023, 1, 22),
@@ -10,8 +12,8 @@ const holidays = [
 ];
 
 const CalendarPicker = ({ selectedDate, handleSelectDate }) => {
-  
-    const getSundays = (date) => {
+  const { holidayList } = useSelector((state) => state.holidayList);
+  const getSundays = (date) => {
     var d = date || new Date(),
       month = d.getMonth(),
       sundays = [];
@@ -30,7 +32,6 @@ const CalendarPicker = ({ selectedDate, handleSelectDate }) => {
 
     return sundays;
   };
-
   const weekends = getSundays();
   const selectedDaysToDisable = holidays;
 

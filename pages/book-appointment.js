@@ -23,7 +23,6 @@ export default () => {
   const { applicationDetails, memberDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  const { holidayList } = useSelector((state) => state.holidayList);
   const { appointmentSlotList } = useSelector(
     (state) => state.appointmentSlotList,
   );
