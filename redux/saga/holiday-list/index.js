@@ -1,7 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
     holidayListFetchRequest,
-    holidayListFetchSuccess
+    holidayListFetchSuccess,
+    holidayListFetchFailure
 } from '../../reducer/holiday-list';
 import * as services from '../../../services';
 
@@ -12,8 +13,10 @@ function* getHolidayListRequest(action) {
     if (status === 200) {
       yield put(holidayListFetchSuccess(data));
     } else {
+      yield put(holidayListFetchFailure());
     }
   } catch (e) {
+    yield put(holidayListFetchFailure());
   }
 }
 

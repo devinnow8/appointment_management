@@ -17,13 +17,14 @@ export default function Home() {
   const { categoryServiceList } = useSelector(
     (state) => state.categoryServiceList,
   );
+  const { isLoading } = useSelector(
+    (state) => state.applicationDetails,
+  );
   const router = useRouter();
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
-  const [isLoader, setIsLoader] = useState(false);
 
   const handleContinue = (values) => {
-    setIsLoader(true);
     const details = {
       applicationId: values.application_id,
       dob: values.dob,
@@ -34,7 +35,6 @@ export default function Home() {
         details,
         (success) => {
           if (success.data.category !== selectedService.label) {
-            setIsLoader(false);
             toast.error("Application not found");
           } else {
             const tempArray = [];
@@ -46,12 +46,10 @@ export default function Home() {
                 pathname: "/book-appointment",
                 query: { selectedService: selectedService.label },
               });
-              setIsLoader(false);
             }
           }
         },
         (error) => {
-          setIsLoader(false);
           if (error.message.includes("Network Error")) {
             toast.error(error.message);
           } else {
@@ -95,7 +93,7 @@ export default function Home() {
           setSelectedService={setSelectedService}
           categoryServiceOptions={categoryServiceOptions}
           handleContinue={handleContinue}
-          isLoader={isLoader}
+          isLoader={isLoading}
         />
       </section>
     </>

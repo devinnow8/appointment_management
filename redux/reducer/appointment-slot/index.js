@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   appointmentSlotList: [],
+  isLoading: false
 };
 
 export const appointmentSlotListSlice = createSlice({
@@ -9,7 +10,9 @@ export const appointmentSlotListSlice = createSlice({
   initialState,
   reducers: {
     appointmentSlotListFetchRequest: {
-      reducer: (state) => {},
+      reducer: (state) => {
+        state.isLoading = true;
+      },
       prepare: (requestBody, successCallback) => {
         return {
           payload: { requestBody, successCallback },
@@ -18,9 +21,13 @@ export const appointmentSlotListSlice = createSlice({
     },
     appointmentSlotListFetchSuccess: (state, action) => {
       state.appointmentSlotList = action.payload;
+      state.isLoading = false
+
     },
     appointmentSlotListFetchFailure: (state) => {
       state.appointmentSlotList = [];
+      state.isLoading = false
+
     },
   },
 });

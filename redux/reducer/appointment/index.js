@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  appointment: []
+  appointment: [],
+  isLoading: false
 };
 
 export const appointmentScheduleSlice = createSlice({
@@ -9,7 +10,9 @@ export const appointmentScheduleSlice = createSlice({
   initialState,
   reducers: {
     appointmentScheduleFetchRequest: {
-      reducer: state => {},
+      reducer: state => {
+        state.isLoading = true
+      },
       prepare: requestBody => {
         return {
           payload: { requestBody }
@@ -18,9 +21,11 @@ export const appointmentScheduleSlice = createSlice({
     },
     appointmentScheduleFetchSuccess: (state, action) => {
       state.holidayList = action.payload;
+      state.isLoading = false
     },
     appointmentScheduleFetchFailure: state => {
       state.holidayList = [];
+      state.isLoading = false
     }
   }
 });

@@ -1,7 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
     centerListFetchRequest,
-    centerListFetchSuccess
+    centerListFetchSuccess,
+    centerListFetchFailure
 } from '../../reducer/center-list';
 import * as services from '../../../services';
 
@@ -12,8 +13,10 @@ function* getCenterListRequest() {
     if (status === 200) {
       yield put(centerListFetchSuccess(data));
     } else {
+      yield put(centerListFetchFailure());
     }
   } catch (e) {
+    yield put(centerListFetchFailure());
   }
 }
 
