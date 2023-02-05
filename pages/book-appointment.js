@@ -26,6 +26,12 @@ export default () => {
   const { appointmentSlotList } = useSelector(
     (state) => state.appointmentSlotList,
   );
+  const { isLoading } = useSelector(
+    (state) => state.applicationDetails,
+  );
+  const { isLoadingSlot } = useSelector(
+    (state) => state.appointmentSlotList,
+  );
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
@@ -35,7 +41,6 @@ export default () => {
   const [deleteId, setDeleteId] = useState(false);
   const [familyMember, setFamilyMember] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
-  const [isLoader, setIsLoader] = useState(false);
   const [selectedCenter, setSelectedCenter] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [arrayTime, setArrayTime] = useState([]);
@@ -57,7 +62,6 @@ export default () => {
   };
 
   const handleConfirm = () => {
-    setIsLoader(true);
     setModal(false);
     const details = {
       applicationId: applicantDetail.application_id,
@@ -72,7 +76,6 @@ export default () => {
             applicationDetails.country === success.data.country &&
             success.data.category === applicationDetails.category
           ) {
-            setIsLoader(false);
             dispatch(
               applicationDetailsFetchMemberSuccess([
                 ...memberDetails,
@@ -82,11 +85,9 @@ export default () => {
             toast.success("Applicant Addedd Successfully");
           } else {
             toast.warn("Application not found");
-            setIsLoader(false);
           }
         },
         (error) => {
-          setIsLoader(false);
           if (error.message.includes("Network Error")) {
             toast.error(error.message);
           } else {
@@ -135,15 +136,10 @@ export default () => {
 
   useEffect(() => {
     if (selectedCenter != undefined) {
-      setIsLoader(true);
       Object.keys(selectedCenter).length > 0 &&
         dispatch(holidayListFetchRequest(selectedCenter?.centerId));
       dispatch(
-        appointmentSlotListFetchRequest(selectedCenter?.centerId, (success) => {
-          if (success.status === 200) {
-            setIsLoader(false);
-          }
-        }),
+        appointmentSlotListFetchRequest(selectedCenter?.centerId),
       );
     }
   }, [centerList, selectedCenter?.centerId]);
@@ -167,7 +163,7 @@ export default () => {
         arrayTime={arrayTime}
         slideToShow={slideToShow}
         setSlideToShow={setSlideToShow}
-        isLoader={isLoader}
+        isLoader={isLoadingSlot}
         applicantAppointment={applicantAppointment}
         setApplicantAppointment={setApplicantAppointment}
         selectedCenter={selectedCenter}
@@ -187,7 +183,7 @@ export default () => {
           applicantAppointment={applicantAppointment}
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
-          isLoader={isLoader}
+          isLoader={isLoading}
         />
       )}
       {deleteModal && (

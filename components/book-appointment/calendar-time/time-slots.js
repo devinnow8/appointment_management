@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback,useRef } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,12 +6,7 @@ import Image from "next/image";
 import { Button } from "reactstrap";
 import Loader from "../../loader";
 
-function TimeSlots({
-  arrayTime,
-  slideToShow,
-  setSlideToShow,
-  isLoader,
-}) {
+function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
   const slider = useRef();
   const settings = {
     dots: false,
@@ -67,44 +62,46 @@ function TimeSlots({
         >
           <Image src="/images/up-arrow.png" alt="" width={12} height={9} />
         </Button>
-        <div id="slider-scroll">
-          <Slider ref={slider} {...settings}>
+        
+          <div id="slider-scroll">
             {isLoader ? (
               <>
-                <Loader isLoader={isLoader} />
+                <div>
+                  <Loader isLoader={isLoader} />
+                </div>
               </>
             ) : (
               <>
                 {arrayTime.length > 0 ? (
-                  arrayTime.map((item, index) => {
-                    return (
-                      <div
-                        className="appointment-calender__time--box"
-                        key={item.id}
-                        onClick={() => {
-                          setSlideToShow(index);
-                          slider.current.slickGoTo(index);
-                        }}
-                      >
-                        <p
-                          className={`time ${
-                            index === slideToShow && "active"
-                          }`}
+                  <Slider ref={slider} {...settings}>
+                    {arrayTime.map((item, index) => {
+                      return (
+                        <div
+                          className="appointment-calender__time--box"
+                          key={item.id}
+                          onClick={() => {
+                            setSlideToShow(index);
+                            slider.current.slickGoTo(index);
+                          }}
                         >
-                          {item.fromTime}
-                        </p>
-                      </div>
-                    );
-                  })
+                          <p
+                            className={`time ${
+                              index === slideToShow && "active"
+                            }`}
+                          >
+                            {item.fromTime}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </Slider>
                 ) : (
-                  <>
-                    <div>No Slots Available</div>
-                  </>
+                  <>No Slots Available</>
                 )}
               </>
             )}
-          </Slider>
-        </div>
+          </div>
+        
         <Button
           className="appointment-calender__time--arrowNext"
           onClick={() => slider.current.slickNext()}
