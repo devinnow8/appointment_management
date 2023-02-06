@@ -1,5 +1,5 @@
 import { Button, Col, Container, Row } from "reactstrap";
-import Header from "../components/Header";
+import Header from "../components/header";
 import jsPDF from "jspdf";
 import { useRouter } from "next/router";
 

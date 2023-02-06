@@ -52,7 +52,7 @@ const CalendarTime = ({
                 setModal(true);
                 setConfirmCalendar(true);
               }}
-              disabled={!applicantAppointment.time?.length}
+              disabled={!applicantAppointment?.time?.length}
             >
               Continue
             </Button>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import Loader from "../loader";
+import Loader from "../../loader";
 import { useSelector } from "react-redux";
 import AppointmentDetails from "./appointment-details";
 import ApplicantVisa from "./applicant-visa";

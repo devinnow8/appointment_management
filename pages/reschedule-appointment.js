@@ -1,14 +1,14 @@
 import { Button, Col, Container, Row } from "reactstrap";
-import Header from "../components/Header";
+import Header from "../components/header";
 import { useRouter } from "next/router";
 
 function RescheduleAppointment() {
   const { push } = useRouter();
- 
+
   return (
     <>
       <Header />
-    RescheduleAppointment
+      RescheduleAppointment
     </>
   );
 }

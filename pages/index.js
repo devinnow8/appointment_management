@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../components/Header";
+import Header from "../components/header";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchSuccess,
@@ -17,9 +17,7 @@ export default function Home() {
   const { categoryServiceList } = useSelector(
     (state) => state.categoryServiceList,
   );
-  const { isLoading } = useSelector(
-    (state) => state.applicationDetails,
-  );
+  const { isLoading } = useSelector((state) => state.applicationDetails);
   const router = useRouter();
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
@@ -62,7 +60,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(categoryServiceListFetchRequest());
-    if(categoryServiceList.length > 0){
+    if (categoryServiceList.length > 0) {
       const obtainedList = categoryServiceList.map((service) => {
         return {
           value:
@@ -74,7 +72,7 @@ export default function Home() {
         };
       });
       setCategoryServiceOptions(obtainedList);
-      setSelectedService(obtainedList[0])
+      setSelectedService(obtainedList[0]);
     }
   }, []);
 

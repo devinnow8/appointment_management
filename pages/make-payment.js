@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../components/Header";
+import Header from "../components/header";
 import { useRouter } from "next/router";
 import PaymentApplication from "../components/make-payment";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
@@ -8,12 +8,12 @@ import moment from "moment";
 
 const MakePayment = () => {
   const dispatch = useDispatch();
-  const {applicationDetails} = useSelector(
+  const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
   const {
     push,
-    query: { centreId,date,time },
+    query: { centreId, date, time },
   } = useRouter();
   const [paymentType, setPaymentType] = useState({
     paymentMode: "Stripe",
