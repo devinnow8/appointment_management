@@ -43,7 +43,7 @@ const Calendar = ({
       ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
       location: selectedCenter?.label,
     }));
-  }, [centerList, applicationDetails]);
+  }, [centerList, applicationDetails, selectedCenter?.label]);
 
   const formatOptionLabel = (item) => {
     if (item.country === selectedCountry.label) {
