@@ -6,6 +6,7 @@ $secondary-color: #023b72;
 @import "./inner-header.scss";
 @import "./book-appointment.scss";
 @import "./make-payment.scss";
+@import "./appointment-booking.scss";
 
 .primary-btn {
   background-color: $primary-color;
@@ -29,5 +30,37 @@ $secondary-color: #023b72;
   }
   @media (max-width: $xxLDesktop) {
     font-size: 14px;
+  }
+}
+.primary-outline-btn{
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color:$primary-color;
+  padding: 10px 0;
+  background-color: #ffffff;
+  width: 174px;
+  &:hover {
+    background: transparent;
+    color: $primary-color;
+    opacity: 0.85;
+    transition: 0.4s ease-in-out all;
+  }
+}
+.secondary-outline-btn{
+  border: 1px solid #787878;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  color:#787878;
+  padding: 10px 0;
+  background-color: #ffffff;
+  width: 174px;
+  &:hover {
+    background: transparent;
+    color: #787878;
+    opacity: 0.85;
+    transition: 0.4s ease-in-out all;
   }
 }

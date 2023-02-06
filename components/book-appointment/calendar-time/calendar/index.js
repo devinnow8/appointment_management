@@ -3,6 +3,8 @@ import { monthNames, countries } from "../../../../constants/index";
 import CalendarPicker from "./calendar-picker";
 import SelectDropdowns from "./country-centre-select";
 import { useSelector } from "react-redux";
+import TimeSlots from "../time-slots";
+import { Col, Row } from "reactstrap";
 
 const Calendar = ({
   setApplicantAppointment,
@@ -10,6 +12,10 @@ const Calendar = ({
   setSelectedCenter,
   selectedDate,
   setSelectedDate,
+  arrayTime,
+  slideToShow,
+  setSlideToShow,
+  isLoader
 }) => {
   const { centerList } = useSelector((state) => state.centerList);
   const { applicationDetails } = useSelector(
@@ -62,6 +68,8 @@ const Calendar = ({
 
   return (
     <>
+    <Row>
+      <Col md={10} lg={10} xl={10}>
       <SelectDropdowns
         countries={countries}
         selectedCountry={selectedCountry}
@@ -73,10 +81,39 @@ const Calendar = ({
         setApplicantAppointment={setApplicantAppointment}
         applicationDetails={applicationDetails}
       />
+      </Col>
+    </Row>
+    <Row className="align-items-center">
+      <Col  md={10} lg={10} xl={10}>
       <CalendarPicker
         selectedDate={selectedDate}
         handleSelectDate={handleSelectDate}
       />
+      </Col>
+      <Col  md={2} lg={2} xl={2}>
+      <TimeSlots
+            arrayTime={arrayTime}
+            slideToShow={slideToShow}
+            setSlideToShow={setSlideToShow}
+            isLoader={isLoader}
+          />
+          </Col>
+    </Row>
+    <div className="calender-status">
+        <p className="calender-status__title">Legends:</p>
+        <div className="calender-status__box">
+          <div className="box"></div>
+          <p className="status">Available</p>
+        </div>
+        <div className="calender-status__box">
+          <div className="box not-avail"></div>
+          <p className="status">Not Available</p>
+        </div>
+        <div className="calender-status__box">
+          <div className="box selected"></div>
+          <p className="status">Selected</p>
+        </div>
+      </div>
     </>
   );
 };

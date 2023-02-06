@@ -22,24 +22,28 @@ const CalendarTime = ({
   return (
     <div className="appointment-calender">
       <Row>
-        <Col md={10} lg={10} xl={10}>
+        <Col md={12} lg={12} xl={12}>
           <Calendar
             setApplicantAppointment={setApplicantAppointment}
             selectedCenter={selectedCenter}
             setSelectedCenter={setSelectedCenter}
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
+            arrayTime={arrayTime}
+            slideToShow={slideToShow}
+            setSlideToShow={setSlideToShow}
+            isLoader={isLoader}
           />
           <h2 className="d-block d-md-none sel-time">Select Time</h2>
         </Col>
-        <Col md={2} lg={2} xl={2}>
+        {/* <Col md={2} lg={2} xl={2}>
           <TimeSlots
             arrayTime={arrayTime}
             slideToShow={slideToShow}
             setSlideToShow={setSlideToShow}
             isLoader={isLoader}
           />
-        </Col>
+        </Col> */}
         <Col sm={12} md={12} className="text-end">
           <div className="appointment-calender__buttons">
             <Button className="cancel-btn me-3" onClick={() => router.back()}>

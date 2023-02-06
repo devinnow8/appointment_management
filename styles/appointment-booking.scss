@@ -1,0 +1,41 @@
+.appointment-booking {
+  justify-content: center!important;
+  height: 80vh;
+  align-items: center;
+  .appointment-booking-title {
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 40px;
+    text-align: center;
+    color: #003C70;
+    margin-bottom: 10px;
+    @media (max-width:$xxLDesktop) {
+      font-size: 25px;
+      line-height: 30px;
+    }
+  }
+  .appointment-booking-details {
+    background: #FFFFFF;
+    border: 1px solid #CDCDCD;
+    border-radius: 5px;
+    .appointment-booking-details-list {
+      border-bottom: 1px solid #CDCDCD;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+    .booking-details-field {
+      font-weight: 500;
+      font-size: 14px;
+      color: #9B9B9B;
+  }
+  .booking-details-value {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000000;
+}
+&:last-child{
+  border-bottom: none;
+}
+  }
+}
+}

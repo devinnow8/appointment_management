@@ -115,6 +115,11 @@
           line-height: 0px;
           margin-right: 20px;
           // width: 140px;
+          &.react-select--is-disabled{
+            .react-select__indicator {
+              display: none;
+            }
+          }
           .react-select__control {
             border: none;
             min-height: 32px;
@@ -201,10 +206,10 @@
       }
     }
     .appointment-calender__time {
-      margin-top: 57px;
-      @media (max-height: 660px) {
-        margin-top: 55px;
-      }
+      // margin-top: 66px;
+      // @media (max-height: 660px) {
+      //   margin-top: 55px;
+      // }
       @media only screen and (max-width: 576px) {
         width: fit-content;
         // display: none;
@@ -212,11 +217,17 @@
       }
       .no-slots {
         box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.1);
-        height: 20rem !important;
+        height: 19rem !important;
         display: flex;
+        font-size: 12px;
         align-items: center;
         justify-content: center;
         font-size: 14px;
+        width: 7rem;
+        border-radius: 5px;
+        @media (max-width:$xxLDesktop)  {
+          height: 16rem;
+        }
       }
     }
     .appointment-calender__time--flex {
@@ -232,9 +243,10 @@
         }
       }
       .slick-list {
-        height: 20.9rem !important;
+        height: 19rem !important;
         box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
+        width: 7rem;
         @media (max-height: 660px) {
           height: 14rem !important;
         }

@@ -58,6 +58,7 @@ $laptop: 1280px;
         display: flex;
         justify-content: center;
         .confirm-modal__img {
+          width: 150px;
           @media (max-height: 660px) {
             max-width: 50%;
           }
@@ -74,7 +75,7 @@ $laptop: 1280px;
         font-weight: 800;
         font-size: 22px;
         text-align: center;
-        margin: 0px 0px 32px 0px;
+        margin: 0px 0px 15px 0px;
         @media (max-width: $xxLDesktop) {
           font-size: 17px;
         }

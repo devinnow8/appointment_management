@@ -112,7 +112,8 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
           </div>
         </>
       ) : (
-        <div className="no-slots">No SLots</div>
+       <div className="appointment-calender__time--flex">
+        <div className="no-slots">No Slots</div></div> 
       )}
     </div>
   );
