@@ -2,9 +2,30 @@ import React from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import {cancelAppointmentFetchRequest} from '../../redux/reducer/cancel-appointment'
+import { useSelector, useDispatch } from "react-redux";
 
 function CancelModal({ isCancel, setIsCancel }) {
   const { push } = useRouter();
+  const dispatch = useDispatch();
+  const { applicationDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
+
+  const handleCancel = () => {
+      const details = {
+        date: applicationDetails.date,
+        time: applicationDetails?.time,
+        centerId: applicationDetails?.centerId,
+        appointmentId: applicationDetails?.appointmentId,
+      };
+      dispatch(cancelAppointmentFetchRequest(details), (success)=> {
+        toast.success("Appointment Cancelled Suucessfully");
+        setIsCancel(!isCancel);
+        push("/");
+      })
+  }
+
   return (
     <div>
       <Modal
@@ -32,11 +53,7 @@ function CancelModal({ isCancel, setIsCancel }) {
           <div className="confirm-modal__btn">
             <button
               className="primary-btn me-2"
-              onClick={() => {
-                toast.success("Appointment Cancelled Suucessfully");
-                setIsCancel(!isCancel);
-                push("/");
-              }}
+              onClick={handleCancel}
             >
               Ok
             </button>

@@ -46,7 +46,7 @@ export default () => {
     amount: "",
   });
   console.log(
-    // applicationDetails,
+    applicationDetails,
     "applicationDetailsapplicationDetails==>",
     applicantAppointment,
   );
@@ -98,7 +98,6 @@ export default () => {
     );
   };
 
-  console.log(applicationDetails, "applicationDetailsapplicationDetails=>>");
   const handleDeleteApplicant = (data, i) => {
     setDeleteMember(data);
     setDeleteModal(true);

@@ -12,21 +12,22 @@ function RescheduleAppointment() {
   );
   const { centerList } = useSelector((state) => state.centerList);
   const [isCancel, setIsCancel] = useState(false);
-
   const centerName = centerList.filter(
     (data) => data.centerId === applicationDetails.centerId,
-  );
-  console.log(
-    centerList,
-    applicationDetails,
-    "applicationDetailsapplicationDetails",
-    centerList.filter((data) => data.centerId === applicationDetails.centerId),
   );
   const handleReschedule = () => {
     push({
       pathname: "/book-appointment",
     });
   };
+
+  useEffect(() => {
+    if (applicationDetails.appointmentId === undefined) {
+      push({
+        pathname: "/",
+      });
+    }
+  }, []);
 
   return (
     <>

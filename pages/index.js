@@ -17,29 +17,25 @@ export default function Home() {
   const { categoryServiceList } = useSelector(
     (state) => state.categoryServiceList,
   );
-  const { isLoading } = useSelector((state) => state.applicationDetails);
+  // const { isLoading } = useSelector((state) => state.applicationDetails);
   const router = useRouter();
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
+  const [isLoader, setIsLoader] = useState(false);
 
-  console.log(isLoading, "isLoadingisLoading");
   const handleContinue = (values) => {
+    setIsLoader(true);
     const details = {
       applicationId: values.application_id,
       dob: values.dob,
       serviceType: selectedService.label,
     };
-    console.log(details, "detailsdetails");
     dispatch(
       applicationDetailsFetchRequest(
         details,
         (success) => {
-          console.log(
-            success.data.appointmentId,
-            "iygiywfyiweiyfiywefy==>",
-            success,
-          );
           if (success.data.category !== selectedService.label) {
+            setIsLoader(false);
             toast.error("Application not found");
             // dispatch(applicationDetailsFetchFailure());
           } else {
@@ -47,7 +43,6 @@ export default function Home() {
             tempArray.push(success.data);
             dispatch(applicationDetailsFetchMemberSuccess(tempArray));
             dispatch(applicationDetailsFetchSuccess(success.data));
-            console.log(success.data.appointmentId, "iygiywfyiweiyfiywefy");
             if (success.data.appointmentId) {
               router.push({
                 pathname: "/reschedule-appointment",
@@ -63,12 +58,13 @@ export default function Home() {
           }
         },
         (error) => {
-          console.log(error.message, "errorrrr=>>>");
           if (error.message.includes("Network Error")) {
             toast.error(error.message);
+            setIsLoader(false);
             // dispatch(applicationDetailsFetchFailure());
           } else {
             toast.error("Application not found");
+            setIsLoader(false);
             // dispatch(applicationDetailsFetchFailure());
           }
         },
@@ -109,7 +105,7 @@ export default function Home() {
           setSelectedService={setSelectedService}
           categoryServiceOptions={categoryServiceOptions}
           handleContinue={handleContinue}
-          isLoader={isLoading}
+          isLoader={isLoader}
         />
       </section>
     </>

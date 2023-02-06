@@ -22,7 +22,6 @@ function* getRescheduleAppointmentRequest(action) {
       yield put(rescheduleAppointmentFetchFailure());
     }
   } catch (e) {
-    console.log(e, "eeeeeeee");
     toast.error(e.message);
     yield put(rescheduleAppointmentFetchFailure());
   }
