@@ -3,7 +3,7 @@ import Applicants from "../applicants";
 import CalendarTime from "../calendar-time";
 import { Container } from "reactstrap";
 
-const DetailSection = (
+const DetailSection = ({
   handleDeleteApplicant,
   arrayTime,
   slideToShow,
@@ -17,7 +17,7 @@ const DetailSection = (
   setSelectedDate,
   setModal,
   setConfirmCalendar,
-) => {
+}) => {
   return (
     <div className="applicant-details calendar-time">
       <Container>

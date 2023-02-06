@@ -210,6 +210,14 @@
         // display: none;
         margin-top: 0;
       }
+      .no-slots {
+        box-shadow: 0px 0px 26px rgba(0, 0, 0, 0.1);
+        height: 20rem !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
     }
     .appointment-calender__time--flex {
       display: flex;
@@ -239,7 +247,7 @@
           box-shadow: none;
           margin: 0rem 0px 0px -17px;
         }
-        
+
         .slick-track {
           @media only screen and (max-width: 576px) {
             width: 360px !important;

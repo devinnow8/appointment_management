@@ -19,7 +19,6 @@ const CalendarTime = ({
   setConfirmCalendar,
 }) => {
   const router = useRouter();
-
   return (
     <div className="appointment-calender">
       <Row>

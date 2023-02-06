@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 import {
   ConfirmModal,
   Header,
-  DetailSection,
   DeleteModal,
+  DetailSection,
 } from "../components/book-appointment";
 import { centerListFetchRequest } from "../redux/reducer/center-list";
 import { holidayListFetchRequest } from "../redux/reducer/holiday-list";
@@ -20,16 +20,10 @@ import moment from "moment";
 export default () => {
   const dispatch = useDispatch();
   const { centerList } = useSelector((state) => state.centerList);
-  const { applicationDetails, memberDetails } = useSelector(
+  const { applicationDetails, memberDetails, isLoading } = useSelector(
     (state) => state.applicationDetails,
   );
-  const { appointmentSlotList } = useSelector(
-    (state) => state.appointmentSlotList,
-  );
-  const { isLoading } = useSelector(
-    (state) => state.applicationDetails,
-  );
-  const { isLoadingSlot } = useSelector(
+  const { appointmentSlotList, isLoadingSlot } = useSelector(
     (state) => state.appointmentSlotList,
   );
   const router = useRouter();
@@ -138,9 +132,7 @@ export default () => {
     if (selectedCenter != undefined) {
       Object.keys(selectedCenter).length > 0 &&
         dispatch(holidayListFetchRequest(selectedCenter?.centerId));
-      dispatch(
-        appointmentSlotListFetchRequest(selectedCenter?.centerId),
-      );
+      dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
     }
   }, [centerList, selectedCenter?.centerId]);
 
@@ -155,9 +147,7 @@ export default () => {
   }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
   return (
     <>
-      <Header
-        handleAddMember={handleAddMember}
-      />
+      <Header handleAddMember={handleAddMember} />
       <DetailSection
         handleDeleteApplicant={handleDeleteApplicant}
         arrayTime={arrayTime}

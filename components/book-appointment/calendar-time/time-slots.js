@@ -55,60 +55,65 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
 
   return (
     <div className="appointment-calender__time">
-      <div className="appointment-calender__time--flex">
-        <Button
-          className="appointment-calender__time--arrowPrev"
-          onClick={() => slider.current.slickPrev()}
-        >
-          <Image src="/images/up-arrow.png" alt="" width={12} height={9} />
-        </Button>
-        
-          <div id="slider-scroll">
-            {isLoader ? (
-              <>
-                <div>
-                  <Loader isLoader={isLoader} />
-                </div>
-              </>
-            ) : (
-              <>
-                {arrayTime.length > 0 ? (
-                  <Slider ref={slider} {...settings}>
-                    {arrayTime.map((item, index) => {
-                      return (
-                        <div
-                          className="appointment-calender__time--box"
-                          key={item.id}
-                          onClick={() => {
-                            setSlideToShow(index);
-                            slider.current.slickGoTo(index);
-                          }}
-                        >
-                          <p
-                            className={`time ${
-                              index === slideToShow && "active"
-                            }`}
-                          >
-                            {item.fromTime}
-                          </p>
-                        </div>
-                      );
-                    })}
-                  </Slider>
-                ) : (
-                  <>No Slots Available</>
-                )}
-              </>
-            )}
+      {isLoader ? (
+        <>
+          <div>
+            <Loader isLoader={isLoader} />
           </div>
-        
-        <Button
-          className="appointment-calender__time--arrowNext"
-          onClick={() => slider.current.slickNext()}
-        >
-          <Image src="/images/down-arrow.png" alt="" width={12} height={9} />
-        </Button>
-      </div>
+        </>
+      ) : arrayTime.length > 0 ? (
+        <>
+          <div className="appointment-calender__time--flex">
+            <Button
+              className="appointment-calender__time--arrowPrev"
+              onClick={() => slider.current.slickPrev()}
+            >
+              <Image src="/images/up-arrow.png" alt="" width={12} height={9} />
+            </Button>
+
+            <div id="slider-scroll">
+              <>
+                <Slider ref={slider} {...settings}>
+                  {arrayTime.map((item, index) => {
+                    return (
+                      <div
+                        className="appointment-calender__time--box"
+                        key={item.id}
+                        onClick={() => {
+                          setSlideToShow(index);
+                          slider.current.slickGoTo(index);
+                        }}
+                      >
+                        <p
+                          className={`time ${
+                            index === slideToShow && "active"
+                          }`}
+                        >
+                          {item.fromTime}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </Slider>
+              </>
+            </div>
+
+            <Button
+              className="appointment-calender__time--arrowNext"
+              onClick={() => slider.current.slickNext()}
+            >
+              <Image
+                src="/images/down-arrow.png"
+                alt=""
+                width={12}
+                height={9}
+              />
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div className="no-slots">No SLots</div>
+      )}
     </div>
   );
 }
