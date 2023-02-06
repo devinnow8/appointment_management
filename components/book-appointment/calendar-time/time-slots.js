@@ -57,8 +57,10 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
     <div className="appointment-calender__time">
       {isLoader ? (
         <>
-          <div>
-            <Loader isLoader={isLoader} />
+          <div className="appointment-calender__time--flex">
+            <div className="no-slots">
+              <Loader isLoader={isLoader} />
+            </div>
           </div>
         </>
       ) : arrayTime.length > 0 ? (
@@ -112,8 +114,9 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
           </div>
         </>
       ) : (
-       <div className="appointment-calender__time--flex">
-        <div className="no-slots">No Slots</div></div> 
+        <div className="appointment-calender__time--flex">
+          <div className="no-slots">No Slots</div>
+        </div>
       )}
     </div>
   );

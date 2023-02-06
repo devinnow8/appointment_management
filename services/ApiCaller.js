@@ -33,3 +33,20 @@ export const postDataApi = ({ path = "no-path-provided", data = {} }) => {
     return error;
   }
 };
+
+export const putDataApi = ({ path = "no-path-provided", data = {} }) => {
+  try {
+    return new Promise((resolve, reject) => {
+      customAxios
+        .put(path, data)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  } catch (error) {
+    return error;
+  }
+};

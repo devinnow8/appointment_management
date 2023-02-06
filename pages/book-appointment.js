@@ -45,6 +45,11 @@ export default () => {
     location: "",
     amount: "",
   });
+  console.log(
+    // applicationDetails,
+    "applicationDetailsapplicationDetails==>",
+    applicantAppointment,
+  );
 
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
@@ -93,6 +98,7 @@ export default () => {
     );
   };
 
+  console.log(applicationDetails, "applicationDetailsapplicationDetails=>>");
   const handleDeleteApplicant = (data, i) => {
     setDeleteMember(data);
     setDeleteModal(true);

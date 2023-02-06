@@ -15,7 +15,7 @@ const Calendar = ({
   arrayTime,
   slideToShow,
   setSlideToShow,
-  isLoader
+  isLoader,
 }) => {
   const { centerList } = useSelector((state) => state.centerList);
   const { applicationDetails } = useSelector(
@@ -68,38 +68,38 @@ const Calendar = ({
 
   return (
     <>
-    <Row>
-      <Col md={10} lg={10} xl={10}>
-      <SelectDropdowns
-        countries={countries}
-        selectedCountry={selectedCountry}
-        setSelectedCountry={setSelectedCountry}
-        newCenterList={newCenterList}
-        selectedCenter={selectedCenter}
-        formatOptionLabel={formatOptionLabel}
-        setSelectedCenter={setSelectedCenter}
-        setApplicantAppointment={setApplicantAppointment}
-        applicationDetails={applicationDetails}
-      />
-      </Col>
-    </Row>
-    <Row className="align-items-center">
-      <Col  md={10} lg={10} xl={10}>
-      <CalendarPicker
-        selectedDate={selectedDate}
-        handleSelectDate={handleSelectDate}
-      />
-      </Col>
-      <Col  md={2} lg={2} xl={2}>
-      <TimeSlots
+      <Row>
+        <Col md={10} lg={10} xl={10}>
+          <SelectDropdowns
+            countries={countries}
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
+            newCenterList={newCenterList}
+            selectedCenter={selectedCenter}
+            formatOptionLabel={formatOptionLabel}
+            setSelectedCenter={setSelectedCenter}
+            setApplicantAppointment={setApplicantAppointment}
+            applicationDetails={applicationDetails}
+          />
+        </Col>
+      </Row>
+      <Row className="align-items-center">
+        <Col md={10} lg={10} xl={10}>
+          <CalendarPicker
+            selectedDate={selectedDate}
+            handleSelectDate={handleSelectDate}
+          />
+        </Col>
+        <Col md={2} lg={2} xl={2}>
+          <TimeSlots
             arrayTime={arrayTime}
             slideToShow={slideToShow}
             setSlideToShow={setSlideToShow}
             isLoader={isLoader}
           />
-          </Col>
-    </Row>
-    <div className="calender-status">
+        </Col>
+      </Row>
+      <div className="calender-status">
         <p className="calender-status__title">Legends:</p>
         <div className="calender-status__box">
           <div className="box"></div>

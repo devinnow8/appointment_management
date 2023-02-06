@@ -22,18 +22,26 @@ export default function Home() {
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
 
+  console.log(isLoading, "isLoadingisLoading");
   const handleContinue = (values) => {
     const details = {
       applicationId: values.application_id,
       dob: values.dob,
       serviceType: selectedService.label,
     };
+    console.log(details, "detailsdetails");
     dispatch(
       applicationDetailsFetchRequest(
         details,
         (success) => {
+          console.log(
+            success.data.appointmentId,
+            "iygiywfyiweiyfiywefy==>",
+            success,
+          );
           if (success.data.category !== selectedService.label) {
             toast.error("Application not found");
+            // dispatch(applicationDetailsFetchFailure());
           } else {
             const tempArray = [];
             tempArray.push(success.data);
@@ -43,7 +51,6 @@ export default function Home() {
             if (success.data.appointmentId) {
               router.push({
                 pathname: "/reschedule-appointment",
-                query: { selectedService: selectedService.label },
               });
             } else {
               if (success.status === 200) {
@@ -56,10 +63,13 @@ export default function Home() {
           }
         },
         (error) => {
+          console.log(error.message, "errorrrr=>>>");
           if (error.message.includes("Network Error")) {
             toast.error(error.message);
+            // dispatch(applicationDetailsFetchFailure());
           } else {
             toast.error("Application not found");
+            // dispatch(applicationDetailsFetchFailure());
           }
         },
       ),

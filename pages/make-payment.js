@@ -51,6 +51,7 @@ const MakePayment = () => {
       category: applicationDetails.category,
       service_type: applicationDetails.category,
       status: status,
+      country: applicationDetails.country,
     };
     dispatch(
       appointmentScheduleFetchRequest(
