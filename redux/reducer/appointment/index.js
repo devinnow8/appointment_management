@@ -1,40 +1,40 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   appointment: [],
-  isLoading: false
+  isLoading: false,
 };
 
 export const appointmentScheduleSlice = createSlice({
-  name: 'appointmentScheduleSlice',
+  name: "appointmentScheduleSlice",
   initialState,
   reducers: {
     appointmentScheduleFetchRequest: {
-      reducer: state => {
-        state.isLoading = true
+      reducer: (state) => {
+        state.isLoading = true;
       },
-      prepare: requestBody => {
+      prepare: (requestBody, successCalback, errorCallback) => {
         return {
-          payload: { requestBody }
+          payload: { requestBody, successCalback, errorCallback },
         };
-      }
+      },
     },
     appointmentScheduleFetchSuccess: (state, action) => {
-      state.holidayList = action.payload;
-      state.isLoading = false
+      state.appointment = action.payload;
+      state.isLoading = false;
     },
-    appointmentScheduleFetchFailure: state => {
-      state.holidayList = [];
-      state.isLoading = false
-    }
-  }
+    appointmentScheduleFetchFailure: (state) => {
+      state.appointment = [];
+      state.isLoading = false;
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
 export const {
-    appointmentScheduleFetchRequest,
-    appointmentScheduleFetchSuccess,
-    appointmentScheduleFetchFailure
+  appointmentScheduleFetchRequest,
+  appointmentScheduleFetchSuccess,
+  appointmentScheduleFetchFailure,
 } = appointmentScheduleSlice.actions;
 
 export default appointmentScheduleSlice.reducer;

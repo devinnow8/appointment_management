@@ -1,7 +1,16 @@
 import React from "react";
 import { Col } from "reactstrap";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 const ApplicantPaymentDetails = () => {
+  const { appointmentDetails } = useSelector(
+    (state) => state.appointmentDetails,
+  );
+  const { memberDetails } = useSelector((state) => state.applicationDetails);
+  const totalMember = memberDetails && memberDetails.length;
+  const totalValue = 350 * totalMember;
+
   return (
     <Col md={5} lg={4} xl={4}>
       <h3 className="make-payment__title">Make Payment</h3>
@@ -12,7 +21,7 @@ const ApplicantPaymentDetails = () => {
             <h4>Appointment ID</h4>
           </div>
           <div className="make-payment__details--value">
-            <p>EPK4746534</p>
+            <p>{appointmentDetails.applicationDetails.applicationId}</p>
           </div>
         </div>
         <div className="make-payment__details--flex">
@@ -22,7 +31,11 @@ const ApplicantPaymentDetails = () => {
             </h4>
           </div>
           <div className="make-payment__details--value">
-            <p>11/12/2022</p>
+            <p>
+              {moment(appointmentDetails.applicantAppointment.date).format(
+                "DD/MM/YYYY",
+              )}
+            </p>
           </div>
         </div>
         <div className="make-payment__details--flex">
@@ -30,7 +43,9 @@ const ApplicantPaymentDetails = () => {
             <h4>Application Fee</h4>
           </div>
           <div className="make-payment__details--value">
-            <p>&#163;20</p>
+            <p>
+              {appointmentDetails.applicantAppointment.amount || "350"} / member
+            </p>
           </div>
         </div>
         <div className="make-payment__details--flex total-fee">
@@ -38,7 +53,7 @@ const ApplicantPaymentDetails = () => {
             <h4>Total Fee</h4>
           </div>
           <div className="make-payment__details--value">
-            <p>&#163;20</p>
+            <p>{totalValue}</p>
           </div>
         </div>
       </div>

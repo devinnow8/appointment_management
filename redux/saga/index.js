@@ -5,6 +5,7 @@ import appointmentSaga from "./appointment";
 import applicationDetailsSaga from "./application-detail";
 import categoryServiceListSaga from "./category-service";
 import appointmentSlotListSaga from "./appointment-slot";
+import appointmentDetailsSaga from "./appointment-details";
 
 const rootSaga = function* root() {
   yield all([
@@ -14,6 +15,7 @@ const rootSaga = function* root() {
     applicationDetailsSaga(),
     categoryServiceListSaga(),
     appointmentSlotListSaga(),
+    appointmentDetailsSaga(),
   ]);
 };
 export default rootSaga;

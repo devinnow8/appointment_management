@@ -2,8 +2,12 @@ import React from "react";
 import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap";
 import Image from "next/image";
 import { paymentModeType } from "../../constants/index";
+import { useSelector } from "react-redux";
+import Loader from "../loader";
 
 const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
+  const { isLoading } = useSelector((state) => state.appointmentSchedule);
+
   return (
     <Col md={7} lg={8} xl={8}>
       <div className="choose-gateway">
@@ -110,6 +114,7 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             <Col md={12} lg={12} className="text-center">
               <Button className="pay-btn" onClick={handlePayNow}>
                 Pay Now
+                <Loader isLoader={isLoading} />
               </Button>
             </Col>
           </Row>

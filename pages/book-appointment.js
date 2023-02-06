@@ -15,6 +15,7 @@ import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
 } from "../redux/reducer/application-detail";
+import { appointmentDetailsFetchRequest } from "../redux/reducer/appointment-details";
 import moment from "moment";
 
 export default () => {
@@ -107,12 +108,15 @@ export default () => {
   };
 
   const handlePaymentProceed = () => {
+    const details = {
+      applicationDetails: applicationDetails,
+      applicantAppointment: applicantAppointment,
+    };
+    dispatch(appointmentDetailsFetchRequest(details));
     router.push({
       pathname: "/make-payment",
       query: {
         centreId: selectedCenter?.centerId,
-        date: moment(applicantAppointment.date).format("DD/MM/YYYY"),
-        time: applicantAppointment.time,
         status: selectedCenter?.status,
       },
     });

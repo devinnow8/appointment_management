@@ -1,10 +1,11 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from "redux-saga/effects";
 import {
-    centerListFetchRequest,
-    centerListFetchSuccess,
-    centerListFetchFailure
-} from '../../reducer/center-list';
-import * as services from '../../../services';
+  centerListFetchRequest,
+  centerListFetchSuccess,
+  centerListFetchFailure,
+} from "../../reducer/center-list";
+import * as services from "../../../services";
+import { toast } from "react-toastify";
 
 function* getCenterListRequest() {
   try {
@@ -17,6 +18,7 @@ function* getCenterListRequest() {
     }
   } catch (e) {
     yield put(centerListFetchFailure());
+    toast.error("Centres Network Error");
   }
 }
 
