@@ -39,11 +39,19 @@ export default function Home() {
             tempArray.push(success.data);
             dispatch(applicationDetailsFetchMemberSuccess(tempArray));
             dispatch(applicationDetailsFetchSuccess(success.data));
-            if (success.status === 200) {
+            console.log(success.data.appointmentId, "iygiywfyiweiyfiywefy");
+            if (success.data.appointmentId) {
               router.push({
-                pathname: "/book-appointment",
+                pathname: "/reschedule-appointment",
                 query: { selectedService: selectedService.label },
               });
+            } else {
+              if (success.status === 200) {
+                router.push({
+                  pathname: "/book-appointment",
+                  query: { selectedService: selectedService.label },
+                });
+              }
             }
           }
         },

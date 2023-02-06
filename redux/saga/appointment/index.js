@@ -13,13 +13,15 @@ function* getAppointmentScheduleRequest(action) {
       action.payload.requestBody,
     );
     const { status, statusText, data = [] } = response || {};
-    if (status === 200) {
+    if (status === 201) {
       yield put(appointmentScheduleFetchSuccess(data));
+      action.payload.successCalback(response);
     } else {
       yield put(appointmentScheduleFetchFailure());
     }
   } catch (e) {
     yield put(appointmentScheduleFetchFailure());
+    action.payload.errorCallback(e);
   }
 }
 

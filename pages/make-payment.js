@@ -4,15 +4,22 @@ import { useRouter } from "next/router";
 import PaymentApplication from "../components/make-payment";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import moment from "moment";
 
 const MakePayment = () => {
   const dispatch = useDispatch();
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
+  const { appointmentDetails } = useSelector(
+    (state) => state.appointmentDetails,
+  );
+  const { appointment } = useSelector((state) => state.appointmentSchedule);
+
   const {
     push,
-    query: { centreId, date, time, status },
+    query: { centreId, status },
   } = useRouter();
   const [paymentType, setPaymentType] = useState({
     paymentMode: "Stripe",
@@ -31,16 +38,31 @@ const MakePayment = () => {
         applicationDetails.category === "Visa"
           ? applicationDetails.applicationId
           : applicationDetails.appointmentDetails?.id_number,
+      appointment_date:
+        appointmentDetails !== undefined &&
+        moment(appointmentDetails.applicantAppointment.date).format(
+          "YYYY-MM-DD",
+        ),
       center_id: centreId,
-      appointment_date: date,
-      appointment_time: time,
-      applicant_fullname: applicationDetails.name || "Chris",
+      appointment_time:
+        appointmentDetails !== undefined &&
+        appointmentDetails.applicantAppointment.time,
+      applicant_fullname: applicationDetails.name,
       category: applicationDetails.category,
       service_type: applicationDetails.category,
       status: status,
     };
-    dispatch(appointmentScheduleFetchRequest(details));
-    push("/appointment-booked");
+    dispatch(
+      appointmentScheduleFetchRequest(
+        details,
+        (success) => {
+          push("/appointment-booked");
+        },
+        (error) => {
+          toast.error("Something Went Wrong");
+        },
+      ),
+    );
   };
 
   return (
