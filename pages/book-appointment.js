@@ -113,6 +113,7 @@ export default () => {
         centreId: selectedCenter?.centerId,
         date: moment(applicantAppointment.date).format("DD/MM/YYYY"),
         time: applicantAppointment.time,
+        status: selectedCenter?.status,
       },
     });
   };

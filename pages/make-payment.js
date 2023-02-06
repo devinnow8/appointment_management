@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import PaymentApplication from "../components/make-payment";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
 
 const MakePayment = () => {
   const dispatch = useDispatch();
@@ -13,7 +12,7 @@ const MakePayment = () => {
   );
   const {
     push,
-    query: { centreId, date, time },
+    query: { centreId, date, time, status },
   } = useRouter();
   const [paymentType, setPaymentType] = useState({
     paymentMode: "Stripe",
@@ -38,7 +37,7 @@ const MakePayment = () => {
       applicant_fullname: applicationDetails.name || "Chris",
       category: applicationDetails.category,
       service_type: applicationDetails.category,
-      status: selectedCenter?.status,
+      status: status,
     };
     dispatch(appointmentScheduleFetchRequest(details));
     push("/appointment-booked");

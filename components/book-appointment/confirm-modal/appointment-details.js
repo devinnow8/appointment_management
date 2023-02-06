@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 const AppointmentDetails = ({ applicantAppointment }) => {
   const { memberDetails, applicationDetails } = useSelector(
@@ -68,7 +69,9 @@ const AppointmentDetails = ({ applicantAppointment }) => {
               </h5>
             </div>
             <div className="confirm-modal__applicant--value">
-              <p className="confirm-modal__applicant-desc">{applicationDetails.category}</p>
+              <p className="confirm-modal__applicant-desc">
+                {applicationDetails.category}
+              </p>
             </div>
           </div>
 
