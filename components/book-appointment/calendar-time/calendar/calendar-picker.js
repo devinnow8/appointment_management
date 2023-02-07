@@ -1,18 +1,18 @@
 import "react-day-picker/dist/style.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import { DAYS_FORMAT } from "../../../../constants/index";
 import { useSelector } from "react-redux";
 
-const holidays = [
-  new Date(2023, 1, 18),
-  new Date(2023, 1, 22),
-  new Date(2023, 1, 27),
-  new Date(2023, 1, 28),
-];
-
 const CalendarPicker = ({ selectedDate, handleSelectDate }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
+  const [holidaysList, setHolidaysList] = useState([]);
+
+  useEffect(() => {
+    const obtainedHoliday = holidayList.map((list) => new Date(list.date));
+    setHolidaysList(obtainedHoliday);
+  }, []);
+
   const getSundays = (date) => {
     var d = date || new Date(),
       month = d.getMonth(),
@@ -33,7 +33,7 @@ const CalendarPicker = ({ selectedDate, handleSelectDate }) => {
     return sundays;
   };
   const weekends = getSundays();
-  const selectedDaysToDisable = holidays;
+  const selectedDaysToDisable = holidaysList;
 
   const getModifierStyles = () => {
     return {
@@ -79,7 +79,7 @@ const CalendarPicker = ({ selectedDate, handleSelectDate }) => {
           },
           ...selectedDaysToDisable,
         ]}
-        modifiers={{ holidays: holidays, weekend: weekends }}
+        modifiers={{ holidays: holidaysList, weekend: weekends }}
         modifiersStyles={getModifierStyles()}
         onDayClick={(day) => {
           handleSelectDate(day);
@@ -89,8 +89,6 @@ const CalendarPicker = ({ selectedDate, handleSelectDate }) => {
           formatWeekdayShort: getFormattedDayTitle,
         }}
       />
-
- 
     </>
   );
 };
