@@ -362,9 +362,16 @@
         background: #6c757d !important;
         border: none;
         color: #fff;
+        padding: 0;
+        height: 44px;
       }
       .continue {
         @extend .primary-btn;
+        padding: 0;
+        height: 44px;
+        > img {
+          width: 20px;
+        }
       }
     }
     .calender-months {
