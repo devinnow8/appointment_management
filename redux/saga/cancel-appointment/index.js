@@ -14,8 +14,7 @@ function* getCancelAppointmentRequest(action) {
       action.payload.requestBody,
     );
     const { status, statusText, data = [] } = response || {};
-    console.log(status, response, "responseresponseresponse");
-    if (status === 201) {
+    if (status === 200) {
       yield put(cancelAppointmentFetchSuccess(data));
       action.payload.successCalback(response);
     } else {

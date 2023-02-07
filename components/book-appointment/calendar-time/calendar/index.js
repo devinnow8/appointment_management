@@ -5,6 +5,7 @@ import SelectDropdowns from "./country-centre-select";
 import { useSelector } from "react-redux";
 import TimeSlots from "../time-slots";
 import { Col, Row } from "reactstrap";
+import moment from "moment";
 
 const Calendar = ({
   setApplicantAppointment,
@@ -27,7 +28,17 @@ const Calendar = ({
     value: applicationDetails.country,
   });
 
+  console.log(
+    applicationDetails,
+    "applicationDetailsapplicationDetails1233",
+    new Date(
+      applicationDetails.appointmentDate +
+        " " +
+        applicationDetails.appointmentTime,
+    ),
+  );
   const handleSelectDate = (value) => {
+    console.log(value, "valuevaluevalue");
     setSelectedDate(value);
     setApplicantAppointment((prev) => ({
       ...prev,

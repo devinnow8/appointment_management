@@ -14,10 +14,9 @@ function* getRescheduleAppointmentRequest(action) {
       action.payload.requestBody,
     );
     const { status, statusText, data = [] } = response || {};
-    console.log(status, response, "responseresponseresponse");
-    if (status === 201) {
+    if (status === 200) {
+      action.payload.successCalback(status);
       yield put(rescheduleAppointmentFetchSuccess(data));
-      action.payload.successCalback(response);
     } else {
       yield put(rescheduleAppointmentFetchFailure());
     }

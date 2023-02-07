@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { rescheduleAppointmentFetchRequest } from "../../../redux/reducer/reschedule-appointment";
 import Loader from "../../loader";
+import { toast } from "react-toastify";
 
 const CalendarTime = ({
   arrayTime,
@@ -35,9 +36,12 @@ const CalendarTime = ({
       centerId: selectedCenter?.centerId,
       appointmentId: applicationDetails.appointmentId,
     };
-    dispatch(rescheduleAppointmentFetchRequest(details), (success) => {
-      router.push("/appointment-booked");
-    });
+    dispatch(
+      rescheduleAppointmentFetchRequest(details, (success) => {
+        toast.success("Appointment Rescheduled Successfully");
+        router.push("/appointment-booked");
+      }),
+    );
   };
   return (
     <div className="appointment-calender">
@@ -62,7 +66,7 @@ const CalendarTime = ({
               <div className="appointment-calender__buttons">
                 <Button
                   className="cancel-btn me-3"
-                  // onClick={() => router.back()}
+                  onClick={() => router.push("/")}
                 >
                   Cancel
                 </Button>

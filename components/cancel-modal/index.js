@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import {cancelAppointmentFetchRequest} from '../../redux/reducer/cancel-appointment'
+import { cancelAppointmentFetchRequest } from "../../redux/reducer/cancel-appointment";
 import { useSelector, useDispatch } from "react-redux";
 
 function CancelModal({ isCancel, setIsCancel }) {
@@ -13,18 +13,18 @@ function CancelModal({ isCancel, setIsCancel }) {
   );
 
   const handleCancel = () => {
-      const details = {
-        date: applicationDetails.date,
-        time: applicationDetails?.time,
-        centerId: applicationDetails?.centerId,
-        appointmentId: applicationDetails?.appointmentId,
-      };
-      dispatch(cancelAppointmentFetchRequest(details), (success)=> {
+    const details = {
+      centerId: applicationDetails?.centerId,
+      appointmentId: applicationDetails?.appointmentId,
+    };
+    dispatch(
+      cancelAppointmentFetchRequest(details, (success) => {
         toast.success("Appointment Cancelled Suucessfully");
         setIsCancel(!isCancel);
         push("/");
-      })
-  }
+      }),
+    );
+  };
 
   return (
     <div>
@@ -51,10 +51,7 @@ function CancelModal({ isCancel, setIsCancel }) {
           <h3 class="confirm-modal__title">Cancel Appointment</h3>
           <p>Are you sure you want to cancel this appointment?</p>
           <div className="confirm-modal__btn">
-            <button
-              className="primary-btn me-2"
-              onClick={handleCancel}
-            >
+            <button className="primary-btn me-2" onClick={handleCancel}>
               Ok
             </button>
             <button

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  rescheduleAppointment: {},
+  rescheduleAppointment: "",
   isLoading: false,
 };
 
@@ -27,7 +27,7 @@ export const rescheduleAppointmentSlice = createSlice({
       state.isLoading = false;
     },
     rescheduleAppointmentFetchFailure: (state) => {
-      state.rescheduleAppointment = [];
+      state.rescheduleAppointment = "";
       state.isLoading = false;
     },
   },
