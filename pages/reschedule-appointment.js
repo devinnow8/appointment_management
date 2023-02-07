@@ -12,9 +12,11 @@ function RescheduleAppointment() {
   );
   const { centerList } = useSelector((state) => state.centerList);
   const [isCancel, setIsCancel] = useState(false);
-  const centerName = centerList.filter(
-    (data) => data.centerId === applicationDetails.centerId,
-  );
+  // const centerName =
+  //   centerList.length > 0 &&
+  //   centerList.filter(
+  //     (data) => data?.centerId === applicationDetails?.centerId,
+  //   );
   const handleReschedule = () => {
     push({
       pathname: "/book-appointment",
@@ -66,7 +68,8 @@ function RescheduleAppointment() {
               <div className="appointment-booking-details-list">
                 <span className="booking-details-field">Location</span>
                 <span className="booking-details-value">
-                  {centerName[0]?.centerName}
+                  {/* {centerName[0]?.centerName} */}
+                  {applicationDetails.country}
                 </span>
               </div>
             </div>
