@@ -147,6 +147,11 @@
       .pay-btn {
         @extend .primary-btn;
         margin-top: 20px;
+        padding: 0;
+        height: 44px;
+        .loader-img {
+          width: 20px;
+        }
       }
     }
   }
