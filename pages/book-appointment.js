@@ -45,12 +45,6 @@ export default () => {
     location: "",
     amount: "",
   });
-  console.log(
-    applicationDetails,
-    "applicationDetailsapplicationDetails==>",
-    applicantAppointment,
-  );
-
   const handleAddMember = (values) => {
     if (familyMember.length === 4) {
       toast.warn("You can't add more than 4 members ");
@@ -60,7 +54,6 @@ export default () => {
       setModal(true);
     }
   };
-
   const handleConfirm = () => {
     setModal(false);
     const details = {
@@ -97,13 +90,11 @@ export default () => {
       ),
     );
   };
-
   const handleDeleteApplicant = (data, i) => {
     setDeleteMember(data);
     setDeleteModal(true);
     setDeleteId(i);
   };
-
   const deleteConfirmation = (i) => {
     const data = [...memberDetails];
     data.splice(i, 1);
@@ -111,7 +102,6 @@ export default () => {
     setDeleteModal(false);
     toast.success("Applicant Deleted Successfully");
   };
-
   const handlePaymentProceed = () => {
     const details = {
       applicationDetails: applicationDetails,
