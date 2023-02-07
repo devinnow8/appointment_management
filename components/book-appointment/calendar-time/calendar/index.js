@@ -30,6 +30,8 @@ const Calendar = ({
 
   console.log(
     applicationDetails,
+    arrayTime,
+    arrayTime.indexOf(applicationDetails.appointmentTime),
     "applicationDetailsapplicationDetails1233",
     new Date(
       applicationDetails.appointmentDate +
@@ -37,6 +39,21 @@ const Calendar = ({
         applicationDetails.appointmentTime,
     ),
   );
+  useEffect(() => {
+    if (applicationDetails.appointmentId !== undefined) {
+      setSelectedDate(
+        new Date(
+          applicationDetails.appointmentDate,
+          // +
+          //   " " +
+          //   applicationDetails.appointmentTime,
+        ),
+      );
+    }
+  }, []);
+
+  console.log(selectedDate, "selectedDateselectedDate");
+
   const handleSelectDate = (value) => {
     console.log(value, "valuevaluevalue");
     setSelectedDate(value);
