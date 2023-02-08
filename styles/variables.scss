@@ -75,7 +75,7 @@ $laptop: 1280px;
         font-weight: 800;
         font-size: 22px;
         text-align: center;
-        margin: 0px 0px 15px 0px;
+        margin: 0px 0px 10px 0px;
         @media (max-width: $xxLDesktop) {
           font-size: 17px;
         }
@@ -87,8 +87,9 @@ $laptop: 1280px;
         font-size: 18px;
         color: #9b9b9b;
         text-align: center;
-        margin-top: -22px;
+        // margin-top: -22px;
         text-align: center;
+        margin-bottom: 20px;
       }
       .confirm-modal__applicant--info {
         border: 1px solid #cdcdcd;
