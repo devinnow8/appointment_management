@@ -16,6 +16,7 @@ function ConfirmModal({
   isLoader,
   setModal,
   setConfirmCalendar,
+  isAppointmentBooked,
 }) {
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
@@ -53,7 +54,9 @@ function ConfirmModal({
             </>
           ) : (
             <h3 className="confirm-modal__title">
-              Please confirm applicant details
+              {isAppointmentBooked
+                ? "Your Appointment is Already booked"
+                : "Please confirm applicant details"}
             </h3>
           )}
           {confirmCalendar ? (
@@ -87,10 +90,14 @@ function ConfirmModal({
                 </Button>
               </>
             ) : (
-              <Button className="confirm" onClick={handleConfirm}>
-                Confirm
-                <Loader isLoader={isLoader} />
-              </Button>
+              <>
+                {!isAppointmentBooked && (
+                  <Button className="confirm" onClick={handleConfirm}>
+                    Confirm
+                    <Loader isLoader={isLoader} />
+                  </Button>
+                )}
+              </>
             )}
           </div>
         </ModalBody>

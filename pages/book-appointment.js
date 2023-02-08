@@ -45,55 +45,60 @@ export default () => {
     location: "",
     amount: "",
   });
+  const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
+  const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
+
   const handleAddMember = (values) => {
     if (memberDetails.length === 5) {
       toast.warn("You can't add more than 4 members ");
     } else {
-      setApplicantDetail(values);
-      setModal(true);
+      const details = {
+        applicationId: values.application_id,
+        dob: values.dob,
+        serviceType: applicationDetails.category,
+      };
+      dispatch(
+        applicationDetailsFetchRequest(
+          details,
+          (success) => {
+            if (success.data.appointmentId !== undefined) {
+              setApplicantDetail(values);
+              setIsAppointmentBooked(true);
+            } else {
+              if (
+                applicationDetails.country === success.data.country &&
+                success.data.category === applicationDetails.category
+              ) {
+                setModal(true);
+                setApplicantDetail(values);
+                setIsAppointmentDetail(success.data);
+              } else {
+                toast.warn("Application not found");
+              }
+            }
+          },
+          (error) => {
+            if (error.message.includes("Network Error")) {
+              toast.error(error.message);
+            } else {
+              toast.error("Application not found");
+            }
+          },
+        ),
+      );
     }
   };
   const handleConfirm = () => {
     setIsLoader(true);
     setModal(false);
-    const details = {
-      applicationId: applicantDetail.application_id,
-      dob: applicantDetail.dob,
-      serviceType: applicationDetails.category,
-    };
     dispatch(
-      applicationDetailsFetchRequest(
-        details,
-        (success) => {
-          if (
-            applicationDetails.country === success.data.country &&
-            success.data.category === applicationDetails.category
-          ) {
-            dispatch(
-              applicationDetailsFetchMemberSuccess([
-                ...memberDetails,
-                success.data,
-              ]),
-            );
-            toast.success("Applicant Addedd Successfully");
-            setIsLoader(false);
-          } else {
-            toast.warn("Application not found");
-            setIsLoader(false);
-          }
-        },
-        (error) => {
-          console.log("errroorr==>>", applicationDetails.category);
-          if (error.message.includes("Network Error")) {
-            toast.error(error.message);
-            setIsLoader(false);
-          } else {
-            toast.error("Application not found");
-            setIsLoader(false);
-          }
-        },
-      ),
+      applicationDetailsFetchMemberSuccess([
+        ...memberDetails,
+        isAppointmentDetail,
+      ]),
+      setIsLoader(false),
     );
+    toast.success("Applicant Addedd Successfully");
   };
   const handleDeleteApplicant = (data, i) => {
     setDeleteMember(data);
@@ -188,6 +193,15 @@ export default () => {
           deleteMember={deleteMember}
           deleteId={deleteId}
           deleteConfirmation={deleteConfirmation}
+        />
+      )}
+      {isAppointmentBooked && (
+        <ConfirmModal
+          modal={isAppointmentBooked}
+          setModal={setIsAppointmentBooked}
+          setConfirmCalendar={setConfirmCalendar}
+          applicantDetail={applicantDetail}
+          isAppointmentBooked={isAppointmentBooked}
         />
       )}
     </>
