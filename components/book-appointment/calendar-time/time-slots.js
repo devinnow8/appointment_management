@@ -141,30 +141,6 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
             <p className="time-box">09:00 AM</p>
             <p className="time-box active">09:00 AM</p>
             <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box active">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box active">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box active">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
-            <p className="time-box">09:00 AM</p>
           </div>
           <button
             className="next-btn"

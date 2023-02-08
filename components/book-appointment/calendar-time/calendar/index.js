@@ -103,7 +103,12 @@ const Calendar = ({
             selectedCenter={selectedCenter}
           />
         </Col>
-        <Col md={2} lg={2} xl={2} className="d-flex justify-content-end">
+        <Col
+          md={2}
+          lg={2}
+          xl={2}
+          className="d-flex justify-content-start justify-content-md-end"
+        >
           <TimeSlots
             arrayTime={arrayTime}
             slideToShow={slideToShow}

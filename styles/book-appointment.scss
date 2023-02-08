@@ -209,12 +209,16 @@
       // @media (max-height: 660px) {
       //   margin-top: 55px;
       // }
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
       width: 9.5rem;
       text-align: right;
       position: relative;
       height: 91%;
       margin-top: 17px;
+      @media (max-width: 768px) {
+        width: 100%;
+        box-shadow: none;
+      }
       @media (max-height: 660px) {
         height: 86%;
       }
@@ -249,6 +253,7 @@
         overflow-y: auto;
         border-radius: 5px;
         padding: 20px 0px;
+        
         @media (max-height: 900px) {
           height: 16.3rem;
         }
@@ -258,8 +263,14 @@
         @media (max-height: 700px) {
           height: 16rem;
         }
-        @media (max-height: 620px) {
+        @media (max-height: 660px) {
           height: 12.3rem;
+        }
+        @media (max-width: 768px) {
+          flex-direction: row;
+          height: unset;
+          flex-wrap: wrap;
+          overflow-y: hidden;
         }
         .time-box {
           border: 1px solid #979797;
@@ -272,6 +283,10 @@
           justify-content: center;
           margin-bottom: 15px;
           font-weight: 500;
+          @media (max-width: 768px) {
+            margin-right: 10px;
+            margin-bottom: 10px;
+          } 
           &.active {
             color: $primary-color;
             border: 1px solid $primary-color;
@@ -286,6 +301,9 @@
         border: none;
         border-radius: 5px;
         padding: 2px 10px 4px 10px;
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
       .next-btn {
         position: absolute;
@@ -295,6 +313,9 @@
         border: none;
         border-radius: 5px;
         padding: 2px 10px 4px 10px;
+        @media (max-width: 768px) {
+          display: none;
+        }
       }
     }
     .appointment-calender__time--flex {
