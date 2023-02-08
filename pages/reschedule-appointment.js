@@ -4,19 +4,14 @@ import { useState, useEffect } from "react";
 import CancelModal from "../components/cancel-modal";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 function RescheduleAppointment() {
   const { push } = useRouter();
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  const { centerList } = useSelector((state) => state.centerList);
   const [isCancel, setIsCancel] = useState(false);
-  // const centerName =
-  //   centerList.length > 0 &&
-  //   centerList.filter(
-  //     (data) => data?.centerId === applicationDetails?.centerId,
-  //   );
   const handleReschedule = () => {
     push({
       pathname: "/book-appointment",
@@ -37,9 +32,7 @@ function RescheduleAppointment() {
       <Container>
         <Row className="justify-content-center appointment-booking">
           <Col sm={10} md={10} lg={5}>
-            <h2 className="appointment-booking-title">
-              Your Appointment is already Booked{" "}
-            </h2>
+            <h2 className="appointment-booking-title">Your Appointment</h2>
             <div className="appointment-booking-details">
               <div className="appointment-booking-details-list">
                 <span className="booking-details-field">Name</span>
@@ -54,9 +47,11 @@ function RescheduleAppointment() {
                 </span>
               </div>
               <div className="appointment-booking-details-list">
-                <span className="booking-details-field">Date</span>
+                <span className="booking-details-field">Date DD/MM/YYYY</span>
                 <span className="booking-details-value">
-                  {applicationDetails.appointmentDate}
+                  {moment(applicationDetails.appointmentDate).format(
+                    "DD/MM/YYYY",
+                  )}
                 </span>
               </div>
               <div className="appointment-booking-details-list">
