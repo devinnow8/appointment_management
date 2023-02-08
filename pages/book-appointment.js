@@ -21,7 +21,7 @@ import moment from "moment";
 export default () => {
   const dispatch = useDispatch();
   const { centerList } = useSelector((state) => state.centerList);
-  const { applicationDetails, memberDetails, isLoading } = useSelector(
+  const { applicationDetails, memberDetails } = useSelector(
     (state) => state.applicationDetails,
   );
   const { appointmentSlotList, isLoadingSlot } = useSelector(
@@ -29,6 +29,7 @@ export default () => {
   );
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
+  const [isLoader, setIsLoader] = useState(false);
   const [confirmCalendar, setConfirmCalendar] = useState(false);
   const [applicantDetail, setApplicantDetail] = useState();
   const [modal, setModal] = useState(false);
@@ -54,7 +55,10 @@ export default () => {
       setModal(true);
     }
   };
+  console.log("errroorr==>>123", applicationDetails.category);
+
   const handleConfirm = () => {
+    setIsLoader(true);
     setModal(false);
     const details = {
       applicationId: applicantDetail.application_id,
@@ -76,15 +80,20 @@ export default () => {
               ]),
             );
             toast.success("Applicant Addedd Successfully");
+            setIsLoader(false);
           } else {
             toast.warn("Application not found");
+            setIsLoader(false);
           }
         },
         (error) => {
+          console.log("errroorr==>>", applicationDetails.category);
           if (error.message.includes("Network Error")) {
             toast.error(error.message);
+            setIsLoader(false);
           } else {
             toast.error("Application not found");
+            setIsLoader(false);
           }
         },
       ),
@@ -173,7 +182,7 @@ export default () => {
           applicantAppointment={applicantAppointment}
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
-          isLoader={isLoading}
+          isLoader={isLoader}
         />
       )}
       {deleteModal && (
