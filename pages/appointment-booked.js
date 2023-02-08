@@ -2,9 +2,12 @@ import { Button, Col, Container, Row } from "reactstrap";
 import Header from "../components/header";
 import jsPDF from "jspdf";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 function AppointmentBooked() {
   const { push } = useRouter();
+  const { appointment } = useSelector((state) => state.appointmentSchedule);
+
   const printDocument = () => {
     const pdf = new jsPDF();
     pdf.text(
@@ -36,10 +39,10 @@ function AppointmentBooked() {
               />
               <h2 className="apt-booked__title">Appointment Booked</h2>
               <p className="apt-booked__para">
-                Your appointment booking is complete, Appointment ID is:
-                XYZ12345. A copy of the appointment slip and checklist have been
+                {`Your appointment booking is complete, Appointment ID is:
+                ${appointment.application_id}. A copy of the appointment slip and checklist have been
                 sent to your email. Optionally you can download it by click the
-                buttons given below.
+                buttons given below.`}
               </p>
               <p className="apt-booked__para">
                 In case you want to reschedule, Please{" "}

@@ -32,7 +32,7 @@ const ApplicantPaymentDetails = () => {
           </div>
           <div className="make-payment__details--value">
             <p>
-              {moment(appointmentDetails.applicantAppointment.date).format(
+              {moment(appointmentDetails.applicantAppointment?.date).format(
                 "DD/MM/YYYY",
               )}
             </p>
@@ -44,7 +44,7 @@ const ApplicantPaymentDetails = () => {
           </div>
           <div className="make-payment__details--value">
             <p>
-              {appointmentDetails.applicantAppointment.amount || "350"} / member
+              {appointmentDetails.applicantAppointment?.amount || "350"} / member
             </p>
           </div>
         </div>

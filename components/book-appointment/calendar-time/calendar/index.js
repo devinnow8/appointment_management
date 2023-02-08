@@ -35,31 +35,28 @@ const Calendar = ({
   useEffect(() => {
     if (appointmentDetails.applicantAppointment) {
       setSelectedDate(new Date(appointmentDetails.applicantAppointment.date));
-    //   const index = arrayTime.findIndex(
-    //     (x) => x.fromTime === appointmentDetails.applicantAppointment.time,
-    //   );
+      const index = arrayTime.findIndex(
+        (x) => x.fromTime === appointmentDetails.applicantAppointment.time,
+      );
+      console.log(index, "indexindex===>");
     }
-  }, [appointmentDetails.applicantAppointment.time, appointmentDetails.applicantAppointment.date]);
+  }, [
+    appointmentDetails.applicantAppointment?.time,
+    appointmentDetails.applicantAppointment?.date,
+    slideToShow,
+    selectedCenter,
+  ]);
 
-//   console.log(
-//     arrayTime,
-//     "arrayTime",
-//     arrayTime.findIndex(
-//       (x) => x.fromTime === applicationDetails.appointmentTime,
-//     ),
-//     applicationDetails.appointmentTime,
-//     applicationDetails
-//   );
   useEffect(() => {
     if (applicationDetails.appointmentId !== undefined) {
-    //   const index = arrayTime.findIndex(
-    //     (x) => x.fromTime === applicationDetails.appointmentTime,
-    //   );
-    //   console.log(index, "arrayTimeReschedule");
+        const index = arrayTime.findIndex(
+          (x) => x.fromTime === applicationDetails.appointmentTime,
+        );
+        console.log(index, "arrayTimeReschedule");
       // setSlideToShow(index);
       setSelectedDate(new Date(applicationDetails.appointmentDate));
     }
-  }, [applicationDetails.appointmentId]);
+  }, [applicationDetails.appointmentId,slideToShow,selectedCenter]);
 
   const handleSelectDate = (value) => {
     setSelectedDate(value);
