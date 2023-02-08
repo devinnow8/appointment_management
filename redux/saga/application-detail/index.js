@@ -1,5 +1,8 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { applicationDetailsFetchRequest,applicationDetailsFetchFailure } from "../../reducer/application-detail";
+import {
+  applicationDetailsFetchRequest,
+  applicationDetailsFetchFailure,
+} from "../../reducer/application-detail";
 import * as services from "../../../services";
 
 function* getApplicationDetailsRequest(action) {
@@ -10,7 +13,7 @@ function* getApplicationDetailsRequest(action) {
     );
     action.payload.successCalback(response);
   } catch (e) {
-    yield put(applicationDetailsFetchFailure());
+    // yield put(applicationDetailsFetchFailure());
     action.payload.errorCallback(e);
   }
 }
