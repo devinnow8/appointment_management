@@ -47,7 +47,9 @@ function RescheduleAppointment() {
                 </span>
               </div>
               <div className="appointment-booking-details-list">
-                <span className="booking-details-field">Date DD/MM/YYYY</span>
+                <span className="booking-details-field">
+                  Date <span>(dd/mm/yyyy)</span>
+                </span>
                 <span className="booking-details-value">
                   {moment(applicationDetails.appointmentDate).format(
                     "DD/MM/YYYY",

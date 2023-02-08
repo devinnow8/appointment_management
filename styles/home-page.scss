@@ -64,6 +64,9 @@
           @media (max-width: $xxLDesktop) {
             font-size: 14px;
           }
+          @media (min-width: 992px) and (max-width: 1200px) {
+            font-size: 12px;
+          }
           .star {
             color: #ff2222;
           }
