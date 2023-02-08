@@ -1,6 +1,6 @@
 import React from "react";
 import Applicants from "../applicants";
-import CalendarTime from "../calendar-time";
+import CalendarTime from "../calendar-time/index";
 import { Container } from "reactstrap";
 
 const DetailSection = ({

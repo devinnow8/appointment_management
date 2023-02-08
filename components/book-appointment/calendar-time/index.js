@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Row } from "reactstrap";
 import { useRouter } from "next/router";
-import Calendar from "./calendar";
+import Calendar from "./calendar/index";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import { rescheduleAppointmentFetchRequest } from "../../../redux/reducer/reschedule-appointment";

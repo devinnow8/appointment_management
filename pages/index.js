@@ -74,6 +74,9 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(categoryServiceListFetchRequest());
+  }, []);
+
+  useEffect(() => {
     if (categoryServiceList.length > 0) {
       const obtainedList = categoryServiceList.map((service) => {
         return {
@@ -88,7 +91,7 @@ export default function Home() {
       setCategoryServiceOptions(obtainedList);
       setSelectedService(obtainedList[0]);
     }
-  }, []);
+  }, [categoryServiceList]);
 
   return (
     <>
