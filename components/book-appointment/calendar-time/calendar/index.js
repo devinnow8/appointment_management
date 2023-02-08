@@ -30,8 +30,6 @@ const Calendar = ({
     value: applicationDetails.country,
   });
 
-  console.log(appointmentDetails, "appointmentDetails==>");
-
   useEffect(() => {
     if (appointmentDetails.applicantAppointment) {
       setSelectedDate(new Date(appointmentDetails.applicantAppointment.date));

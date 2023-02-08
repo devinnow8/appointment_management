@@ -2,11 +2,17 @@ import { Button, Col, Container, Row } from "reactstrap";
 import Header from "../components/header";
 import jsPDF from "jspdf";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { appointmentBookedPdfRequest } from "../redux/reducer/appointment-booked";
+import { useEffect } from "react";
 
 function AppointmentBooked() {
   const { push } = useRouter();
+  const dispatch = useDispatch();
   const { appointment } = useSelector((state) => state.appointmentSchedule);
+  const { appointmentBookedPdf } = useSelector(
+    (state) => state.appointmentBooked,
+  );
 
   const printDocument = () => {
     const pdf = new jsPDF();
@@ -22,8 +28,11 @@ function AppointmentBooked() {
     );
     pdf.save("download.pdf");
   };
-  const handlePrintSlip = () => {
-    window.open("https://apt.oisservices.com/app/print/NDA5NDUz", "_blank");
+
+  const handlePrintSlip = (id) => {
+    console.log(id, "appointment=>>>");
+    // window.open("https://apt.oisservices.com/app/print/NDA5NDUz", "_blank");
+    dispatch(appointmentBookedPdfRequest(id));
   };
   return (
     <>
@@ -52,7 +61,10 @@ function AppointmentBooked() {
                 .
               </p>
               <div className="d-flex justify-content-center align-items-center">
-                <Button className="slip-btn mb-sm-0" onClick={handlePrintSlip}>
+                <Button
+                  className="slip-btn mb-sm-0"
+                  onClick={() => handlePrintSlip(appointment.application_id)}
+                >
                   Print Booking Slip
                 </Button>
                 <Button className="checklist-btn" onClick={printDocument}>

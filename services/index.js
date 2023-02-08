@@ -6,3 +6,4 @@ export * from "./category-service";
 export * from "./appointment-slot";
 export * from "./reschedule-appointment";
 export * from './cancel-appointment'
+export * from './appointment-booked'
