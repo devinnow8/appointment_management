@@ -35,7 +35,6 @@ export default () => {
   const [modal, setModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [deleteId, setDeleteId] = useState(false);
-  const [familyMember, setFamilyMember] = useState([]);
   const [deleteMember, setDeleteMember] = useState();
   const [selectedCenter, setSelectedCenter] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -47,16 +46,13 @@ export default () => {
     amount: "",
   });
   const handleAddMember = (values) => {
-    if (familyMember.length === 4) {
+    if (memberDetails.length === 5) {
       toast.warn("You can't add more than 4 members ");
     } else {
       setApplicantDetail(values);
-      setFamilyMember([...familyMember, { ...values }]);
       setModal(true);
     }
   };
-  console.log("errroorr==>>123", applicationDetails.category);
-
   const handleConfirm = () => {
     setIsLoader(true);
     setModal(false);
