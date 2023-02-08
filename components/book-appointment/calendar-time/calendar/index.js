@@ -5,7 +5,6 @@ import SelectDropdowns from "./country-centre-select";
 import { useSelector } from "react-redux";
 import TimeSlots from "../time-slots";
 import { Col, Row } from "reactstrap";
-import moment from "moment";
 
 const Calendar = ({
   setApplicantAppointment,
@@ -28,34 +27,18 @@ const Calendar = ({
     value: applicationDetails.country,
   });
 
-  console.log(
-    applicationDetails,
-    arrayTime,
-    arrayTime.indexOf(applicationDetails.appointmentTime),
-    "applicationDetailsapplicationDetails1233",
-    new Date(
-      applicationDetails.appointmentDate +
-        " " +
-        applicationDetails.appointmentTime,
-    ),
-  );
   useEffect(() => {
     if (applicationDetails.appointmentId !== undefined) {
-      setSelectedDate(
-        new Date(
-          applicationDetails.appointmentDate,
-          // +
-          //   " " +
-          //   applicationDetails.appointmentTime,
-        ),
-      );
+      // const index = arrayTime.findIndex(
+      //   (x) => x.fromTime === applicationDetails.appointmentTime,
+      // );
+      // console.log(index, "indexindex");
+      // setSlideToShow(index);
+      setSelectedDate(new Date(applicationDetails.appointmentDate));
     }
   }, []);
 
-  console.log(selectedDate, "selectedDateselectedDate");
-
   const handleSelectDate = (value) => {
-    console.log(value, "valuevaluevalue");
     setSelectedDate(value);
     setApplicantAppointment((prev) => ({
       ...prev,
