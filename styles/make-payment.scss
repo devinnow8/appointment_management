@@ -144,6 +144,16 @@
           color: #bcbcbc;
         }
       }
+      .cancel {
+        @extend .primary-btn;
+        background: #6c757d !important;
+        border: none;
+        color: #fff;
+        padding: 0;
+        height: 44px;
+        margin-top: 20px;
+        margin-right: 20px;
+      }
       .pay-btn {
         @extend .primary-btn;
         margin-top: 20px;

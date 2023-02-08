@@ -19,7 +19,6 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
     );
   }, [buttonClick]);
 
-  console.log(arrayTime, "arrayTimearrayTime");
   return (
     <div className="appointment-calender__time">
       {isLoader ? (

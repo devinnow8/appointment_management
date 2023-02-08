@@ -19,6 +19,9 @@ export const appointmentDetailsSlice = createSlice({
     appointmentDetailsFetchSuccess: (state, action) => {
       state.appointmentDetails = action.payload;
     },
+    appointmentDetailsFetchFailure: (state, action) => {
+      state.appointmentDetails = {};
+    },
   },
 });
 
@@ -26,6 +29,7 @@ export const appointmentDetailsSlice = createSlice({
 export const {
   appointmentDetailsFetchRequest,
   appointmentDetailsFetchSuccess,
+  appointmentDetailsFetchFailure
 } = appointmentDetailsSlice.actions;
 
 export default appointmentDetailsSlice.reducer;

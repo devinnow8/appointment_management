@@ -21,7 +21,7 @@ const ApplicantPaymentDetails = () => {
             <h4>Appointment ID</h4>
           </div>
           <div className="make-payment__details--value">
-            <p>{appointmentDetails.applicationDetails.applicationId}</p>
+            <p>{appointmentDetails.applicationDetails?.applicationId}</p>
           </div>
         </div>
         <div className="make-payment__details--flex">

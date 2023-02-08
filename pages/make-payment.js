@@ -3,6 +3,7 @@ import Header from "../components/header";
 import { useRouter } from "next/router";
 import PaymentApplication from "../components/make-payment";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
+import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import moment from "moment";
@@ -58,6 +59,7 @@ const MakePayment = () => {
         details,
         (success) => {
           push("/appointment-booked");
+          dispatch(appointmentDetailsFetchFailure())
         },
         (error) => {
           toast.error("Something Went Wrong");

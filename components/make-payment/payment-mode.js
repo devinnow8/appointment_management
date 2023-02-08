@@ -4,9 +4,11 @@ import Image from "next/image";
 import { paymentModeType } from "../../constants/index";
 import { useSelector } from "react-redux";
 import Loader from "../loader";
+import { useRouter } from "next/router";
 
 const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
   const { isLoading } = useSelector((state) => state.appointmentSchedule);
+  const router = useRouter();
 
   return (
     <Col md={7} lg={8} xl={8}>
@@ -112,6 +114,9 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
               </FormGroup>
             </Col>
             <Col md={12} lg={12} className="text-center">
+            <Button className="cancel" onClick={() => router.back()}>
+                Cancel
+              </Button>
               <Button className="pay-btn" onClick={handlePayNow}>
                 Pay Now
                 <Loader isLoader={isLoading} />
