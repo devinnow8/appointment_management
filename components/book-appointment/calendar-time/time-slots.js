@@ -65,7 +65,7 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
         </>
       ) : arrayTime.length > 0 ? (
         <>
-          <div className="appointment-calender__time--flex">
+          {/* <div className="appointment-calender__time--flex">
             <Button
               className="appointment-calender__time--arrowPrev"
               onClick={() => slider.current.slickPrev()}
@@ -111,7 +111,22 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
                 height={9}
               />
             </Button>
+          </div> */}
+          <button className="prev-btn">
+            <Image src="/images/up-arrow.png" alt="" width={12} height={9} />
+          </button>
+          <div className="time-slot">
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box active">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
           </div>
+          <button className="next-btn">
+            <Image src="/images/down-arrow.png" alt="" width={12} height={9} />
+          </button>
         </>
       ) : (
         <div className="appointment-calender__time--flex">

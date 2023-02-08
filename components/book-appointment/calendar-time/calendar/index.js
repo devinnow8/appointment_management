@@ -94,7 +94,7 @@ const Calendar = ({
           />
         </Col>
       </Row>
-      <Row className="align-items-center">
+      <Row className="justify-content-end align-items-cente">
         <Col md={10} lg={10} xl={10}>
           <CalendarPicker
             selectedDate={selectedDate}
@@ -103,7 +103,7 @@ const Calendar = ({
             selectedCenter={selectedCenter}
           />
         </Col>
-        <Col md={2} lg={2} xl={2}>
+        <Col md={2} lg={2} xl={2} className="d-flex justify-content-end">
           <TimeSlots
             arrayTime={arrayTime}
             slideToShow={slideToShow}
