@@ -1,12 +1,14 @@
-import React, { useEffect, useCallback, useRef } from "react";
+import React, { useEffect, useCallback, useRef, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
 import { Button } from "reactstrap";
 import Loader from "../../loader";
+import $ from "jquery";
 
 function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
+  const [buttonClick, setButtonClick] = useState(0);
   const slider = useRef();
   const settings = {
     dots: false,
@@ -52,6 +54,15 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
         });
     }
   }, [scroll]);
+
+  useEffect(() => {
+    $(".wrapper").animate(
+      {
+        scrollTop: buttonClick,
+      },
+      1000,
+    );
+  }, [buttonClick]);
 
   return (
     <div className="appointment-calender__time">
@@ -112,10 +123,41 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
               />
             </Button>
           </div> */}
-          <button className="prev-btn">
+          <button
+            className="prev-btn"
+            onClick={() => setButtonClick(Number(buttonClick) + 100)}
+          >
             <Image src="/images/up-arrow.png" alt="" width={12} height={9} />
           </button>
-          <div className="time-slot">
+          <div className="time-slot wrapper">
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box active">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box active">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box active">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box active">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
+            <p className="time-box">09:00 AM</p>
             <p className="time-box">09:00 AM</p>
             <p className="time-box">09:00 AM</p>
             <p className="time-box active">09:00 AM</p>
@@ -124,7 +166,10 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
             <p className="time-box">09:00 AM</p>
             <p className="time-box">09:00 AM</p>
           </div>
-          <button className="next-btn">
+          <button
+            className="next-btn"
+            onClick={() => setButtonClick(Number(buttonClick) - 100)}
+          >
             <Image src="/images/down-arrow.png" alt="" width={12} height={9} />
           </button>
         </>
