@@ -98,7 +98,9 @@ const Calendar = ({
         <Col md={10} lg={10} xl={10}>
           <CalendarPicker
             selectedDate={selectedDate}
+            selectedCountry={selectedCountry}
             handleSelectDate={handleSelectDate}
+            selectedCenter={selectedCenter}
           />
         </Col>
         <Col md={2} lg={2} xl={2}>

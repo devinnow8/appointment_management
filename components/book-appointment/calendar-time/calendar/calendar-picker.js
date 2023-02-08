@@ -4,14 +4,24 @@ import { LocaleUtils, DayPicker } from "react-day-picker";
 import { DAYS_FORMAT } from "../../../../constants/index";
 import { useSelector } from "react-redux";
 
-const CalendarPicker = ({ selectedDate, handleSelectDate }) => {
+const CalendarPicker = ({
+  selectedDate,
+  handleSelectDate,
+  selectedCountry,
+  selectedCenter,
+}) => {
   const { holidayList } = useSelector((state) => state.holidayList);
   const [holidaysList, setHolidaysList] = useState([]);
 
   useEffect(() => {
-    const obtainedHoliday = holidayList.map((list) => new Date(list.date));
-    setHolidaysList(obtainedHoliday);
-  }, []);
+    if (
+      selectedCountry?.label !== undefined &&
+      selectedCenter?.centerId !== undefined
+    ) {
+      const obtainedHoliday = holidayList.map((list) => new Date(list.date));
+      setHolidaysList(obtainedHoliday);
+    }
+  }, [selectedCountry?.label, selectedCenter?.centerId]);
 
   const getSundays = (date) => {
     var d = date || new Date(),
