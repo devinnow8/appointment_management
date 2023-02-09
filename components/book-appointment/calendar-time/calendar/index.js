@@ -91,6 +91,7 @@ const Calendar = ({
     slideToShow,
     selectedCountry.label,
     centerList,
+    applicationDetails.serviceType,
   ]);
 
   const handleSelectDate = (value) => {
@@ -118,19 +119,21 @@ const Calendar = ({
   };
 
   useEffect(() => {
-    const filteredArray = centerList.filter(
-      (centre) => selectedCountry.label === centre?.country,
-    );
-    const obtainedArray = filteredArray.map((centre) => {
-      return {
-        ...centre,
-        value: centre?.centerId,
-        label: centre?.centerName,
-      };
-    });
-    setNewCenterList(obtainedArray);
-    setSelectedCenter(obtainedArray[0]);
-  }, [applicationDetails, centerList]);
+    if (applicationDetails.appointmentId === undefined) {
+      const filteredArray = centerList.filter(
+        (centre) => selectedCountry.label === centre?.country,
+      );
+      const obtainedArray = filteredArray.map((centre) => {
+        return {
+          ...centre,
+          value: centre?.centerId,
+          label: centre?.centerName,
+        };
+      });
+      setNewCenterList(obtainedArray);
+      setSelectedCenter(obtainedArray[0]);
+    }
+  }, [applicationDetails, centerList, applicationDetails.appointmentId]);
 
   return (
     <>
