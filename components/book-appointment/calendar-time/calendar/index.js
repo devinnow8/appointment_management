@@ -16,6 +16,7 @@ const Calendar = ({
   slideToShow,
   setSlideToShow,
   isLoader,
+  applicantAppointment,
 }) => {
   const { centerList } = useSelector((state) => state.centerList);
   const { applicationDetails } = useSelector(
@@ -32,6 +33,7 @@ const Calendar = ({
 
   useEffect(() => {
     if (appointmentDetails.applicantAppointment) {
+      // if click cancel after going to payment page
       const filteredArray = centerList.filter(
         (centre) =>
           selectedCountry.label === centre?.country &&
@@ -63,6 +65,7 @@ const Calendar = ({
 
   useEffect(() => {
     if (applicationDetails.appointmentId !== undefined) {
+      // RESCHULE
       const filteredArray = centerList.filter(
         (centre) =>
           selectedCountry.label === centre?.country &&
@@ -104,12 +107,15 @@ const Calendar = ({
   };
 
   useEffect(() => {
-    setApplicantAppointment((prev) => ({
-      ...prev,
-      date: `${monthNames[selectedDate.getMonth()]}
+    // GENERAL SCENARIO
+    if (!applicationDetails.appointmentId) {
+      setApplicantAppointment((prev) => ({
+        ...prev,
+        date: `${monthNames[selectedDate.getMonth()]}
       ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
-      location: selectedCenter?.label,
-    }));
+        location: selectedCenter?.label,
+      }));
+    }
   }, [centerList, applicationDetails, selectedCenter?.label]);
 
   const formatOptionLabel = (item) => {
@@ -130,7 +136,12 @@ const Calendar = ({
       };
     });
     setNewCenterList(obtainedArray);
-    setSelectedCenter(obtainedArray[0]);
+    if (
+      !Object.keys(appointmentDetails).length &&
+      applicationDetails.appointmentId === undefined // reschule
+    ) {
+      setSelectedCenter(obtainedArray[0]);
+    }
   }, [centerList]);
 
   return (

@@ -49,6 +49,7 @@ const CalendarTime = ({
         <Col md={12} lg={12} xl={12}>
           <Calendar
             setApplicantAppointment={setApplicantAppointment}
+            applicantAppointment={applicantAppointment}
             selectedCenter={selectedCenter}
             setSelectedCenter={setSelectedCenter}
             selectedDate={selectedDate}

@@ -191,6 +191,7 @@ export default () => {
     setApplicantAppointment((prev) => ({
       ...prev,
       time: arrayTime[slideToShow]?.fromTime,
+      date: selectedDate,
     }));
   }, [centerList, applicationDetails, slideToShow, arrayTime]);
 
@@ -214,6 +215,9 @@ export default () => {
       }
     });
     setArrayTime(filderdSlot);
+    if (filderdSlot.length) {
+      setSlideToShow(0);
+    }
   }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
   return (
     <>

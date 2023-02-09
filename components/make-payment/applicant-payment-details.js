@@ -40,11 +40,20 @@ const ApplicantPaymentDetails = () => {
         </div>
         <div className="make-payment__details--flex">
           <div className="make-payment__details--heading">
+            <h4>Appointment Time</h4>
+          </div>
+          <div className="make-payment__details--value">
+            <p>{appointmentDetails.applicantAppointment?.time}</p>
+          </div>
+        </div>
+        <div className="make-payment__details--flex">
+          <div className="make-payment__details--heading">
             <h4>Application Fee</h4>
           </div>
           <div className="make-payment__details--value">
             <p>
-              {appointmentDetails.applicantAppointment?.amount || "350"} / member
+              {appointmentDetails.applicantAppointment?.amount || "350"} /
+              member
             </p>
           </div>
         </div>
