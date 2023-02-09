@@ -32,29 +32,66 @@ const Calendar = ({
 
   useEffect(() => {
     if (appointmentDetails.applicantAppointment) {
+      const filteredArray = centerList.filter(
+        (centre) =>
+          selectedCountry.label === centre?.country &&
+          centre.centerId === appointmentDetails.centerId,
+      );
+      const obtainedArray = filteredArray.map((centre) => {
+        return {
+          ...centre,
+          value: centre?.centerId,
+          label: centre?.centerName,
+        };
+      });
+      setSelectedCenter(obtainedArray[0]);
       setSelectedDate(new Date(appointmentDetails.applicantAppointment.date));
       const index = arrayTime.findIndex(
         (x) => x.fromTime === appointmentDetails.applicantAppointment.time,
       );
-      console.log(index, "indexindex===>");
+      setSlideToShow(index);
     }
   }, [
+    appointmentDetails.applicantAppointment,
     appointmentDetails.applicantAppointment?.time,
     appointmentDetails.applicantAppointment?.date,
+    appointmentDetails.centerId,
     slideToShow,
-    selectedCenter,
+    selectedCountry.label,
+    centerList,
   ]);
 
   useEffect(() => {
     if (applicationDetails.appointmentId !== undefined) {
+      const filteredArray = centerList.filter(
+        (centre) =>
+          selectedCountry.label === centre?.country &&
+          centre.centerId === applicationDetails.centerId,
+      );
+      const obtainedArray = filteredArray.map((centre) => {
+        return {
+          ...centre,
+          value: centre?.centerId,
+          label: centre?.centerName,
+        };
+      });
+      setSelectedCenter(obtainedArray[0]);
       const index = arrayTime.findIndex(
         (x) => x.fromTime === applicationDetails.appointmentTime,
       );
-      console.log(index, "arrayTimeReschedule");
-      // setSlideToShow(index);
+      setSlideToShow(index);
       setSelectedDate(new Date(applicationDetails.appointmentDate));
     }
-  }, [applicationDetails.appointmentId, slideToShow, selectedCenter]);
+  }, [
+    applicationDetails.appointmentId,
+    applicationDetails,
+    applicationDetails.appointmentTime,
+    applicationDetails.appointmentDate,
+    applicationDetails.centerId,
+    slideToShow,
+    selectedCountry.label,
+    centerList,
+  ]);
 
   const handleSelectDate = (value) => {
     setSelectedDate(value);
