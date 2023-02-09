@@ -25,51 +25,104 @@ export default function Home() {
 
   const handleContinue = (values) => {
     setIsLoader(true);
-    const details = {
-      applicationId: values.application_id,
-      dob: values.dob,
-      serviceType: selectedService.label,
-    };
-    dispatch(
-      applicationDetailsFetchRequest(
-        details,
-        (success) => {
-          if (success.data.category !== selectedService.label) {
-            setIsLoader(false);
-            toast.error("Application not found");
-            // dispatch(applicationDetailsFetchFailure());
-          } else {
-            const tempArray = [];
-            tempArray.push(success.data);
-            dispatch(applicationDetailsFetchMemberSuccess(tempArray));
-            dispatch(applicationDetailsFetchSuccess(success.data));
-            if (success.data.appointmentId) {
-              router.push({
-                pathname: "/reschedule-appointment",
-              });
+    if (selectedService.label === "Visa") {
+      const details = {
+        applicationId: values.application_id,
+        dob: values.dob,
+        serviceType: selectedService.label,
+      };
+      dispatch(
+        applicationDetailsFetchRequest(
+          details,
+          (success) => {
+            if (success.data.category !== selectedService.label) {
+              setIsLoader(false);
+              toast.error("Application not found");
+              // dispatch(applicationDetailsFetchFailure());
             } else {
-              if (success.status === 200) {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+              dispatch(applicationDetailsFetchSuccess(success.data));
+              if (success.data.appointmentId) {
                 router.push({
-                  pathname: "/book-appointment",
-                  query: { selectedService: selectedService.label },
+                  pathname: "/reschedule-appointment",
                 });
+              } else {
+                if (success.status === 200) {
+                  router.push({
+                    pathname: "/book-appointment",
+                    query: { selectedService: selectedService.label },
+                  });
+                }
               }
             }
-          }
-        },
-        (error) => {
-          if (error.message.includes("Network Error")) {
-            toast.error(error.message);
-            setIsLoader(false);
-            // dispatch(applicationDetailsFetchFailure());
-          } else {
-            toast.error("Application not found");
-            setIsLoader(false);
-            // dispatch(applicationDetailsFetchFailure());
-          }
-        },
-      ),
-    );
+          },
+          (error) => {
+            if (error.message.includes("Network Error")) {
+              toast.error(error.message);
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            } else {
+              toast.error("Application not found");
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            }
+          },
+        ),
+      );
+    } else {
+      const details = {
+        name: values.name,
+        country: values.nationality.label,
+        nationality: values.nationality.label,
+        id_type: values.id_type.label,
+        applicationId: values.id_number,
+        id_number: values.id_number,
+        serviceType: selectedService.label,
+        category: selectedService.label,
+      };
+      dispatch(
+        applicationDetailsFetchRequest(
+          details,
+          (success) => {
+            if (success.data.category !== selectedService.label) {
+              setIsLoader(false);
+              toast.error("Application not found");
+              // dispatch(applicationDetailsFetchFailure());
+            } else {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+              dispatch(applicationDetailsFetchSuccess(success.data));
+              if (success.data.appointmentId) {
+                router.push({
+                  pathname: "/reschedule-appointment",
+                });
+              } else {
+                if (success.status === 200) {
+                  router.push({
+                    pathname: "/book-appointment",
+                    query: { selectedService: selectedService.label },
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            if (error.message.includes("Network Error")) {
+              toast.error(error.message);
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            } else {
+              toast.error("Application not found");
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            }
+          },
+        ),
+      );
+    }
   };
 
   useEffect(() => {

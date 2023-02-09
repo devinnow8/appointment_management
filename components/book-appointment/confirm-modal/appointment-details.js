@@ -54,7 +54,8 @@ const AppointmentDetails = ({ applicantAppointment }) => {
             </div>
             <div className="confirm-modal__applicant--value">
               <p className="confirm-modal__applicant-desc">
-                {applicantAppointment.location || "-"}
+                {applicantAppointment.location?.charAt(0).toUpperCase() +
+                  applicantAppointment.location?.slice(1) || "-"}
               </p>
             </div>
           </div>

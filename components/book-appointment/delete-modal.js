@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody, Button } from "reactstrap";
 import moment from "moment";
+import { useSelector } from "react-redux";
 
 function DeleteModal({
   deleteMember,
@@ -9,6 +10,9 @@ function DeleteModal({
   deleteConfirmation,
   setDeleteModal,
 }) {
+  const { applicationDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
   return (
     <Modal
       centered
@@ -41,24 +45,32 @@ function DeleteModal({
             <div className="confirm-modal__applicant--flex">
               <div className="confirm-modal__applicant--data">
                 <h5 className="confirm-modal__applicant--heading">
-                  Application ID
+                  {applicationDetails.category === "Visa"
+                    ? "Application ID"
+                    : "ID Number"}
                 </h5>
               </div>
               <div className="confirm-modal__applicant--value">
                 <p className="confirm-modal__applicant-desc">
-                  {deleteMember.applicationId}
+                  {applicationDetails.category === "Visa"
+                    ? deleteMember.applicationId
+                    : deleteMember.id_number}
                 </p>
               </div>
             </div>
             <div className="confirm-modal__applicant--flex">
               <div className="confirm-modal__applicant--data">
                 <h5 className="confirm-modal__applicant--heading">
-                  Date of Birth (dd/mm/yyyy)
+                  {applicationDetails.category === "Visa"
+                    ? "Date of Birth (dd/mm/yyyy)"
+                    : "Id Type"}
                 </h5>
               </div>
               <div className="confirm-modal__applicant--value">
                 <p className="confirm-modal__applicant-desc">
-                  {moment(deleteMember.dob).format("DD/MM/YYYY")}
+                  {applicationDetails.category === "Visa"
+                    ? moment(deleteMember.dob).format("DD/MM/YYYY")
+                    : deleteMember.id_type}
                 </p>
               </div>
             </div>
