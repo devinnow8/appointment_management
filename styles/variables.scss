@@ -23,6 +23,11 @@ $laptop: 1280px;
 }
 
 .header {
+  .navbar {
+    > .container-fluid {
+      padding-left: 0;
+    }
+  }
   .navbar-toggler {
     display: none;
   }
