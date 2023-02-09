@@ -172,6 +172,10 @@ export default () => {
     const details = {
       applicationDetails: applicationDetails,
       applicantAppointment: applicantAppointment,
+      center:
+        selectedCenter?.centerName.charAt(0).toUpperCase() +
+        selectedCenter?.centerName.slice(1),
+      centerId: selectedCenter.centerId,
     };
     dispatch(appointmentDetailsFetchRequest(details));
     router.push({
