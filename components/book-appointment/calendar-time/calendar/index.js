@@ -91,6 +91,7 @@ const Calendar = ({
     slideToShow,
     selectedCountry.label,
     centerList,
+    applicationDetails.serviceType,
   ]);
 
   const handleSelectDate = (value) => {
@@ -130,7 +131,7 @@ const Calendar = ({
     });
     setNewCenterList(obtainedArray);
     setSelectedCenter(obtainedArray[0]);
-  }, [applicationDetails, centerList]);
+  }, [centerList]);
 
   return (
     <>

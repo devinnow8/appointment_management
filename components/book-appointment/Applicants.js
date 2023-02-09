@@ -27,10 +27,19 @@ function Applicants({ handleDeleteApplicant }) {
                     >
                       <div className="applicant-details__card--flex">
                         <div className="applicant-details__card--info">
-                          <h4 className="applicant-details__card--title">
-                            {data?.name?.charAt(0).toUpperCase() +
-                              data?.name?.slice(1)}
-                          </h4>
+                          {!applicationDetails.applicantFullName ? (
+                            <h4 className="applicant-details__card--title">
+                              {data?.name?.charAt(0).toUpperCase() +
+                                data?.name?.slice(1)}
+                            </h4>
+                          ) : (
+                            <h4 className="applicant-details__card--title">
+                              {applicationDetails?.applicantFullName
+                                ?.charAt(0)
+                                .toUpperCase() +
+                                applicationDetails?.applicantFullName?.slice(1)}
+                            </h4>
+                          )}
                           {applicationDetails.category === "Visa" ? (
                             <div className="applicant-details__card--div">
                               <p className="applicant-details__card--text">
