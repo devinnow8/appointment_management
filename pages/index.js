@@ -81,6 +81,8 @@ export default function Home() {
         id_number: values.id_number,
         serviceType: selectedService.label,
         category: selectedService.label,
+        email: values.email,
+        phone: values.phone,
       };
       dispatch(
         applicationDetailsFetchRequest(

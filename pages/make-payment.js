@@ -38,7 +38,7 @@ const MakePayment = () => {
       application_id:
         applicationDetails.category === "Visa"
           ? applicationDetails.applicationId
-          : applicationDetails.appointmentDetails?.id_number,
+          : applicationDetails.id_number,
       appointment_date:
         appointmentDetails !== undefined &&
         moment(appointmentDetails.applicantAppointment.date).format(
@@ -59,7 +59,7 @@ const MakePayment = () => {
         details,
         (success) => {
           push("/appointment-booked");
-          dispatch(appointmentDetailsFetchFailure())
+          dispatch(appointmentDetailsFetchFailure());
         },
         (error) => {
           toast.error("Something Went Wrong");
