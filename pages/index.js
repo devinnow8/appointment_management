@@ -112,7 +112,7 @@ export default function Home() {
             }
           },
           (error) => {
-            if (error.message.includes("Network Error")) {
+            if (error.message.includes("Internal Server Error")) {
               toast.error(error.message);
               setIsLoader(false);
               // dispatch(applicationDetailsFetchFailure());

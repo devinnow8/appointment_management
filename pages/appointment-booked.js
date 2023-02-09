@@ -9,8 +9,8 @@ function AppointmentBooked() {
   const { push } = useRouter();
   const dispatch = useDispatch();
   const { appointment } = useSelector((state) => state.appointmentSchedule);
-  const { appointmentBookedPdf } = useSelector(
-    (state) => state.appointmentBooked,
+  const { applicationDetails } = useSelector(
+    (state) => state.applicationDetails,
   );
 
   const printDocument = () => {
@@ -55,7 +55,11 @@ function AppointmentBooked() {
               <h2 className="apt-booked__title">Appointment Booked</h2>
               <p className="apt-booked__para">
                 {`Your appointment booking is complete, Appointment ID is:
-                ${appointment.appointment_id}. A copy of the appointment slip and checklist have been
+                ${
+                  applicationDetails.appointmentId !== undefined
+                    ? applicationDetails.appointmentId
+                    : appointment.appointment_id
+                }. A copy of the appointment slip and checklist have been
                 sent to your email. Optionally you can download it by click the
                 buttons given below.`}
               </p>
@@ -69,7 +73,13 @@ function AppointmentBooked() {
               <div className="d-flex justify-content-center align-items-center">
                 <Button
                   className="slip-btn mb-sm-0"
-                  onClick={() => handlePrintSlip(appointment.appointment_id)}
+                  onClick={() =>
+                    handlePrintSlip(
+                      applicationDetails.appointmentId !== undefined
+                        ? applicationDetails.appointmentId
+                        : appointment.appointment_id,
+                    )
+                  }
                 >
                   Print Booking Slip
                 </Button>

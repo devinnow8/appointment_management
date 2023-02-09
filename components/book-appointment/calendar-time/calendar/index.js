@@ -16,7 +16,6 @@ const Calendar = ({
   slideToShow,
   setSlideToShow,
   isLoader,
-  applicantAppointment,
 }) => {
   const { centerList } = useSelector((state) => state.centerList);
   const { applicationDetails } = useSelector(
@@ -138,8 +137,8 @@ const Calendar = ({
     setNewCenterList(obtainedArray);
     if (
       !Object.keys(appointmentDetails).length &&
-      applicationDetails.appointmentId === undefined // reschule
-    ) {
+      applicationDetails.appointmentId === undefined
+    ) { // general scenario
       setSelectedCenter(obtainedArray[0]);
     }
   }, [centerList]);
@@ -200,21 +199,6 @@ const Calendar = ({
           />
         </Col>
       </Row>
-      {/* <div className="calender-status">
-        <p className="calender-status__title">Legends:</p>
-        <div className="calender-status__box">
-          <div className="box"></div>
-          <p className="status">Available</p>
-        </div>
-        <div className="calender-status__box">
-          <div className="box not-avail"></div>
-          <p className="status">Not Available</p>
-        </div>
-        <div className="calender-status__box">
-          <div className="box selected"></div>
-          <p className="status">Selected</p>
-        </div>
-      </div> */}
     </>
   );
 };
