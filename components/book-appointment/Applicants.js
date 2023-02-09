@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 
 function Applicants({ handleDeleteApplicant }) {
-  const {memberDetails } = useSelector(
+  const { memberDetails, applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  
+
   return (
     <Row>
       <Col xs={12} sm={12}>
@@ -30,14 +30,27 @@ function Applicants({ handleDeleteApplicant }) {
                           <h4 className="applicant-details__card--title">
                             {data?.name}
                           </h4>
-                          <div className="applicant-details__card--div">
-                            <p className="applicant-details__card--text">
-                              Application ID
-                            </p>
-                            <p className="applicant-details__card--id">
-                              {data?.applicationId}
-                            </p>
-                          </div>
+                          {applicationDetails.category === "Visa" ? (
+                            <div className="applicant-details__card--div">
+                              <p className="applicant-details__card--text">
+                                Application ID
+                              </p>
+                              <p className="applicant-details__card--id">
+                                {data?.applicationId}
+                              </p>
+                            </div>
+                          ) : (
+                            <>
+                              <div className="applicant-details__card--div">
+                                <p className="applicant-details__card--text">
+                                  {data?.id_type}
+                                </p>
+                                <p className="applicant-details__card--id">
+                                  {data?.id_number}
+                                </p>
+                              </div>
+                            </>
+                          )}
                         </div>
                         {memberDetails.length > 1 && (
                           <Image

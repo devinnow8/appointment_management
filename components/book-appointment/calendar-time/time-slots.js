@@ -22,7 +22,7 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
   return (
     <div
       className={`${
-        arrayTime.length == 0 && `no-slot-div `
+        arrayTime.length == 0 ? `no-slot-div ` : ""
       }appointment-calender__time`}
     >
       {isLoader ? (
