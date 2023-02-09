@@ -20,7 +20,11 @@ function TimeSlots({ arrayTime, slideToShow, setSlideToShow, isLoader }) {
   }, [buttonClick]);
 
   return (
-    <div className="appointment-calender__time">
+    <div
+      className={`${
+        arrayTime.length == 0 && `no-slot-div `
+      }appointment-calender__time`}
+    >
       {isLoader ? (
         <>
           <div className="appointment-calender__time--flex">

@@ -88,8 +88,9 @@ const CalendarPicker = ({
             after: new Date(2023, 2, 24),
           },
           ...selectedDaysToDisable,
+          // weekends,
         ]}
-        modifiers={{ holidays: holidaysList, weekend: weekends }}
+        modifiers={{ holidays: holidaysList }}
         modifiersStyles={getModifierStyles()}
         onDayClick={(day) => {
           handleSelectDate(day);
