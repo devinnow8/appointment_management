@@ -55,7 +55,7 @@ function ConfirmModal({
           ) : (
             <h3 className="confirm-modal__title">
               {isAppointmentBooked
-                ? "Your Appointment is Already booked"
+                ? "This applicant id has already been booked with us"
                 : "Please confirm applicant details"}
             </h3>
           )}

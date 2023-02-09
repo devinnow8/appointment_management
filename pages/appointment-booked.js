@@ -31,14 +31,12 @@ function AppointmentBooked() {
   const handlePrintSlip = async (id) => {
     dispatch(
       appointmentBookedPdfRequest(id, (success) => {
-        console.log(success, "successsuccess==>");
         const file = new Blob([success.data], { type: "application/pdf" });
         const fileURL = URL.createObjectURL(file);
         const link = document.createElement("a");
         link.href = fileURL;
         link.download = "AppointmentBooked.pdf";
         link.click();
-        window.open(fileURL);
       }),
     );
   };

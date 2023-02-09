@@ -3,15 +3,17 @@ import Header from "../components/header";
 import { useState, useEffect } from "react";
 import CancelModal from "../components/cancel-modal";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import checkIcon from "../public/images/check-icon.png";
+import { appointmentBookedPdfRequest } from "../redux/reducer/appointment-booked";
 
 function RescheduleAppointment() {
   const { push } = useRouter();
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
+  const dispatch = useDispatch();
   const [isCancel, setIsCancel] = useState(false);
   const handleReschedule = () => {
     push({
@@ -26,6 +28,19 @@ function RescheduleAppointment() {
       });
     }
   }, []);
+
+  const handlePrintSlip = async (id) => {
+    dispatch(
+      appointmentBookedPdfRequest(id, (success) => {
+        const file = new Blob([success.data], { type: "application/pdf" });
+        const fileURL = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = fileURL;
+        link.download = "AppointmentBooked.pdf";
+        link.click();
+      }),
+    );
+  };
 
   return (
     <>
@@ -88,7 +103,12 @@ function RescheduleAppointment() {
             </div>
             <div className="justify-content-between">
               <div className="mt-3 text-center">
-                <button className="secondary-outline-btn slip-btn me-4">
+                <button
+                  className="secondary-outline-btn me-4 slip-btn"
+                  onClick={() =>
+                    handlePrintSlip(applicationDetails.appointmentId)
+                  }
+                >
                   Print Booking Slip
                 </button>
                 <button className="secondary-outline-btn checklist-btn">
