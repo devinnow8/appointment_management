@@ -51,6 +51,11 @@ export default () => {
   const handleAddMember = (values) => {
     if (memberDetails.length === 5) {
       toast.warn("You can't add more than 4 members ");
+    } else if (
+      memberDetails.filter((x) => x.applicationId === values.application_id)
+        .length > 0
+    ) {
+      toast.error("This application id is already existing ");
     } else {
       const details = {
         applicationId: values.application_id,
