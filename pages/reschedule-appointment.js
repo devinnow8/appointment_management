@@ -32,7 +32,7 @@ function RescheduleAppointment() {
       <Container>
         <Row className="justify-content-center appointment-booking">
           <Col sm={10} md={10} lg={5}>
-            <h2 className="appointment-booking-title">Your Appointment</h2>
+            <h2 className="appointment-booking-title">You’re Booked!</h2>
             <div className="appointment-booking-details">
               <div className="appointment-booking-details-list">
                 <span className="booking-details-field">Name</span>
