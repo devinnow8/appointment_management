@@ -45,7 +45,7 @@ const Others = ({ handleContinue, isLoader }) => {
             id="name"
             name="name"
             type="text"
-            placeholder="eg: Jhone Doe"
+            placeholder="eg: John Doe"
             className="appointment-form__input"
             value={formik.values.name}
             onChange={formik.handleChange}

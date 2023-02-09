@@ -58,7 +58,6 @@ const CalendarTime = ({
             setSlideToShow={setSlideToShow}
             isLoader={isLoader}
           />
-          <h2 className="d-block d-md-none sel-time">Select Time</h2>
         </Col>
         {applicationDetails.appointmentId ? (
           <>

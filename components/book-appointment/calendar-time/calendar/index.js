@@ -120,13 +120,29 @@ const Calendar = ({
             handleSelectDate={handleSelectDate}
             selectedCenter={selectedCenter}
           />
+          <div className="calender-status">
+            <p className="calender-status__title">Legends:</p>
+            <div className="calender-status__box">
+              <div className="box"></div>
+              <p className="status">Available</p>
+            </div>
+            <div className="calender-status__box">
+              <div className="box not-avail"></div>
+              <p className="status">Not Available</p>
+            </div>
+            <div className="calender-status__box">
+              <div className="box selected"></div>
+              <p className="status">Selected</p>
+            </div>
+          </div>
         </Col>
         <Col
           md={2}
           lg={2}
           xl={2}
-          className="d-flex justify-content-start justify-content-md-end"
+          className="d-block d-md-flex justify-content-start justify-content-md-end"
         >
+          <h2 className="d-block d-md-none sel-time">Select Time</h2>
           <TimeSlots
             arrayTime={arrayTime}
             slideToShow={slideToShow}
@@ -135,7 +151,7 @@ const Calendar = ({
           />
         </Col>
       </Row>
-      <div className="calender-status">
+      {/* <div className="calender-status">
         <p className="calender-status__title">Legends:</p>
         <div className="calender-status__box">
           <div className="box"></div>
@@ -149,7 +165,7 @@ const Calendar = ({
           <div className="box selected"></div>
           <p className="status">Selected</p>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
