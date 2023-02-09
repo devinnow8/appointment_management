@@ -17,6 +17,23 @@ export const getDataApi = ({ path = "no-path-provided", data = {} }) => {
   }
 };
 
+export const getDownloadData = ({ path = "no-path-provided", data = {} }) => {
+  try {
+    return new Promise((resolve, reject) => {
+      return customAxios
+        .get(path, { responseType: "blob" })
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  } catch (error) {
+    return error;
+  }
+};
+
 export const postDataApi = ({ path = "no-path-provided", data = {} }) => {
   try {
     return new Promise((resolve, reject) => {

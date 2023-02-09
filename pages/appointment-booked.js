@@ -4,7 +4,6 @@ import jsPDF from "jspdf";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { appointmentBookedPdfRequest } from "../redux/reducer/appointment-booked";
-import { useEffect } from "react";
 
 function AppointmentBooked() {
   const { push } = useRouter();
@@ -29,19 +28,16 @@ function AppointmentBooked() {
     pdf.save("download.pdf");
   };
 
-  const handlePrintSlip = (id) => {
-    // window.open("https://apt.oisservices.com/app/print/NDA5NDUz", "_blank");
+  const handlePrintSlip = async (id) => {
     dispatch(
       appointmentBookedPdfRequest(id, (success) => {
         console.log(success, "successsuccess==>");
         const file = new Blob([success.data], { type: "application/pdf" });
-        //Build a URL from the file
         const fileURL = URL.createObjectURL(file);
         const link = document.createElement("a");
         link.href = fileURL;
         link.download = "AppointmentBooked.pdf";
         link.click();
-        //Open the URL on new Window
         window.open(fileURL);
       }),
     );

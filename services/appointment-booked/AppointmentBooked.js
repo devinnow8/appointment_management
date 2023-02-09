@@ -1,9 +1,7 @@
-import config from './Config';
-import { getDataApi } from '../ApiCaller';
+import config from "./Config";
+import { getDownloadData } from "../ApiCaller";
 
-export const appointmentBookedPdf = id => {
+export const appointmentBookedPdf = (id) => {
   const { path } = config.appointmentBookedPdf;
-  return getDataApi({ path: path(id) });
+  return getDownloadData({ path: path(id) });
 };
-
-
