@@ -38,7 +38,6 @@ function AppointmentBooked() {
         link.href = fileURL;
         link.download = "AppointmentBooked.pdf";
         link.click();
-        window.open(fileURL);
       }),
     );
   };
