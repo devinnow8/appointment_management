@@ -216,6 +216,12 @@
       position: relative;
       height: 84%;
       margin-top: 17px;
+      @media (max-height: 768px) {
+        height: 79%;
+      }
+      @media (max-height: 660px) {
+        height: 75%;
+      }
       &.no-slot-div {
         margin-top: 0px;
         height: 90%;
@@ -226,9 +232,6 @@
       @media (max-width: 768px) {
         width: 100%;
         box-shadow: none;
-      }
-      @media (max-height: 660px) {
-        height: 86%;
       }
       @media only screen and (max-width: 576px) {
         width: fit-content;

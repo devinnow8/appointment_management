@@ -45,8 +45,8 @@
       .inner-header__input {
         min-height: 38px;
         width: 200px;
-        border: 1px solid #c0c0c0;
-        color: #555 !important;
+        border: 1px solid #B1B1B1;
+        color: #BCBCBC !important;
         @media (max-width: $xxLDesktop) {
           font-size: 14px;
         }
@@ -61,7 +61,7 @@
           width: 100%;
         }
         &::placeholder {
-          color: #bcbcbc;
+          color: #BCBCBC;
         }
         &:focus {
           box-shadow: none;

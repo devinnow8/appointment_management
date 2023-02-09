@@ -88,10 +88,12 @@
         align-items: center;
         @media (min-width: 769px) and (max-width: 992px) {
           margin-bottom: 30px;
+          max-width: 100%;
         }
         @media only screen and (max-width: 768px) {
           margin-bottom: 42px;
           margin-left: 34px;
+          max-width: 100%;
         }
         .choose-gateway__title {
           font-size: 20px;
@@ -102,9 +104,17 @@
         input {
           margin-right: 24px;
           cursor: pointer;
+          border:2px solid white;
+          box-shadow:0 0 0 1px #c1c1c1;
+          appearance:none;
+          border-radius:50%;
+          width:12px;
+          height:12px;
+          background-color:#fff;
+          transition:all ease-in 0.2s;
           &:checked {
             background-color: $primary-color;
-            border-color: $primary-color;
+            
           }
         }
         img {
@@ -156,6 +166,9 @@
         height: 44px;
         margin-top: 20px;
         margin-right: 20px;
+        @media (min-width: 769px) and (max-width: 992px) {
+          margin-right: 6px;
+        }
       }
       .pay-btn {
         @extend .primary-btn;
