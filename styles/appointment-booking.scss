@@ -2,13 +2,30 @@
   justify-content: center!important;
   height: 80vh;
   align-items: center;
+  @media (max-width: 576px) {
+    padding: 44px 0px;
+    height: unset;
+  }
+  .slip-btn, .checklist-btn, .reschedule-btn, .cancel-apt-btn {
+    @media (max-width: 576px) {
+      width: 134px;
+      font-size: 13px;
+    }
+  }
+  .check-icon {
+    width: 100px;
+    margin-bottom: 12px;
+    @media (max-width:$xxLDesktop) {
+      width: 64px;
+    }
+  }
   .appointment-booking-title {
     font-weight: 500;
     font-size: 33px;
     line-height: 40px;
     text-align: center;
     color: #003C70;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
     @media (max-width:$xxLDesktop) {
       font-size: 25px;
       line-height: 30px;
@@ -20,9 +37,18 @@
     border-radius: 5px;
     .appointment-booking-details-list {
       border-bottom: 1px solid #CDCDCD;
-      padding: 1rem 2rem;
+      padding: 14px 42px 14px 32px;
       display: flex;
       justify-content: space-between;
+      @media (max-width: 576px) {
+        padding: 16px 16px 16px 32px;
+      }
+      .booking-details-div {
+        width: 19%;
+        @media (max-width: 576px) {
+          width: 30%;
+        }
+      }
     .booking-details-field {
       font-weight: 500;
       font-size: 14px;
