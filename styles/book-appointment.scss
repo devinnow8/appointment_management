@@ -214,11 +214,14 @@
       width: 9.5rem;
       text-align: right;
       position: relative;
-      height: 91%;
+      height: 84%;
       margin-top: 17px;
       &.no-slot-div {
         margin-top: 0px;
         height: 90%;
+        @media (max-height: 660px) {
+          height: 88%;
+        }
       }
       @media (max-width: 768px) {
         width: 100%;

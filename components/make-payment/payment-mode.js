@@ -79,7 +79,7 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             <Col md={6} lg={6}>
               <FormGroup>
                 <Label for="name">
-                  Card Number <span className="star">*</span>
+                  Card Number<span className="star">*</span>
                 </Label>
                 <Input
                   id="name"
@@ -92,7 +92,7 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             <Col md={6} lg={6}>
               <FormGroup>
                 <Label for="name">
-                  Cardholder Name <span className="star">*</span>
+                  Cardholder Name<span className="star">*</span>
                 </Label>
                 <Input id="name" name="name" type="text" />
               </FormGroup>
@@ -114,7 +114,7 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
               </FormGroup>
             </Col>
             <Col md={12} lg={12} className="text-center">
-            <Button className="cancel" onClick={() => router.back()}>
+              <Button className="cancel" onClick={() => router.back()}>
                 Cancel
               </Button>
               <Button className="pay-btn" onClick={handlePayNow}>

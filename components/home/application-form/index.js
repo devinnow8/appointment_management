@@ -61,7 +61,10 @@ function ApplicationForm({
             </div>
             <p className="appointment-form_desc">
               If you have not completed your visa application, please{" "}
-              <a href="https://portal.immigration.gov.ng/visa/freshVisa">
+              <a
+                href="https://portal.immigration.gov.ng/visa/freshVisa"
+                target="_blank"
+              >
                 visit
               </a>{" "}
               to complete your application, before returning to OIS to book your

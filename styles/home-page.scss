@@ -76,9 +76,9 @@
         }
         .appointment-form__input {
           min-height: 38px;
-          // color: #bcbcbc;
+          color: #555;
           &::placeholder {
-            color: #bcbcbc;
+            color: #555;
           }
           &:focus {
             box-shadow: none;
