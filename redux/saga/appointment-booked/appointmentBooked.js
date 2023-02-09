@@ -9,6 +9,7 @@ export function* appointmentBookedPdfRequest(action) {
   const id = action.payload.id;
   try {
     const response = yield call(services.appointmentBookedPdf, id);
+    action.payload.success(response);
     const { status, statusText, data = [] } = response || {};
     if (status === 200) {
       yield put(appointmentBookedPdfFetchSuccess(data));

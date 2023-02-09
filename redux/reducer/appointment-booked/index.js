@@ -10,9 +10,9 @@ export const appointmentBookedSlice = createSlice({
   reducers: {
     appointmentBookedPdfRequest: {
       reducer: (state) => {},
-      prepare: (id) => {
+      prepare: (id, success) => {
         return {
-          payload: { id },
+          payload: { id, success },
         };
       },
     },
