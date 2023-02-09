@@ -49,48 +49,99 @@ export default () => {
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
 
   const handleAddMember = (values) => {
-    if (memberDetails.length === 5) {
-      toast.warn("You can't add more than 4 members ");
-    } else if (
-      memberDetails.filter((x) => x.applicationId === values.application_id)
-        .length > 0
-    ) {
-      toast.error("This application id is already existing ");
-    } else {
-      const details = {
-        applicationId: values.application_id,
-        dob: values.dob,
-        serviceType: applicationDetails.category,
-      };
-      dispatch(
-        applicationDetailsFetchRequest(
-          details,
-          (success) => {
-            if (success.data.appointmentId !== undefined) {
-              setApplicantDetail(values);
-              setIsAppointmentBooked(true);
-            } else {
-              if (
-                applicationDetails.country === success.data.country &&
-                success.data.category === applicationDetails.category
-              ) {
-                setModal(true);
+    if (applicationDetails.category === "Visa") {
+      if (memberDetails.length === 5) {
+        toast.warn("You can't add more than 4 members ");
+      } else if (
+        memberDetails.filter((x) => x.applicationId === values.application_id)
+          .length > 0
+      ) {
+        toast.error("This application id is already existing ");
+      } else {
+        const details = {
+          applicationId: values.application_id,
+          dob: values.dob,
+          serviceType: applicationDetails.category,
+        };
+        dispatch(
+          applicationDetailsFetchRequest(
+            details,
+            (success) => {
+              if (success.data.appointmentId !== undefined) {
                 setApplicantDetail(values);
-                setIsAppointmentDetail(success.data);
+                setIsAppointmentBooked(true);
               } else {
-                toast.warn("Application not found");
+                if (
+                  applicationDetails.country === success.data.country &&
+                  success.data.category === applicationDetails.category
+                ) {
+                  setModal(true);
+                  setApplicantDetail(values);
+                  setIsAppointmentDetail(success.data);
+                } else {
+                  toast.warn("Application not found");
+                }
               }
-            }
-          },
-          (error) => {
-            if (error.message.includes("Network Error")) {
-              toast.error(error.message);
-            } else {
-              toast.error("Application not found");
-            }
-          },
-        ),
-      );
+            },
+            (error) => {
+              if (error.message.includes("Network Error")) {
+                toast.error(error.message);
+              } else {
+                toast.error("Application not found");
+              }
+            },
+          ),
+        );
+      }
+    } else {
+      if (memberDetails.length === 5) {
+        toast.warn("You can't add more than 4 members ");
+      } else if (
+        memberDetails.filter((x) => x.applicationId === values.id_number)
+          .length > 0
+      ) {
+        toast.error("This application id is already existing ");
+      } else {
+        const details = {
+          name: values.name,
+          country: values.nationality.label,
+          nationality: values.nationality.label,
+          id_type: values.id_type.label,
+          applicationId: values.id_number,
+          id_number: values.id_number,
+          serviceType: applicationDetails.category,
+          category: applicationDetails.category,
+        };
+        dispatch(
+          applicationDetailsFetchRequest(
+            details,
+            (success) => {
+              if (success.data.appointmentId !== undefined) {
+                setApplicantDetail(values);
+                setIsAppointmentBooked(true);
+              } else {
+                if (
+                  applicationDetails.country === success.data.country &&
+                  success.data.category === applicationDetails.category
+                ) {
+                  setModal(true);
+                  setApplicantDetail(values);
+                  setIsAppointmentDetail(success.data);
+                } else {
+                  toast.warn("Application not found");
+                }
+              }
+            },
+            (error) => {
+              if (error.message.includes("Network Error")) {
+                toast.error(error.message);
+              } else {
+                toast.error("Application not found");
+              }
+            },
+          ),
+        );
+      }
     }
   };
   const handleConfirm = () => {

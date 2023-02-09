@@ -1,13 +1,12 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put } from "redux-saga/effects";
 import {
-    appointmentBookedPdfFetchSuccess,
-    appointmentBookedPdfFetchFailure,
-} from '../../reducer/appointment-booked';
-import * as services from '../../../services';
+  appointmentBookedPdfFetchSuccess,
+  appointmentBookedPdfFetchFailure,
+} from "../../reducer/appointment-booked";
+import * as services from "../../../services";
 
 export function* appointmentBookedPdfRequest(action) {
   const id = action.payload.id;
-    console.log(action, 'actionaction');
   try {
     const response = yield call(services.appointmentBookedPdf, id);
     const { status, statusText, data = [] } = response || {};
@@ -20,7 +19,3 @@ export function* appointmentBookedPdfRequest(action) {
     yield put(appointmentBookedPdfFetchFailure());
   }
 }
-
-
-
-

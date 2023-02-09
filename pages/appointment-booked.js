@@ -30,7 +30,6 @@ function AppointmentBooked() {
   };
 
   const handlePrintSlip = (id) => {
-    console.log(id, "appointment=>>>");
     // window.open("https://apt.oisservices.com/app/print/NDA5NDUz", "_blank");
     dispatch(appointmentBookedPdfRequest(id));
   };

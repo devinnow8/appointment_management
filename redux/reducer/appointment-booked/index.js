@@ -11,7 +11,6 @@ export const appointmentBookedSlice = createSlice({
     appointmentBookedPdfRequest: {
       reducer: (state) => {},
       prepare: (id) => {
-        console.log(id, 'idddddddd');
         return {
           payload: { id },
         };

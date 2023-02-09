@@ -47,14 +47,14 @@ const Calendar = ({
 
   useEffect(() => {
     if (applicationDetails.appointmentId !== undefined) {
-        const index = arrayTime.findIndex(
-          (x) => x.fromTime === applicationDetails.appointmentTime,
-        );
-        console.log(index, "arrayTimeReschedule");
+      const index = arrayTime.findIndex(
+        (x) => x.fromTime === applicationDetails.appointmentTime,
+      );
+      console.log(index, "arrayTimeReschedule");
       // setSlideToShow(index);
       setSelectedDate(new Date(applicationDetails.appointmentDate));
     }
-  }, [applicationDetails.appointmentId,slideToShow,selectedCenter]);
+  }, [applicationDetails.appointmentId, slideToShow, selectedCenter]);
 
   const handleSelectDate = (value) => {
     setSelectedDate(value);
