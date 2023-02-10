@@ -32,7 +32,7 @@ const Others = ({ handleContinue, isLoader }) => {
       }
       if (!values.phone) {
         errors.phone = "Required";
-      } else if (/^[6-9]\d{9}$/.test(values.phone)) {
+      } else if (/^[6-9]\d{10}$/.test(values.phone)) {
         errors.phone = "Invalid Phone Number";
       }
       if (values.id_number == "") {
