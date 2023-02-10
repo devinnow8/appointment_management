@@ -138,10 +138,11 @@ const Calendar = ({
     if (
       !Object.keys(appointmentDetails).length &&
       applicationDetails.appointmentId === undefined
-    ) { // general scenario
+    ) {
+      // general scenario
       setSelectedCenter(obtainedArray[0]);
     }
-  }, [centerList]);
+  }, [centerList, applicationDetails]);
 
   return (
     <>
