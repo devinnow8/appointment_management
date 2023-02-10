@@ -79,7 +79,9 @@ const AddMember = ({
           <Row>
             <Col lg={6} xl={6}>
               <div>
-                <Label for="Application ID">Name</Label>
+                <Label for="Application ID">
+                  Name <span className="star">*</span>
+                </Label>
                 <Input
                   id="name"
                   name="name"
@@ -99,7 +101,9 @@ const AddMember = ({
             </Col>
             <Col lg={6} xl={6}>
               <div>
-                <Label for="Nationality">Nationality</Label>
+                <Label for="Nationality">
+                  Nationality <span className="star">*</span>
+                </Label>
                 <Select
                   options={countries}
                   className="react-select-container"
@@ -119,7 +123,9 @@ const AddMember = ({
             </Col>
             <Col lg={6} xl={6}>
               <div>
-                <Label for="Application ID">ID Type</Label>
+                <Label for="Application ID">
+                  ID Type <span className="star">*</span>
+                </Label>
                 <Select
                   options={idType}
                   className="react-select-container"
@@ -139,7 +145,9 @@ const AddMember = ({
             </Col>
             <Col lg={6} xl={6}>
               <div>
-                <Label for="id_number">ID Number</Label>
+                <Label for="id_number">
+                  ID Number <span className="star">*</span>
+                </Label>
                 <Input
                   id="id_number"
                   name="id_number"
