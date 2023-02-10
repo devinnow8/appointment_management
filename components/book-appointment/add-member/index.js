@@ -58,7 +58,9 @@ const AddMember = ({
       }
       if (!values.phone) {
         errors.phone = "Required";
-      } else if (/^[6-9]\d{10}$/.test(values.phone)) {
+      } else if (
+        !/^(?:(?:\+|0{0,2})(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/.test(values.phone)
+      ) {
         errors.phone = "Invalid Phone Number";
       }
       return errors;
