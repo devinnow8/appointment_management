@@ -101,6 +101,8 @@ export default () => {
           .length > 0
       ) {
         toast.error("This application id is already existing ");
+      } else if (applicationDetails.country !== values.nationality.label) {
+        toast.error("Application should be of same country");
       } else {
         const details = {
           name: values.name,
@@ -118,28 +120,13 @@ export default () => {
           applicationDetailsFetchRequest(
             details,
             (success) => {
-              console.log(
-                success,
-                "success",
-                details,
-                "details==>",
-                applicationDetails,
-                values,
-              );
               if (success.data.appointmentId !== undefined) {
                 setApplicantDetail(values);
                 setIsAppointmentBooked(true);
               } else {
-                if (
-                  applicationDetails.country === success.data.country &&
-                  success.data.category === applicationDetails.category
-                ) {
-                  setModal(true);
-                  setApplicantDetail(values);
-                  setIsAppointmentDetail(success.data);
-                } else {
-                  toast.warn("Application not found");
-                }
+                setModal(true);
+                setApplicantDetail(values);
+                setIsAppointmentDetail(success.data);
               }
             },
             (error) => {
