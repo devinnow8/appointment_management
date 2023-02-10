@@ -45,6 +45,28 @@ const ApplicantOthers = ({ applicantDetail }) => {
           </p>
         </div>
       </div>
+
+      <div className="confirm-modal__applicant--flex">
+        <div className="confirm-modal__applicant--data">
+          <h5 className="confirm-modal__applicant--heading">Email</h5>
+        </div>
+        <div className="confirm-modal__applicant--value">
+          <p className="confirm-modal__applicant-desc">
+            {applicantDetail.email}
+          </p>
+        </div>
+      </div>
+
+      <div className="confirm-modal__applicant--flex">
+        <div className="confirm-modal__applicant--data">
+          <h5 className="confirm-modal__applicant--heading">Phone No</h5>
+        </div>
+        <div className="confirm-modal__applicant--value">
+          <p className="confirm-modal__applicant-desc">
+            {applicantDetail.phone}
+          </p>
+        </div>
+      </div>
     </>
   );
 };

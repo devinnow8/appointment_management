@@ -111,8 +111,8 @@ export default () => {
           id_number: values.id_number,
           serviceType: applicationDetails.category,
           category: applicationDetails.category,
-          // email: "",
-          // phone_number: 2588,
+          email: values.email,
+          phone_number: values.phone,
         };
         dispatch(
           applicationDetailsFetchRequest(
