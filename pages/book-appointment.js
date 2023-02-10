@@ -111,11 +111,21 @@ export default () => {
           id_number: values.id_number,
           serviceType: applicationDetails.category,
           category: applicationDetails.category,
+          // email: "",
+          // phone_number: 2588,
         };
         dispatch(
           applicationDetailsFetchRequest(
             details,
             (success) => {
+              console.log(
+                success,
+                "success",
+                details,
+                "details==>",
+                applicationDetails,
+                values,
+              );
               if (success.data.appointmentId !== undefined) {
                 setApplicantDetail(values);
                 setIsAppointmentBooked(true);
