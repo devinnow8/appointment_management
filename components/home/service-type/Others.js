@@ -73,50 +73,6 @@ const Others = ({ handleContinue, isLoader }) => {
         </div>
       </Col>
       <Col lg={6} xl={6}>
-        <div className="mb-0">
-          <Label for="email">
-            Email <span className="star">*</span>
-          </Label>
-          <Input
-            id="email"
-            name="email"
-            type="text"
-            placeholder="eg: @gmail.com"
-            className="appointment-form__input"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.errors.email && formik.touched.email ? (
-            <div className="error-msg">{formik.errors.email}</div>
-          ) : (
-            <div className="no-error-msg"></div>
-          )}
-        </div>
-      </Col>
-      <Col lg={6} xl={6}>
-        <div className="mb-0">
-          <Label for="phone">
-            Phone No. <span className="star">*</span>
-          </Label>
-          <Input
-            id="phone"
-            name="phone"
-            type="text"
-            placeholder="eg: 646454104"
-            className="appointment-form__input"
-            value={formik.values.phone}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.errors.phone && formik.touched.phone ? (
-            <div className="error-msg">{formik.errors.phone}</div>
-          ) : (
-            <div className="no-error-msg"></div>
-          )}
-        </div>
-      </Col>
-      <Col lg={6} xl={6}>
         <div>
           <Label for="nationality">
             Nationality <span className="star">*</span>
@@ -163,6 +119,7 @@ const Others = ({ handleContinue, isLoader }) => {
           )}
         </div>
       </Col>
+
       <Col lg={6} xl={6}>
         <div>
           <Label for="id_number">
@@ -180,6 +137,50 @@ const Others = ({ handleContinue, isLoader }) => {
           />
           {formik.errors.id_number && formik.touched.id_number ? (
             <div className="error-msg">{formik.errors.id_number}</div>
+          ) : (
+            <div className="no-error-msg"></div>
+          )}
+        </div>
+      </Col>
+      <Col lg={6} xl={6}>
+        <div className="mb-0">
+          <Label for="email">
+            Email <span className="star">*</span>
+          </Label>
+          <Input
+            id="email"
+            name="email"
+            type="text"
+            placeholder="eg: @gmail.com"
+            className="appointment-form__input"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.errors.email && formik.touched.email ? (
+            <div className="error-msg">{formik.errors.email}</div>
+          ) : (
+            <div className="no-error-msg"></div>
+          )}
+        </div>
+      </Col>
+      <Col lg={6} xl={6}>
+        <div className="mb-0">
+          <Label for="phone">
+            Phone No. <span className="star">*</span>
+          </Label>
+          <Input
+            id="phone"
+            name="phone"
+            type="text"
+            placeholder="eg: 646454104"
+            className="appointment-form__input"
+            value={formik.values.phone}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+          />
+          {formik.errors.phone && formik.touched.phone ? (
+            <div className="error-msg">{formik.errors.phone}</div>
           ) : (
             <div className="no-error-msg"></div>
           )}
