@@ -33,40 +33,80 @@ const MakePayment = () => {
     }));
   };
 
+  console.log(applicationDetails, "applicationDetails=>");
   const handlePayNow = () => {
-    const details = {
-      application_id:
-        applicationDetails.category === "Visa"
-          ? applicationDetails.applicationId
-          : applicationDetails.id_number,
-      appointment_date:
-        appointmentDetails !== undefined &&
-        moment(appointmentDetails.applicantAppointment?.date).format(
-          "YYYY-MM-DD",
+    if (
+      applicationDetails.email !== "" &&
+      applicationDetails.phone_number !== ""
+    ) {
+      const details = {
+        application_id:
+          applicationDetails.category === "Visa"
+            ? applicationDetails.applicationId
+            : applicationDetails.id_number,
+        appointment_date:
+          appointmentDetails !== undefined &&
+          moment(appointmentDetails.applicantAppointment?.date).format(
+            "YYYY-MM-DD",
+          ),
+        center_id: centreId,
+        appointment_time:
+          appointmentDetails !== undefined &&
+          appointmentDetails.applicantAppointment?.time,
+        applicant_fullname: applicationDetails.name,
+        category: applicationDetails.category,
+        service_type: applicationDetails.category,
+        status: status,
+        country: applicationDetails.country,
+        email: applicationDetails.email,
+        phone_number: applicationDetails.phone_number,
+      };
+      dispatch(
+        appointmentScheduleFetchRequest(
+          details,
+          (success) => {
+            push("/appointment-booked");
+            dispatch(appointmentDetailsFetchFailure());
+          },
+          (error) => {
+            toast.error("Something Went Wrong");
+          },
         ),
-      center_id: centreId,
-      appointment_time:
-        appointmentDetails !== undefined &&
-        appointmentDetails.applicantAppointment?.time,
-      applicant_fullname: applicationDetails.name,
-      category: applicationDetails.category,
-      service_type: applicationDetails.category,
-      status: status,
-      country: applicationDetails.country,
-    };
-    console.log(details, "details==>");
-    dispatch(
-      appointmentScheduleFetchRequest(
-        details,
-        (success) => {
-          push("/appointment-booked");
-          dispatch(appointmentDetailsFetchFailure());
-        },
-        (error) => {
-          toast.error("Something Went Wrong");
-        },
-      ),
-    );
+      );
+    } else {
+      const details = {
+        application_id:
+          applicationDetails.category === "Visa"
+            ? applicationDetails.applicationId
+            : applicationDetails.id_number,
+        appointment_date:
+          appointmentDetails !== undefined &&
+          moment(appointmentDetails.applicantAppointment?.date).format(
+            "YYYY-MM-DD",
+          ),
+        center_id: centreId,
+        appointment_time:
+          appointmentDetails !== undefined &&
+          appointmentDetails.applicantAppointment?.time,
+        applicant_fullname: applicationDetails.name,
+        category: applicationDetails.category,
+        service_type: applicationDetails.category,
+        status: status,
+        country: applicationDetails.country,
+      };
+      dispatch(
+        appointmentScheduleFetchRequest(
+          details,
+          (success) => {
+            push("/appointment-booked");
+            dispatch(appointmentDetailsFetchFailure());
+          },
+          (error) => {
+            toast.error("Something Went Wrong");
+          },
+        ),
+      );
+    }
   };
 
   return (
