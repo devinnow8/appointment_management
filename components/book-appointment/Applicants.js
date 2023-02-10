@@ -8,6 +8,7 @@ function Applicants({ handleDeleteApplicant }) {
     (state) => state.applicationDetails,
   );
 
+  console.log(applicationDetails, "applicationDetails==>");
   return (
     <Row>
       <Col xs={12} sm={12}>
