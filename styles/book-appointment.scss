@@ -30,7 +30,7 @@
       padding: 10px 13px;
       position: relative;
       @media only screen and (max-width: 576px) {
-        padding: 5px 13px;
+        padding: 10px 13px 7px 13px;
       }
       &.width15 {
         width: 204px;
@@ -316,6 +316,9 @@
         border: none;
         border-radius: 5px;
         padding: 2px 10px 4px 10px;
+        @media (min-width: 769px) and (max-width: 992px) {
+          left: 32.1%;
+        }
         @media (max-width: 768px) {
           display: none;
         }
@@ -328,6 +331,9 @@
         border: none;
         border-radius: 5px;
         padding: 2px 10px 4px 10px;
+        @media (min-width: 769px) and (max-width: 992px) {
+          right: 35.1%;
+        }
         @media (max-width: 768px) {
           display: none;
         }

@@ -86,6 +86,7 @@ $laptop: 1280px;
         }
         @media only screen and (max-width: 576px) {
           font-size: 18px;
+          margin: 4px 0px 14px 0px;
         }
       }
       .confirm-modal__subtitle {
@@ -102,7 +103,7 @@ $laptop: 1280px;
         width: 350px;
         margin: 0 auto;
         @media only screen and (max-width: 576px) {
-          width: 272px;
+          width: 320px;
         }
         .confirm-modal__applicant--flex {
           display: flex;
@@ -169,8 +170,9 @@ $laptop: 1280px;
       margin-right: 20px;
       background: #6c757d !important;
       @media only screen and (max-width: 576px) {
-        width: 130px !important;
-        margin-bottom: 0px;
+        width: 252px !important;
+        margin-bottom: 10px;
+        margin-right: 0px;
       }
     }
     .confirm {
@@ -183,7 +185,9 @@ $laptop: 1280px;
         width: unset;
         padding: 11px 22px;
         @media only screen and (max-width: 576px) {
-          width: 100%;
+          width: 252px !important;
+          display: block;
+          margin: 0 auto;
         }
       }
     }
