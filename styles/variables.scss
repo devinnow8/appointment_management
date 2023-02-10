@@ -105,6 +105,9 @@ $laptop: 1280px;
         @media only screen and (max-width: 576px) {
           width: 320px;
         }
+        @media only screen and (max-width: 340px) {
+          width: 270px;
+        }
         .confirm-modal__applicant--flex {
           display: flex;
           align-items: center;
