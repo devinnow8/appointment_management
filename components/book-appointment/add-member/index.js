@@ -1,25 +1,27 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import { Label, Input, Button } from "reactstrap";
 import Select from "react-select";
 import { idType, countries } from "../../../constants";
-import AddMember from "../add-member";
 
-const Others = ({ handleAddMember }) => {
-  const [isAddMember, setIsAddMember] = useState(false);
-  const [details, setDetails] = useState({});
+const AddMember = ({
+  handleAddMember,
+  details,
+  setIsAddMember,
+  isAddMember,
+}) => {
   const formik = useFormik({
     initialValues: {
-      name: "",
-      nationality: "",
-      id_type: "",
-      id_number: "",
+      name: details.name,
+      nationality: details.nationality,
+      id_type: details.id_type,
+      id_number: details.id_number,
+      phone: "",
+      email: "",
     },
     onSubmit: (values, onSubmitProps) => {
-      // handleAddMember(values);
+      handleAddMember(values);
       onSubmitProps.resetForm();
-      setIsAddMember(true);
-      setDetails(values);
     },
     validate: (values, props) => {
       const errors = {};
@@ -119,19 +121,8 @@ const Others = ({ handleAddMember }) => {
           Add Member
         </Button>
       </div>
-
-      {isAddMember && (
-        <>
-          <AddMember
-            handleAddMember={handleAddMember}
-            isAddMember={isAddMember}
-            setIsAddMember={setIsAddMember}
-            details={details}
-          />
-        </>
-      )}
     </>
   );
 };
 
-export default Others;
+export default AddMember;
