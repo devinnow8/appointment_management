@@ -154,6 +154,9 @@ $laptop: 1280px;
               opacity: 0.7;
               color: black;
               margin-bottom: 0;
+              &.email-add {
+                word-break: break-all;
+              }
               @media (max-width: $xxLDesktop) {
                 font-size: 14px;
               }

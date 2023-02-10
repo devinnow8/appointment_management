@@ -51,7 +51,7 @@ const ApplicantOthers = ({ applicantDetail }) => {
           <h5 className="confirm-modal__applicant--heading">Email</h5>
         </div>
         <div className="confirm-modal__applicant--value">
-          <p className="confirm-modal__applicant-desc">
+          <p className="confirm-modal__applicant-desc email-add">
             {applicantDetail.email}
           </p>
         </div>
