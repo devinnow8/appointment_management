@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { store } from "../redux/store";
 // const NEXT_APP_BASE_URL = 'https://ois-be.azurewebsites.net/admin/';
-const NEXT_APP_BASE_URL = "https://a702-103-68-20-198.in.ngrok.io/user/";
+const NEXT_APP_BASE_URL = "https://9f73-103-68-20-198.in.ngrok.io/user/";
 // const NEXT_APP_BASE_URL =
 //   "https://ec2-13-232-174-48.ap-south-1.compute.amazonaws.com:8080/user/";
 

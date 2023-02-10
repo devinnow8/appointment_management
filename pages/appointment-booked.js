@@ -58,7 +58,7 @@ function AppointmentBooked() {
                 ${
                   applicationDetails.appointmentId !== undefined
                     ? applicationDetails.appointmentId
-                    : appointment.appointment_id
+                    : appointment.appointment_id || appointment.application_id
                 }. A copy of the appointment slip and checklist have been
                 sent to your email. Optionally you can download it by click the
                 buttons given below.`}
@@ -77,7 +77,8 @@ function AppointmentBooked() {
                     handlePrintSlip(
                       applicationDetails.appointmentId !== undefined
                         ? applicationDetails.appointmentId
-                        : appointment.appointment_id,
+                        : appointment.appointment_id ||
+                            appointment.application_id,
                     )
                   }
                 >

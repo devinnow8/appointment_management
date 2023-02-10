@@ -41,19 +41,20 @@ const MakePayment = () => {
           : applicationDetails.id_number,
       appointment_date:
         appointmentDetails !== undefined &&
-        moment(appointmentDetails.applicantAppointment.date).format(
+        moment(appointmentDetails.applicantAppointment?.date).format(
           "YYYY-MM-DD",
         ),
       center_id: centreId,
       appointment_time:
         appointmentDetails !== undefined &&
-        appointmentDetails.applicantAppointment.time,
+        appointmentDetails.applicantAppointment?.time,
       applicant_fullname: applicationDetails.name,
       category: applicationDetails.category,
       service_type: applicationDetails.category,
       status: status,
       country: applicationDetails.country,
     };
+    console.log(details, "details==>");
     dispatch(
       appointmentScheduleFetchRequest(
         details,

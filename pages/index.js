@@ -35,6 +35,7 @@ export default function Home() {
         applicationDetailsFetchRequest(
           details,
           (success) => {
+            console.log(success, "successData==>");
             if (success.data.category !== selectedService.label) {
               setIsLoader(false);
               toast.error("Application not found");
@@ -82,12 +83,13 @@ export default function Home() {
         serviceType: selectedService.label,
         category: selectedService.label,
         email: values.email,
-        phone: values.phone,
+        phone_number: parseInt(values.phone),
       };
       dispatch(
         applicationDetailsFetchRequest(
           details,
           (success) => {
+            console.log(success, "successData==>12");
             if (success.data.category !== selectedService.label) {
               setIsLoader(false);
               toast.error("Application not found");
