@@ -231,7 +231,7 @@ export default () => {
   }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
   return (
     <>
-      <Header handleAddMember={handleAddMember} />
+      <Header handleAddMember={handleAddMember} isLoader={isLoader} />
       <DetailSection
         handleDeleteApplicant={handleDeleteApplicant}
         arrayTime={arrayTime}

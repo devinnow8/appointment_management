@@ -12,12 +12,14 @@ import {
 } from "reactstrap";
 import Select from "react-select";
 import { idType, countries } from "../../../constants";
+import Loader from "../../loader";
 
 const AddMember = ({
   handleAddMember,
   details,
   setIsAddMember,
   isAddMember,
+  isLoader,
 }) => {
   const formik = useFormik({
     initialValues: {
@@ -205,6 +207,7 @@ const AddMember = ({
                   onClick={formik.handleSubmit}
                 >
                   Save Changes
+                  <Loader isLoader={isLoader} />
                 </Button>
               </div>
             </Col>
