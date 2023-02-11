@@ -203,10 +203,7 @@ export default () => {
   }
 
   const handleFreeBooking = () => {
-    if (
-      applicationDetails.email !== "" &&
-      applicationDetails.phone_number !== ""
-    ) {
+    if (applicationDetails.category !== "Visa") {
       const details = {
         application_id: applicationDetails.id_number,
         appointment_date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
@@ -215,7 +212,7 @@ export default () => {
         applicant_fullname: applicationDetails.name,
         category: applicationDetails.category,
         service_type: applicationDetails.category,
-        status: selectedCenter?.status,
+        // status: selectedCenter?.status,
         country: applicationDetails.country,
         email: applicationDetails.email,
         phone_number: applicationDetails.phone_number,
@@ -241,7 +238,7 @@ export default () => {
         applicant_fullname: applicationDetails.name,
         category: applicationDetails.category,
         service_type: applicationDetails.category,
-        status: selectedCenter?.status,
+        // status: selectedCenter?.status,
         country: applicationDetails.country,
       };
       dispatch(
