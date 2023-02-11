@@ -69,14 +69,24 @@ const CalendarTime = ({
                 >
                   Cancel
                 </Button>
-                <Button
+                {/* <Button
                   className="continue"
                   onClick={handleRescheduleAppointment}
                   disabled={!applicantAppointment?.time?.length}
                 >
                   Continue
                   <Loader isLoader={isLoading} />
-                </Button>
+                </Button> */}
+                <Button
+                className="continue"
+                onClick={() => {
+                  setModal(true);
+                  setConfirmCalendar(true);
+                }}
+                disabled={!applicantAppointment?.time?.length}
+              >
+                Continue
+              </Button>
               </div>
             </Col>
           </>

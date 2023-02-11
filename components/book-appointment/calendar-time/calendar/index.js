@@ -83,6 +83,10 @@ const Calendar = ({
       );
       setSlideToShow(index);
       setSelectedDate(new Date(applicationDetails.appointmentDate));
+      setApplicantAppointment((prev) => ({
+        ...prev,
+        location: selectedCenter?.label,
+      }));
     }
   }, [
     applicationDetails.appointmentId,

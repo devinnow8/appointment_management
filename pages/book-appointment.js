@@ -17,6 +17,7 @@ import {
 } from "../redux/reducer/application-detail";
 import { appointmentDetailsFetchRequest } from "../redux/reducer/appointment-details";
 import moment from "moment";
+import { rescheduleAppointmentFetchRequest } from "../redux/reducer/reschedule-appointment";
 
 export default () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ export default () => {
   const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
 
+  console.log(applicantAppointment, 'applicantAppointment====>',applicationDetails );
   const handleAddMember = (values) => {
     if (applicationDetails.category === "Visa") {
       if (memberDetails.length === 5) {
@@ -184,6 +186,21 @@ export default () => {
     });
   };
 
+  const handleRescheduleAppointment = () => {
+    const details = {
+      date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
+      time: applicantAppointment?.time,
+      centerId: selectedCenter?.centerId,
+      appointmentId: applicationDetails.appointmentId,
+    };
+    dispatch(
+      rescheduleAppointmentFetchRequest(details, (success) => {
+        toast.success("Appointment Rescheduled Successfully");
+        router.push("/appointment-booked");
+      }),
+    );
+  }
+
   useEffect(() => {
     setApplicantAppointment((prev) => ({
       ...prev,
@@ -245,6 +262,7 @@ export default () => {
           confirmCalendar={confirmCalendar}
           handlePaymentProceed={handlePaymentProceed}
           isLoader={isLoader}
+          handleRescheduleAppointment={handleRescheduleAppointment}
         />
       )}
       {deleteModal && (

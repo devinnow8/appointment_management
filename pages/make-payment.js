@@ -33,7 +33,6 @@ const MakePayment = () => {
     }));
   };
 
-  console.log(applicationDetails, "applicationDetails=>");
   const handlePayNow = () => {
     if (
       applicationDetails.email !== "" &&
