@@ -17,7 +17,8 @@ function ConfirmModal({
   setModal,
   setConfirmCalendar,
   isAppointmentBooked,
-  handleRescheduleAppointment
+  handleRescheduleAppointment,
+  handleFreeBooking
 }) {
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
@@ -87,11 +88,23 @@ function ConfirmModal({
               <>
                 <Button
                   className="confirm payment-btn"
-                  onClick={applicationDetails.appointmentId ? handleRescheduleAppointment :handlePaymentProceed}
+                  onClick={
+                    applicationDetails.appointmentId
+                      ? handleRescheduleAppointment
+                      : applicationDetails.price
+                      ? handleFreeBooking
+                      : handlePaymentProceed
+                  }
                 >
-                  {applicationDetails.appointmentId ? "Reschedule" : "Confirm & Proceed for Payment"}
+                  {applicationDetails.appointmentId
+                    ? "Reschedule"
+                    : applicationDetails.price
+                    ? "Confirm & Book"
+                    : "Confirm & Proceed for Payment"}
 
-                 {applicationDetails.appointmentId && <Loader isLoader={isLoading} />}
+                  {applicationDetails.appointmentId && (
+                    <Loader isLoader={isLoading} />
+                  )}
                 </Button>
               </>
             ) : (

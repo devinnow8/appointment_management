@@ -39,10 +39,7 @@ const MakePayment = () => {
       applicationDetails.phone_number !== ""
     ) {
       const details = {
-        application_id:
-          applicationDetails.category === "Visa"
-            ? applicationDetails.applicationId
-            : applicationDetails.id_number,
+        application_id: applicationDetails.id_number,
         appointment_date:
           appointmentDetails !== undefined &&
           moment(appointmentDetails.applicantAppointment?.date).format(
@@ -74,10 +71,7 @@ const MakePayment = () => {
       );
     } else {
       const details = {
-        application_id:
-          applicationDetails.category === "Visa"
-            ? applicationDetails.applicationId
-            : applicationDetails.id_number,
+        application_id:applicationDetails.applicationId,
         appointment_date:
           appointmentDetails !== undefined &&
           moment(appointmentDetails.applicantAppointment?.date).format(

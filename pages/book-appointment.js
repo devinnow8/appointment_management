@@ -18,6 +18,8 @@ import {
 import { appointmentDetailsFetchRequest } from "../redux/reducer/appointment-details";
 import moment from "moment";
 import { rescheduleAppointmentFetchRequest } from "../redux/reducer/reschedule-appointment";
+import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
+import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
 
 export default () => {
   const dispatch = useDispatch();
@@ -49,7 +51,6 @@ export default () => {
   const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
 
-  console.log(applicantAppointment, 'applicantAppointment====>',applicationDetails );
   const handleAddMember = (values) => {
     if (applicationDetails.category === "Visa") {
       if (memberDetails.length === 5) {
@@ -201,6 +202,63 @@ export default () => {
     );
   }
 
+  const handleFreeBooking = () => {
+    if (
+      applicationDetails.email !== "" &&
+      applicationDetails.phone_number !== ""
+    ) {
+      const details = {
+        application_id: applicationDetails.id_number,
+        appointment_date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
+        center_id: selectedCenter?.centerId,
+        appointment_time: applicantAppointment?.time,
+        applicant_fullname: applicationDetails.name,
+        category: applicationDetails.category,
+        service_type: applicationDetails.category,
+        status: selectedCenter?.status,
+        country: applicationDetails.country,
+        email: applicationDetails.email,
+        phone_number: applicationDetails.phone_number,
+      };
+      dispatch(
+        appointmentScheduleFetchRequest(
+          details,
+          (success) => {
+            push("/appointment-booked");
+            // dispatch(appointmentDetailsFetchFailure());
+          },
+          (error) => {
+            toast.error("Something Went Wrong");
+          },
+        ),
+      );
+    } else {
+      const details = {
+        application_id:applicationDetails.applicationId,
+        appointment_date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
+        center_id: selectedCenter?.centerId,
+        appointment_time: applicantAppointment?.time,
+        applicant_fullname: applicationDetails.name,
+        category: applicationDetails.category,
+        service_type: applicationDetails.category,
+        status: selectedCenter?.status,
+        country: applicationDetails.country,
+      };
+      dispatch(
+        appointmentScheduleFetchRequest(
+          details,
+          (success) => {
+            push("/appointment-booked");
+            // dispatch(appointmentDetailsFetchFailure());
+          },
+          (error) => {
+            toast.error("Something Went Wrong");
+          },
+        ),
+      );
+    }
+
+  }
   useEffect(() => {
     setApplicantAppointment((prev) => ({
       ...prev,
@@ -263,6 +321,7 @@ export default () => {
           handlePaymentProceed={handlePaymentProceed}
           isLoader={isLoader}
           handleRescheduleAppointment={handleRescheduleAppointment}
+          handleFreeBooking={handleFreeBooking}
         />
       )}
       {deleteModal && (
