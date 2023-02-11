@@ -57,7 +57,6 @@ const Calendar = ({
     appointmentDetails.applicantAppointment?.time,
     appointmentDetails.applicantAppointment?.date,
     appointmentDetails.centerId,
-    slideToShow,
     selectedCountry.label,
     centerList,
   ]);
@@ -94,7 +93,6 @@ const Calendar = ({
     applicationDetails.appointmentTime,
     applicationDetails.appointmentDate,
     applicationDetails.centerId,
-    slideToShow,
     selectedCountry.label,
     centerList,
     applicationDetails.serviceType,

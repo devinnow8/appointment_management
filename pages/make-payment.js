@@ -34,10 +34,7 @@ const MakePayment = () => {
   };
 
   const handlePayNow = () => {
-    if (
-      applicationDetails.email !== "" &&
-      applicationDetails.phone_number !== ""
-    ) {
+    if (applicationDetails.category !== "Visa") {
       const details = {
         application_id: applicationDetails.id_number,
         appointment_date:
@@ -52,7 +49,7 @@ const MakePayment = () => {
         applicant_fullname: applicationDetails.name,
         category: applicationDetails.category,
         service_type: applicationDetails.category,
-        status: status,
+        // status: status,
         country: applicationDetails.country,
         email: applicationDetails.email,
         phone_number: applicationDetails.phone_number,
@@ -71,7 +68,7 @@ const MakePayment = () => {
       );
     } else {
       const details = {
-        application_id:applicationDetails.applicationId,
+        application_id: applicationDetails.applicationId,
         appointment_date:
           appointmentDetails !== undefined &&
           moment(appointmentDetails.applicantAppointment?.date).format(
@@ -84,7 +81,7 @@ const MakePayment = () => {
         applicant_fullname: applicationDetails.name,
         category: applicationDetails.category,
         service_type: applicationDetails.category,
-        status: status,
+        // status: status,
         country: applicationDetails.country,
       };
       dispatch(
