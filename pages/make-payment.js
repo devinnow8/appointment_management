@@ -34,69 +34,54 @@ const MakePayment = () => {
   };
 
   const handlePayNow = () => {
+    const details = {};
     if (applicationDetails.category !== "Visa") {
-      const details = {
-        application_id: applicationDetails.id_number,
-        appointment_date:
-          appointmentDetails !== undefined &&
-          moment(appointmentDetails.applicantAppointment?.date).format(
-            "YYYY-MM-DD",
-          ),
-        center_id: centreId,
-        appointment_time:
-          appointmentDetails !== undefined &&
-          appointmentDetails.applicantAppointment?.time,
-        applicant_fullname: applicationDetails.name,
-        category: applicationDetails.category,
-        service_type: applicationDetails.category,
-        // status: status,
-        country: applicationDetails.country,
-        email: applicationDetails.email,
-        phone_number: applicationDetails.phone_number,
-      };
-      dispatch(
-        appointmentScheduleFetchRequest(
-          details,
-          (success) => {
-            push("/appointment-booked");
-            dispatch(appointmentDetailsFetchFailure());
-          },
-          (error) => {
-            toast.error("Something Went Wrong");
-          },
-        ),
-      );
+      details.application_id = applicationDetails.id_number;
+      details.appointment_date =
+        appointmentDetails !== undefined &&
+        moment(appointmentDetails.applicantAppointment?.date).format(
+          "YYYY-MM-DD",
+        );
+      details.center_id = centreId;
+      details.appointment_time =
+        appointmentDetails !== undefined &&
+        appointmentDetails.applicantAppointment?.time;
+      details.applicant_fullname = applicationDetails.name;
+      details.category = applicationDetails.category;
+      details.service_type = applicationDetails.category;
+      // status: selectedCenter?.status,
+      details.country = applicationDetails.country;
+      details.email = applicationDetails.email;
+      details.phone_number = applicationDetails.phone_number;
     } else {
-      const details = {
-        application_id: applicationDetails.applicationId,
-        appointment_date:
-          appointmentDetails !== undefined &&
-          moment(appointmentDetails.applicantAppointment?.date).format(
-            "YYYY-MM-DD",
-          ),
-        center_id: centreId,
-        appointment_time:
-          appointmentDetails !== undefined &&
-          appointmentDetails.applicantAppointment?.time,
-        applicant_fullname: applicationDetails.name,
-        category: applicationDetails.category,
-        service_type: applicationDetails.category,
-        // status: status,
-        country: applicationDetails.country,
-      };
-      dispatch(
-        appointmentScheduleFetchRequest(
-          details,
-          (success) => {
-            push("/appointment-booked");
-            dispatch(appointmentDetailsFetchFailure());
-          },
-          (error) => {
-            toast.error("Something Went Wrong");
-          },
-        ),
-      );
+      details.application_id = applicationDetails.applicationId;
+      details.appointment_date =
+        appointmentDetails !== undefined &&
+        moment(appointmentDetails.applicantAppointment?.date).format(
+          "YYYY-MM-DD",
+        );
+      details.center_id = centreId;
+      details.appointment_time =
+        appointmentDetails !== undefined &&
+        appointmentDetails.applicantAppointment?.time;
+      details.applicant_fullname = applicationDetails.name;
+      details.category = applicationDetails.category;
+      details.service_type = applicationDetails.category;
+      // status: selectedCenter?.status,
+      details.country = applicationDetails.country;
     }
+    dispatch(
+      appointmentScheduleFetchRequest(
+        details,
+        (success) => {
+          push("/appointment-booked");
+          dispatch(appointmentDetailsFetchFailure());
+        },
+        (error) => {
+          toast.error("Something Went Wrong");
+        },
+      ),
+    );
   };
 
   return (

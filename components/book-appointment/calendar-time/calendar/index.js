@@ -31,7 +31,7 @@ const Calendar = ({
   });
 
   useEffect(() => {
-    if (appointmentDetails.applicantAppointment) {
+    if (appointmentDetails.applicantAppointment !== undefined) {
       // if click cancel after going to payment page
       const filteredArray = centerList.filter(
         (centre) =>

@@ -24,23 +24,23 @@ export default function Home() {
 
   const handleContinue = (values) => {
     setIsLoader(true);
-      const details = {};
-      if (selectedService.label === "Visa") {
-        details.applicationId = values.application_id;
-        details.dob = values.dob;
-        details.serviceType =  selectedService.label;
-      } else {
-        details.name = values.name;
-        details.country = values.nationality.label;
-        details.serviceType =  selectedService.label; 
-        details.nationality = values.nationality.label;
-        details.id_type =   values.id_type.label;
-        details.applicationId =  values.id_number;
-        details.id_number = values.id_number;
-        details.category =  selectedService.label;
-        details.email =  values.email;
-        details.phone_number =  parseInt(values.phone);
-      }
+    const details = {};
+    if (selectedService.label === "Visa") {
+      details.applicationId = values.application_id;
+      details.dob = values.dob;
+      details.serviceType = selectedService.label;
+    } else {
+      details.name = values.name;
+      details.country = values.nationality.label;
+      details.serviceType = selectedService.label;
+      details.nationality = values.nationality.label;
+      details.id_type = values.id_type.label;
+      details.applicationId = values.id_number;
+      details.id_number = values.id_number;
+      details.category = selectedService.label;
+      details.email = values.email;
+      details.phone_number = parseInt(values.phone);
+    }
     dispatch(
       applicationDetailsFetchRequest(
         details,

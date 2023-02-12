@@ -19,7 +19,6 @@ import { appointmentDetailsFetchRequest } from "../redux/reducer/appointment-det
 import moment from "moment";
 import { rescheduleAppointmentFetchRequest } from "../redux/reducer/reschedule-appointment";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
-import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
 
 export default () => {
   const dispatch = useDispatch();
@@ -99,13 +98,13 @@ export default () => {
     } else {
       if (memberDetails.length === 5) {
         toast.warn("You can't add more than 4 members ");
+      } else if (applicationDetails.country !== values.nationality.label) {
+        toast.error("Application should be of same country");
       } else if (
         memberDetails.filter((x) => x.applicationId === values.id_number)
           .length > 0
       ) {
         toast.error("This application id is already existing ");
-      } else if (applicationDetails.country !== values.nationality.label) {
-        toast.error("Application should be of same country");
       } else {
         const details = {
           name: values.name,
@@ -200,62 +199,48 @@ export default () => {
         router.push("/appointment-booked");
       }),
     );
-  }
-
+  };
   const handleFreeBooking = () => {
+    const details = {};
     if (applicationDetails.category !== "Visa") {
-      const details = {
-        application_id: applicationDetails.id_number,
-        appointment_date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
-        center_id: selectedCenter?.centerId,
-        appointment_time: applicantAppointment?.time,
-        applicant_fullname: applicationDetails.name,
-        category: applicationDetails.category,
-        service_type: applicationDetails.category,
-        // status: selectedCenter?.status,
-        country: applicationDetails.country,
-        email: applicationDetails.email,
-        phone_number: applicationDetails.phone_number,
-      };
-      dispatch(
-        appointmentScheduleFetchRequest(
-          details,
-          (success) => {
-            push("/appointment-booked");
-            // dispatch(appointmentDetailsFetchFailure());
-          },
-          (error) => {
-            toast.error("Something Went Wrong");
-          },
-        ),
+      details.application_id = applicationDetails.id_number;
+      details.appointment_date = moment(applicantAppointment.date).format(
+        "YYYY-MM-DD",
       );
+      details.center_id = selectedCenter?.centerId;
+      details.appointment_time = applicantAppointment?.time;
+      details.applicant_fullname = applicationDetails.name;
+      details.category = applicationDetails.category;
+      details.service_type = applicationDetails.category;
+      // status: selectedCenter?.status,
+      details.country = applicationDetails.country;
+      details.email = applicationDetails.email;
+      details.phone_number = applicationDetails.phone_number;
     } else {
-      const details = {
-        application_id:applicationDetails.applicationId,
-        appointment_date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
-        center_id: selectedCenter?.centerId,
-        appointment_time: applicantAppointment?.time,
-        applicant_fullname: applicationDetails.name,
-        category: applicationDetails.category,
-        service_type: applicationDetails.category,
-        // status: selectedCenter?.status,
-        country: applicationDetails.country,
-      };
-      dispatch(
-        appointmentScheduleFetchRequest(
-          details,
-          (success) => {
-            push("/appointment-booked");
-            // dispatch(appointmentDetailsFetchFailure());
-          },
-          (error) => {
-            toast.error("Something Went Wrong");
-          },
-        ),
+      details.application_id = applicationDetails.applicationId;
+      details.appointment_date = moment(applicantAppointment.date).format(
+        "YYYY-MM-DD",
       );
+      details.center_id = selectedCenter?.centerId;
+      details.appointment_time = applicantAppointment?.time;
+      details.applicant_fullname = applicationDetails.name;
+      details.category = applicationDetails.category;
+      details.service_type = applicationDetails.category;
+      // status: selectedCenter?.status,
+      details.country = applicationDetails.country;
     }
-
-  }
+    dispatch(
+      appointmentScheduleFetchRequest(
+        details,
+        (success) => {
+          push("/appointment-booked");
+        },
+        (error) => {
+          toast.error("Something Went Wrong");
+        },
+      ),
+    );
+  };
   useEffect(() => {
     setApplicantAppointment((prev) => ({
       ...prev,
