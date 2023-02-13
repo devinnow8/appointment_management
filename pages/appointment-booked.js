@@ -21,7 +21,6 @@ function AppointmentBooked() {
     (state) => state.applicationDetails,
   );
 
-  console.log(applicationDetails, "applicationDetails=>");
   const printDocument = (id) => {
     // const pdf = new jsPDF();
     // pdf.text(

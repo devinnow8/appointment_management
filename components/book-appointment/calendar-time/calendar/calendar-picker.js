@@ -10,6 +10,7 @@ const CalendarPicker = ({
   handleSelectDate,
   selectedCountry,
   selectedCenter,
+  setSelectedDate,
 }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
   const [holidaysList, setHolidaysList] = useState([]);
@@ -23,6 +24,19 @@ const CalendarPicker = ({
         const date1 = new Date(list.date);
         return new Date(date1.toUTCString().slice(0, -4));
       });
+      const filteredDate = holidayList.filter((list) => {
+        const date1 = new Date(list.date);
+        const date2 = new Date(date1.toUTCString().slice(0, -4));
+        if (
+          moment(selectedDate).format("MM/DD/YYYY") ===
+          moment(date2).format("MM/DD/YYYY")
+        ) {
+          return list;
+        }
+      });
+      if (filteredDate.length > 0) {
+        setSelectedDate("");
+      }
       setHolidaysList(obtainedHoliday);
     }
   }, [selectedCountry?.label, selectedCenter?.centerId, holidayList]);

@@ -14,7 +14,6 @@ export const serviceListSlice = createSlice({
         state.isLoading = true;
       },
       prepare: (requestBody) => {
-        console.log(requestBody, "requestBody=>");
         return {
           payload: {
             requestBody,

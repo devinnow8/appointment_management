@@ -170,6 +170,7 @@ const Calendar = ({
             selectedCountry={selectedCountry}
             handleSelectDate={handleSelectDate}
             selectedCenter={selectedCenter}
+            setSelectedDate={setSelectedDate}
           />
           <div className="calender-status">
             <p className="calender-status__title">Legends:</p>

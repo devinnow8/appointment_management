@@ -8,13 +8,11 @@ import * as services from "../../../services";
 import { toast } from "react-toastify";
 
 function* getServiceListRequest(action) {
-  console.log(action, "actionaction/>>");
   try {
     const response = yield call(
       services.serviceList,
       action.payload.requestBody,
     );
-    console.log(response, "responseresponse==>>");
     const { status, statusText, data = [] } = response || {};
     if (status === 200) {
       yield put(serviceListFetchSuccess(data));

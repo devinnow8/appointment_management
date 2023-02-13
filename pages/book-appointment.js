@@ -55,13 +55,58 @@ export default () => {
   });
   const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
+  const [updatedMembers, setUpdatedMembers] = useState([])
 
   const totalAmount = serviceList.reduce((acc, obj) => {
     if (obj.per_person) return acc + obj.price * memberDetails.length;
     else return acc + obj.price;
   }, 0);
 
-  console.log(totalAmount, "totalAmount=>", serviceList, totalAmount);
+  useEffect(() => {
+    if (applicationDetails.category !== "Visa") {
+    const obtainedArray = memberDetails.map((member)=>{
+      return {
+        application_id: member.id_number,
+        appointment_date: applicantAppointment !== undefined &&
+          moment(applicantAppointment?.date).format(
+            "YYYY-MM-DD",
+          ),
+        center_id: selectedCenter?.centerId,
+        appointment_time: applicantAppointment !== undefined &&
+        applicantAppointment?.time,
+        applicant_fullname: member.name,
+        category: member.category,
+        service_type: member.category,
+        // status: selectedCenter?.status,
+        country: member.country,
+        email: member.email,
+        phone_number: member.phone_number,
+        price: totalAmount,
+      }
+    })
+    setUpdatedMembers(obtainedArray)
+  }else {
+    const obtainedArray = memberDetails.map((member)=>{
+      return {
+        application_id: member.applicationId,
+        appointment_date: applicantAppointment !== undefined &&
+          moment(applicantAppointment?.date).format(
+            "YYYY-MM-DD",
+          ),
+        center_id: selectedCenter?.centerId,
+        appointment_time: applicantAppointment !== undefined &&
+        applicantAppointment?.time,
+        applicant_fullname: member.name,
+        category: member.category,
+        service_type: member.category,
+        // status: selectedCenter?.status,
+        country: member.country,
+        price: totalAmount,
+      }
+    })
+    setUpdatedMembers(obtainedArray)
+  }
+  }, [memberDetails, applicationDetails, applicationDetails, selectedCenter?.centerId, applicantAppointment])
 
   const handleAddMember = (values) => {
     if (applicationDetails.category === "Visa") {
@@ -157,7 +202,6 @@ export default () => {
       }
     }
   };
-  console.log(serviceList, "serviceList==>");
   const handleConfirm = () => {
     setIsLoader(true);
     setModal(false);
@@ -192,6 +236,7 @@ export default () => {
         selectedCenter?.centerName.slice(1),
       centerId: selectedCenter.centerId,
       totalAmount: totalAmount,
+      updatedMembers: updatedMembers
     };
     dispatch(appointmentDetailsFetchRequest(details));
     router.push({
@@ -297,7 +342,6 @@ export default () => {
         }
       } else {
         let day = moment(selectedDate).format("DD/MM/YYYY");
-        console.log(day, "dayday=>", item.day);
         if (item.day === day && item.centerId === selectedCenter?.centerId) {
           return item;
         }
