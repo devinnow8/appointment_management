@@ -13,6 +13,9 @@ const MakePayment = () => {
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
+  const { memberDetails } = useSelector((state) => state.applicationDetails);
+  const totalMember = memberDetails && memberDetails.length;
+  const totalValue = 350 * totalMember;
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
@@ -53,6 +56,7 @@ const MakePayment = () => {
       details.country = applicationDetails.country;
       details.email = applicationDetails.email;
       details.phone_number = applicationDetails.phone_number;
+      details.price = totalValue;
     } else {
       details.application_id = applicationDetails.applicationId;
       details.appointment_date =
@@ -69,6 +73,7 @@ const MakePayment = () => {
       details.service_type = applicationDetails.category;
       // status: selectedCenter?.status,
       details.country = applicationDetails.country;
+      details.price = totalValue;
     }
     dispatch(
       appointmentScheduleFetchRequest(
