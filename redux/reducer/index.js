@@ -10,6 +10,7 @@ import appointmentDetails from "./appointment-details";
 import rescheduleAppointment from "./reschedule-appointment";
 import cancelAppointment from "./cancel-appointment";
 import appointmentBooked from "./appointment-booked";
+import serviceList from "./service-list";
 
 const rootReducer = combineReducers({
   user,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   appointmentDetails,
   rescheduleAppointment,
   cancelAppointment,
-  appointmentBooked
+  appointmentBooked,
+  serviceList,
 });
 
 export default rootReducer;

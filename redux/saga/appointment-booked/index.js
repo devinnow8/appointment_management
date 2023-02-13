@@ -1,13 +1,18 @@
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest } from "redux-saga/effects";
 import {
-    appointmentBookedPdfRequest
-} from '../../reducer/appointment-booked';
-import * as appointmentBookedCrudSaga from './appointmentBooked';
+  appointmentBookedPdfRequest,
+  appointmentBookedChecklistRequest,
+} from "../../reducer/appointment-booked";
+import * as appointmentBookedCrudSaga from "./appointmentBooked";
 
 function* appointmentBookedSaga() {
   yield takeLatest(
     appointmentBookedPdfRequest.type,
-    appointmentBookedCrudSaga.appointmentBookedPdfRequest
+    appointmentBookedCrudSaga.appointmentBookedPdfRequest,
+  );
+  yield takeLatest(
+    appointmentBookedChecklistRequest.type,
+    appointmentBookedCrudSaga.appointmentBookedChecklistRequest,
   );
 }
 

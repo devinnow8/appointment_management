@@ -18,7 +18,9 @@ function ConfirmModal({
   setConfirmCalendar,
   isAppointmentBooked,
   handleRescheduleAppointment,
-  handleFreeBooking
+  handleFreeBooking,
+  serviceList,
+  totalAmount,
 }) {
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
@@ -64,7 +66,11 @@ function ConfirmModal({
             </h3>
           )}
           {confirmCalendar ? (
-            <AppointmentDetails applicantAppointment={applicantAppointment} />
+            <AppointmentDetails
+              applicantAppointment={applicantAppointment}
+              serviceList={serviceList}
+              totalAmount={totalAmount}
+            />
           ) : (
             <div className="confirm-modal__applicant--info">
               {applicationDetails.category === "Visa" ? (

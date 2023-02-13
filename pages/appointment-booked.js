@@ -3,30 +3,53 @@ import Header from "../components/header";
 import jsPDF from "jspdf";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { appointmentBookedPdfRequest } from "../redux/reducer/appointment-booked";
+import {
+  appointmentBookedPdfRequest,
+  appointmentBookedChecklistRequest,
+} from "../redux/reducer/appointment-booked";
 import { useEffect } from "react";
 
 function AppointmentBooked() {
-  const { push } = useRouter();
+  // const { push } = useRouter();
+  const {
+    push,
+    query: { centreId },
+  } = useRouter();
   const dispatch = useDispatch();
   const { appointment } = useSelector((state) => state.appointmentSchedule);
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
 
-  const printDocument = () => {
-    const pdf = new jsPDF();
-    pdf.text(
-      `Requirements\n\n You will be required to present the following:\n\n 1. Valid ID(any of the following): \n
-      a) Nigerian International Passport
-      b) Nigerian National ID Card
-      c) Nigerian Drivers License
-      d) International Passport (Non Nigerian)
-      `,
-      10,
-      10,
+  console.log(applicationDetails, "applicationDetails=>");
+  const printDocument = (id) => {
+    // const pdf = new jsPDF();
+    // pdf.text(
+    //   `Requirements\n\n You will be required to present the following:\n\n 1. Valid ID(any of the following): \n
+    //   a) Nigerian International Passport
+    //   b) Nigerian National ID Card
+    //   c) Nigerian Drivers License
+    //   d) International Passport (Non Nigerian)
+    //   `,
+    //   10,
+    //   10,
+    // );
+    // pdf.save("download.pdf");
+
+    const details = {
+      centreId: id,
+      serviceType: applicationDetails.category,
+    };
+    dispatch(
+      appointmentBookedChecklistRequest(details, (success) => {
+        const file = new Blob([success.data], { type: "application/pdf" });
+        const fileURL = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = fileURL;
+        link.download = "AppointmentBookedChecklist.pdf";
+        link.click();
+      }),
     );
-    pdf.save("download.pdf");
   };
 
   const handlePrintSlip = async (id) => {
@@ -93,7 +116,10 @@ function AppointmentBooked() {
                 >
                   Print Booking Slip
                 </Button>
-                <Button className="checklist-btn" onClick={printDocument}>
+                <Button
+                  className="checklist-btn"
+                  onClick={() => printDocument(centreId)}
+                >
                   Print Checklist
                 </Button>
               </div>

@@ -7,10 +7,6 @@ const ApplicantPaymentDetails = () => {
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
-  const { memberDetails } = useSelector((state) => state.applicationDetails);
-  const totalMember = memberDetails && memberDetails.length;
-  const totalValue = 350 * totalMember;
-
   return (
     <Col md={5} lg={4} xl={4}>
       <h3 className="make-payment__title">Make Payment</h3>
@@ -46,7 +42,7 @@ const ApplicantPaymentDetails = () => {
             <p>{appointmentDetails.applicantAppointment?.time}</p>
           </div>
         </div>
-        <div className="make-payment__details--flex">
+        {/* <div className="make-payment__details--flex">
           <div className="make-payment__details--heading">
             <h4>Application Fee</h4>
           </div>
@@ -56,13 +52,13 @@ const ApplicantPaymentDetails = () => {
               member
             </p>
           </div>
-        </div>
+        </div> */}
         <div className="make-payment__details--flex total-fee">
           <div className="make-payment__details--heading">
             <h4>Total Fee</h4>
           </div>
           <div className="make-payment__details--value">
-            <p>{totalValue}</p>
+            <p>{appointmentDetails?.totalAmount}</p>
           </div>
         </div>
       </div>

@@ -1,25 +1,21 @@
 import React, { useState } from "react";
-import Header from "../components/header";
+import moment from "moment";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import Header from "../components/header";
 import PaymentApplication from "../components/make-payment";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import moment from "moment";
 
 const MakePayment = () => {
   const dispatch = useDispatch();
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  const { memberDetails } = useSelector((state) => state.applicationDetails);
-  const totalMember = memberDetails && memberDetails.length;
-  const totalValue = 350 * totalMember;
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
-  const { appointment } = useSelector((state) => state.appointmentSchedule);
 
   const {
     push,
@@ -73,13 +69,18 @@ const MakePayment = () => {
       details.service_type = applicationDetails.category;
       // status: selectedCenter?.status,
       details.country = applicationDetails.country;
-      details.price = totalValue;
+      details.price = appointmentDetails?.totalAmount;
     }
     dispatch(
       appointmentScheduleFetchRequest(
-        details,
+        [details],
         (success) => {
-          push("/appointment-booked");
+          push({
+            pathname: "/appointment-booked",
+            query: {
+              centreId: centreId,
+            },
+          });
           dispatch(appointmentDetailsFetchFailure());
         },
         (error) => {

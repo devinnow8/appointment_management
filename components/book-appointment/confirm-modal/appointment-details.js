@@ -2,15 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
 
-const AppointmentDetails = ({ applicantAppointment }) => {
+const AppointmentDetails = ({
+  applicantAppointment,
+  serviceList,
+  totalAmount,
+}) => {
   const { memberDetails, applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  const totalMember = memberDetails && memberDetails.length;
-  const totalValue = applicationDetails?.price
-    ? applicationDetails.price * totalMember
-    : 350 * totalMember;
-    
+
   return (
     <>
       <div className="confirm-modal__applicant--info">
@@ -63,23 +63,32 @@ const AppointmentDetails = ({ applicantAppointment }) => {
             </div>
           </div>
 
-          <div className="confirm-modal__applicant--flex">
-            <div className="confirm-modal__applicant--data">
-              <h5 className="confirm-modal__applicant--heading">
-                <div className="img-box">
-                  <img src="/images/s-name.png" alt="" />
-                </div>{" "}
-                Service Name
-              </h5>
-            </div>
-            <div className="confirm-modal__applicant--value">
-              <p className="confirm-modal__applicant-desc">
-                {applicationDetails.category}
-              </p>
-            </div>
-          </div>
+          {serviceList.length > 0 &&
+            serviceList.map((list) => {
+              return (
+                <>
+                  <div className="confirm-modal__applicant--flex">
+                    <div className="confirm-modal__applicant--data">
+                      <h5 className="confirm-modal__applicant--heading">
+                        <div className="img-box">
+                          <img src="/images/s-name.png" alt="" />
+                        </div>{" "}
+                        {list.serviceName}
+                      </h5>
+                    </div>
+                    <div className="confirm-modal__applicant--value">
+                      <p className="confirm-modal__applicant-desc">
+                        {list.per_person === true
+                          ? `${list.price} / member`
+                          : list.price}
+                      </p>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
 
-          <div className="confirm-modal__applicant--flex">
+          {/* <div className="confirm-modal__applicant--flex">
             <div className="confirm-modal__applicant--data">
               <h5 className="confirm-modal__applicant--heading">
                 <div className="img-box">
@@ -93,7 +102,7 @@ const AppointmentDetails = ({ applicantAppointment }) => {
                 {applicationDetails?.price || "350"} / member
               </p>
             </div>
-          </div>
+          </div> */}
           <div className="confirm-modal__applicant--flex">
             <div className="confirm-modal__applicant--data">
               <h5 className="confirm-modal__applicant--heading">
@@ -104,7 +113,7 @@ const AppointmentDetails = ({ applicantAppointment }) => {
               </h5>
             </div>
             <div className="confirm-modal__applicant--value">
-              <p className="confirm-modal__applicant-desc">{totalValue}</p>
+              <p className="confirm-modal__applicant-desc">{totalAmount}</p>
             </div>
           </div>
         </>

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   appointmentBookedPdf: "",
+  appointmentBookedChecklist: "",
 };
 
 export const appointmentBookedSlice = createSlice({
@@ -22,6 +23,21 @@ export const appointmentBookedSlice = createSlice({
     appointmentBookedPdfFetchFailure: (state) => {
       state.appointmentBookedPdfelAppointment = "";
     },
+
+    appointmentBookedChecklistRequest: {
+      reducer: (state) => {},
+      prepare: (details, success) => {
+        return {
+          payload: { details, success },
+        };
+      },
+    },
+    appointmentBookedChecklistFetchSuccess: (state, action) => {
+      state.appointmentBookedChecklist = action.payload;
+    },
+    appointmentBookedChecklistFetchFailure: (state) => {
+      state.appointmentBookedChecklist = "";
+    },
   },
 });
 
@@ -30,6 +46,9 @@ export const {
   appointmentBookedPdfRequest,
   appointmentBookedPdfFetchSuccess,
   appointmentBookedPdfFetchFailure,
+  appointmentBookedChecklistRequest,
+  appointmentBookedChecklistFetchSuccess,
+  appointmentBookedChecklistFetchFailure,
 } = appointmentBookedSlice.actions;
 
 export default appointmentBookedSlice.reducer;

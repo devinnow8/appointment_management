@@ -18,6 +18,7 @@ import {
 import { appointmentDetailsFetchRequest } from "../redux/reducer/appointment-details";
 import moment from "moment";
 import { rescheduleAppointmentFetchRequest } from "../redux/reducer/reschedule-appointment";
+import { serviceListFetchRequest } from "../redux/reducer/service-list";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 
 export default () => {
@@ -32,6 +33,7 @@ export default () => {
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
+  const { serviceList } = useSelector((state) => state.serviceList);
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
   const [isLoader, setIsLoader] = useState(false);
@@ -53,6 +55,13 @@ export default () => {
   });
   const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
+
+  const totalAmount = serviceList.reduce((acc, obj) => {
+    if (obj.per_person) return acc + obj.price * memberDetails.length;
+    else return acc + obj.price;
+  }, 0);
+
+  console.log(totalAmount, "totalAmount=>", serviceList, totalAmount);
 
   const handleAddMember = (values) => {
     if (applicationDetails.category === "Visa") {
@@ -148,6 +157,7 @@ export default () => {
       }
     }
   };
+  console.log(serviceList, "serviceList==>");
   const handleConfirm = () => {
     setIsLoader(true);
     setModal(false);
@@ -172,6 +182,7 @@ export default () => {
     setDeleteModal(false);
     toast.success("Applicant Deleted Successfully");
   };
+
   const handlePaymentProceed = () => {
     const details = {
       applicationDetails: applicationDetails,
@@ -180,6 +191,7 @@ export default () => {
         selectedCenter?.centerName.charAt(0).toUpperCase() +
         selectedCenter?.centerName.slice(1),
       centerId: selectedCenter.centerId,
+      totalAmount: totalAmount,
     };
     dispatch(appointmentDetailsFetchRequest(details));
     router.push({
@@ -267,6 +279,16 @@ export default () => {
   }, [centerList, selectedCenter?.centerId]);
 
   useEffect(() => {
+    if (selectedCenter != undefined) {
+      const details = {
+        centerId: selectedCenter?.centerId,
+        category: applicationDetails.category,
+      };
+      dispatch(serviceListFetchRequest(details));
+    }
+  }, [selectedCenter?.centerId, applicationDetails]);
+
+  useEffect(() => {
     let filderdSlot = appointmentSlotList.filter((item) => {
       if (item.type === "day") {
         let day = moment(selectedDate).format("dddd");
@@ -328,6 +350,8 @@ export default () => {
           isLoader={isLoader}
           handleRescheduleAppointment={handleRescheduleAppointment}
           handleFreeBooking={handleFreeBooking}
+          serviceList={serviceList}
+          totalAmount={totalAmount}
         />
       )}
       {deleteModal && (
