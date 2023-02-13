@@ -19,7 +19,7 @@ function CancelModal({ isCancel, setIsCancel }) {
     };
     dispatch(
       cancelAppointmentFetchRequest(details, (success) => {
-        toast.success("Appointment Cancelled Suucessfully");
+        toast.success("Appointment Cancelled Successfully");
         setIsCancel(!isCancel);
         push("/");
       }),
