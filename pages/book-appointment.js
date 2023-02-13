@@ -264,10 +264,18 @@ export default () => {
   }, [centerList, selectedCenter?.centerId]);
 
   useEffect(() => {
-    let day = moment(selectedDate).format("dddd");
     let filderdSlot = appointmentSlotList.filter((item) => {
-      if (item.day === day && item.centerId === selectedCenter?.centerId) {
-        return item;
+      if (item.type === "day") {
+        let day = moment(selectedDate).format("dddd");
+        if (item.day === day && item.centerId === selectedCenter?.centerId) {
+          return item;
+        }
+      } else {
+        let day = moment(selectedDate).format("DD/MM/YYYY");
+        console.log(day, "dayday=>", item.day);
+        if (item.day === day && item.centerId === selectedCenter?.centerId) {
+          return item;
+        }
       }
     });
     setArrayTime(filderdSlot);

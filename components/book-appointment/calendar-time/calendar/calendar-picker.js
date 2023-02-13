@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import { DAYS_FORMAT } from "../../../../constants/index";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 const CalendarPicker = ({
   selectedDate,
@@ -18,7 +19,10 @@ const CalendarPicker = ({
       selectedCountry?.label !== undefined &&
       selectedCenter?.centerId !== undefined
     ) {
-      const obtainedHoliday = holidayList.map((list) => new Date(list.date));
+      const obtainedHoliday = holidayList.map((list) => {
+        const date1 = new Date(list.date);
+        return new Date(date1.toUTCString().slice(0, -4));
+      });
       setHolidaysList(obtainedHoliday);
     }
   }, [selectedCountry?.label, selectedCenter?.centerId, holidayList]);
@@ -74,6 +78,16 @@ const CalendarPicker = ({
     return DAYS_FORMAT[day] || "M";
   };
 
+  moment.addRealMonth = function addRealMonth(d) {
+    var fm = moment(d).add(1, "M");
+    var fmEnd = moment(fm).endOf("month");
+    return d.date() != fm.date() && fm.isSame(fmEnd.format("YYYY-MM-DD"))
+      ? fm.add(1, "d")
+      : fm;
+  };
+
+  var nextMonth = moment.addRealMonth(moment());
+
   return (
     <>
       <DayPicker
@@ -85,7 +99,7 @@ const CalendarPicker = ({
         disabled={[
           { before: new Date() },
           {
-            after: new Date(2023, 2, 24),
+            after: nextMonth._d,
           },
           ...selectedDaysToDisable,
           // weekends,
