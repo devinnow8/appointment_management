@@ -39,6 +39,7 @@ export default () => {
   const [deleteId, setDeleteId] = useState(false);
   const [deleteMember, setDeleteMember] = useState();
   const [selectedCenter, setSelectedCenter] = useState();
+  const [isAddMember, setIsAddMember] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [arrayTime, setArrayTime] = useState([]);
   const [applicantAppointment, setApplicantAppointment] = useState({
@@ -122,6 +123,7 @@ export default () => {
           applicationDetailsFetchRequest(
             details,
             (success) => {
+              setIsAddMember(false);
               if (success.data.appointmentId !== undefined) {
                 setApplicantDetail(values);
                 setIsAppointmentBooked(true);
@@ -275,7 +277,12 @@ export default () => {
   }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
   return (
     <>
-      <Header handleAddMember={handleAddMember} isLoader={isLoader} />
+      <Header
+        handleAddMember={handleAddMember}
+        isLoader={isLoader}
+        isAddMember={isAddMember}
+        setIsAddMember={setIsAddMember}
+      />
       <DetailSection
         handleDeleteApplicant={handleDeleteApplicant}
         arrayTime={arrayTime}

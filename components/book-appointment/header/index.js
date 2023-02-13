@@ -4,7 +4,7 @@ import Visa from "./Visa";
 import Others from "./Others";
 import { useSelector } from "react-redux";
 
-const index = ({ handleAddMember, isLoader }) => {
+const index = ({ handleAddMember, isLoader, isAddMember, setIsAddMember }) => {
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
@@ -26,7 +26,12 @@ const index = ({ handleAddMember, isLoader }) => {
               {applicationDetails.category === "Visa" ? (
                 <Visa handleAddMember={handleAddMember} />
               ) : (
-                <Others handleAddMember={handleAddMember} isLoader={isLoader} />
+                <Others
+                  handleAddMember={handleAddMember}
+                  isLoader={isLoader}
+                  isAddMember={isAddMember}
+                  setIsAddMember={setIsAddMember}
+                />
               )}
             </div>
           </Col>

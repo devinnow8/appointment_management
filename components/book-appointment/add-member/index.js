@@ -33,7 +33,7 @@ const AddMember = ({
     onSubmit: (values, onSubmitProps) => {
       handleAddMember(values);
       onSubmitProps.resetForm();
-      setIsAddMember(false);
+      //   setIsAddMember(false);
     },
     validate: (values, props) => {
       const errors = {};

@@ -5,8 +5,7 @@ import Select from "react-select";
 import { idType, countries } from "../../../constants";
 import AddMember from "../add-member";
 
-const Others = ({ handleAddMember, isLoader }) => {
-  const [isAddMember, setIsAddMember] = useState(false);
+const Others = ({ handleAddMember, isLoader, isAddMember, setIsAddMember }) => {
   const [details, setDetails] = useState({});
   const formik = useFormik({
     initialValues: {
