@@ -29,6 +29,9 @@ export default () => {
   const { appointmentSlotList, isLoadingSlot } = useSelector(
     (state) => state.appointmentSlotList,
   );
+  const { appointmentDetails } = useSelector(
+    (state) => state.appointmentDetails,
+  );
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
   const [isLoader, setIsLoader] = useState(false);
@@ -280,9 +283,15 @@ export default () => {
     });
     setArrayTime(filderdSlot);
     if (filderdSlot.length) {
-      setSlideToShow(0);
+      if (
+        !Object.keys(appointmentDetails).length &&
+        applicationDetails.appointmentId === undefined
+      ) {
+        setSlideToShow(0);
+      }
     }
   }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
+
   return (
     <>
       <Header
