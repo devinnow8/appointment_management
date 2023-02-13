@@ -87,7 +87,13 @@ function ConfirmModal({
             {confirmCalendar ? (
               <>
                 <Button
-                  className="confirm payment-btn"
+                  className={
+                    applicationDetails.appointmentId
+                      ? "confirm payment-btn reschedule"
+                      : applicationDetails.price
+                      ? "confirm payment-btn free-booking"
+                      : "confirm payment-btn"
+                  }
                   onClick={
                     applicationDetails.appointmentId
                       ? handleRescheduleAppointment

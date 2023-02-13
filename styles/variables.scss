@@ -199,6 +199,9 @@ $laptop: 1280px;
           display: block;
           margin: 0 auto;
         }
+        &.reschedule {
+          width: 174px;
+        }
       }
     }
   }
