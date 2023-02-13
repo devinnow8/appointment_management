@@ -17,50 +17,11 @@ export default function Home() {
   const { categoryServiceList } = useSelector(
     (state) => state.categoryServiceList,
   );
+  // const { isLoading } = useSelector((state) => state.applicationDetails);
   const router = useRouter();
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
-
-  const dispatchFunction = (details) => {
-    dispatch(
-      applicationDetailsFetchRequest(
-        details,
-        (success) => {
-          if (success.data.category !== selectedService.label) {
-            setIsLoader(false);
-            toast.error("Application not found");
-          } else {
-            const tempArray = [];
-            tempArray.push(success.data);
-            dispatch(applicationDetailsFetchMemberSuccess(tempArray));
-            dispatch(applicationDetailsFetchSuccess(success.data));
-            if (success.data.appointmentId) {
-              router.push({
-                pathname: "/reschedule-appointment",
-              });
-            } else {
-              if (success.status === 200) {
-                router.push({
-                  pathname: "/book-appointment",
-                  query: { selectedService: selectedService.label },
-                });
-              }
-            }
-          }
-        },
-        (error) => {
-          if (error.message.includes("Internal Server Error")) {
-            toast.error(error.message);
-            setIsLoader(false);
-          } else {
-            toast.error("Application not found");
-            setIsLoader(false);
-          }
-        },
-      ),
-    );
-  };
 
   const handleContinue = (values) => {
     setIsLoader(true);
@@ -70,7 +31,46 @@ export default function Home() {
         dob: values.dob,
         serviceType: selectedService.label,
       };
-      dispatchFunction(details);
+      dispatch(
+        applicationDetailsFetchRequest(
+          details,
+          (success) => {
+            if (success.data.category !== selectedService.label) {
+              setIsLoader(false);
+              toast.error("Application not found");
+              // dispatch(applicationDetailsFetchFailure());
+            } else {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+              dispatch(applicationDetailsFetchSuccess(success.data));
+              if (success.data.appointmentId) {
+                router.push({
+                  pathname: "/reschedule-appointment",
+                });
+              } else {
+                if (success.status === 200) {
+                  router.push({
+                    pathname: "/book-appointment",
+                    query: { selectedService: selectedService.label },
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            if (error.message.includes("Network Error")) {
+              toast.error(error.message);
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            } else {
+              toast.error("Application not found");
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            }
+          },
+        ),
+      );
     } else {
       const details = {
         name: values.name,
@@ -84,7 +84,46 @@ export default function Home() {
         email: values.email,
         phone: values.phone,
       };
-      dispatchFunction(details);
+      dispatch(
+        applicationDetailsFetchRequest(
+          details,
+          (success) => {
+            if (success.data.category !== selectedService.label) {
+              setIsLoader(false);
+              toast.error("Application not found");
+              // dispatch(applicationDetailsFetchFailure());
+            } else {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+              dispatch(applicationDetailsFetchSuccess(success.data));
+              if (success.data.appointmentId) {
+                router.push({
+                  pathname: "/reschedule-appointment",
+                });
+              } else {
+                if (success.status === 200) {
+                  router.push({
+                    pathname: "/book-appointment",
+                    query: { selectedService: selectedService.label },
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            if (error.message.includes("Internal Server Error")) {
+              toast.error(error.message);
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            } else {
+              toast.error("Application not found");
+              setIsLoader(false);
+              // dispatch(applicationDetailsFetchFailure());
+            }
+          },
+        ),
+      );
     }
   };
 

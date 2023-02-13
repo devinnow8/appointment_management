@@ -48,38 +48,6 @@ export default () => {
   const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
 
-  const handleFunction = (details, values) => {
-    dispatch(
-      applicationDetailsFetchRequest(
-        details,
-        (success) => {
-          if (success.data.appointmentId !== undefined) {
-            setApplicantDetail(values);
-            setIsAppointmentBooked(true);
-          } else {
-            if (
-              applicationDetails.country === success.data.country &&
-              success.data.category === applicationDetails.category
-            ) {
-              setModal(true);
-              setApplicantDetail(values);
-              setIsAppointmentDetail(success.data);
-            } else {
-              toast.warn("Application not found");
-            }
-          }
-        },
-        (error) => {
-          if (error.message.includes("Network Error")) {
-            toast.error(error.message);
-          } else {
-            toast.error("Application not found");
-          }
-        },
-      ),
-    );
-  };
-
   const handleAddMember = (values) => {
     if (applicationDetails.category === "Visa") {
       if (memberDetails.length === 5) {
@@ -95,7 +63,35 @@ export default () => {
           dob: values.dob,
           serviceType: applicationDetails.category,
         };
-        handleFunction(details, values);
+        dispatch(
+          applicationDetailsFetchRequest(
+            details,
+            (success) => {
+              if (success.data.appointmentId !== undefined) {
+                setApplicantDetail(values);
+                setIsAppointmentBooked(true);
+              } else {
+                if (
+                  applicationDetails.country === success.data.country &&
+                  success.data.category === applicationDetails.category
+                ) {
+                  setModal(true);
+                  setApplicantDetail(values);
+                  setIsAppointmentDetail(success.data);
+                } else {
+                  toast.warn("Application not found");
+                }
+              }
+            },
+            (error) => {
+              if (error.message.includes("Network Error")) {
+                toast.error(error.message);
+              } else {
+                toast.error("Application not found");
+              }
+            },
+          ),
+        );
       }
     } else {
       if (memberDetails.length === 5) {
@@ -116,7 +112,35 @@ export default () => {
           serviceType: applicationDetails.category,
           category: applicationDetails.category,
         };
-        handleFunction(details, values);
+        dispatch(
+          applicationDetailsFetchRequest(
+            details,
+            (success) => {
+              if (success.data.appointmentId !== undefined) {
+                setApplicantDetail(values);
+                setIsAppointmentBooked(true);
+              } else {
+                if (
+                  applicationDetails.country === success.data.country &&
+                  success.data.category === applicationDetails.category
+                ) {
+                  setModal(true);
+                  setApplicantDetail(values);
+                  setIsAppointmentDetail(success.data);
+                } else {
+                  toast.warn("Application not found");
+                }
+              }
+            },
+            (error) => {
+              if (error.message.includes("Network Error")) {
+                toast.error(error.message);
+              } else {
+                toast.error("Application not found");
+              }
+            },
+          ),
+        );
       }
     }
   };
