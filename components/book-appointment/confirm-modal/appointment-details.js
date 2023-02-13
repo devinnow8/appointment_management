@@ -7,7 +7,10 @@ const AppointmentDetails = ({ applicantAppointment }) => {
     (state) => state.applicationDetails,
   );
   const totalMember = memberDetails && memberDetails.length;
-  const totalValue = 350 * totalMember;
+  const totalValue = applicationDetails?.price
+    ? applicationDetails.price * totalMember
+    : 350 * totalMember;
+    
   return (
     <>
       <div className="confirm-modal__applicant--info">
@@ -87,7 +90,7 @@ const AppointmentDetails = ({ applicantAppointment }) => {
             </div>
             <div className="confirm-modal__applicant--value">
               <p className="confirm-modal__applicant-desc">
-                {applicantAppointment.amount || "350"} / member
+                {applicationDetails?.price || "350"} / member
               </p>
             </div>
           </div>

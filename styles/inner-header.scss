@@ -50,6 +50,9 @@
         @media (max-width: $xxLDesktop) {
           font-size: 14px;
         }
+        @media (min-width: 1201px) and (max-width: 1400px) {
+          width: 162px;
+        }
         @media (min-width: 993px) and (max-width: 1200px) {
           width: 132px;
         }
@@ -73,8 +76,9 @@
         border: 1px solid #c0c0c0;
         width: 200px;
         font-size: 14px;
-        @media only screen and (max-width: 768px) {
-          width: 100%;
+        
+        @media (min-width: 1201px) and (max-width: 1400px) {
+          width: 162px;
         }
         @media (min-width: 993px) and (max-width: 1200px) {
           width: 132px;
@@ -82,6 +86,9 @@
         @media (min-width: 769px) and (max-width: 992px) {
           width: 134px;
           margin-bottom: 12px;
+        }
+        @media only screen and (max-width: 768px) {
+          width: 100%;
         }
         cursor: pointer;
         .react-select__indicator-separator {

@@ -21,7 +21,7 @@ const CalendarPicker = ({
       const obtainedHoliday = holidayList.map((list) => new Date(list.date));
       setHolidaysList(obtainedHoliday);
     }
-  }, [selectedCountry?.label, selectedCenter?.centerId]);
+  }, [selectedCountry?.label, selectedCenter?.centerId, holidayList]);
 
   const getSundays = (date) => {
     var d = date || new Date(),

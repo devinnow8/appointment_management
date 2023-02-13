@@ -34,26 +34,42 @@ const MakePayment = () => {
   };
 
   const handlePayNow = () => {
-    const details = {
-      application_id:
-        applicationDetails.category === "Visa"
-          ? applicationDetails.applicationId
-          : applicationDetails.id_number,
-      appointment_date:
+    const details = {};
+    if (applicationDetails.category !== "Visa") {
+      details.application_id = applicationDetails.id_number;
+      details.appointment_date =
         appointmentDetails !== undefined &&
-        moment(appointmentDetails.applicantAppointment.date).format(
+        moment(appointmentDetails.applicantAppointment?.date).format(
           "YYYY-MM-DD",
-        ),
-      center_id: centreId,
-      appointment_time:
+        );
+      details.center_id = centreId;
+      details.appointment_time =
         appointmentDetails !== undefined &&
-        appointmentDetails.applicantAppointment.time,
-      applicant_fullname: applicationDetails.name,
-      category: applicationDetails.category,
-      service_type: applicationDetails.category,
-      status: status,
-      country: applicationDetails.country,
-    };
+        appointmentDetails.applicantAppointment?.time;
+      details.applicant_fullname = applicationDetails.name;
+      details.category = applicationDetails.category;
+      details.service_type = applicationDetails.category;
+      // status: selectedCenter?.status,
+      details.country = applicationDetails.country;
+      details.email = applicationDetails.email;
+      details.phone_number = applicationDetails.phone_number;
+    } else {
+      details.application_id = applicationDetails.applicationId;
+      details.appointment_date =
+        appointmentDetails !== undefined &&
+        moment(appointmentDetails.applicantAppointment?.date).format(
+          "YYYY-MM-DD",
+        );
+      details.center_id = centreId;
+      details.appointment_time =
+        appointmentDetails !== undefined &&
+        appointmentDetails.applicantAppointment?.time;
+      details.applicant_fullname = applicationDetails.name;
+      details.category = applicationDetails.category;
+      details.service_type = applicationDetails.category;
+      // status: selectedCenter?.status,
+      details.country = applicationDetails.country;
+    }
     dispatch(
       appointmentScheduleFetchRequest(
         details,

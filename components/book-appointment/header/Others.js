@@ -1,10 +1,13 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Label, Input, Button } from "reactstrap";
 import Select from "react-select";
 import { idType, countries } from "../../../constants";
+import AddMember from "../add-member";
 
-const Others = ({ handleAddMember }) => {
+const Others = ({ handleAddMember, isLoader }) => {
+  const [isAddMember, setIsAddMember] = useState(false);
+  const [details, setDetails] = useState({});
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -13,8 +16,10 @@ const Others = ({ handleAddMember }) => {
       id_number: "",
     },
     onSubmit: (values, onSubmitProps) => {
-      handleAddMember(values);
+      // handleAddMember(values);
       onSubmitProps.resetForm();
+      setIsAddMember(true);
+      setDetails(values);
     },
     validate: (values, props) => {
       const errors = {};
@@ -114,6 +119,18 @@ const Others = ({ handleAddMember }) => {
           Add Member
         </Button>
       </div>
+
+      {isAddMember && (
+        <>
+          <AddMember
+            handleAddMember={handleAddMember}
+            isAddMember={isAddMember}
+            setIsAddMember={setIsAddMember}
+            details={details}
+            isLoader={isLoader}
+          />
+        </>
+      )}
     </>
   );
 };

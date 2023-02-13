@@ -4,6 +4,7 @@ import jsPDF from "jspdf";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { appointmentBookedPdfRequest } from "../redux/reducer/appointment-booked";
+import { useEffect } from "react";
 
 function AppointmentBooked() {
   const { push } = useRouter();
@@ -40,6 +41,14 @@ function AppointmentBooked() {
       }),
     );
   };
+
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+      window.history.pushState(null, "", window.location.href);
+    };
+  }, [appointment.appointment_id, applicationDetails.appointmentId]);
+
   return (
     <>
       <Header />
@@ -58,7 +67,7 @@ function AppointmentBooked() {
                 ${
                   applicationDetails.appointmentId !== undefined
                     ? applicationDetails.appointmentId
-                    : appointment.appointment_id
+                    : appointment.appointment_id || appointment.application_id
                 }. A copy of the appointment slip and checklist have been
                 sent to your email. Optionally you can download it by click the
                 buttons given below.`}
@@ -77,7 +86,8 @@ function AppointmentBooked() {
                     handlePrintSlip(
                       applicationDetails.appointmentId !== undefined
                         ? applicationDetails.appointmentId
-                        : appointment.appointment_id,
+                        : appointment.appointment_id ||
+                            appointment.application_id,
                     )
                   }
                 >
