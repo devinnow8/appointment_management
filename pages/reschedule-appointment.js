@@ -10,7 +10,10 @@ import {
   appointmentBookedPdfRequest,
   appointmentBookedChecklistRequest,
 } from "../redux/reducer/appointment-booked";
-import { applicationDetailsFetchSuccess } from "../redux/reducer/application-detail";
+import {
+  applicationDetailsFetchSuccess,
+  applicationDetailsFetchMemberSuccess,
+} from "../redux/reducer/application-detail";
 import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
 
 function RescheduleAppointment() {
@@ -28,14 +31,6 @@ function RescheduleAppointment() {
   };
 
   useEffect(() => {
-    if (applicationDetails.appointmentId === undefined) {
-      push({
-        pathname: "/",
-      });
-    }
-  }, []);
-
-  useEffect(() => {
     if (window.location?.search?.includes("appointmentId")) {
       const appointmentIdParam = window.location?.search
         .split("/")[0]
@@ -49,6 +44,9 @@ function RescheduleAppointment() {
                 pathname: "/",
               });
             } else {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
               dispatch(applicationDetailsFetchSuccess(success.data));
             }
           },
