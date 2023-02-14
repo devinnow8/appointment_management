@@ -5,6 +5,7 @@ import SelectDropdowns from "./country-centre-select";
 import { useSelector } from "react-redux";
 import TimeSlots from "../time-slots";
 import { Col, Row } from "reactstrap";
+import moment from "moment";
 
 const Calendar = ({
   setApplicantAppointment,
@@ -63,6 +64,7 @@ const Calendar = ({
 
   useEffect(() => {
     if (applicationDetails.appointmentId !== undefined) {
+      console.log("check==>");
       // RESCHULE
       const filteredArray = centerList.filter(
         (centre) =>
@@ -80,6 +82,13 @@ const Calendar = ({
       const index = arrayTime.findIndex(
         (x) => x.fromTime === applicationDetails.appointmentTime,
       );
+      console.log(
+        index,
+        "index=>",
+        arrayTime.findIndex(
+          (x) => x.fromTime === applicationDetails.appointmentTime,
+        ),
+      );
       setSlideToShow(index);
       setSelectedDate(new Date(applicationDetails.appointmentDate));
       setApplicantAppointment((prev) => ({
@@ -89,14 +98,14 @@ const Calendar = ({
     }
   }, [
     applicationDetails.appointmentId,
-    applicationDetails,
     applicationDetails.appointmentTime,
     applicationDetails.appointmentDate,
     applicationDetails.centerId,
     selectedCountry.label,
     centerList,
-    applicationDetails.serviceType,
   ]);
+
+  console.log("index=>12", slideToShow, applicationDetails);
 
   const handleSelectDate = (value) => {
     setSelectedDate(value);
@@ -112,12 +121,11 @@ const Calendar = ({
     if (!applicationDetails.appointmentId) {
       setApplicantAppointment((prev) => ({
         ...prev,
-        date: `${monthNames[selectedDate.getMonth()]}
-      ${selectedDate.getDate()}, ${selectedDate.getFullYear()}`,
+        date: moment(selectedDate).format("DD/MM/YYYY"),
         location: selectedCenter?.label,
       }));
     }
-  }, [centerList, applicationDetails, selectedCenter?.label]);
+  }, [centerList, applicationDetails, selectedCenter?.label, selectedDate]);
 
   const formatOptionLabel = (item) => {
     if (item.country === selectedCountry.label) {

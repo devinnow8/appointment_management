@@ -4,6 +4,6 @@ export default {
   },
   appointmentBookedChecklist: {
     path: (details) =>
-      `center/${details.centreId}/service/${details.serviceType}/checklist`,
+      `center/${details.centreId}/category/${details.serviceType}/checklist-pdf`,
   },
 };

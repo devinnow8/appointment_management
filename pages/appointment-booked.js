@@ -1,6 +1,5 @@
 import { Button, Col, Container, Row } from "reactstrap";
 import Header from "../components/header";
-import jsPDF from "jspdf";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +9,6 @@ import {
 import { useEffect } from "react";
 
 function AppointmentBooked() {
-  // const { push } = useRouter();
   const {
     push,
     query: { centreId },
@@ -22,19 +20,6 @@ function AppointmentBooked() {
   );
 
   const printDocument = (id) => {
-    // const pdf = new jsPDF();
-    // pdf.text(
-    //   `Requirements\n\n You will be required to present the following:\n\n 1. Valid ID(any of the following): \n
-    //   a) Nigerian International Passport
-    //   b) Nigerian National ID Card
-    //   c) Nigerian Drivers License
-    //   d) International Passport (Non Nigerian)
-    //   `,
-    //   10,
-    //   10,
-    // );
-    // pdf.save("download.pdf");
-
     const details = {
       centreId: id,
       serviceType: applicationDetails.category,

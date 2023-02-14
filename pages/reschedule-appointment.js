@@ -6,7 +6,10 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import checkIcon from "../public/images/check-icon.png";
-import { appointmentBookedPdfRequest } from "../redux/reducer/appointment-booked";
+import {
+  appointmentBookedPdfRequest,
+  appointmentBookedChecklistRequest,
+} from "../redux/reducer/appointment-booked";
 
 function RescheduleAppointment() {
   const { push } = useRouter();
@@ -37,6 +40,23 @@ function RescheduleAppointment() {
         const link = document.createElement("a");
         link.href = fileURL;
         link.download = "AppointmentBooked.pdf";
+        link.click();
+      }),
+    );
+  };
+
+  const printDocument = (id) => {
+    const details = {
+      centreId: id,
+      serviceType: applicationDetails.category,
+    };
+    dispatch(
+      appointmentBookedChecklistRequest(details, (success) => {
+        const file = new Blob([success.data], { type: "application/pdf" });
+        const fileURL = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = fileURL;
+        link.download = "AppointmentBookedChecklist.pdf";
         link.click();
       }),
     );
@@ -111,7 +131,10 @@ function RescheduleAppointment() {
                 >
                   Print Booking Slip
                 </button>
-                <button className="secondary-outline-btn checklist-btn">
+                <button
+                  className="secondary-outline-btn checklist-btn"
+                  onClick={() => printDocument(applicationDetails.centerId)}
+                >
                   Print Checklist
                 </button>
               </div>
