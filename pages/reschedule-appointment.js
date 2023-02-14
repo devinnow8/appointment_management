@@ -63,10 +63,6 @@ function RescheduleAppointment() {
           },
         ),
       );
-    } else {
-      push({
-        pathname: "/",
-      });
     }
   }, [window?.location?.search]);
 
