@@ -324,7 +324,6 @@ $laptop: 1280px;
       border-bottom: 1px solid #b1b1b1;
       padding: 17px 22px 15px 36px;
       .btn-close {
-        // background: url("../public/images/close-icon.png") no-repeat;
         border-radius: 0;
         opacity: 1;
       }
@@ -413,6 +412,9 @@ $laptop: 1280px;
         font-weight: 400;
         padding: 12px 24px;
         border-radius: 5px;
+        &:hover {
+          opacity: 0.85;
+        }
       }
     }
   }
