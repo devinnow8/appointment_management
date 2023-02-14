@@ -19,8 +19,11 @@ const Calendar = ({
   isLoader,
 }) => {
   const { centerList } = useSelector((state) => state.centerList);
-  const { applicationDetails } = useSelector(
+  const { applicationDetails, memberDetails } = useSelector(
     (state) => state.applicationDetails,
+  );
+  const { appointmentSlotList } = useSelector(
+    (state) => state.appointmentSlotList,
   );
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
@@ -31,6 +34,10 @@ const Calendar = ({
     value: applicationDetails.country,
   });
 
+  console.log(
+    appointmentDetails.applicantAppointment,
+    "appointmentDetailsApplicantAppointment",
+  );
   useEffect(() => {
     if (appointmentDetails.applicantAppointment !== undefined) {
       // if click cancel after going to payment page
@@ -48,10 +55,17 @@ const Calendar = ({
       });
       setSelectedCenter(obtainedArray[0]);
       setSelectedDate(new Date(appointmentDetails.applicantAppointment.date));
-      const index = arrayTime.findIndex(
-        (x) => x.fromTime === appointmentDetails.applicantAppointment.time,
+      console.log(
+        appointmentDetails.applicantAppointment,
+        "appointmentDetailsApplicantAppointment=>",
+        arrayTime,
       );
-      setSlideToShow(index);
+      if (arrayTime.length > 0) {
+        const index = arrayTime.findIndex(
+          (x) => x?.fromTime === appointmentDetails.applicantAppointment?.time,
+        );
+        setSlideToShow(index);
+      }
     }
   }, [
     appointmentDetails.applicantAppointment,
@@ -60,6 +74,7 @@ const Calendar = ({
     appointmentDetails.centerId,
     selectedCountry.label,
     centerList,
+    appointmentSlotList,
   ]);
 
   useEffect(() => {
@@ -79,17 +94,12 @@ const Calendar = ({
         };
       });
       setSelectedCenter(obtainedArray[0]);
-      const index = arrayTime.findIndex(
-        (x) => x.fromTime === applicationDetails.appointmentTime,
-      );
-      console.log(
-        index,
-        "index=>",
-        arrayTime.findIndex(
+      if (arrayTime.length > 0) {
+        const index = arrayTime.findIndex(
           (x) => x.fromTime === applicationDetails.appointmentTime,
-        ),
-      );
-      setSlideToShow(index);
+        );
+        setSlideToShow(index);
+      }
       setSelectedDate(new Date(applicationDetails.appointmentDate));
       setApplicantAppointment((prev) => ({
         ...prev,
@@ -103,6 +113,7 @@ const Calendar = ({
     applicationDetails.centerId,
     selectedCountry.label,
     centerList,
+    appointmentSlotList,
   ]);
 
   console.log("index=>12", slideToShow, applicationDetails);
