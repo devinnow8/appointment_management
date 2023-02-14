@@ -4,6 +4,8 @@ import {
   appointmentBookedPdfFetchFailure,
   appointmentBookedChecklistFetchSuccess,
   appointmentBookedChecklistFetchFailure,
+  appointmentBookedDetailsFetchSuccess,
+  appointmentBookedDetailsFetchFailure,
 } from "../../reducer/appointment-booked";
 import * as services from "../../../services";
 
@@ -38,5 +40,22 @@ export function* appointmentBookedChecklistRequest(action) {
     }
   } catch (e) {
     yield put(appointmentBookedChecklistFetchFailure());
+  }
+}
+
+export function* appointmentBookedDetailsRequest(action) {
+  const id = action.payload.id;
+  try {
+    const response = yield call(services.appointmentBookedDetails, id);
+    action.payload.success(response);
+    const { status, statusText, data = [] } = response || {};
+    if (status === 200) {
+      yield put(appointmentBookedDetailsFetchSuccess(data));
+    } else {
+      yield put(appointmentBookedDetailsFetchFailure());
+    }
+  } catch (e) {
+    action.payload.error(e);
+    yield put(appointmentBookedDetailsFetchFailure());
   }
 }

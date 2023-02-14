@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   appointmentBookedPdf: "",
   appointmentBookedChecklist: "",
+  details: {},
 };
 
 export const appointmentBookedSlice = createSlice({
@@ -38,6 +39,21 @@ export const appointmentBookedSlice = createSlice({
     appointmentBookedChecklistFetchFailure: (state) => {
       state.appointmentBookedChecklist = "";
     },
+
+    appointmentBookedDetailsRequest: {
+      reducer: (state) => {},
+      prepare: (id, success, error) => {
+        return {
+          payload: { id, success, error },
+        };
+      },
+    },
+    appointmentBookedDetailsFetchSuccess: (state, action) => {
+      state.details = action.payload;
+    },
+    appointmentBookedDetailsFetchFailure: (state) => {
+      state.details = "";
+    },
   },
 });
 
@@ -49,6 +65,9 @@ export const {
   appointmentBookedChecklistRequest,
   appointmentBookedChecklistFetchSuccess,
   appointmentBookedChecklistFetchFailure,
+  appointmentBookedDetailsRequest,
+  appointmentBookedDetailsFetchSuccess,
+  appointmentBookedDetailsFetchFailure,
 } = appointmentBookedSlice.actions;
 
 export default appointmentBookedSlice.reducer;

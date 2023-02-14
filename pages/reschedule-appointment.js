@@ -10,14 +10,20 @@ import {
   appointmentBookedPdfRequest,
   appointmentBookedChecklistRequest,
 } from "../redux/reducer/appointment-booked";
+import { applicationDetailsFetchSuccess } from "../redux/reducer/application-detail";
+import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
+import { toast } from "react-toastify";
 
 function RescheduleAppointment() {
   const { push } = useRouter();
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
+  const { details } = useSelector((state) => state.appointmentBooked);
+  const { appointment } = useSelector((state) => state.appointmentSchedule);
   const dispatch = useDispatch();
   const [isCancel, setIsCancel] = useState(false);
+
   const handleReschedule = () => {
     push({
       pathname: "/book-appointment",
@@ -31,6 +37,38 @@ function RescheduleAppointment() {
       });
     }
   }, []);
+
+  useEffect(() => {
+    if (window.location?.search?.includes("appointmentId")) {
+      const appointmentIdParam = window.location?.search
+        .split("/")[0]
+        .split("=")[1];
+      dispatch(
+        appointmentBookedDetailsRequest(
+          appointmentIdParam,
+          (success) => {
+            console.log(success.data.status, "success==>");
+            if (success.data.status === "Cancel") {
+              push({
+                pathname: "/",
+              });
+            } else {
+              dispatch(applicationDetailsFetchSuccess(success.data));
+            }
+          },
+          (error) => {
+            push({
+              pathname: "/",
+            });
+          },
+        ),
+      );
+    } else {
+      push({
+        pathname: "/",
+      });
+    }
+  }, [window?.location?.search]);
 
   const handlePrintSlip = async (id) => {
     dispatch(
@@ -79,7 +117,9 @@ function RescheduleAppointment() {
                 </div>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {applicationDetails.applicantFullName}
+                    {details
+                      ? details.applicantFullName
+                      : applicationDetails.applicantFullName}
                   </span>
                 </div>
               </div>
@@ -87,7 +127,9 @@ function RescheduleAppointment() {
                 <span className="booking-details-field">Application ID</span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {applicationDetails.applicationId}
+                    {details
+                      ? details.applicationId
+                      : applicationDetails.applicationId}
                   </span>
                 </div>
               </div>
@@ -97,9 +139,11 @@ function RescheduleAppointment() {
                 </span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {moment(applicationDetails.appointmentDate).format(
-                      "DD/MM/YYYY",
-                    )}
+                    {details
+                      ? moment(details.appointmentDate).format("DD/MM/YYYY")
+                      : moment(applicationDetails.appointmentDate).format(
+                          "DD/MM/YYYY",
+                        )}
                   </span>
                 </div>
               </div>
@@ -107,7 +151,9 @@ function RescheduleAppointment() {
                 <span className="booking-details-field">Time</span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {applicationDetails.appointmentTime}
+                    {details
+                      ? details.appointmentTime
+                      : applicationDetails.appointmentTime}
                   </span>
                 </div>
               </div>
@@ -115,8 +161,7 @@ function RescheduleAppointment() {
                 <span className="booking-details-field">Location</span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {/* {centerName[0]?.centerName} */}
-                    {applicationDetails.country}
+                    {details ? details.country : applicationDetails.country}
                   </span>
                 </div>
               </div>
