@@ -174,7 +174,7 @@ const Others = ({ handleContinue, isLoader }) => {
           <Input
             id="phone"
             name="phone"
-            type="text"
+            type="number"
             placeholder="eg: 646454104"
             className="appointment-form__input"
             value={formik.values.phone}

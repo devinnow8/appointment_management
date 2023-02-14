@@ -197,7 +197,7 @@ const AddMember = ({
                 <Input
                   id="phone"
                   name="phone"
-                  type="text"
+                  type="number"
                   placeholder="eg: 646454104"
                   className="member-input"
                   value={formik.values.phone}

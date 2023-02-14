@@ -8,6 +8,17 @@ $secondary-color: #023b72;
 @import "./make-payment.scss";
 @import "./appointment-booking.scss";
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .primary-btn {
   background-color: $primary-color;
   border: none;
@@ -32,12 +43,12 @@ $secondary-color: #023b72;
     font-size: 14px;
   }
 }
-.primary-outline-btn{
+.primary-outline-btn {
   border: 1px solid $primary-color;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 400;
-  color:$primary-color;
+  color: $primary-color;
   padding: 10px 0;
   background-color: #ffffff;
   width: 174px;
@@ -48,12 +59,12 @@ $secondary-color: #023b72;
     transition: 0.4s ease-in-out all;
   }
 }
-.secondary-outline-btn{
+.secondary-outline-btn {
   border: 1px solid #787878;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 400;
-  color:#787878;
+  color: #787878;
   padding: 10px 0;
   background-color: #ffffff;
   width: 174px;
