@@ -7,6 +7,7 @@ const ApplicantPaymentDetails = () => {
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
+  const { serviceList } = useSelector((state) => state.serviceList);
   return (
     <Col md={5} lg={4} xl={4}>
       <h3 className="make-payment__title">Make Payment</h3>
@@ -58,7 +59,10 @@ const ApplicantPaymentDetails = () => {
             <h4>Total Fee</h4>
           </div>
           <div className="make-payment__details--value">
-            <p>{appointmentDetails?.totalAmount}</p>
+            <p>
+              {serviceList[0]?.currency_type} {""}
+              {appointmentDetails?.totalAmount}
+            </p>
           </div>
         </div>
       </div>

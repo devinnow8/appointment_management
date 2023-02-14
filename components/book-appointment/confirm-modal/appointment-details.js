@@ -113,7 +113,10 @@ const AppointmentDetails = ({
               </h5>
             </div>
             <div className="confirm-modal__applicant--value">
-              <p className="confirm-modal__applicant-desc">{totalAmount}</p>
+              <p className="confirm-modal__applicant-desc">
+                {serviceList[0]?.currency_type} {""}
+                {totalAmount}
+              </p>
             </div>
           </div>
         </>
