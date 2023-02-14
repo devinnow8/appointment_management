@@ -12,15 +12,12 @@ import {
 } from "../redux/reducer/appointment-booked";
 import { applicationDetailsFetchSuccess } from "../redux/reducer/application-detail";
 import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
-import { toast } from "react-toastify";
 
 function RescheduleAppointment() {
   const { push } = useRouter();
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  const { details } = useSelector((state) => state.appointmentBooked);
-  const { appointment } = useSelector((state) => state.appointmentSchedule);
   const dispatch = useDispatch();
   const [isCancel, setIsCancel] = useState(false);
 
@@ -47,7 +44,6 @@ function RescheduleAppointment() {
         appointmentBookedDetailsRequest(
           appointmentIdParam,
           (success) => {
-            console.log(success.data.status, "success==>");
             if (success.data.status === "Cancel") {
               push({
                 pathname: "/",
@@ -113,9 +109,7 @@ function RescheduleAppointment() {
                 </div>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {details
-                      ? details.applicantFullName
-                      : applicationDetails.applicantFullName}
+                    {applicationDetails.applicantFullName}
                   </span>
                 </div>
               </div>
@@ -123,9 +117,7 @@ function RescheduleAppointment() {
                 <span className="booking-details-field">Application ID</span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {details
-                      ? details.applicationId
-                      : applicationDetails.applicationId}
+                    {applicationDetails.applicationId}
                   </span>
                 </div>
               </div>
@@ -135,11 +127,9 @@ function RescheduleAppointment() {
                 </span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {details
-                      ? moment(details.appointmentDate).format("DD/MM/YYYY")
-                      : moment(applicationDetails.appointmentDate).format(
-                          "DD/MM/YYYY",
-                        )}
+                    {moment(applicationDetails.appointmentDate).format(
+                      "DD/MM/YYYY",
+                    )}
                   </span>
                 </div>
               </div>
@@ -147,9 +137,7 @@ function RescheduleAppointment() {
                 <span className="booking-details-field">Time</span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {details
-                      ? details.appointmentTime
-                      : applicationDetails.appointmentTime}
+                    {applicationDetails.appointmentTime}
                   </span>
                 </div>
               </div>
@@ -157,7 +145,7 @@ function RescheduleAppointment() {
                 <span className="booking-details-field">Location</span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {details ? details.country : applicationDetails.country}
+                    {applicationDetails.country}
                   </span>
                 </div>
               </div>
