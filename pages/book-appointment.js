@@ -92,6 +92,7 @@ export default () => {
       const obtainedArray = memberDetails.map((member) => {
         return {
           application_id: member.applicationId,
+          dob: member.dob,
           appointment_date:
             applicantAppointment !== undefined &&
             moment(applicantAppointment?.date).format("YYYY-MM-DD"),
