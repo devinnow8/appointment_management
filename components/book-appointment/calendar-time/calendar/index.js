@@ -166,9 +166,25 @@ const Calendar = ({
       // general scenario
       setSelectedCenter(obtainedArray[0]);
       setSelectedDate(new Date());
+    } else {
+      if (Object.keys(appointmentDetails).length) {
+        const filteredArray = centerList.filter(
+          (centre) => selectedCountry.label === centre?.country,
+        );
+        const obtainedArray = filteredArray.map((centre) => {
+          return {
+            ...centre,
+            value: centre?.centerId,
+            label: centre?.centerName,
+          };
+        });
+        console.log(obtainedArray, "obtainedArray=>");
+        setNewCenterList(obtainedArray);
+        setSelectedCenter(obtainedArray[0]);
+      }
     }
   }, [centerList, applicationDetails, selectedCountry.label]);
-  console.log(selectedCountry.label, "labelll=>", selectedDate);
+  console.log(selectedCountry.label, "labelll=>", selectedDate, selectedCenter);
 
   return (
     <>
