@@ -181,9 +181,8 @@ function RescheduleAppointment() {
               </div>
               <div className="text-center mt-4">
                 <p className="back-home">
-                  Back to Home, Please{" "}
                   <span style={{ cursor: "pointer" }} onClick={() => push("/")}>
-                    click here
+                    Back to Home
                   </span>
                 </p>
               </div>
