@@ -109,7 +109,7 @@ function ConfirmModal({
                   }
                 >
                   {applicationDetails.appointmentId
-                    ? "Reschedule"
+                    ? "Confirm"
                     : totalAmount === 0
                     ? "Confirm & Book"
                     : "Confirm & Proceed for Payment"}
