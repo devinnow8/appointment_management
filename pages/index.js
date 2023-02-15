@@ -97,7 +97,12 @@ export default function Home() {
         };
       });
       setCategoryServiceOptions(obtainedList);
-      setSelectedService(obtainedList[0]);
+      let defaultSelectedService = obtainedList[0];
+      const item = obtainedList.find(
+        (item) => item.label.toLowerCase() === "visa",
+      );
+      if (item) defaultSelectedService = defaultSelectedService;
+      setSelectedService(item);
     }
   }, [categoryServiceList]);
 

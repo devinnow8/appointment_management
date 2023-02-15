@@ -7,6 +7,7 @@ import {
 import * as services from "../../../services";
 
 function* getAppointmentScheduleRequest(action) {
+  console.log(action, "actionaction");
   try {
     const response = yield call(
       services.appointmentSchedule,

@@ -52,7 +52,8 @@ function ApplicationForm({
                 />
               </FormGroup>
               <Row>
-                {selectedService?.label == "Visa" ? (
+                {!selectedService?.label ||
+                selectedService?.label?.toLowerCase() === "visa" ? (
                   <Visa handleContinue={handleContinue} isLoader={isLoader} />
                 ) : (
                   <Others handleContinue={handleContinue} isLoader={isLoader} />

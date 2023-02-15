@@ -47,19 +47,20 @@ export default () => {
   const [isAddMember, setIsAddMember] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  let defaultSelectedCountry = "";
+  if (centerList.length > 0) {
+    const applicantCenter = centerList.find(
+      (item) => !!item && item.country === applicationDetails.country,
+    );
+    if (applicantCenter) {
+      defaultSelectedCountry = applicantCenter.country;
+    } else {
+      defaultSelectedCountry = centerList[0].country;
+    }
+  }
   const [selectedCountry, setSelectedCountry] = useState({
-    label:
-      applicationDetails.appointmentId !== undefined
-        ? applicationDetails.country
-        : Object.keys(appointmentDetails).length > 0
-        ? appointmentDetails.country
-        : applicationDetails.country,
-    value:
-      applicationDetails.appointmentId !== undefined
-        ? applicationDetails.country
-        : Object.keys(appointmentDetails).length > 0
-        ? appointmentDetails.country
-        : applicationDetails.country,
+    label: defaultSelectedCountry,
+    value: defaultSelectedCountry,
   });
 
   const [arrayTime, setArrayTime] = useState([]);
@@ -297,39 +298,43 @@ export default () => {
     );
   };
   const handleFreeBooking = () => {
-    const details = {};
-    if (applicationDetails.category !== "Visa") {
-      details.application_id = applicationDetails.id_number;
-      details.appointment_date = moment(applicantAppointment.date).format(
-        "YYYY-MM-DD",
-      );
-      details.center_id = selectedCenter?.centerId;
-      details.appointment_time = applicantAppointment?.time;
-      details.applicant_fullname = applicationDetails.name;
-      details.category = applicationDetails.category;
-      details.service_type = applicationDetails.category;
-      // status: selectedCenter?.status,
-      details.country = applicationDetails.country;
-      details.email = applicationDetails.email;
-      details.phone_number = applicationDetails.phone_number;
-    } else {
-      details.application_id = applicationDetails.applicationId;
-      details.appointment_date = moment(applicantAppointment.date).format(
-        "YYYY-MM-DD",
-      );
-      details.center_id = selectedCenter?.centerId;
-      details.appointment_time = applicantAppointment?.time;
-      details.applicant_fullname = applicationDetails.name;
-      details.category = applicationDetails.category;
-      details.service_type = applicationDetails.category;
-      // status: selectedCenter?.status,
-      details.country = applicationDetails.country;
-    }
+    // const details = {};
+    // if (applicationDetails.category !== "Visa") {
+    //   details.application_id = applicationDetails.id_number;
+    //   details.appointment_date = moment(applicantAppointment.date).format(
+    //     "YYYY-MM-DD",
+    //   );
+    //   details.center_id = selectedCenter?.centerId;
+    //   details.appointment_time = applicantAppointment?.time;
+    //   details.applicant_fullname = applicationDetails.name;
+    //   details.category = applicationDetails.category;
+    //   details.service_type = applicationDetails.category;
+    //   details.country = applicationDetails.country;
+    //   details.email = applicationDetails.email;
+    //   details.phone_number = applicationDetails.phone_number;
+    //   details.price = totalAmount;
+    // } else {
+    //   details.application_id = applicationDetails.applicationId;
+    //   details.appointment_date = moment(applicantAppointment.date).format(
+    //     "YYYY-MM-DD",
+    //   );
+    //   details.center_id = selectedCenter?.centerId;
+    //   details.appointment_time = applicantAppointment?.time;
+    //   details.applicant_fullname = applicationDetails.name;
+    //   details.category = applicationDetails.category;
+    //   details.service_type = applicationDetails.category;
+    //   details.country = applicationDetails.country;
+    //   details.email = applicationDetails.email;
+    //   details.phone_number = applicationDetails.phone_number;
+    //   details.price = totalAmount;
+    // }
+    // console.log(details, "details=>>");
     dispatch(
       appointmentScheduleFetchRequest(
-        details,
+        updatedMembers,
         (success) => {
-          push("/appointment-booked");
+          console.log(success, "success=>");
+          router.push("/appointment-booked");
         },
         (error) => {
           toast.error("Something Went Wrong");
