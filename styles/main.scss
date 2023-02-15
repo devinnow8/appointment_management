@@ -53,8 +53,8 @@ input[type="number"] {
   background-color: #ffffff;
   width: 174px;
   &:hover {
-    background: transparent;
-    color: $primary-color;
+    background: $primary-color;
+    color: white;
     opacity: 0.85;
     transition: 0.4s ease-in-out all;
   }
@@ -69,8 +69,8 @@ input[type="number"] {
   background-color: #ffffff;
   width: 174px;
   &:hover {
-    background: transparent;
-    color: #787878;
+    background: #787878;
+    color: #fff;
     opacity: 0.85;
     transition: 0.4s ease-in-out all;
   }

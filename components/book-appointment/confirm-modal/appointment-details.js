@@ -107,7 +107,11 @@ const AppointmentDetails = ({
             <div className="confirm-modal__applicant--data">
               <h5 className="confirm-modal__applicant--heading">
                 <div className="img-box">
-                  <img src="/images/currency.png" className="curr-img" alt="" />
+                  <img
+                    src="/images/currency2.png"
+                    className="curr-img"
+                    alt=""
+                  />
                 </div>{" "}
                 Total Amount
               </h5>

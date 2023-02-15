@@ -135,7 +135,7 @@ $laptop: 1280px;
               .img-box {
                 width: 17%;
                 .curr-img {
-                  margin-left: 6px;
+                  margin-left: 2px;
                 }
               }
               @media (max-width: $xxLDesktop) {
@@ -278,6 +278,11 @@ $laptop: 1280px;
     @media only screen and (max-width: 576px) {
       width: 140px !important;
       margin: 0;
+    }
+    &:hover {
+      background-color: $primary-color !important;
+      color: white !important;
+      opacity: 1;
     }
   }
 }

@@ -151,7 +151,21 @@ function RescheduleAppointment() {
             <div className="justify-content-between">
               <div className="mt-3 text-center">
                 <button
-                  className="secondary-outline-btn me-4 slip-btn"
+                  className="secondary-outline-btn reschedule-btn  me-4"
+                  onClick={handleReschedule}
+                >
+                  Reschedule
+                </button>
+                <button
+                  className="secondary-outline-btn cancel-apt-btn"
+                  onClick={() => setIsCancel(true)}
+                >
+                  Cancel Appointment
+                </button>
+              </div>
+              <div className="mt-3 text-center">
+                <button
+                  className="primary-btn slip-btn me-4"
                   onClick={() =>
                     handlePrintSlip(applicationDetails.appointmentId)
                   }
@@ -159,24 +173,10 @@ function RescheduleAppointment() {
                   Print Booking Slip
                 </button>
                 <button
-                  className="secondary-outline-btn checklist-btn"
+                  className="primary-outline-btn checklist-btn"
                   onClick={() => printDocument(applicationDetails.centerId)}
                 >
                   Print Checklist
-                </button>
-              </div>
-              <div className="mt-3 text-center">
-                <button
-                  className="primary-btn reschedule-btn me-4"
-                  onClick={handleReschedule}
-                >
-                  Reschedule
-                </button>
-                <button
-                  className="primary-outline-btn cancel-apt-btn"
-                  onClick={() => setIsCancel(true)}
-                >
-                  Cancel Appointment
                 </button>
               </div>
             </div>
