@@ -81,7 +81,14 @@ function AppointmentBooked() {
               </p>
               <p className="apt-booked__para">
                 In case you want to reschedule, Please{" "}
-                <span style={{ cursor: "pointer" }} onClick={() => push("/")}>
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() =>
+                    push(
+                      `reschedule-appointment/?appointmentId=${appointment?.appointment_id}`,
+                    )
+                  }
+                >
                   click here
                 </span>
                 .

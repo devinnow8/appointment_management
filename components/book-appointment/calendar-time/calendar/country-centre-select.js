@@ -44,6 +44,7 @@ const SelectDropdowns = ({
               classNamePrefix="react-select"
               value={selectedCenter}
               formatOptionLabel={formatOptionLabel}
+              isSearchable={false}
               onChange={(selected) => {
                 setSelectedCenter(selected);
                 setApplicantAppointment((prev) => ({
