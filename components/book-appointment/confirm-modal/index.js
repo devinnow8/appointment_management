@@ -96,21 +96,21 @@ function ConfirmModal({
                   className={
                     applicationDetails.appointmentId
                       ? "confirm payment-btn reschedule"
-                      : applicationDetails.price
+                      : totalAmount === 0
                       ? "confirm payment-btn free-booking"
                       : "confirm payment-btn"
                   }
                   onClick={
                     applicationDetails.appointmentId
                       ? handleRescheduleAppointment
-                      : applicationDetails.price
+                      : totalAmount === 0
                       ? handleFreeBooking
                       : handlePaymentProceed
                   }
                 >
                   {applicationDetails.appointmentId
                     ? "Reschedule"
-                    : applicationDetails.price
+                    : totalAmount === 0
                     ? "Confirm & Book"
                     : "Confirm & Proceed for Payment"}
 
