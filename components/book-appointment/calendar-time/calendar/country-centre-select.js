@@ -22,6 +22,7 @@ const SelectDropdowns = ({
           <Select
             options={countries}
             isDisabled={applicationDetails.category === "Visa"}
+            isSearchable={false}
             className="location-select"
             name="location"
             classNamePrefix="react-select"
