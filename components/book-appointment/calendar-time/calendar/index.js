@@ -217,7 +217,7 @@ const Calendar = ({
             </div>
             <div className="calender-status__box">
               <div className="box not-avail"></div>
-              <p className="status">Not Available</p>
+              <p className="status">Holidays</p>
             </div>
             <div className="calender-status__box">
               <div className="box selected"></div>
