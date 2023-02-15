@@ -103,26 +103,28 @@ const AppointmentDetails = ({
               </p>
             </div>
           </div> */}
-          <div className="confirm-modal__applicant--flex">
-            <div className="confirm-modal__applicant--data">
-              <h5 className="confirm-modal__applicant--heading">
-                <div className="img-box">
-                  <img
-                    src="/images/currency2.png"
-                    className="curr-img"
-                    alt=""
-                  />
-                </div>{" "}
-                Total Amount
-              </h5>
+          {totalAmount !== 0 && (
+            <div className="confirm-modal__applicant--flex">
+              <div className="confirm-modal__applicant--data">
+                <h5 className="confirm-modal__applicant--heading">
+                  <div className="img-box">
+                    <img
+                      src="/images/currency2.png"
+                      className="curr-img"
+                      alt=""
+                    />
+                  </div>{" "}
+                  Total Amount
+                </h5>
+              </div>
+              <div className="confirm-modal__applicant--value">
+                <p className="confirm-modal__applicant-desc">
+                  {serviceList[0]?.currency_type} {""}
+                  {totalAmount}
+                </p>
+              </div>
             </div>
-            <div className="confirm-modal__applicant--value">
-              <p className="confirm-modal__applicant-desc">
-                {serviceList[0]?.currency_type} {""}
-                {totalAmount}
-              </p>
-            </div>
-          </div>
+          )}
         </>
       </div>
     </>
