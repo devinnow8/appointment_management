@@ -291,6 +291,7 @@
           height: unset;
           flex-wrap: wrap;
           overflow-y: hidden;
+          margin-bottom: 12px;
         }
         .time-box {
           cursor: pointer;
@@ -305,7 +306,10 @@
           margin-bottom: 15px;
           font-weight: 500;
           &:last-child {
-            margin-bottom: 0px;
+            margin-bottom: 3px;
+            @media (max-width: 768px) {
+              margin-bottom: 10px;
+            }
           }
           @media (max-width: 768px) {
             margin-right: 10px;
