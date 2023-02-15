@@ -88,6 +88,11 @@ const Calendar = ({
           selectedCountry.label === centre?.country &&
           centre.centerId === applicationDetails.centerId,
       );
+      // if (obtainedArray.length) {
+      //   setSelectedCenter(obtainedArray[0]);
+      // } else {
+      //   setSelectedCenter(centerList[0]);
+      // }
       const obtainedArray = filteredArray.map((centre) => {
         return {
           ...centre,
@@ -211,6 +216,7 @@ const Calendar = ({
             handleSelectDate={handleSelectDate}
             selectedCenter={selectedCenter}
             setSelectedDate={setSelectedDate}
+            applicationDetails={applicationDetails}
           />
           <div className="calender-status">
             <p className="calender-status__title">Legends:</p>
@@ -220,7 +226,7 @@ const Calendar = ({
             </div>
             <div className="calender-status__box">
               <div className="box not-avail"></div>
-              <p className="status">Not Available</p>
+              <p className="status">Holidays</p>
             </div>
             <div className="calender-status__box">
               <div className="box selected"></div>

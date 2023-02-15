@@ -12,6 +12,7 @@ const CalendarPicker = ({
   selectedCountry,
   selectedCenter,
   setSelectedDate,
+  applicationDetails,
 }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
   const [holidaysList, setHolidaysList] = useState([]);
@@ -103,6 +104,11 @@ const CalendarPicker = ({
 
   var nextMonth = moment.addRealMonth(moment());
 
+  console.log(
+    applicationDetails,
+    new Date(applicationDetails.appointmentDate),
+    "new Date()new Date()",
+  );
   return (
     <>
       <DayPicker
@@ -110,7 +116,11 @@ const CalendarPicker = ({
         max={60}
         className="calender-months"
         selected={selectedDate}
-        defaultMonth={new Date()}
+        defaultMonth={
+          applicationDetails.appointmentId
+            ? new Date(applicationDetails.appointmentDate)
+            : new Date()
+        }
         disabled={[
           { before: new Date() },
           {
