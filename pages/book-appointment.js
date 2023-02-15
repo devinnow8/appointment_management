@@ -69,15 +69,12 @@ export default () => {
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
   const [updatedMembers, setUpdatedMembers] = useState([]);
 
-  console.log(appointmentDetails, "appointmentDetails=>");
   const totalAmount = serviceList.reduce((acc, obj) => {
     if (obj.per_person) return acc + obj.price * memberDetails.length;
     else return acc + obj.price;
   }, 0);
 
   useEffect(() => {
-    console.log("usssssee", appointmentDetails, applicationDetails);
-
     let defaultSelectedCountry = "";
     if (centerList.length > 0) {
       let tmpSelectedCountry = applicationDetails.country;
@@ -347,42 +344,10 @@ export default () => {
     );
   };
   const handleFreeBooking = () => {
-    // const details = {};
-    // if (applicationDetails.category !== "Visa") {
-    //   details.application_id = applicationDetails.id_number;
-    //   details.appointment_date = moment(applicantAppointment.date).format(
-    //     "YYYY-MM-DD",
-    //   );
-    //   details.center_id = selectedCenter?.centerId;
-    //   details.appointment_time = applicantAppointment?.time;
-    //   details.applicant_fullname = applicationDetails.name;
-    //   details.category = applicationDetails.category;
-    //   details.service_type = applicationDetails.category;
-    //   details.country = applicationDetails.country;
-    //   details.email = applicationDetails.email;
-    //   details.phone_number = applicationDetails.phone_number;
-    //   details.price = totalAmount;
-    // } else {
-    //   details.application_id = applicationDetails.applicationId;
-    //   details.appointment_date = moment(applicantAppointment.date).format(
-    //     "YYYY-MM-DD",
-    //   );
-    //   details.center_id = selectedCenter?.centerId;
-    //   details.appointment_time = applicantAppointment?.time;
-    //   details.applicant_fullname = applicationDetails.name;
-    //   details.category = applicationDetails.category;
-    //   details.service_type = applicationDetails.category;
-    //   details.country = applicationDetails.country;
-    //   details.email = applicationDetails.email;
-    //   details.phone_number = applicationDetails.phone_number;
-    //   details.price = totalAmount;
-    // }
-    // console.log(details, "details=>>");
     dispatch(
       appointmentScheduleFetchRequest(
         updatedMembers,
         (success) => {
-          console.log(success, "success=>");
           router.push("/appointment-booked");
         },
         (error) => {

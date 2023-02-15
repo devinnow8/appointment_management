@@ -4,7 +4,6 @@ import { LocaleUtils, DayPicker } from "react-day-picker";
 import { DAYS_FORMAT } from "../../../../constants/index";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-// import { appointmentDetailsFetchFailure } from "../../../../redux/reducer/appointment-details";
 
 const CalendarPicker = ({
   selectedDate,
@@ -19,7 +18,6 @@ const CalendarPicker = ({
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
-  // const dispatch = useDispatch();
   useEffect(() => {
     if (
       selectedCountry?.label !== undefined &&
@@ -137,7 +135,6 @@ const CalendarPicker = ({
         modifiersStyles={getModifierStyles()}
         onDayClick={(day) => {
           handleSelectDate(day);
-          // dispatch(appointmentDetailsFetchFailure());
         }}
         localeUtils={{
           ...LocaleUtils,
