@@ -78,6 +78,9 @@ $laptop: 1280px;
       @media (max-height: 660px) {
         padding: 12px 0px 20px 0px;
       }
+      .cancel-txt {
+        color: #555;
+      }
       .confirm-modal__title {
         color: $secondary-color;
         font-weight: 800;
@@ -202,6 +205,13 @@ $laptop: 1280px;
         &.reschedule {
           width: 174px;
         }
+      }
+    }
+    
+    &.cancel-modal__btn {
+      @media only screen and (max-width: 576px) {
+        display: grid;
+        place-content: center;
       }
     }
   }

@@ -99,6 +99,9 @@
         color: $primary-color;
         font-weight: 400;
         font-size: 16px;
+        @media (max-width: 360px) {
+          font-size: 13px;
+        }
       }
       .appointment-calender__center--country {
         display: flex;
@@ -141,9 +144,9 @@
               margin: 0;
               color: #f1651c;
               text-transform: capitalize;
-              // @media (max-height: 660px) {
-              //   font-size: 16px;
-              // }
+              @media (max-width: 360px) {
+                font-size: 13px;
+              }
             }
             .react-select__indicator-separator {
               width: 0px;

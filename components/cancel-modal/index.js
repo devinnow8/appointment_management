@@ -49,8 +49,10 @@ function CancelModal({ isCancel, setIsCancel }) {
         </ModalHeader>
         <ModalBody className="text-center">
           <h3 class="confirm-modal__title">Cancel Appointment</h3>
-          <p>Are you sure you want to cancel this appointment?</p>
-          <div className="confirm-modal__btn">
+          <p className="cancel-txt">
+            Are you sure you want to cancel this appointment?
+          </p>
+          <div className="confirm-modal__btn cancel-modal__btn">
             <button className="primary-btn me-0 me-sm-2" onClick={handleCancel}>
               Ok
             </button>
