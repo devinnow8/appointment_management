@@ -93,14 +93,6 @@ function AppointmentBooked() {
                 </span>
                 .
               </p>
-              <div className="text-center mt-4">
-                <p className="back-home">
-                  Back to Home, Please{" "}
-                  <span style={{ cursor: "pointer" }} onClick={() => push("/")}>
-                    click here
-                  </span>
-                </p>
-              </div>
               <div className="d-flex justify-content-center align-items-center">
                 <Button
                   className="slip-btn mb-sm-0"
@@ -121,6 +113,14 @@ function AppointmentBooked() {
                 >
                   Print Checklist
                 </Button>
+              </div>
+              <div className="text-center mt-4">
+                <p className="back-home">
+                  Back to Home, Please{" "}
+                  <span style={{ cursor: "pointer" }} onClick={() => push("/")}>
+                    click here
+                  </span>
+                </p>
               </div>
             </Col>
           </Row>
