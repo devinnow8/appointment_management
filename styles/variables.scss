@@ -222,6 +222,13 @@ $laptop: 1280px;
 // appointment booked
 .apt-booked {
   padding: 50px 0px;
+  .back-home {
+    color: #555;
+    margin-bottom: 28px;
+    > span {
+      color: $primary-color;
+    }
+  }
   .apt-booked__img {
     margin-bottom: 32px;
     max-width: 30%;

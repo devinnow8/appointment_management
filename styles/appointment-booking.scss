@@ -19,6 +19,12 @@
       width: 64px;
     }
   }
+  .back-home {
+    color: #555;
+    > span {
+      color: $primary-color;
+    }
+  }
   .appointment-booking-title {
     font-weight: 500;
     font-size: 33px;

@@ -179,6 +179,14 @@ function RescheduleAppointment() {
                   Print Checklist
                 </button>
               </div>
+              <div className="text-center mt-4">
+                <p className="back-home">
+                  Back to Home, Please{" "}
+                  <span style={{ cursor: "pointer" }} onClick={() => push("/")}>
+                    click here
+                  </span>
+                </p>
+              </div>
             </div>
           </Col>
         </Row>
