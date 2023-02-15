@@ -10,6 +10,11 @@ import {
   appointmentBookedPdfRequest,
   appointmentBookedChecklistRequest,
 } from "../redux/reducer/appointment-booked";
+import {
+  applicationDetailsFetchSuccess,
+  applicationDetailsFetchMemberSuccess,
+} from "../redux/reducer/application-detail";
+import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
 
 function RescheduleAppointment() {
   const { push } = useRouter();
@@ -18,6 +23,7 @@ function RescheduleAppointment() {
   );
   const dispatch = useDispatch();
   const [isCancel, setIsCancel] = useState(false);
+
   const handleReschedule = () => {
     push({
       pathname: "/book-appointment",
@@ -25,12 +31,34 @@ function RescheduleAppointment() {
   };
 
   useEffect(() => {
-    if (applicationDetails.appointmentId === undefined) {
-      push({
-        pathname: "/",
-      });
+    if (window.location?.search?.includes("appointmentId")) {
+      const appointmentIdParam = window.location?.search
+        .split("/")[0]
+        .split("=")[1];
+      dispatch(
+        appointmentBookedDetailsRequest(
+          appointmentIdParam,
+          (success) => {
+            if (success.data.status === "Cancel") {
+              push({
+                pathname: "/",
+              });
+            } else {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+              dispatch(applicationDetailsFetchSuccess(success.data));
+            }
+          },
+          (error) => {
+            push({
+              pathname: "/",
+            });
+          },
+        ),
+      );
     }
-  }, []);
+  }, [window?.location?.search]);
 
   const handlePrintSlip = async (id) => {
     dispatch(
@@ -115,7 +143,6 @@ function RescheduleAppointment() {
                 <span className="booking-details-field">Location</span>
                 <div className="booking-details-div">
                   <span className="booking-details-value">
-                    {/* {centerName[0]?.centerName} */}
                     {applicationDetails.country}
                   </span>
                 </div>

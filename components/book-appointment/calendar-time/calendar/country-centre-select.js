@@ -21,7 +21,7 @@ const SelectDropdowns = ({
           </label>
           <Select
             options={countries}
-            isDisabled={true}
+            isDisabled={applicationDetails.category === "Visa"}
             className="location-select"
             name="location"
             classNamePrefix="react-select"

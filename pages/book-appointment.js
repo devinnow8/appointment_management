@@ -92,6 +92,7 @@ export default () => {
       const obtainedArray = memberDetails.map((member) => {
         return {
           application_id: member.applicationId,
+          dob: member.dob,
           appointment_date:
             applicantAppointment !== undefined &&
             moment(applicantAppointment?.date).format("YYYY-MM-DD"),
@@ -101,6 +102,8 @@ export default () => {
           applicant_fullname: member.name,
           category: member.category,
           service_type: member.category,
+          email: member.email,
+          phone_number: member.phone_number,
           // status: selectedCenter?.status,
           country: member.country,
           price: totalAmount,

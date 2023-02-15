@@ -2,8 +2,9 @@ import "react-day-picker/dist/style.css";
 import React, { useState, useEffect } from "react";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import { DAYS_FORMAT } from "../../../../constants/index";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import { appointmentDetailsFetchFailure } from "../../../../redux/reducer/appointment-details";
 
 const CalendarPicker = ({
   selectedDate,
@@ -14,7 +15,7 @@ const CalendarPicker = ({
 }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
   const [holidaysList, setHolidaysList] = useState([]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (
       selectedCountry?.label !== undefined &&
@@ -116,12 +117,12 @@ const CalendarPicker = ({
             after: nextMonth._d,
           },
           ...selectedDaysToDisable,
-          // weekends,
         ]}
         modifiers={{ holidays: holidaysList }}
         modifiersStyles={getModifierStyles()}
         onDayClick={(day) => {
           handleSelectDate(day);
+          dispatch(appointmentDetailsFetchFailure());
         }}
         localeUtils={{
           ...LocaleUtils,
