@@ -370,6 +370,42 @@ export default () => {
         applicationDetails.appointmentId === undefined
       ) {
         setSlideToShow(0);
+      } else {
+        if (applicationDetails.appointmentId !== undefined) {
+          if (
+            moment(selectedDate).format("DD/MM/YYYY") ===
+            moment(applicationDetails.appointmentDate).format("DD/MM/YYYY")
+          ) {
+            if (filderdSlot.length > 0) {
+              const index = filderdSlot.findIndex(
+                (x) => x.fromTime === applicationDetails.appointmentTime,
+              );
+              setSlideToShow(index);
+            }
+          } else {
+            setSlideToShow(0);
+          }
+        } else {
+          if (Object.keys(appointmentDetails).length) {
+            if (
+              moment(selectedDate).format("DD/MM/YYYY") ===
+              moment(appointmentDetails.applicantAppointment.date).format(
+                "DD/MM/YYYY",
+              )
+            ) {
+              if (filderdSlot.length > 0) {
+                const index = filderdSlot.findIndex(
+                  (x) =>
+                    x.fromTime ===
+                    appointmentDetails.applicantAppointment?.time,
+                );
+                setSlideToShow(index);
+              }
+            } else {
+              setSlideToShow(0);
+            }
+          }
+        }
       }
     }
   }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
