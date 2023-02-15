@@ -17,6 +17,8 @@ const CalendarTime = ({
   setSelectedDate,
   setModal,
   setConfirmCalendar,
+  selectedCountry,
+  setSelectedCountry,
 }) => {
   const router = useRouter();
   const { applicationDetails } = useSelector(
@@ -37,6 +39,8 @@ const CalendarTime = ({
             slideToShow={slideToShow}
             setSlideToShow={setSlideToShow}
             isLoader={isLoader}
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
           />
         </Col>
 

@@ -17,6 +17,8 @@ const DetailSection = ({
   setSelectedDate,
   setModal,
   setConfirmCalendar,
+  selectedCountry,
+  setSelectedCountry,
 }) => {
   return (
     <div className="applicant-details calendar-time">
@@ -33,6 +35,8 @@ const DetailSection = ({
           setSelectedCenter={setSelectedCenter}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
           setModal={setModal}
           setConfirmCalendar={setConfirmCalendar}
         />

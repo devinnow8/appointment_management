@@ -17,6 +17,8 @@ const Calendar = ({
   slideToShow,
   setSlideToShow,
   isLoader,
+  selectedCountry,
+  setSelectedCountry,
 }) => {
   const { centerList } = useSelector((state) => state.centerList);
   const { applicationDetails, memberDetails } = useSelector(
@@ -29,10 +31,10 @@ const Calendar = ({
     (state) => state.appointmentDetails,
   );
   const [newCenterList, setNewCenterList] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState({
-    label: applicationDetails.country,
-    value: applicationDetails.country,
-  });
+  // const [selectedCountry, setSelectedCountry] = useState({
+  //   label: applicationDetails.country,
+  //   value: applicationDetails.country,
+  // });
 
   console.log(
     appointmentDetails.applicantAppointment,
@@ -43,7 +45,7 @@ const Calendar = ({
       // if click cancel after going to payment page
       const filteredArray = centerList.filter(
         (centre) =>
-          selectedCountry.label === centre?.country &&
+          appointmentDetails.country === centre?.country &&
           centre.centerId === appointmentDetails.centerId,
       );
       const obtainedArray = filteredArray.map((centre) => {
@@ -72,7 +74,7 @@ const Calendar = ({
     appointmentDetails.applicantAppointment?.time,
     appointmentDetails.applicantAppointment?.date,
     appointmentDetails.centerId,
-    selectedCountry.label,
+    appointmentDetails.country,
     centerList,
     appointmentSlotList,
   ]);
@@ -155,6 +157,7 @@ const Calendar = ({
         label: centre?.centerName,
       };
     });
+    console.log(obtainedArray, "obtainedArray=>");
     setNewCenterList(obtainedArray);
     if (
       !Object.keys(appointmentDetails).length &&
@@ -162,8 +165,10 @@ const Calendar = ({
     ) {
       // general scenario
       setSelectedCenter(obtainedArray[0]);
+      setSelectedDate(new Date());
     }
-  }, [centerList, applicationDetails]);
+  }, [centerList, applicationDetails, selectedCountry.label]);
+  console.log(selectedCountry.label, "labelll=>", selectedDate);
 
   return (
     <>

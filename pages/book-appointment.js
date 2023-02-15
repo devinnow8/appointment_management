@@ -46,6 +46,22 @@ export default () => {
   const [selectedCenter, setSelectedCenter] = useState();
   const [isAddMember, setIsAddMember] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const [selectedCountry, setSelectedCountry] = useState({
+    label:
+      applicationDetails.appointmentId !== undefined
+        ? applicationDetails.country
+        : Object.keys(appointmentDetails).length > 0
+        ? appointmentDetails.country
+        : applicationDetails.country,
+    value:
+      applicationDetails.appointmentId !== undefined
+        ? applicationDetails.country
+        : Object.keys(appointmentDetails).length > 0
+        ? appointmentDetails.country
+        : applicationDetails.country,
+  });
+
   const [arrayTime, setArrayTime] = useState([]);
   const [applicantAppointment, setApplicantAppointment] = useState({
     date: "",
@@ -57,6 +73,7 @@ export default () => {
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
   const [updatedMembers, setUpdatedMembers] = useState([]);
 
+  console.log(appointmentDetails, "appointmentDetails=>");
   const totalAmount = serviceList.reduce((acc, obj) => {
     if (obj.per_person) return acc + obj.price * memberDetails.length;
     else return acc + obj.price;
@@ -77,7 +94,7 @@ export default () => {
           category: member.category,
           service_type: member.category,
           // status: selectedCenter?.status,
-          country: member.country,
+          country: selectedCountry.label,
           email: member.email,
           phone_number: member.phone_number,
           price: totalAmount,
@@ -248,6 +265,7 @@ export default () => {
       centerId: selectedCenter.centerId,
       totalAmount: totalAmount,
       updatedMembers: updatedMembers,
+      country: selectedCountry.label,
     };
     dispatch(appointmentDetailsFetchRequest(details));
     router.push({
@@ -432,6 +450,8 @@ export default () => {
         setSelectedDate={setSelectedDate}
         setModal={setModal}
         setConfirmCalendar={setConfirmCalendar}
+        selectedCountry={selectedCountry}
+        setSelectedCountry={setSelectedCountry}
       />
       {modal && (
         <ConfirmModal

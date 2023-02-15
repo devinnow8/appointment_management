@@ -15,7 +15,7 @@ const CalendarPicker = ({
 }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
   const [holidaysList, setHolidaysList] = useState([]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   useEffect(() => {
     if (
       selectedCountry?.label !== undefined &&
@@ -40,7 +40,7 @@ const CalendarPicker = ({
       }
       setHolidaysList(obtainedHoliday);
     }
-  }, [selectedCountry?.label, selectedCenter?.centerId, holidayList]);
+  }, [holidayList]);
 
   const getSundays = (date) => {
     var d = date || new Date(),
