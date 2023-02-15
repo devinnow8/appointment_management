@@ -103,7 +103,7 @@ const AppointmentDetails = ({
               </p>
             </div>
           </div> */}
-          {!totalAmount && (
+          {!applicationDetails.appointmentId && (
             <div className="confirm-modal__applicant--flex">
               <div className="confirm-modal__applicant--data">
                 <h5 className="confirm-modal__applicant--heading">
