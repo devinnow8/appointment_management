@@ -51,11 +51,11 @@ function CancelModal({ isCancel, setIsCancel }) {
           <h3 class="confirm-modal__title">Cancel Appointment</h3>
           <p>Are you sure you want to cancel this appointment?</p>
           <div className="confirm-modal__btn">
-            <button className="primary-btn me-2" onClick={handleCancel}>
+            <button className="primary-btn me-0 me-sm-2" onClick={handleCancel}>
               Ok
             </button>
             <button
-              className="primary-outline-btn"
+              className="primary-outline-btn mt-sm-0 mt-2"
               onClick={() => {
                 setIsCancel(!isCancel);
               }}

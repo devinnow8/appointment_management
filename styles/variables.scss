@@ -189,7 +189,7 @@ $laptop: 1280px;
       @extend .primary-btn;
       width: 190px;
       @media only screen and (max-width: 576px) {
-        width: 130px !important;
+        width: 252px !important;
       }
       &.payment-btn {
         width: unset;
