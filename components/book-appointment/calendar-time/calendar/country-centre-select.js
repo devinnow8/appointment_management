@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import Select from "react-select";
-import { appointmentDetailsFetchFailure } from "../../../../redux/reducer/appointment-details";
 
 const SelectDropdowns = ({
   countries,
@@ -14,7 +13,6 @@ const SelectDropdowns = ({
   setApplicantAppointment,
   applicationDetails,
 }) => {
-  const dispatch = useDispatch();
   return (
     <div className="appointment-calender__center">
       <div className="appointment-calender__center--country">
@@ -35,7 +33,6 @@ const SelectDropdowns = ({
             value={selectedCountry}
             onChange={(selected) => {
               setSelectedCountry(selected);
-              dispatch(appointmentDetailsFetchFailure());
             }}
           />
         </div>
