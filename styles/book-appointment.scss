@@ -164,14 +164,15 @@
           }
           .react-select__menu {
             // width: 100%;
-            width: 154px;
+            width: 164px;
             top: 84%;
             border: 1px solid #b1b1b1;
             .react-select__option {
               cursor: pointer;
               color: #555;
               text-transform: capitalize;
-              padding: 18px 12px;
+              padding: 8px 12px 10px 12px;
+              line-height: 22px;
               &.react-select__option--is-focused {
                 background-color: rgb(230, 245, 255);
                 color: #555;
@@ -188,6 +189,7 @@
             .react-select__menu-list {
               background-color: transparent;
               padding-top: 0;
+              padding-bottom: 0;
               .react-select__option {
                 &:hover {
                   background-color: rgb(230, 245, 255);
