@@ -24,7 +24,10 @@ const SelectDropdowns = ({
           </label>
           <Select
             options={countries}
-            isDisabled={applicationDetails.category === "Visa"}
+            isDisabled={
+              applicationDetails.category === "Visa" ||
+              !!applicationDetails.appointmentId
+            }
             isSearchable={false}
             className="location-select"
             name="location"
@@ -50,6 +53,7 @@ const SelectDropdowns = ({
               value={selectedCenter}
               formatOptionLabel={formatOptionLabel}
               isSearchable={false}
+              isDisabled={!!applicationDetails.appointmentId}
               onChange={(selected) => {
                 setSelectedCenter(selected);
                 setApplicantAppointment((prev) => ({

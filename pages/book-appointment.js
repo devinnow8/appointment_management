@@ -45,22 +45,17 @@ export default () => {
   const [deleteMember, setDeleteMember] = useState();
   const [selectedCenter, setSelectedCenter] = useState();
   const [isAddMember, setIsAddMember] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(
+    !!appointmentDetails?.applicantAppointment?.date
+      ? new Date(appointmentDetails?.applicantAppointment?.date)
+      : !!applicationDetails.appointmentId
+      ? new Date(applicationDetails.appointmentDate)
+      : new Date(),
+  );
 
-  let defaultSelectedCountry = "";
-  if (centerList.length > 0) {
-    const applicantCenter = centerList.find(
-      (item) => !!item && item.country === applicationDetails.country,
-    );
-    if (applicantCenter) {
-      defaultSelectedCountry = applicantCenter.country;
-    } else {
-      defaultSelectedCountry = centerList[0].country;
-    }
-  }
   const [selectedCountry, setSelectedCountry] = useState({
-    label: defaultSelectedCountry,
-    value: defaultSelectedCountry,
+    label: "",
+    value: "",
   });
 
   const [arrayTime, setArrayTime] = useState([]);
@@ -79,6 +74,60 @@ export default () => {
     if (obj.per_person) return acc + obj.price * memberDetails.length;
     else return acc + obj.price;
   }, 0);
+
+  useEffect(() => {
+    console.log("usssssee", appointmentDetails, applicationDetails);
+
+    let defaultSelectedCountry = "";
+    if (centerList.length > 0) {
+      let tmpSelectedCountry = applicationDetails.country;
+      if (!!appointmentDetails.applicantAppointment) {
+        tmpSelectedCountry = appointmentDetails.country;
+      } else if (!!applicationDetails.appointmentId) {
+        tmpSelectedCountry = applicationDetails.country;
+      }
+      const applicantCenter = centerList.find(
+        (item) => !!item && item.country === tmpSelectedCountry,
+      );
+      if (applicantCenter) {
+        defaultSelectedCountry = applicantCenter.country;
+      } else {
+        defaultSelectedCountry = centerList[0].country;
+      }
+    }
+    setSelectedCountry({
+      label: defaultSelectedCountry,
+      value: defaultSelectedCountry,
+    });
+
+    const filteredCenterArray = centerList.filter(
+      (centre) => defaultSelectedCountry.label === centre?.country,
+    );
+    const newCenterList = filteredCenterArray.map((centre) => {
+      return {
+        ...centre,
+        value: centre?.centerId,
+        label: centre?.centerName,
+      };
+    });
+    let selectedCenterTemp = newCenterList[0];
+    if (!!appointmentDetails.applicantAppointment) {
+      const tmpCenter = newCenterList.find(
+        (i) => i.label === appointmentDetails.applicantAppointment.location,
+      );
+      if (tmpCenter) {
+        selectedCenterTemp = tmpCenter;
+      }
+    } else if (!!applicationDetails.appointmentId) {
+      const tmpCenter = newCenterList.find(
+        (i) => i.centerId === applicationDetails.centerId,
+      );
+      if (tmpCenter) {
+        selectedCenterTemp = tmpCenter;
+      }
+    }
+    setSelectedCenter(selectedCenterTemp);
+  }, [centerList, JSON.stringify(appointmentDetails)]);
 
   useEffect(() => {
     if (applicationDetails.category !== "Visa") {

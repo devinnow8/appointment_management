@@ -16,6 +16,9 @@ const CalendarPicker = ({
 }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
   const [holidaysList, setHolidaysList] = useState([]);
+  const { appointmentDetails } = useSelector(
+    (state) => state.appointmentDetails,
+  );
   // const dispatch = useDispatch();
   useEffect(() => {
     if (
@@ -109,6 +112,12 @@ const CalendarPicker = ({
     new Date(applicationDetails.appointmentDate),
     "new Date()new Date()",
   );
+  let defaultMonth = new Date();
+  if (applicationDetails.appointmentId) {
+    defaultMonth = new Date(applicationDetails.appointmentDate);
+  } else if (appointmentDetails?.applicantAppointment) {
+    defaultMonth = new Date(appointmentDetails.applicantAppointment.date);
+  }
   return (
     <>
       <DayPicker
@@ -116,11 +125,7 @@ const CalendarPicker = ({
         max={60}
         className="calender-months"
         selected={selectedDate}
-        defaultMonth={
-          applicationDetails.appointmentId
-            ? new Date(applicationDetails.appointmentDate)
-            : new Date()
-        }
+        defaultMonth={defaultMonth}
         disabled={[
           { before: new Date() },
           {

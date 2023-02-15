@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { monthNames } from "../../../../constants/index";
 import CalendarPicker from "./calendar-picker";
 import SelectDropdowns from "./country-centre-select";
@@ -45,7 +45,7 @@ const Calendar = ({
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
-  const [newCenterList, setNewCenterList] = useState([]);
+  // const [newCenterList, setNewCenterList] = useState([]);
 
   const countries = useMemo(() => getCountriesList(centerList), [centerList]);
 
@@ -53,88 +53,117 @@ const Calendar = ({
     appointmentDetails.applicantAppointment,
     "appointmentDetailsApplicantAppointment",
   );
-  useEffect(() => {
-    if (appointmentDetails.applicantAppointment !== undefined) {
-      // if click cancel after going to payment page
-      const filteredArray = centerList.filter(
-        (centre) =>
-          appointmentDetails.country === centre?.country &&
-          centre.centerId === appointmentDetails.centerId,
-      );
-      const obtainedArray = filteredArray.map((centre) => {
-        return {
-          ...centre,
-          value: centre?.centerId,
-          label: centre?.centerName,
-        };
-      });
-      setSelectedCenter(obtainedArray[0]);
-      setSelectedDate(new Date(appointmentDetails.applicantAppointment.date));
-      console.log(
-        appointmentDetails.applicantAppointment,
-        "appointmentDetailsApplicantAppointment=>",
-        arrayTime,
-      );
-      if (arrayTime.length > 0) {
-        const index = arrayTime.findIndex(
-          (x) => x?.fromTime === appointmentDetails.applicantAppointment?.time,
-        );
-        setSlideToShow(index);
-      }
-    }
-  }, [
-    appointmentDetails.applicantAppointment,
-    appointmentDetails.applicantAppointment?.time,
-    appointmentDetails.applicantAppointment?.date,
-    appointmentDetails.centerId,
-    appointmentDetails.country,
-    centerList,
-    appointmentSlotList,
-  ]);
+
+  const newCenterList = useRef([]);
 
   useEffect(() => {
-    if (applicationDetails.appointmentId !== undefined) {
-      console.log("check==>");
-      // RESCHULE
-      const filteredArray = centerList.filter(
-        (centre) =>
-          selectedCountry.label === centre?.country &&
-          centre.centerId === applicationDetails.centerId,
-      );
-      // if (obtainedArray.length) {
-      //   setSelectedCenter(obtainedArray[0]);
-      // } else {
-      //   setSelectedCenter(centerList[0]);
-      // }
-      const obtainedArray = filteredArray.map((centre) => {
-        return {
-          ...centre,
-          value: centre?.centerId,
-          label: centre?.centerName,
-        };
-      });
-      setSelectedCenter(obtainedArray[0]);
-      if (arrayTime.length > 0) {
-        const index = arrayTime.findIndex(
-          (x) => x.fromTime === applicationDetails.appointmentTime,
-        );
-        setSlideToShow(index);
-      }
-      setSelectedDate(new Date(applicationDetails.appointmentDate));
-      setApplicantAppointment((prev) => ({
-        ...prev,
-        location: selectedCenter?.label,
-      }));
-    }
-  }, [
-    applicationDetails.appointmentId,
-    applicationDetails.appointmentTime,
-    applicationDetails.appointmentDate,
-    applicationDetails.centerId,
-    selectedCountry.label,
-    centerList,
-    appointmentSlotList,
-  ]);
+    const filteredCenterArray = centerList.filter(
+      (centre) => selectedCountry.label === centre?.country,
+    );
+    newCenterList.current = filteredCenterArray.map((centre) => {
+      return {
+        ...centre,
+        value: centre?.centerId,
+        label: centre?.centerName,
+      };
+    });
+
+    console.log(
+      "appointmentDetails.applicantAppointment: ",
+      appointmentDetails.applicantAppointment,
+    );
+
+    let selectedCenterTemp = newCenterList.current[0];
+
+    setApplicantAppointment((prev) => ({
+      ...prev,
+      location: selectedCenterTemp?.label,
+    }));
+    setSelectedCenter(selectedCenterTemp);
+  }, [selectedCountry]);
+
+  // useEffect(() => {
+  //   if (appointmentDetails.applicantAppointment !== undefined) {
+  //     // if click cancel after going to payment page
+  //     const filteredArray = centerList.filter(
+  //       (centre) =>
+  //         appointmentDetails.country === centre?.country &&
+  //         centre.centerId === appointmentDetails.centerId,
+  //     );
+  //     const obtainedArray = filteredArray.map((centre) => {
+  //       return {
+  //         ...centre,
+  //         value: centre?.centerId,
+  //         label: centre?.centerName,
+  //       };
+  //     });
+  //     setSelectedCenter(obtainedArray[0]);
+  //     setSelectedDate(new Date(appointmentDetails.applicantAppointment.date));
+  //     console.log(
+  //       appointmentDetails.applicantAppointment,
+  //       "appointmentDetailsApplicantAppointment=>",
+  //       arrayTime,
+  //     );
+  //     if (arrayTime.length > 0) {
+  //       const index = arrayTime.findIndex(
+  //         (x) => x?.fromTime === appointmentDetails.applicantAppointment?.time,
+  //       );
+  //       setSlideToShow(index);
+  //     }
+  //   }
+  // }, [
+  //   appointmentDetails.applicantAppointment,
+  //   appointmentDetails.applicantAppointment?.time,
+  //   appointmentDetails.applicantAppointment?.date,
+  //   appointmentDetails.centerId,
+  //   appointmentDetails.country,
+  //   centerList,
+  //   appointmentSlotList,
+  // ]);
+
+  // useEffect(() => {
+  //   if (applicationDetails.appointmentId !== undefined) {
+  //     console.log("check==>");
+  //     // RESCHULE
+  //     const filteredArray = centerList.filter(
+  //       (centre) =>
+  //         selectedCountry.label === centre?.country &&
+  //         centre.centerId === applicationDetails.centerId,
+  //     );
+  //     // if (obtainedArray.length) {
+  //     //   setSelectedCenter(obtainedArray[0]);
+  //     // } else {
+  //     //   setSelectedCenter(centerList[0]);
+  //     // }
+  //     const obtainedArray = filteredArray.map((centre) => {
+  //       return {
+  //         ...centre,
+  //         value: centre?.centerId,
+  //         label: centre?.centerName,
+  //       };
+  //     });
+  //     setSelectedCenter(obtainedArray[0]);
+  //     if (arrayTime.length > 0) {
+  //       const index = arrayTime.findIndex(
+  //         (x) => x.fromTime === applicationDetails.appointmentTime,
+  //       );
+  //       setSlideToShow(index);
+  //     }
+  //     setSelectedDate(new Date(applicationDetails.appointmentDate));
+  //     setApplicantAppointment((prev) => ({
+  //       ...prev,
+  //       location: selectedCenter?.label,
+  //     }));
+  //   }
+  // }, [
+  //   applicationDetails.appointmentId,
+  //   applicationDetails.appointmentTime,
+  //   applicationDetails.appointmentDate,
+  //   applicationDetails.centerId,
+  //   selectedCountry.label,
+  //   centerList,
+  //   appointmentSlotList,
+  // ]);
 
   console.log("index=>12", slideToShow, applicationDetails);
 
@@ -164,44 +193,44 @@ const Calendar = ({
     }
   };
 
-  useEffect(() => {
-    const filteredArray = centerList.filter(
-      (centre) => selectedCountry.label === centre?.country,
-    );
-    const obtainedArray = filteredArray.map((centre) => {
-      return {
-        ...centre,
-        value: centre?.centerId,
-        label: centre?.centerName,
-      };
-    });
-    console.log(obtainedArray, "obtainedArray=>");
-    setNewCenterList(obtainedArray);
-    if (
-      !Object.keys(appointmentDetails).length &&
-      applicationDetails.appointmentId === undefined
-    ) {
-      // general scenario
-      setSelectedCenter(obtainedArray[0]);
-      setSelectedDate(new Date());
-    } else {
-      if (Object.keys(appointmentDetails).length) {
-        const filteredArray = centerList.filter(
-          (centre) => selectedCountry.label === centre?.country,
-        );
-        const obtainedArray = filteredArray.map((centre) => {
-          return {
-            ...centre,
-            value: centre?.centerId,
-            label: centre?.centerName,
-          };
-        });
-        console.log(obtainedArray, "obtainedArray=>");
-        setNewCenterList(obtainedArray);
-        setSelectedCenter(obtainedArray[0]);
-      }
-    }
-  }, [centerList, applicationDetails, selectedCountry.label]);
+  // useEffect(() => {
+  //   const filteredArray = centerList.filter(
+  //     (centre) => selectedCountry.label === centre?.country,
+  //   );
+  //   const obtainedArray = filteredArray.map((centre) => {
+  //     return {
+  //       ...centre,
+  //       value: centre?.centerId,
+  //       label: centre?.centerName,
+  //     };
+  //   });
+  //   console.log(obtainedArray, "obtainedArray=>");
+  //   setNewCenterList(obtainedArray);
+  //   if (
+  //     !Object.keys(appointmentDetails).length &&
+  //     applicationDetails.appointmentId === undefined
+  //   ) {
+  //     // general scenario
+  //     setSelectedCenter(obtainedArray[0]);
+  //     setSelectedDate(new Date());
+  //   } else {
+  //     if (Object.keys(appointmentDetails).length) {
+  //       const filteredArray = centerList.filter(
+  //         (centre) => selectedCountry.label === centre?.country,
+  //       );
+  //       const obtainedArray = filteredArray.map((centre) => {
+  //         return {
+  //           ...centre,
+  //           value: centre?.centerId,
+  //           label: centre?.centerName,
+  //         };
+  //       });
+  //       console.log(obtainedArray, "obtainedArray=>");
+  //       setNewCenterList(obtainedArray);
+  //       setSelectedCenter(obtainedArray[0]);
+  //     }
+  //   }
+  // }, [centerList, applicationDetails, selectedCountry.label]);
   console.log(selectedCountry.label, "labelll=>", selectedDate, selectedCenter);
 
   return (
@@ -212,7 +241,7 @@ const Calendar = ({
             countries={countries}
             selectedCountry={selectedCountry}
             setSelectedCountry={setSelectedCountry}
-            newCenterList={newCenterList}
+            newCenterList={newCenterList.current}
             selectedCenter={selectedCenter}
             formatOptionLabel={formatOptionLabel}
             setSelectedCenter={setSelectedCenter}
