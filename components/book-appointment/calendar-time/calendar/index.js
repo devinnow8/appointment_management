@@ -1,11 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { monthNames, countries } from "../../../../constants/index";
+import React, { useState, useEffect, useMemo } from "react";
+import { monthNames } from "../../../../constants/index";
 import CalendarPicker from "./calendar-picker";
 import SelectDropdowns from "./country-centre-select";
 import { useSelector } from "react-redux";
 import TimeSlots from "../time-slots";
 import { Col, Row } from "reactstrap";
 import moment from "moment";
+
+const getCountriesList = (centers) => {
+  const result = [];
+  const map = new Map();
+  for (const item of centers) {
+    if (item && !map.has(item.country)) {
+      map.set(item.country, true); // set any value to Map
+      result.push({
+        label: item.country,
+        value: item.country,
+      });
+    }
+  }
+  return result;
+};
 
 const Calendar = ({
   setApplicantAppointment,
@@ -31,10 +46,8 @@ const Calendar = ({
     (state) => state.appointmentDetails,
   );
   const [newCenterList, setNewCenterList] = useState([]);
-  // const [selectedCountry, setSelectedCountry] = useState({
-  //   label: applicationDetails.country,
-  //   value: applicationDetails.country,
-  // });
+
+  const countries = useMemo(() => getCountriesList(centerList), [centerList]);
 
   console.log(
     appointmentDetails.applicantAppointment,

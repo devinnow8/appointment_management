@@ -47,19 +47,20 @@ export default () => {
   const [isAddMember, setIsAddMember] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  let defaultSelectedCountry = "";
+  if (centerList.length > 0) {
+    const applicantCenter = centerList.find(
+      (item) => !!item && item.country === applicationDetails.country,
+    );
+    if (applicantCenter) {
+      defaultSelectedCountry = applicantCenter.country;
+    } else {
+      defaultSelectedCountry = centerList[0].country;
+    }
+  }
   const [selectedCountry, setSelectedCountry] = useState({
-    label:
-      applicationDetails.appointmentId !== undefined
-        ? applicationDetails.country
-        : Object.keys(appointmentDetails).length > 0
-        ? appointmentDetails.country
-        : applicationDetails.country,
-    value:
-      applicationDetails.appointmentId !== undefined
-        ? applicationDetails.country
-        : Object.keys(appointmentDetails).length > 0
-        ? appointmentDetails.country
-        : applicationDetails.country,
+    label: defaultSelectedCountry,
+    value: defaultSelectedCountry,
   });
 
   const [arrayTime, setArrayTime] = useState([]);
