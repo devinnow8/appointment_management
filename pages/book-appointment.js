@@ -333,7 +333,7 @@ export default () => {
         updatedMembers,
         (success) => {
           console.log(success, "success=>");
-          push("/appointment-booked");
+          router.push("/appointment-booked");
         },
         (error) => {
           toast.error("Something Went Wrong");
