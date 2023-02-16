@@ -76,7 +76,9 @@ function AppointmentBooked() {
                     ? applicationDetails.appointmentId
                     : appointment.appointment_id || appointment.application_id
                 }. A copy of the appointment slip and checklist have been
-                sent to your email. Optionally you can download it by click the
+                sent to your email (${
+                  applicationDetails.email
+                }). Optionally you can download it by click the
                 buttons given below.`}
               </p>
               <p className="apt-booked__para">

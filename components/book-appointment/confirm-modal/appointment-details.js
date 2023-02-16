@@ -10,7 +10,7 @@ const AppointmentDetails = ({
   const { memberDetails, applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return (
     <>
       <div className="confirm-modal__applicant--info">
@@ -42,7 +42,7 @@ const AppointmentDetails = ({
             </div>
             <div className="confirm-modal__applicant--value">
               <p className="confirm-modal__applicant-desc">
-                {applicantAppointment.time || "12:00 PM"}
+                {applicantAppointment.time} {""} {`(${timezone})`}
               </p>
             </div>
           </div>
@@ -63,7 +63,8 @@ const AppointmentDetails = ({
             </div>
           </div>
 
-          {serviceList.length > 0 &&
+          {!applicationDetails.appointmentId &&
+            serviceList.length > 0 &&
             serviceList.map((list) => {
               return (
                 <>
@@ -79,7 +80,7 @@ const AppointmentDetails = ({
                     <div className="confirm-modal__applicant--value">
                       <p className="confirm-modal__applicant-desc">
                         {list.per_person === true
-                          ? `${list.price} / member`
+                          ? `${list.price} / Applicant`
                           : list.price}
                       </p>
                     </div>
@@ -88,21 +89,6 @@ const AppointmentDetails = ({
               );
             })}
 
-          {/* <div className="confirm-modal__applicant--flex">
-            <div className="confirm-modal__applicant--data">
-              <h5 className="confirm-modal__applicant--heading">
-                <div className="img-box">
-                  <img src="/images/currency.png" className="curr-img" alt="" />
-                </div>{" "}
-                Amount
-              </h5>
-            </div>
-            <div className="confirm-modal__applicant--value">
-              <p className="confirm-modal__applicant-desc">
-                {applicationDetails?.price || "350"} / member
-              </p>
-            </div>
-          </div> */}
           {!applicationDetails.appointmentId && (
             <div className="confirm-modal__applicant--flex">
               <div className="confirm-modal__applicant--data">
