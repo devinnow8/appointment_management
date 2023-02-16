@@ -44,7 +44,7 @@ const Visa = ({ handleAddMember }) => {
           name="application_id"
           placeholder="01234567789"
           type="text"
-          className="inner-header__input"
+          className="inner-header__input ttt"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.application_id}

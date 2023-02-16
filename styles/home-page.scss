@@ -76,6 +76,9 @@
           min-height: 38px;
           color: #555;
           border: 1px solid #B1B1B1;
+          width: 100%;
+          border-radius: 5px;
+          padding-left: 8px;
           &::placeholder {
             color: #BCBCBC;
           }
@@ -88,6 +91,9 @@
           }
           @media (max-width: $xxLDesktop) {
             font-size: 14px;
+          }
+          &.date-picker {
+            width: 100% !important;
           }
         }
         .cont-btn {
@@ -155,7 +161,35 @@
               }
             }
           }
-          
+        }
+        .react-datepicker {
+          .react-datepicker__day--selected {
+            background-color: $primary-color;
+          }
+          .react-datepicker__day--keyboard-selected {
+            background-color: $primary-color;
+            color: white;
+          }
+          .react-datepicker__day:hover {
+            background-color: $primary-color;
+            color: white;
+          }
+          .react-datepicker__month-dropdown-container {
+            margin: 7px 0px;
+            .react-datepicker__month-select {
+              border: 1px solid #cdcdcd;
+              border-radius: 5px;
+              padding: 4px;
+            }
+          }
+          .react-datepicker__year-dropdown-container {
+            margin: 7px 10px;
+            .react-datepicker__year-select {
+              border: 1px solid #cdcdcd;
+              border-radius: 5px;
+              padding: 4px;
+            }
+          }
         }
       }
       .appointment-form_desc {
