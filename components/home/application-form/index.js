@@ -5,6 +5,7 @@ import { Col, Container, FormGroup, Input, Label, Row } from "reactstrap";
 import Visa from "../service-type/Visa";
 import Others from "../service-type/Others";
 import Loader from "../../loader";
+import { arrayTabs } from "../../../constants";
 
 function ApplicationForm({
   selectedService,
@@ -14,9 +15,11 @@ function ApplicationForm({
   isLoader,
   setAppointment,
   appointment,
+  errorMsg,
+  setErrorMsg,
 }) {
+  console.log(isLoader, "isLoader=>");
   const [isTrackingId, setIsTrackingId] = useState("");
-
   return (
     <Container>
       <Row className="appointment-form__row">
@@ -39,31 +42,16 @@ function ApplicationForm({
               Welcome to <mark>OIS</mark> Appointment Booking System
             </h1>
             <div className="appointment-form__tabs">
-              <button
-                className={`tab-btn ${
-                  appointment === "New Appointment" && "active"
-                }`}
-                onClick={() => setAppointment("New Appointment")}
-              >
-                New Appointment
-              </button>
-              <button
-                className={`tab-btn ${
-                  appointment === "Reschedule Appointment" && "active"
-                }`}
-                onClick={() => setAppointment("Reschedule Appointment")}
-              >
-                Reschedule Appointment
-              </button>
-              <button
-                className={`tab-btn ${
-                  appointment === "Cancel Appointment" && "active"
-                }`}
-                onClick={() => setAppointment("Cancel Appointment")}
-              >
-                {" "}
-                Cancel Appointment
-              </button>
+              {arrayTabs.map((tab) => {
+                return (
+                  <button
+                    className={`tab-btn ${appointment === tab && "active"}`}
+                    onClick={() => setAppointment(tab)}
+                  >
+                    {tab}
+                  </button>
+                );
+              })}
             </div>
 
             {appointment === "New Appointment" && (
@@ -106,13 +94,20 @@ function ApplicationForm({
                     name="application_id"
                     placeholder="01234567789"
                     type="text"
-                    onChange={(e) => setIsTrackingId(e.target.value)}
+                    onChange={(e) => {
+                      setIsTrackingId(e.target.value);
+                      setErrorMsg("");
+                    }}
                     value={isTrackingId}
                     className="appointment-form__input"
                   />
+                  <div className="error-msg">{errorMsg}</div>
                 </div>
                 <div className="text-md-start text-center ">
-                  <button onClick={() => handleContinue(isTrackingId)}>
+                  <button
+                    className="cont-btn"
+                    onClick={() => handleContinue(isTrackingId)}
+                  >
                     Continue
                     <Loader isLoader={isLoader} />
                   </button>

@@ -344,3 +344,9 @@ export const paymentModeType = {
   payPal: "Paypal",
   amazonPay: "Amazon Pay",
 };
+
+export const arrayTabs = [
+  "New Appointment",
+  "Reschedule Appointment",
+  "Cancel Appointment",
+];

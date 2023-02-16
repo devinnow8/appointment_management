@@ -27,6 +27,30 @@
     }
 
     .appointment-form__content {
+      .appointment-form__input {
+        min-height: 38px;
+        color: #555;
+        border: 1px solid #b1b1b1;
+        width: 100%;
+        border-radius: 5px;
+        padding-left: 8px;
+        &::placeholder {
+          color: #bcbcbc;
+        }
+        &:focus {
+          box-shadow: none;
+          outline: none !important;
+        }
+        &:internal-autofill-selected {
+          background-color: red !important;
+        }
+        @media (max-width: $xxLDesktop) {
+          font-size: 14px;
+        }
+        &.date-picker {
+          width: 100% !important;
+        }
+      }
       .appointment-form__tabs {
         display: flex;
         align-items: center;
@@ -105,7 +129,7 @@
           @media (min-width: 992px) and (max-width: 1200px) {
             font-size: 12px;
           }
-          
+
           // span {
           //   color: #bcbcbc;
           // }
@@ -113,12 +137,12 @@
         .appointment-form__input {
           min-height: 38px;
           color: #555;
-          border: 1px solid #B1B1B1;
+          border: 1px solid #b1b1b1;
           width: 100%;
           border-radius: 5px;
           padding-left: 8px;
           &::placeholder {
-            color: #BCBCBC;
+            color: #bcbcbc;
           }
           &:focus {
             box-shadow: none;
@@ -153,7 +177,7 @@
         }
         .react-select__control {
           min-height: 38px !important;
-          border: 1px solid #B1B1B1;
+          border: 1px solid #b1b1b1;
           width: 100%;
           @media only screen and (max-width: 768px) {
             width: 100%;
@@ -245,6 +269,27 @@
         }
         @media (max-width: 768px) {
           margin-bottom: 32px;
+        }
+      }
+      .cont-btn {
+        @extend .primary-btn;
+        margin-top: 22px;
+        margin-bottom: 14px;
+        padding: 0px !important;
+        height: 45px;
+        &:focus {
+          box-shadow: none;
+          outline: none;
+        }
+        &.cont-btn-disabled {
+          background: $primary-color !important;
+          opacity: 0.4;
+        }
+        @media only screen and (max-width: 992px) {
+          margin-top: 20px;
+        }
+        .loader-img {
+          width: 20px;
         }
       }
     }

@@ -12,6 +12,7 @@ import { categoryServiceListFetchRequest } from "../redux/reducer/category-servi
 import { toast } from "react-toastify";
 import ApplicationForm from "../components/home/application-form";
 import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
+import { arrayTabs } from "../constants";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -22,7 +23,8 @@ export default function Home() {
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
-  const [appointment, setAppointment] = useState("New Appointment");
+  const [appointment, setAppointment] = useState(arrayTabs[0]);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleContinue = (values) => {
     if (appointment === "New Appointment") {
@@ -82,35 +84,41 @@ export default function Home() {
         ),
       );
     } else {
-      console.log(values, "success=>");
-      dispatch(
-        appointmentBookedDetailsRequest(
-          values,
-          (success) => {
-            console.log(success, "success=>");
-            if (success.data.status === "Cancel") {
-              console.log("successdata", success.data);
-              toast.error("This Application is Cancelled");
-              setIsLoader(false);
-            } else {
-              if (success.data.appointmentId) {
-                const tempArray = [];
-                tempArray.push(success.data);
-                dispatch(applicationDetailsFetchMemberSuccess(tempArray));
-                dispatch(applicationDetailsFetchSuccess(success.data));
-                router.push({
-                  pathname: "/reschedule-appointment",
-                });
+      if (values === "") {
+        setErrorMsg("Required");
+      } else {
+        setIsLoader(true);
+        setErrorMsg("");
+        console.log(values, "success=>");
+        dispatch(
+          appointmentBookedDetailsRequest(
+            values,
+            (success) => {
+              console.log(success, "success=>");
+              if (success.data.status === "Cancel") {
+                console.log("successdata", success.data);
+                toast.error("This Application is Cancelled");
+                setIsLoader(false);
+              } else {
+                if (success.data.appointmentId) {
+                  const tempArray = [];
+                  tempArray.push(success.data);
+                  dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+                  dispatch(applicationDetailsFetchSuccess(success.data));
+                  router.push({
+                    pathname: "/reschedule-appointment",
+                  });
+                }
               }
-            }
-          },
-          (error) => {
-            console.log(error, "error==>");
-            toast.error("Application not found");
-            setIsLoader(false);
-          },
-        ),
-      );
+            },
+            (error) => {
+              console.log(error, "error==>");
+              toast.error("Application not found");
+              setIsLoader(false);
+            },
+          ),
+        );
+      }
     }
   };
 
@@ -158,6 +166,8 @@ export default function Home() {
           isLoader={isLoader}
           setAppointment={setAppointment}
           appointment={appointment}
+          errorMsg={errorMsg}
+          setErrorMsg={setErrorMsg}
         />
       </section>
     </>
