@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Select from "react-select";
-import { Col, Container, FormGroup, Label, Row } from "reactstrap";
+import { Col, Container, FormGroup, Input, Label, Row } from "reactstrap";
 import Visa from "../service-type/Visa";
 import Others from "../service-type/Others";
 
@@ -33,10 +33,11 @@ function ApplicationForm({
             <h1 className="appointment-form__title">
               Welcome to <mark>OIS</mark> Appointment Booking System
             </h1>
-            <p className="appointment-form__info">
-              {" "}
-              New Appointment / Reschedule Appointment / Cancel Appointment{" "}
-            </p>
+            <div className="appointment-form__tabs">
+              <button className="tab-btn active">New Appointment</button>
+              <button className="tab-btn">Reschedule Appointment</button>
+              <button className="tab-btn"> Cancel Appointment</button>
+            </div>
 
             <div className="appointment-form__fields">
               <FormGroup>
@@ -59,6 +60,28 @@ function ApplicationForm({
                   <Others handleContinue={handleContinue} isLoader={isLoader} />
                 )}
               </Row>
+            </div>
+
+            <div>
+              <Label for="application_id">
+                Tracking ID
+                <span className="star">*</span>
+              </Label>
+              <Input
+                id="application_id"
+                name="application_id"
+                placeholder="01234567789"
+                type="text"
+                // onChange={formik.handleChange}
+                // onBlur={formik.handleBlur}
+                // value={formik.values.application_id}
+                className="appointment-form__input"
+              />
+              {/* {formik.errors.application_id && formik.touched.application_id ? (
+                <div className="error-msg">{formik.errors.application_id}</div>
+              ) : (
+                <div className="no-error-msg"></div>
+              )} */}
             </div>
             <p className="appointment-form_desc">
               If you have not completed your visa application, please{" "}

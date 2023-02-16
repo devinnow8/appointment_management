@@ -27,6 +27,44 @@
     }
 
     .appointment-form__content {
+      .appointment-form__tabs {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 18px 0px 20px 0px;
+        @media (max-width: 576px) {
+          display: block;
+        }
+        .tab-btn {
+          border: 1px solid #848484;
+          color: #848484;
+          padding: 13px 10px;
+          margin-right: 10px;
+          background: none;
+          border-radius: 5px;
+          font-size: 14px;
+          font-weight: 500;
+          flex: 0 0 32%;
+          max-width: 32%;
+          @media (min-width: 1200px) and (max-width: 1400px) {
+            flex: 0 0 33%;
+            max-width: 33%;
+            padding: 12px 10px;
+            font-size: 13px;
+          }
+          @media (max-width: 768px) {
+            flex: unset;
+            max-width: unset;
+          }
+          @media (max-width: 576px) {
+            display: block;
+          }
+          &.active {
+            border: 1px solid $primary-color;
+            color: $primary-color;
+          }
+        }
+      }
       .appointment-form__title {
         font-size: 50px;
         font-weight: 500;
