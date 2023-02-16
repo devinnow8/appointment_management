@@ -85,7 +85,7 @@ function ApplicationForm({
             {appointment !== "New Appointment" && (
               <>
                 <div className="appointment-form__fields">
-                  <div className="mb-3">
+                  <div className="m-0">
                     <Label for="application_id">
                       Tracking ID
                       <span className="star">*</span>
