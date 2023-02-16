@@ -6,11 +6,11 @@ const AppointmentDetails = ({
   applicantAppointment,
   serviceList,
   totalAmount,
+  selectedCenter,
 }) => {
-  const { memberDetails, applicationDetails } = useSelector(
+  const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   return (
     <>
       <div className="confirm-modal__applicant--info">
@@ -42,7 +42,8 @@ const AppointmentDetails = ({
             </div>
             <div className="confirm-modal__applicant--value">
               <p className="confirm-modal__applicant-desc">
-                {applicantAppointment.time} {""} {`(${timezone})`}
+                {applicantAppointment.time} {""}{" "}
+                {!!selectedCenter && `(${selectedCenter?.timeZone})`}
               </p>
             </div>
           </div>

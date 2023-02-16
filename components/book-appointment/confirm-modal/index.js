@@ -21,6 +21,7 @@ function ConfirmModal({
   handleFreeBooking,
   serviceList,
   totalAmount,
+  selectedCenter,
 }) {
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
@@ -70,6 +71,7 @@ function ConfirmModal({
               applicantAppointment={applicantAppointment}
               serviceList={serviceList}
               totalAmount={totalAmount}
+              selectedCenter={selectedCenter}
             />
           ) : (
             <div className="confirm-modal__applicant--info">

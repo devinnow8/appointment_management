@@ -102,6 +102,14 @@ const Calendar = ({
             applicationDetails={applicationDetails}
           />
         </Col>
+        <Col md={2} lg={2}>
+          <div className="time-zone-text">
+            <label>Time Zone</label>
+            <p className="value">
+              {(!!selectedCenter && selectedCenter?.timeZone) || "IST"}
+            </p>
+          </div>
+        </Col>
       </Row>
       <Row className="justify-content-end align-items-cente">
         <Col md={10} lg={10} xl={10}>
@@ -135,6 +143,12 @@ const Calendar = ({
           xl={2}
           className="d-block d-md-flex justify-content-start justify-content-md-end"
         >
+          <div className="time-zone-mobile">
+            <label>Time Zone</label>
+            <p className="value">
+              {(!!selectedCenter && selectedCenter?.timeZone) || "IST"}
+            </p>
+          </div>
           <h2 className="d-block d-md-none sel-time">Select Time</h2>
           <TimeSlots
             arrayTime={arrayTime}

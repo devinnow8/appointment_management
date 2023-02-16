@@ -52,7 +52,6 @@ export default () => {
       ? new Date(applicationDetails.appointmentDate)
       : new Date(),
   );
-
   const [selectedCountry, setSelectedCountry] = useState({
     label: "",
     value: "",
@@ -487,6 +486,7 @@ export default () => {
           handleFreeBooking={handleFreeBooking}
           serviceList={serviceList}
           totalAmount={totalAmount}
+          selectedCenter={selectedCenter}
         />
       )}
       {deleteModal && (
