@@ -24,11 +24,11 @@ const CalendarPicker = ({
       selectedCenter?.centerId !== undefined
     ) {
       const obtainedHoliday = holidayList.map((list) => {
-        const date1 = new Date(list.date);
+        const date1 = new Date(list.day);
         return new Date(date1.toUTCString().slice(0, -4));
       });
       const filteredDate = holidayList.filter((list) => {
-        const date1 = new Date(list.date);
+        const date1 = new Date(list.day);
         const date2 = new Date(date1.toUTCString().slice(0, -4));
         if (
           moment(selectedDate).format("MM/DD/YYYY") ===
