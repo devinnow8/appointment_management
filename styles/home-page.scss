@@ -70,6 +70,11 @@
           font-weight: 500;
           flex: 0 0 32%;
           max-width: 32%;
+          @media (min-width: 993px) and (max-width: 1200px) {
+            font-size: 11px;
+            flex: 0 0 33%;
+            max-width: 33%;
+          }
           @media (min-width: 1200px) and (max-width: 1400px) {
             flex: 0 0 33%;
             max-width: 33%;
@@ -81,7 +86,16 @@
             max-width: unset;
           }
           @media (max-width: 576px) {
-            display: block;
+            width: 154px;
+            font-size: 12px;
+            padding: 12px 6px;
+            margin-bottom: 10px;
+          }
+          @media (max-width: 360px) {
+            width: 138px;
+            font-size: 10px;
+            padding: 12px 2px;
+            margin-bottom: 10px;
           }
           &.active {
             border: 1px solid $primary-color;
@@ -269,27 +283,6 @@
         }
         @media (max-width: 768px) {
           margin-bottom: 32px;
-        }
-      }
-      .cont-btn {
-        @extend .primary-btn;
-        margin-top: 22px;
-        margin-bottom: 14px;
-        padding: 0px !important;
-        height: 45px;
-        &:focus {
-          box-shadow: none;
-          outline: none;
-        }
-        &.cont-btn-disabled {
-          background: $primary-color !important;
-          opacity: 0.4;
-        }
-        @media only screen and (max-width: 992px) {
-          margin-top: 20px;
-        }
-        .loader-img {
-          width: 20px;
         }
       }
     }

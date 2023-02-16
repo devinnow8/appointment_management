@@ -84,33 +84,36 @@ function ApplicationForm({
 
             {appointment !== "New Appointment" && (
               <>
-                <div>
-                  <Label for="application_id">
-                    Tracking ID
-                    <span className="star">*</span>
-                  </Label>
-                  <Input
-                    id="application_id"
-                    name="application_id"
-                    placeholder="01234567789"
-                    type="text"
-                    onChange={(e) => {
-                      setIsTrackingId(e.target.value);
-                      setErrorMsg("");
-                    }}
-                    value={isTrackingId}
-                    className="appointment-form__input"
-                  />
-                  <div className="error-msg">{errorMsg}</div>
-                </div>
-                <div className="text-md-start text-center ">
-                  <button
-                    className="cont-btn"
-                    onClick={() => handleContinue(isTrackingId)}
-                  >
-                    Continue
-                    <Loader isLoader={isLoader} />
-                  </button>
+                <div className="appointment-form__fields">
+                  <div className="mb-3">
+                    <Label for="application_id">
+                      Tracking ID
+                      <span className="star">*</span>
+                    </Label>
+                    <Input
+                      id="application_id"
+                      name="application_id"
+                      placeholder="01234567789"
+                      type="text"
+                      onChange={(e) => {
+                        setIsTrackingId(e.target.value);
+                        setErrorMsg("");
+                      }}
+                      value={isTrackingId}
+                      className="appointment-form__input"
+                    />
+                    <div className="error-msg">{errorMsg}</div>
+                  </div>
+
+                  <div className="text-md-start text-center ">
+                    <button
+                      className="cont-btn"
+                      onClick={() => handleContinue(isTrackingId)}
+                    >
+                      Continue
+                      <Loader isLoader={isLoader} />
+                    </button>
+                  </div>
                 </div>
               </>
             )}
