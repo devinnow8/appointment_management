@@ -11,6 +11,7 @@ import {
 import { categoryServiceListFetchRequest } from "../redux/reducer/category-service";
 import { toast } from "react-toastify";
 import ApplicationForm from "../components/home/application-form";
+import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -21,63 +22,96 @@ export default function Home() {
   const [categoryServiceOptions, setCategoryServiceOptions] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
+  const [appointment, setAppointment] = useState("New Appointment");
 
   const handleContinue = (values) => {
-    setIsLoader(true);
-    const details = {};
-    if (selectedService.label === "Visa") {
-      details.applicationId = values.application_id;
-      details.dob = values.dob;
-      details.serviceType = selectedService.label;
-    } else {
-      details.name = values.name;
-      details.country = values.nationality.label;
-      details.serviceType = selectedService.label;
-      details.nationality = values.nationality.label;
-      details.id_type = values.id_type.label;
-      details.applicationId = values.id_number;
-      details.id_number = values.id_number;
-      details.category = selectedService.label;
-      details.email = values.email;
-      details.phone_number = parseInt(values.phone);
-    }
-    dispatch(
-      applicationDetailsFetchRequest(
-        details,
-        (success) => {
-          if (success.data.category !== selectedService.label) {
-            setIsLoader(false);
-            toast.error("Application not found");
-          } else {
-            const tempArray = [];
-            tempArray.push(success.data);
-            dispatch(applicationDetailsFetchMemberSuccess(tempArray));
-            dispatch(applicationDetailsFetchSuccess(success.data));
-            if (success.data.appointmentId) {
-              router.push({
-                pathname: "/reschedule-appointment",
-              });
+    if (appointment === "New Appointment") {
+      setIsLoader(true);
+      const details = {};
+      if (selectedService.label === "Visa") {
+        details.applicationId = values.application_id;
+        details.dob = values.dob;
+        details.serviceType = selectedService.label;
+      } else {
+        details.name = values.name;
+        details.country = values.nationality.label;
+        details.serviceType = selectedService.label;
+        details.nationality = values.nationality.label;
+        details.id_type = values.id_type.label;
+        details.applicationId = values.id_number;
+        details.id_number = values.id_number;
+        details.category = selectedService.label;
+        details.email = values.email;
+        details.phone_number = parseInt(values.phone);
+      }
+      dispatch(
+        applicationDetailsFetchRequest(
+          details,
+          (success) => {
+            if (success.data.category !== selectedService.label) {
+              setIsLoader(false);
+              toast.error("Application not found");
             } else {
-              if (success.status === 200) {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+              dispatch(applicationDetailsFetchSuccess(success.data));
+              if (success.data.appointmentId) {
                 router.push({
-                  pathname: "/book-appointment",
-                  query: { selectedService: selectedService.label },
+                  pathname: "/reschedule-appointment",
+                });
+              } else {
+                if (success.status === 200) {
+                  router.push({
+                    pathname: "/book-appointment",
+                    query: { selectedService: selectedService.label },
+                  });
+                }
+              }
+            }
+          },
+          (error) => {
+            if (error.message.includes("Network Error")) {
+              toast.error(error.message);
+              setIsLoader(false);
+            } else {
+              toast.error("Application not found");
+              setIsLoader(false);
+            }
+          },
+        ),
+      );
+    } else {
+      console.log(values, "success=>");
+      dispatch(
+        appointmentBookedDetailsRequest(
+          values,
+          (success) => {
+            console.log(success, "success=>");
+            if (success.data.status === "Cancel") {
+              console.log("successdata", success.data);
+              toast.error("This Application is Cancelled");
+              setIsLoader(false);
+            } else {
+              if (success.data.appointmentId) {
+                const tempArray = [];
+                tempArray.push(success.data);
+                dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+                dispatch(applicationDetailsFetchSuccess(success.data));
+                router.push({
+                  pathname: "/reschedule-appointment",
                 });
               }
             }
-          }
-        },
-        (error) => {
-          if (error.message.includes("Network Error")) {
-            toast.error(error.message);
-            setIsLoader(false);
-          } else {
+          },
+          (error) => {
+            console.log(error, "error==>");
             toast.error("Application not found");
             setIsLoader(false);
-          }
-        },
-      ),
-    );
+          },
+        ),
+      );
+    }
   };
 
   useEffect(() => {
@@ -122,6 +156,8 @@ export default function Home() {
           categoryServiceOptions={categoryServiceOptions}
           handleContinue={handleContinue}
           isLoader={isLoader}
+          setAppointment={setAppointment}
+          appointment={appointment}
         />
       </section>
     </>

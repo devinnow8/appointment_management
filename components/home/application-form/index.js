@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Select from "react-select";
 import { Col, Container, FormGroup, Input, Label, Row } from "reactstrap";
 import Visa from "../service-type/Visa";
 import Others from "../service-type/Others";
+import Loader from "../../loader";
 
 function ApplicationForm({
   selectedService,
@@ -11,7 +12,11 @@ function ApplicationForm({
   categoryServiceOptions,
   handleContinue,
   isLoader,
+  setAppointment,
+  appointment,
 }) {
+  const [isTrackingId, setIsTrackingId] = useState("");
+
   return (
     <Container>
       <Row className="appointment-form__row">
@@ -34,55 +39,87 @@ function ApplicationForm({
               Welcome to <mark>OIS</mark> Appointment Booking System
             </h1>
             <div className="appointment-form__tabs">
-              <button className="tab-btn active">New Appointment</button>
-              <button className="tab-btn">Reschedule Appointment</button>
-              <button className="tab-btn"> Cancel Appointment</button>
+              <button
+                className={`tab-btn ${
+                  appointment === "New Appointment" && "active"
+                }`}
+                onClick={() => setAppointment("New Appointment")}
+              >
+                New Appointment
+              </button>
+              <button
+                className={`tab-btn ${
+                  appointment === "Reschedule Appointment" && "active"
+                }`}
+                onClick={() => setAppointment("Reschedule Appointment")}
+              >
+                Reschedule Appointment
+              </button>
+              <button
+                className={`tab-btn ${
+                  appointment === "Cancel Appointment" && "active"
+                }`}
+                onClick={() => setAppointment("Cancel Appointment")}
+              >
+                {" "}
+                Cancel Appointment
+              </button>
             </div>
 
-            <div className="appointment-form__fields">
-              <FormGroup>
-                <Label for="exampleSelect">Select Service</Label>
-                <Select
-                  value={selectedService}
-                  onChange={(selected) => {
-                    setSelectedService(selected);
-                  }}
-                  options={categoryServiceOptions}
-                  className="react-select-container"
-                  classNamePrefix="react-select"
-                />
-              </FormGroup>
-              <Row>
-                {!selectedService?.label ||
-                selectedService?.label?.toLowerCase() === "visa" ? (
-                  <Visa handleContinue={handleContinue} isLoader={isLoader} />
-                ) : (
-                  <Others handleContinue={handleContinue} isLoader={isLoader} />
-                )}
-              </Row>
-            </div>
+            {appointment === "New Appointment" && (
+              <div className="appointment-form__fields">
+                <FormGroup>
+                  <Label for="exampleSelect">Select Service</Label>
+                  <Select
+                    value={selectedService}
+                    onChange={(selected) => {
+                      setSelectedService(selected);
+                    }}
+                    options={categoryServiceOptions}
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                  />
+                </FormGroup>
+                <Row>
+                  {!selectedService?.label ||
+                  selectedService?.label?.toLowerCase() === "visa" ? (
+                    <Visa handleContinue={handleContinue} isLoader={isLoader} />
+                  ) : (
+                    <Others
+                      handleContinue={handleContinue}
+                      isLoader={isLoader}
+                    />
+                  )}
+                </Row>
+              </div>
+            )}
 
-            <div>
-              <Label for="application_id">
-                Tracking ID
-                <span className="star">*</span>
-              </Label>
-              <Input
-                id="application_id"
-                name="application_id"
-                placeholder="01234567789"
-                type="text"
-                // onChange={formik.handleChange}
-                // onBlur={formik.handleBlur}
-                // value={formik.values.application_id}
-                className="appointment-form__input"
-              />
-              {/* {formik.errors.application_id && formik.touched.application_id ? (
-                <div className="error-msg">{formik.errors.application_id}</div>
-              ) : (
-                <div className="no-error-msg"></div>
-              )} */}
-            </div>
+            {appointment !== "New Appointment" && (
+              <>
+                <div>
+                  <Label for="application_id">
+                    Tracking ID
+                    <span className="star">*</span>
+                  </Label>
+                  <Input
+                    id="application_id"
+                    name="application_id"
+                    placeholder="01234567789"
+                    type="text"
+                    onChange={(e) => setIsTrackingId(e.target.value)}
+                    value={isTrackingId}
+                    className="appointment-form__input"
+                  />
+                </div>
+                <div className="text-md-start text-center ">
+                  <button onClick={() => handleContinue(isTrackingId)}>
+                    Continue
+                    <Loader isLoader={isLoader} />
+                  </button>
+                </div>
+              </>
+            )}
+
             <p className="appointment-form_desc">
               If you have not completed your visa application, please{" "}
               <a
