@@ -31,27 +31,9 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
               />{" "}
             </div>
             <Image src="/images/razorpay.png" alt="" width={36} height={36} />
-            <p className="choose-gateway__title">Razorpay</p>
-          </div>
-          {/* <div
-            className={`choose-gateway__option--box ${
-              paymentType.paymentMode === paymentModeType.stripe
-                ? "radio-active"
-                : ""
-            }`}
-            >
-            <div>
-              <input
-                type="radio"
-                value={paymentModeType.stripe}
-                name="type"
-                checked={paymentType.paymentMode === paymentModeType.stripe}
-              />{" "}
-            </div>
-            <Image src="/images/stripe.png" alt="" width={36} height={36} />
             <p className="choose-gateway__title">Stripe</p>
           </div>
-          <div
+          {/* <div
             className={`choose-gateway__option--box ${
               paymentType.paymentMode === paymentModeType.payPal
                 ? "radio-active"
@@ -87,6 +69,26 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             <Image src="/images/amazon-pay.png" alt="" width={36} height={36} />
             <p className="choose-gateway__title">Amazon Pay</p>
           </div> */}
+        </div>
+        <div className="payment-mode-info">
+          <div className="payment-info">
+            <div className="payment-image">
+              <p className="txt">Credit Card/Debit Card/Net Banking</p>
+              <div className="img-flex">
+                <Image src="/images/razor2.png" alt="" width={36} height={36} />
+                <div>
+                  <h5 className="mb-0">Pay by Razorpay</h5>
+                  <p className="mb-0">Cards, Netbanking, Wallet & UPI</p>
+                </div>
+              </div>
+            </div>
+            <div className="info-card">
+              <p className="text mb-0">
+                Pay securely by Credit or Debit card of Internet Banking through
+                Razorpay.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="choose-gateway__card">

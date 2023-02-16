@@ -139,6 +139,9 @@
             box-shadow: none;
             outline: none;
           }
+          @media (max-width: 768px) {
+            width: 100%;
+          }
           @media (max-height: 660px) {
             font-size: 14px;
           }
