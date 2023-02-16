@@ -1,15 +1,27 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Label, Input, Button } from "reactstrap";
+import DatePicker from "react-datepicker";
+import moment from "moment";
 
 const Visa = ({ handleAddMember }) => {
   const formik = useFormik({
     initialValues: {
       application_id: "",
-      dob: new Date().toISOString().split("T")[0],
+      dob: new Date(),
     },
+    // onSubmit: (values, onSubmitProps) => {
+    //   handleAddMember(values);
+    //   onSubmitProps.resetForm();
+    // },
     onSubmit: (values, onSubmitProps) => {
-      handleAddMember(values);
+      console.log(values, "values=>122");
+      const formattedValue = {
+        application_id: values.application_id,
+        dob: moment(values.dob).format("YYYY-MM-DD"),
+      };
+      console.log(formattedValue, "formattedValue=>");
+      handleAddMember(formattedValue);
       onSubmitProps.resetForm();
     },
     validate: (values, props) => {
@@ -17,7 +29,7 @@ const Visa = ({ handleAddMember }) => {
       if (values.application_id == "") {
         errors.application_id = "Required";
       }
-      if (values.dob == "") {
+      if (!values.dob || values.dob == "") {
         errors.dob = "Required";
       }
       return errors;
@@ -32,7 +44,7 @@ const Visa = ({ handleAddMember }) => {
           name="application_id"
           placeholder="01234567789"
           type="text"
-          className="inner-header__input"
+          className="inner-header__input ttt"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.application_id}
@@ -47,7 +59,7 @@ const Visa = ({ handleAddMember }) => {
         <Label for="exampleDate">
           Date of Birth <span>(dd/mm/yyyy)</span>
         </Label>
-        <Input
+        {/* <Input
           id="dob"
           name="dob"
           placeholder="date placeholder"
@@ -57,7 +69,26 @@ const Visa = ({ handleAddMember }) => {
           onBlur={formik.handleBlur}
           value={formik.values.dob}
           max={new Date().toISOString().split("T")[0]}
+        /> */}
+        <DatePicker
+          id="dob"
+          name="dob"
+          placeholder="date placeholder"
+          className="appointment-form__input"
+          selected={formik.values.dob}
+          dateFormat="dd/MM/yyyy"
+          onBlur={formik.handleBlur}
+          // peekNextMonth
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
+          maxDate={new Date()}
+          onChange={(date) => {
+            console.log(date, "datedatedate");
+            formik.setFieldValue("dob", date);
+          }}
         />
+
         {formik.errors.dob && formik.touched.dob ? (
           <div className="error-msg">{formik.errors.dob}</div>
         ) : (

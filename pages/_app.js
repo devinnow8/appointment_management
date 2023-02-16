@@ -1,11 +1,12 @@
 import "../styles/main.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { Provider } from "react-redux";
 import { configureStore } from "../redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { ToastContainer } from "react-toastify";
-import { store, persistor } from '../redux/store';
+import { store, persistor } from "../redux/store";
 
 // const { store, persistor } = configureStore();
 
