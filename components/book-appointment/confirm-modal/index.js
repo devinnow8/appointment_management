@@ -74,7 +74,15 @@ function ConfirmModal({
               selectedCenter={selectedCenter}
             />
           ) : (
-            <div className="confirm-modal__applicant--info">
+            <div
+              className={
+                applicationDetails.category === "Visa"
+                  ? "confirm-modal__applicant--info visa-case"
+                  : applicationDetails.category !== "Visa"
+                  ? "confirm-modal__applicant--info other-case"
+                  : "confirm-modal__applicant--info"
+              }
+            >
               {applicationDetails.category === "Visa" ? (
                 <ApplicantVisa applicantDetail={applicantDetail} />
               ) : (

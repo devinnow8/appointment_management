@@ -107,8 +107,14 @@ $laptop: 1280px;
       .confirm-modal__applicant--info {
         border: 1px solid #cdcdcd;
         border-radius: 5px;
-        width: 350px;
+        width: 440px;
         margin: 0 auto;
+        &.visa-case {
+          width: 367px;
+        }
+        &.reschedule-case {
+          width: 367px;
+        }
         @media only screen and (max-width: 576px) {
           width: 320px;
         }
@@ -124,7 +130,7 @@ $laptop: 1280px;
             border-bottom: none;
           }
           .confirm-modal__applicant--data {
-            width: 56%;
+            width: 52%;
             .confirm-modal__applicant--heading {
               color: #9b9b9b;
               font-weight: 500;
@@ -132,9 +138,8 @@ $laptop: 1280px;
               margin-bottom: 0;
               display: flex;
               align-items: center;
-              text-transform: capitalize;
               .img-box {
-                width: 17%;
+                width: 15%;
                 .curr-img {
                   margin-left: 2px;
                 }
@@ -151,7 +156,7 @@ $laptop: 1280px;
             }
           }
           .confirm-modal__applicant--value {
-            width: 44%;
+            width: 50%;
             .confirm-modal__applicant-desc {
               font-size: 15px;
               font-weight: 600;
@@ -164,6 +169,10 @@ $laptop: 1280px;
               }
               @media (max-width: $xxLDesktop) {
                 font-size: 14px;
+              }
+              span {
+                display: inline-block;
+                font-size: 13px;
               }
             }
           }
@@ -302,7 +311,7 @@ $laptop: 1280px;
 
 // delete modal
 .del-modal {
-  max-width: 444px !important;
+  max-width: 476px !important;
   @media only screen and (max-width: 576px) {
     margin: 0 auto !important;
   }
@@ -332,6 +341,9 @@ $laptop: 1280px;
       }
       .confirm-modal__applicant--data {
         text-align: left;
+      }
+      .confirm-modal__applicant--info {
+        width: 367px;
       }
     }
   }

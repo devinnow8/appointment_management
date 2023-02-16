@@ -13,7 +13,13 @@ const AppointmentDetails = ({
   );
   return (
     <>
-      <div className="confirm-modal__applicant--info">
+      <div
+        className={
+          applicationDetails.appointmentId
+            ? "confirm-modal__applicant--info reschedule-case"
+            : "confirm-modal__applicant--info"
+        }
+      >
         <>
           <div className="confirm-modal__applicant--flex">
             <div className="confirm-modal__applicant--data">
@@ -43,7 +49,11 @@ const AppointmentDetails = ({
             <div className="confirm-modal__applicant--value">
               <p className="confirm-modal__applicant-desc">
                 {applicantAppointment.time} {""}{" "}
-                {!!selectedCenter && `(${selectedCenter?.timeZone})`}
+                {selectedCenter?.timeZone && (
+                  <span>
+                    {!!selectedCenter && `${selectedCenter?.timeZone}`}
+                  </span>
+                )}
               </p>
             </div>
           </div>
