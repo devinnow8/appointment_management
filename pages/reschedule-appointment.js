@@ -90,6 +90,12 @@ function RescheduleAppointment() {
     );
   };
 
+  useEffect(() => {
+    if (!applicationDetails.applicationId) {
+      push("/");
+    }
+  }, [applicationDetails]);
+
   return (
     <>
       <Header />
