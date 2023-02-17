@@ -18,7 +18,6 @@ function ApplicationForm({
   errorMsg,
   setErrorMsg,
 }) {
-  console.log(isLoader, "isLoader=>");
   const [isTrackingId, setIsTrackingId] = useState("");
 
   return (

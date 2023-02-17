@@ -12,20 +12,13 @@ const Visa = ({ handleContinue, isLoader }) => {
       dob: new Date(),
     },
     onSubmit: (values) => {
-      console.log(values, "values=>122");
       const formattedValue = {
         application_id: values.application_id,
         dob: moment(values.dob).format("YYYY-MM-DD"),
       };
-      console.log(formattedValue, "formattedValue=>");
       handleContinue(formattedValue);
     },
     validate: (values, props) => {
-      console.log(
-        values.dob,
-        moment(values.dob).format("DD/MM/YYYY"),
-        "valuesvalues=>",
-      );
       const errors = {};
 
       if (values.application_id == "") {
@@ -94,7 +87,6 @@ const Visa = ({ handleContinue, isLoader }) => {
             dropdownMode="select"
             maxDate={new Date()}
             onChange={(date) => {
-              console.log(date, "datedatedate");
               formik.setFieldValue("dob", date);
             }}
           />

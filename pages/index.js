@@ -89,14 +89,11 @@ export default function Home() {
       } else {
         setIsLoader(true);
         setErrorMsg("");
-        console.log(values, "success=>");
         dispatch(
           appointmentBookedDetailsRequest(
             values,
             (success) => {
-              console.log(success, "success=>");
               if (success.data.status === "Cancel") {
-                console.log("successdata", success.data);
                 toast.error("This Application is Cancelled");
                 setIsLoader(false);
               } else {
@@ -112,7 +109,6 @@ export default function Home() {
               }
             },
             (error) => {
-              console.log(error, "error==>");
               toast.error("Application not found");
               setIsLoader(false);
             },

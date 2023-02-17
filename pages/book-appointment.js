@@ -320,6 +320,7 @@ export default () => {
       totalAmount: totalAmount,
       updatedMembers: updatedMembers,
       country: selectedCountry.label,
+      currency: serviceList[0]?.currency_type,
     };
     dispatch(appointmentDetailsFetchRequest(details));
     router.push({

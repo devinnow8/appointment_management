@@ -82,7 +82,6 @@ const Calendar = ({
       //general scenario
       selectedCenterTemp = newCenterList.current[0];
     }
-    console.log(selectedCenterTemp, "selectedCenterTemp=>");
     setApplicantAppointment((prev) => ({
       ...prev,
       location: selectedCenterTemp?.label,

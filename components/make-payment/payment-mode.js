@@ -2,13 +2,98 @@ import React from "react";
 import { Button, Col, FormGroup, Input, Label, Row } from "reactstrap";
 import Image from "next/image";
 import { paymentModeType } from "../../constants/index";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loader from "../loader";
 import { useRouter } from "next/router";
+import {
+  confirmOrderRequest,
+  appointmentOrderRequest,
+} from "../../redux/reducer/order-conformation";
+import { toast } from "react-toastify";
 
 const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
   const { isLoading } = useSelector((state) => state.appointmentSchedule);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { appointmentDetails } = useSelector(
+    (state) => state.appointmentDetails,
+  );
+  const { serviceList } = useSelector((state) => state.serviceList);
+
+  const {
+    applicationDetails,
+    totalAmount,
+    updatedMembers,
+    currency,
+    centerId,
+  } = appointmentDetails;
+  const makePayment = async () => {
+    const res = await initializeRazorpay();
+
+    if (!res) {
+      alert("Razorpay SDK Failed to load");
+      return;
+    }
+
+    // Make API call to the serverless API
+    let obj = {
+      currency: currency,
+      amount: totalAmount,
+      appointment_details: updatedMembers,
+      centerId: centerId,
+    };
+
+    dispatch(
+      appointmentOrderRequest(obj, (success) => {
+        var options = {
+          key: "rzp_test_bE836NuX2MOT7e", // Enter the Key ID generated from the Dashboard
+          name: applicationDetails.name,
+          currency: serviceList[0]?.currency_type,
+          amount: totalAmount,
+          order_id: success?.data,
+          handler: function (response) {
+            let data = {
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              signature: response.razorpay_signature,
+            };
+            dispatch(
+              confirmOrderRequest(data, (success) => {
+                if (success.status) {
+                  router.push("/appointment-booked");
+                  toast.success("Appointment Booked Successfully");
+                }
+              }),
+            );
+          },
+          prefill: {
+            name: applicationDetails.name,
+            email: applicationDetails.email,
+            contact: applicationDetails.phone_number,
+          },
+        };
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+      }),
+    );
+  };
+  const initializeRazorpay = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      // document.body.appendChild(script);
+
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+
+      document.body.appendChild(script);
+    });
+  };
 
   return (
     <Col md={7} lg={8} xl={8}>
@@ -31,7 +116,7 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
               />{" "}
             </div>
             <Image src="/images/razorpay.png" alt="" width={36} height={36} />
-            <p className="choose-gateway__title">Stripe</p>
+            <p className="choose-gateway__title">Razorpay</p>
           </div>
           {/* <div
             className={`choose-gateway__option--box ${
@@ -75,7 +160,7 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             <div className="payment-image">
               <p className="txt">Credit Card/Debit Card/Net Banking</p>
               <div className="img-flex">
-                <Image src="/images/razor2.png" alt="" width={36} height={36} />
+                <Image src="/images/razor2.png" alt="" width={30} height={30} />
                 <div>
                   <h5 className="mb-0">Pay by Razorpay</h5>
                   <p className="mb-0">Cards, Netbanking, Wallet & UPI</p>
@@ -139,7 +224,8 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
               <Button className="cancel" onClick={() => router.back()}>
                 Cancel
               </Button>
-              <Button className="pay-btn" onClick={handlePayNow}>
+              {/* <Button className="pay-btn" onClick={handlePayNow}> */}
+              <Button className="pay-btn" onClick={makePayment}>
                 Pay Now
                 <Loader isLoader={isLoading} />
               </Button>

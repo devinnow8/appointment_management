@@ -11,7 +11,6 @@ const AppointmentDetails = ({
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
-  console.log(typeof totalAmount, "totalAmounttotalAmounttotalAmount");
   return (
     <>
       <div

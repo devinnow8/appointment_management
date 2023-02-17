@@ -15,12 +15,10 @@ const Visa = ({ handleAddMember }) => {
     //   onSubmitProps.resetForm();
     // },
     onSubmit: (values, onSubmitProps) => {
-      console.log(values, "values=>122");
       const formattedValue = {
         application_id: values.application_id,
         dob: moment(values.dob).format("YYYY-MM-DD"),
       };
-      console.log(formattedValue, "formattedValue=>");
       handleAddMember(formattedValue);
       onSubmitProps.resetForm();
     },
@@ -84,7 +82,6 @@ const Visa = ({ handleAddMember }) => {
           dropdownMode="select"
           maxDate={new Date()}
           onChange={(date) => {
-            console.log(date, "datedatedate");
             formik.setFieldValue("dob", date);
           }}
         />

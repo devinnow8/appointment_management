@@ -15,6 +15,7 @@ export function* appointmentOrderRequest(action) {
     );
     action.payload.success(response);
     const { status, statusText, data = [] } = response || {};
+    action.payload.success(response);
     if (status === 200) {
       yield put(appointmentOrderFetchSuccess(data));
     } else {
