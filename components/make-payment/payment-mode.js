@@ -60,7 +60,13 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             dispatch(
               confirmOrderRequest(data, (success) => {
                 if (success.status) {
-                  router.push("/appointment-booked");
+                  // router.push("/appointment-booked");
+                  router.push({
+                    pathname: "/appointment-booked",
+                    query: {
+                      centreId: centerId,
+                    },
+                  });
                   toast.success("Appointment Booked Successfully");
                 }
               }),

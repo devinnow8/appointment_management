@@ -188,7 +188,9 @@ function RescheduleAppointment() {
                 </button>
                 <button
                   className="primary-outline-btn checklist-btn"
-                  onClick={() => printDocument(applicationDetails.centerId)}
+                  onClick={() =>
+                    printDocument(applicationDetails?.center?.centerId)
+                  }
                 >
                   Print Checklist
                 </button>
