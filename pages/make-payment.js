@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -8,6 +8,9 @@ import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
 
 const MakePayment = () => {
+  const { applicationDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
   const dispatch = useDispatch();
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
@@ -47,6 +50,12 @@ const MakePayment = () => {
       ),
     );
   };
+
+  useEffect(() => {
+    if (!applicationDetails.applicationId) {
+      push("/");
+    }
+  }, [applicationDetails]);
 
   return (
     <>

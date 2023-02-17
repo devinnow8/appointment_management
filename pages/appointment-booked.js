@@ -56,6 +56,12 @@ function AppointmentBooked() {
     };
   }, [appointment.appointment_id, applicationDetails.appointmentId]);
 
+  useEffect(() => {
+    if (!applicationDetails.applicationId) {
+      push("/");
+    }
+  }, [applicationDetails]);
+
   return (
     <>
       <Header />

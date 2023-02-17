@@ -74,6 +74,12 @@ export default () => {
   }, 0);
 
   useEffect(() => {
+    if (!applicationDetails.applicationId) {
+      router.push("/");
+    }
+  }, [applicationDetails]);
+
+  useEffect(() => {
     let defaultSelectedCountry = "";
     if (centerList.length > 0) {
       let tmpSelectedCountry = applicationDetails.country;
