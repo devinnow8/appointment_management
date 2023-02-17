@@ -10,6 +10,7 @@ import rescheduleAppointmentSaga from "./reschedule-appointment";
 import cancelAppointmentSaga from "./cancel-appointment";
 import appointmentBookedSaga from "./appointment-booked";
 import serviceListSaga from "./service-list";
+import orderControllerSaga from "./order-confirmation";
 
 const rootSaga = function* root() {
   yield all([
@@ -24,6 +25,7 @@ const rootSaga = function* root() {
     cancelAppointmentSaga(),
     appointmentBookedSaga(),
     serviceListSaga(),
+    orderControllerSaga(),
   ]);
 };
 export default rootSaga;

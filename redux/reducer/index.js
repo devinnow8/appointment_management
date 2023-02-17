@@ -11,6 +11,7 @@ import rescheduleAppointment from "./reschedule-appointment";
 import cancelAppointment from "./cancel-appointment";
 import appointmentBooked from "./appointment-booked";
 import serviceList from "./service-list";
+import orderController from "./order-conformation";
 
 const rootReducer = combineReducers({
   user,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   cancelAppointment,
   appointmentBooked,
   serviceList,
+  orderController,
 });
 
 export default rootReducer;
