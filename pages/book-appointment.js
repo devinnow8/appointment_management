@@ -123,7 +123,6 @@ export default () => {
         selectedCenterTemp = tmpCenter;
       }
     } else {
-      console.log(selectedCenterTemp, "selectedCenterTemp000");
       selectedCenterTemp = newCenterList[0];
     }
     setSelectedCenter(selectedCenterTemp);
@@ -316,7 +315,6 @@ export default () => {
       updatedMembers: updatedMembers,
       country: selectedCountry.label,
     };
-    console.log(details, "detailsdetails==>");
     dispatch(appointmentDetailsFetchRequest(details));
     router.push({
       pathname: "/make-payment",
@@ -383,7 +381,6 @@ export default () => {
   }, [centerList, selectedCenter?.centerId]);
 
   useEffect(() => {
-    console.log(selectedCenter, "selectedCenterselectedCenter");
     if (
       selectedCenter != undefined &&
       Object.keys(selectedCenter).length !== 0

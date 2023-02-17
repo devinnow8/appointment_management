@@ -55,19 +55,23 @@ const Calendar = ({
         label: centre?.centerName,
       };
     });
-    console.log(newCenterList, "newCenterList==>");
     let selectedCenterTemp = {};
     if (!!appointmentDetails.applicantAppointment) {
-      const tmpCenter = newCenterList.current.find(
-        //cancel
-        (i) => i.label === appointmentDetails.applicantAppointment.location,
-      );
+      if (selectedCountry.label === appointmentDetails.country) {
+        const tmpCenter = newCenterList.current.find(
+          //cancel scenario
+          (i) => i.label === appointmentDetails.applicantAppointment.location,
+        );
 
-      if (tmpCenter) {
-        selectedCenterTemp = tmpCenter;
+        if (tmpCenter) {
+          selectedCenterTemp = tmpCenter;
+        }
+      } else {
+        //cancel scenario but changed the country
+        selectedCenterTemp = newCenterList.current[0];
       }
     } else if (!!applicationDetails.appointmentId) {
-      //rechedule
+      //rechedule scenario
       const tmpCenter = newCenterList.current.find(
         (i) => i.centerId === applicationDetails?.center?.centerId,
       );
@@ -78,6 +82,7 @@ const Calendar = ({
       //general scenario
       selectedCenterTemp = newCenterList.current[0];
     }
+    console.log(selectedCenterTemp, "selectedCenterTemp=>");
     setApplicantAppointment((prev) => ({
       ...prev,
       location: selectedCenterTemp?.label,
