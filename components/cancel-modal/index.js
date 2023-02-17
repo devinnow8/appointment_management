@@ -14,7 +14,7 @@ function CancelModal({ isCancel, setIsCancel }) {
 
   const handleCancel = () => {
     const details = {
-      centerId: applicationDetails?.centerId,
+      centerId: applicationDetails?.center?.centerId,
       appointmentId: applicationDetails?.appointmentId,
     };
     dispatch(

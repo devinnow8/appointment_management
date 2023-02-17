@@ -11,6 +11,7 @@ const AppointmentDetails = ({
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
+  console.log(typeof totalAmount, "totalAmounttotalAmounttotalAmount");
   return (
     <>
       <div
@@ -100,29 +101,28 @@ const AppointmentDetails = ({
               );
             })}
 
-          {!applicationDetails.appointmentId ||
-            (totalAmount === 0 && (
-              <div className="confirm-modal__applicant--flex">
-                <div className="confirm-modal__applicant--data">
-                  <h5 className="confirm-modal__applicant--heading">
-                    <div className="img-box">
-                      <img
-                        src="/images/currency2.png"
-                        className="curr-img"
-                        alt=""
-                      />
-                    </div>{" "}
-                    Total Amount
-                  </h5>
-                </div>
-                <div className="confirm-modal__applicant--value">
-                  <p className="confirm-modal__applicant-desc">
-                    {serviceList[0]?.currency_type} {""}
-                    {totalAmount}
-                  </p>
-                </div>
+          {!applicationDetails.appointmentId && totalAmount !== 0 && (
+            <div className="confirm-modal__applicant--flex">
+              <div className="confirm-modal__applicant--data">
+                <h5 className="confirm-modal__applicant--heading">
+                  <div className="img-box">
+                    <img
+                      src="/images/currency2.png"
+                      className="curr-img"
+                      alt=""
+                    />
+                  </div>{" "}
+                  Total Amount
+                </h5>
               </div>
-            ))}
+              <div className="confirm-modal__applicant--value">
+                <p className="confirm-modal__applicant-desc">
+                  {serviceList[0]?.currency_type} {""}
+                  {totalAmount}
+                </p>
+              </div>
+            </div>
+          )}
         </>
       </div>
     </>

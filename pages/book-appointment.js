@@ -95,12 +95,6 @@ export default () => {
       label: defaultSelectedCountry,
       value: defaultSelectedCountry,
     });
-
-    console.log(
-      defaultSelectedCountry,
-      "defaultSelectedCountry=>1",
-      centerList,
-    );
     const filteredCenterArray = centerList.filter(
       (centre) => defaultSelectedCountry === centre?.country,
     );
@@ -111,45 +105,25 @@ export default () => {
         label: centre?.centerName,
       };
     });
-    console.log(
-      defaultSelectedCountry,
-      "defaultSelectedCountry=>2",
-      centerList,
-      newCenterList,
-    );
 
     let selectedCenterTemp = {};
     if (!!appointmentDetails.applicantAppointment) {
       const tmpCenter = newCenterList.find(
         (i) => i.label === appointmentDetails.applicantAppointment.location,
       );
-      console.log(
-        defaultSelectedCountry,
-        "defaultSelectedCountry=>3",
-        centerList,
-        newCenterList,
-        tmpCenter,
-      );
 
       if (tmpCenter) {
         selectedCenterTemp = tmpCenter;
       }
-      console.log(
-        defaultSelectedCountry,
-        "defaultSelectedCountry=>4",
-        centerList,
-        newCenterList,
-        tmpCenter,
-        selectedCenterTemp,
-      );
     } else if (!!applicationDetails.appointmentId) {
       const tmpCenter = newCenterList.find(
-        (i) => i.centerId === applicationDetails.centerId,
+        (i) => i.centerId === applicationDetails?.center?.centerId,
       );
       if (tmpCenter) {
         selectedCenterTemp = tmpCenter;
       }
     } else {
+      console.log(selectedCenterTemp, "selectedCenterTemp000");
       selectedCenterTemp = newCenterList[0];
     }
     setSelectedCenter(selectedCenterTemp);
@@ -206,7 +180,6 @@ export default () => {
     }
   }, [
     memberDetails,
-    applicationDetails,
     applicationDetails,
     selectedCenter?.centerId,
     applicantAppointment,
@@ -343,6 +316,7 @@ export default () => {
       updatedMembers: updatedMembers,
       country: selectedCountry.label,
     };
+    console.log(details, "detailsdetails==>");
     dispatch(appointmentDetailsFetchRequest(details));
     router.push({
       pathname: "/make-payment",
@@ -398,7 +372,10 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    if (selectedCenter != undefined) {
+    if (
+      selectedCenter != undefined &&
+      Object.keys(selectedCenter).length !== 0
+    ) {
       Object.keys(selectedCenter).length > 0 &&
         dispatch(holidayListFetchRequest(selectedCenter?.centerId));
       dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
@@ -406,7 +383,11 @@ export default () => {
   }, [centerList, selectedCenter?.centerId]);
 
   useEffect(() => {
-    if (selectedCenter != undefined) {
+    console.log(selectedCenter, "selectedCenterselectedCenter");
+    if (
+      selectedCenter != undefined &&
+      Object.keys(selectedCenter).length !== 0
+    ) {
       const details = {
         centerId: selectedCenter?.centerId,
         category: applicationDetails.category,

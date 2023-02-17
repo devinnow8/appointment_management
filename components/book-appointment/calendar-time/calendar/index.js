@@ -39,6 +39,9 @@ const Calendar = ({
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
+  const { appointmentDetails } = useSelector(
+    (state) => state.appointmentDetails,
+  );
   const countries = useMemo(() => getCountriesList(centerList), [centerList]);
   const newCenterList = useRef([]);
   useEffect(() => {
@@ -52,13 +55,40 @@ const Calendar = ({
         label: centre?.centerName,
       };
     });
-    let selectedCenterTemp = newCenterList.current[0];
+    console.log(newCenterList, "newCenterList==>");
+    let selectedCenterTemp = {};
+    if (!!appointmentDetails.applicantAppointment) {
+      const tmpCenter = newCenterList.current.find(
+        //cancel
+        (i) => i.label === appointmentDetails.applicantAppointment.location,
+      );
+
+      if (tmpCenter) {
+        selectedCenterTemp = tmpCenter;
+      }
+    } else if (!!applicationDetails.appointmentId) {
+      //rechedule
+      const tmpCenter = newCenterList.current.find(
+        (i) => i.centerId === applicationDetails?.center?.centerId,
+      );
+      if (tmpCenter) {
+        selectedCenterTemp = tmpCenter;
+      }
+    } else {
+      //general scenario
+      selectedCenterTemp = newCenterList.current[0];
+    }
     setApplicantAppointment((prev) => ({
       ...prev,
       location: selectedCenterTemp?.label,
     }));
+
     setSelectedCenter(selectedCenterTemp);
-  }, [selectedCountry]);
+  }, [
+    selectedCountry,
+    JSON.stringify(appointmentDetails),
+    applicationDetails.appointmentId,
+  ]);
 
   const handleSelectDate = (value) => {
     setSelectedDate(value);
