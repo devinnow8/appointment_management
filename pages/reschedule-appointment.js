@@ -153,6 +153,14 @@ function RescheduleAppointment() {
                   </span>
                 </div>
               </div>
+              <div className="appointment-booking-details-list">
+                <span className="booking-details-field">Center</span>
+                <div className="booking-details-div">
+                  <span className="booking-details-value">
+                    {applicationDetails?.center?.centerName}
+                  </span>
+                </div>
+              </div>
             </div>
             <div className="justify-content-between">
               <div className="mt-3 text-center">
