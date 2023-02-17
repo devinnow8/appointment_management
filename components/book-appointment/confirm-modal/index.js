@@ -108,6 +108,8 @@ function ConfirmModal({
                       ? "confirm payment-btn reschedule"
                       : totalAmount === 0
                       ? "confirm payment-btn free-booking"
+                      : selectedCenter?.paymentMode === "Offline"
+                      ? "confirm payment-btn free-booking"
                       : "confirm payment-btn"
                   }
                   onClick={
@@ -115,12 +117,16 @@ function ConfirmModal({
                       ? handleRescheduleAppointment
                       : totalAmount === 0
                       ? handleFreeBooking
+                      : selectedCenter?.paymentMode === "Offline"
+                      ? handleFreeBooking
                       : handlePaymentProceed
                   }
                 >
                   {applicationDetails.appointmentId
                     ? "Confirm"
                     : totalAmount === 0
+                    ? "Confirm & Book"
+                    : selectedCenter?.paymentMode === "Offline"
                     ? "Confirm & Book"
                     : "Confirm & Proceed for Payment"}
 

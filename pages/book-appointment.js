@@ -96,8 +96,13 @@ export default () => {
       value: defaultSelectedCountry,
     });
 
+    console.log(
+      defaultSelectedCountry,
+      "defaultSelectedCountry=>1",
+      centerList,
+    );
     const filteredCenterArray = centerList.filter(
-      (centre) => defaultSelectedCountry.label === centre?.country,
+      (centre) => defaultSelectedCountry === centre?.country,
     );
     const newCenterList = filteredCenterArray.map((centre) => {
       return {
@@ -106,14 +111,37 @@ export default () => {
         label: centre?.centerName,
       };
     });
-    let selectedCenterTemp = newCenterList[0];
+    console.log(
+      defaultSelectedCountry,
+      "defaultSelectedCountry=>2",
+      centerList,
+      newCenterList,
+    );
+
+    let selectedCenterTemp = {};
     if (!!appointmentDetails.applicantAppointment) {
       const tmpCenter = newCenterList.find(
         (i) => i.label === appointmentDetails.applicantAppointment.location,
       );
+      console.log(
+        defaultSelectedCountry,
+        "defaultSelectedCountry=>3",
+        centerList,
+        newCenterList,
+        tmpCenter,
+      );
+
       if (tmpCenter) {
         selectedCenterTemp = tmpCenter;
       }
+      console.log(
+        defaultSelectedCountry,
+        "defaultSelectedCountry=>4",
+        centerList,
+        newCenterList,
+        tmpCenter,
+        selectedCenterTemp,
+      );
     } else if (!!applicationDetails.appointmentId) {
       const tmpCenter = newCenterList.find(
         (i) => i.centerId === applicationDetails.centerId,
@@ -121,6 +149,8 @@ export default () => {
       if (tmpCenter) {
         selectedCenterTemp = tmpCenter;
       }
+    } else {
+      selectedCenterTemp = newCenterList[0];
     }
     setSelectedCenter(selectedCenterTemp);
   }, [centerList, JSON.stringify(appointmentDetails)]);
