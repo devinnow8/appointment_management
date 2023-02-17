@@ -1,17 +1,15 @@
 .inner-header {
-  padding: 1rem 0px 0px 0px;
+  padding: 28px 0px 0px 0px;
   @media (max-height: 660px) {
     padding: 8px 0px 0px 0px;
   }
+  @media only screen and (max-width: 768px) {
+    padding: 20px 0px 0px 0px;
+  }
+  
   .inner-header__logo {
     width: 156px;
     height: auto;
-    // margin-top: 16px;
-    // @media (max-width: $xxLDesktop) {
-    //   width: 156px;
-    //   height: auto;
-    //   margin-top: 16px;
-    // }
     @media (max-width: 992px) {
       margin-bottom: 22px;
     }
