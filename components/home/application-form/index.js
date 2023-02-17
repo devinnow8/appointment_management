@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Select from "react-select";
 import { Col, Container, FormGroup, Input, Label, Row } from "reactstrap";
@@ -20,6 +20,7 @@ function ApplicationForm({
 }) {
   console.log(isLoader, "isLoader=>");
   const [isTrackingId, setIsTrackingId] = useState("");
+
   return (
     <Container>
       <Row className="appointment-form__row">
@@ -46,7 +47,9 @@ function ApplicationForm({
                 return (
                   <button
                     className={`tab-btn ${appointment === tab && "active"}`}
-                    onClick={() => setAppointment(tab)}
+                    onClick={() => {
+                      setAppointment(tab);
+                    }}
                   >
                     {tab}
                   </button>
@@ -55,31 +58,36 @@ function ApplicationForm({
             </div>
 
             {appointment === "New Appointment" && (
-              <div className="appointment-form__fields">
-                <FormGroup>
-                  <Label for="exampleSelect">Select Service</Label>
-                  <Select
-                    value={selectedService}
-                    onChange={(selected) => {
-                      setSelectedService(selected);
-                    }}
-                    options={categoryServiceOptions}
-                    className="react-select-container"
-                    classNamePrefix="react-select"
-                  />
-                </FormGroup>
-                <Row>
-                  {!selectedService?.label ||
-                  selectedService?.label?.toLowerCase() === "visa" ? (
-                    <Visa handleContinue={handleContinue} isLoader={isLoader} />
-                  ) : (
-                    <Others
-                      handleContinue={handleContinue}
-                      isLoader={isLoader}
+              <>
+                <div className="appointment-form__fields">
+                  <FormGroup>
+                    <Label for="exampleSelect">Select Service</Label>
+                    <Select
+                      value={selectedService}
+                      onChange={(selected) => {
+                        setSelectedService(selected);
+                      }}
+                      options={categoryServiceOptions}
+                      className="react-select-container"
+                      classNamePrefix="react-select"
                     />
-                  )}
-                </Row>
-              </div>
+                  </FormGroup>
+                  <Row className="anim-row">
+                    {!selectedService?.label ||
+                    selectedService?.label?.toLowerCase() === "visa" ? (
+                      <Visa
+                        handleContinue={handleContinue}
+                        isLoader={isLoader}
+                      />
+                    ) : (
+                      <Others
+                        handleContinue={handleContinue}
+                        isLoader={isLoader}
+                      />
+                    )}
+                  </Row>
+                </div>
+              </>
             )}
 
             {appointment !== "New Appointment" && (
