@@ -26,6 +26,13 @@ $laptop: 1280px;
 }
 
 .header {
+  padding: 10px 0px 0px 0px;
+  @media (max-height: 660px) {
+    padding: 0px;
+  }
+  @media only screen and (max-width: 768px) {
+    padding: 6px 0px 0px 0px;
+  }
   .navbar {
     > .container-fluid {
       padding-left: 0;
