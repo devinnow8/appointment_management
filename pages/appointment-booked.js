@@ -14,7 +14,7 @@ function AppointmentBooked() {
     query: { centreId },
   } = useRouter();
   const dispatch = useDispatch();
-  const { appointment } = useSelector((state) => state.appointmentSchedule);
+  const { confirmOrder } = useSelector((state) => state.orderController);
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
@@ -54,7 +54,7 @@ function AppointmentBooked() {
     window.onpopstate = function () {
       window.history.pushState(null, "", window.location.href);
     };
-  }, [appointment.appointment_id, applicationDetails.appointmentId]);
+  }, [confirmOrder.appointment_id, applicationDetails.appointmentId]);
 
   useEffect(() => {
     if (!applicationDetails.applicationId) {
@@ -80,7 +80,7 @@ function AppointmentBooked() {
                 ${
                   applicationDetails.appointmentId !== undefined
                     ? applicationDetails.appointmentId
-                    : appointment.appointment_id || appointment.application_id
+                    : confirmOrder.appointment_id
                 }. A copy of the appointment slip and checklist have been
                 sent to your email (${
                   applicationDetails.email
@@ -93,7 +93,7 @@ function AppointmentBooked() {
                   style={{ cursor: "pointer" }}
                   onClick={() =>
                     push(
-                      `reschedule-appointment/?appointmentId=${appointment?.appointment_id}`,
+                      `reschedule-appointment/?appointmentId=${confirmOrder?.appointment_id}`,
                     )
                   }
                 >
@@ -108,8 +108,7 @@ function AppointmentBooked() {
                     handlePrintSlip(
                       applicationDetails.appointmentId !== undefined
                         ? applicationDetails.appointmentId
-                        : appointment.appointment_id ||
-                            appointment.application_id,
+                        : confirmOrder.appointment_id
                     )
                   }
                 >

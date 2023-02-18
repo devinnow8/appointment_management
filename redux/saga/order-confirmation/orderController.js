@@ -40,6 +40,7 @@ export function* confirmOrderRequest(action) {
       yield put(confirmOrderFetchFailure());
     }
   } catch (e) {
+    action.payload.error(e.message);
     yield put(confirmOrderFetchFailure());
   }
 }

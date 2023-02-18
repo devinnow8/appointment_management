@@ -3,7 +3,7 @@ import { Container, Row } from "reactstrap";
 import ApplicantPaymentDetails from "./applicant-payment-details";
 import PaymentMode from "./payment-mode";
 
-const PaymentApplication = ({ paymentType, handleType, handlePayNow }) => {
+const PaymentApplication = ({ paymentType, handleType }) => {
   return (
     <Container>
       <Row>
@@ -11,7 +11,6 @@ const PaymentApplication = ({ paymentType, handleType, handlePayNow }) => {
         <PaymentMode
           paymentType={paymentType}
           handleType={handleType}
-          handlePayNow={handlePayNow}
         />
       </Row>
     </Container>

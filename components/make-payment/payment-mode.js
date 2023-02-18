@@ -9,9 +9,10 @@ import {
   confirmOrderRequest,
   appointmentOrderRequest,
 } from "../../redux/reducer/order-conformation";
+import { appointmentDetailsFetchFailure } from "../../redux/reducer/appointment-details";
 import { toast } from "react-toastify";
 
-const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
+const PaymentMode = ({ paymentType, handleType }) => {
   const { isLoading } = useSelector((state) => state.appointmentSchedule);
   const router = useRouter();
   const dispatch = useDispatch();
@@ -42,7 +43,6 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
       appointment_details: updatedMembers,
       centerId: centerId,
     };
-
     dispatch(
       appointmentOrderRequest(obj, (success) => {
         var options = {
@@ -50,7 +50,7 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
           name: applicationDetails.name,
           currency: serviceList[0]?.currency_type,
           amount: totalAmount,
-          order_id: success?.data,
+          order_id: success?.data?.order_id,
           handler: function (response) {
             let data = {
               razorpay_order_id: response.razorpay_order_id,
@@ -60,7 +60,6 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             dispatch(
               confirmOrderRequest(data, (success) => {
                 if (success.status) {
-                  // router.push("/appointment-booked");
                   router.push({
                     pathname: "/appointment-booked",
                     query: {
@@ -68,7 +67,10 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
                     },
                   });
                   toast.success("Appointment Booked Successfully");
+                  dispatch(appointmentDetailsFetchFailure());
                 }
+              }, (error) => {
+                toast.error(error);
               }),
             );
           },
@@ -78,7 +80,6 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             contact: applicationDetails.phone_number,
           },
         };
-
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
       }),
@@ -124,42 +125,6 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
             <Image src="/images/razorpay.png" alt="" width={36} height={36} />
             <p className="choose-gateway__title">Razorpay</p>
           </div>
-          {/* <div
-            className={`choose-gateway__option--box ${
-              paymentType.paymentMode === paymentModeType.payPal
-                ? "radio-active"
-                : ""
-            }`}
-          >
-            <div>
-              <input
-                type="radio"
-                value={paymentModeType.payPal}
-                name="type"
-                checked={paymentType.paymentMode === paymentModeType.payPal}
-              />{" "}
-            </div>
-            <Image src="/images/pay-pal.png" alt="" width={36} height={36} />
-            <p className="choose-gateway__title">PayPal</p>
-          </div>
-          <div
-            className={`choose-gateway__option--box ${
-              paymentType.paymentMode === paymentModeType.amazonPay
-                ? "radio-active"
-                : ""
-            }`}
-          >
-            <div>
-              <input
-                type="radio"
-                value={paymentModeType.amazonPay}
-                name="type"
-                checked={paymentType.paymentMode === paymentModeType.amazonPay}
-              />{" "}
-            </div>
-            <Image src="/images/amazon-pay.png" alt="" width={36} height={36} />
-            <p className="choose-gateway__title">Amazon Pay</p>
-          </div> */}
         </div>
         <div className="payment-mode-info">
           <div className="payment-info">
@@ -183,54 +148,11 @@ const PaymentMode = ({ paymentType, handleType, handlePayNow }) => {
         </div>
 
         <div className="choose-gateway__card">
-          {/* <h3 className="choose-gateway__card--title">
-            Fill your card details
-          </h3>
-          <Row>
-            <Col md={6} lg={6}>
-              <FormGroup>
-                <Label for="name">
-                  Card Number<span className="star">*</span>
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="**** **** 5467"
-                />
-              </FormGroup>
-            </Col>
-            <Col md={6} lg={6}>
-              <FormGroup>
-                <Label for="name">
-                  Cardholder Name<span className="star">*</span>
-                </Label>
-                <Input id="name" name="name" type="text" />
-              </FormGroup>
-            </Col>
-            <Col md={6} lg={6}>
-              <FormGroup>
-                <Label for="name">
-                  Expiry Date<span className="star">*</span>
-                </Label>
-                <Input id="name" name="name" type="text" placeholder="09/25" />
-              </FormGroup>
-            </Col>
-            <Col md={6} lg={6}>
-              <FormGroup>
-                <Label for="name">
-                  CVV<span className="star">*</span>
-                </Label>
-                <Input id="name" name="name" type="password" />
-              </FormGroup>
-            </Col>
-          </Row> */}
           <Row>
             <Col md={12} lg={12} className="text-center">
               <Button className="cancel" onClick={() => router.back()}>
                 Cancel
               </Button>
-              {/* <Button className="pay-btn" onClick={handlePayNow}> */}
               <Button className="pay-btn" onClick={makePayment}>
                 Pay Now
                 <Loader isLoader={isLoading} />

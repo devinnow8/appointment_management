@@ -26,9 +26,9 @@ export const orderControllerSlice = createSlice({
 
     confirmOrderRequest: {
       reducer: (state) => {},
-      prepare: (details, success) => {
+      prepare: (details, success, error) => {
         return {
-          payload: { details, success },
+          payload: { details, success, error },
         };
       },
     },
