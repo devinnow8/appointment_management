@@ -23,6 +23,7 @@
     color: #555;
     font-weight: 400;
     font-size: 1.2rem;
+    margin-bottom: 0;
     @media (max-width: $xxLDesktop) {
       font-size: 1rem;
     }
@@ -33,6 +34,9 @@
   .date-time {
     font-size: 13px;
     color: $primary-color;
+    margin-bottom: 16px;
+    font-weight: 600;
+    display: inline-block;
   }
   .applicant-details__card--wrapper {
     display: flex;
