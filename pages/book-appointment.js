@@ -510,15 +510,7 @@ export default () => {
         isAddMember={isAddMember}
         setIsAddMember={setIsAddMember}
       />
-      {
-        <div>
-          {window.location?.search?.includes("appointmentId")
-            ? "Admin Reschedule"
-            : applicationDetails.appointmentId
-            ? "User Reschedule"
-            : ""}
-        </div>
-      }
+      {}
       <DetailSection
         handleDeleteApplicant={handleDeleteApplicant}
         arrayTime={arrayTime}

@@ -8,9 +8,18 @@ function Applicants({ handleDeleteApplicant }) {
     (state) => state.applicationDetails,
   );
 
+  console.log(applicationDetails, "applicationDetails=>");
   return (
     <Row>
       <Col xs={12} sm={12}>
+        <h2 className="applicant-details__status">Reschedule Appointment</h2>
+        {applicationDetails.appointmentId && (
+          <span className="date-time">
+            {applicationDetails?.appointmentDate}{" "}
+            {applicationDetails?.appointmentTime}{" "}
+            {applicationDetails?.center?.timeZone}
+          </span>
+        )}
         <h2 className="applicant-details__title">Applicant Details</h2>
         <div className="applicant-details__card--wrapper">
           <>
