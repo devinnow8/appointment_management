@@ -37,6 +37,9 @@
     margin-bottom: 16px;
     font-weight: 600;
     display: inline-block;
+    @media (max-height: 600px) {
+      margin-bottom: 9px;
+    }
   }
   .applicant-details__card--wrapper {
     display: flex;
@@ -155,7 +158,7 @@
       .value {
         font-size: 16px;
         color: $primary-color;
-        margin-bottom: 3px;
+        margin-bottom: 0;
       }
     }
     .appointment-calender__center {
