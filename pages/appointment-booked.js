@@ -15,6 +15,7 @@ function AppointmentBooked() {
   } = useRouter();
   const dispatch = useDispatch();
   const { confirmOrder } = useSelector((state) => state.orderController);
+  const { appointment } = useSelector((state) => state.appointmentSchedule);
   const { applicationDetails } = useSelector(
     (state) => state.applicationDetails,
   );
@@ -81,6 +82,8 @@ function AppointmentBooked() {
                   applicationDetails.appointmentId !== undefined
                     ? applicationDetails.appointmentId
                     : confirmOrder.appointment_id
+                    ? confirmOrder.appointment_id
+                    : appointment.appointment_id
                 }. A copy of the appointment slip and checklist have been
                 sent to your email (${
                   applicationDetails.email
@@ -97,6 +100,8 @@ function AppointmentBooked() {
                         applicationDetails.appointmentId !== undefined
                           ? applicationDetails.appointmentId
                           : confirmOrder.appointment_id
+                          ? confirmOrder.appointment_id
+                          : appointment.appointment_id
                       }`,
                     )
                   }
@@ -112,7 +117,9 @@ function AppointmentBooked() {
                     handlePrintSlip(
                       applicationDetails.appointmentId !== undefined
                         ? applicationDetails.appointmentId
-                        : confirmOrder.appointment_id,
+                        : confirmOrder.appointment_id
+                        ? confirmOrder.appointment_id
+                        : appointment.appointment_id,
                     )
                   }
                 >
