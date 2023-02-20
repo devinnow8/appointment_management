@@ -14,12 +14,14 @@ import { appointmentSlotListFetchRequest } from "../redux/reducer/appointment-sl
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
+  applicationDetailsFetchSuccess,
 } from "../redux/reducer/application-detail";
 import { appointmentDetailsFetchRequest } from "../redux/reducer/appointment-details";
 import moment from "moment";
 import { rescheduleAppointmentFetchRequest } from "../redux/reducer/reschedule-appointment";
 import { serviceListFetchRequest } from "../redux/reducer/service-list";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
+import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
 
 export default () => {
   const dispatch = useDispatch();
@@ -73,11 +75,14 @@ export default () => {
     else return acc + obj.price;
   }, 0);
 
-  useEffect(() => {
-    if (!applicationDetails.applicationId) {
-      router.push("/");
-    }
-  }, [applicationDetails]);
+  // useEffect(() => {
+  //   if (
+  //     !applicationDetails.applicationId &&
+  //     !window.location?.search?.includes("appointmentId")
+  //   ) {
+  //     router.push("/");
+  //   }
+  // }, [applicationDetails]);
 
   useEffect(() => {
     let defaultSelectedCountry = "";
@@ -189,6 +194,40 @@ export default () => {
     selectedCenter?.centerId,
     applicantAppointment,
   ]);
+
+  console.log(applicationDetails, "applicationDetails==>");
+  useEffect(() => {
+    if (window.location?.search?.includes("appointmentId")) {
+      const appointmentIdParam = window.location?.search
+        .split("/")[0]
+        .split("=")[1];
+      console.log(appointmentIdParam, "appointmentIdParam=>");
+      dispatch(
+        appointmentBookedDetailsRequest(
+          appointmentIdParam,
+          (success) => {
+            console.log(success, "success==>");
+            if (success.data.status === "Cancel") {
+              console.log("In cancel");
+              router.push({
+                pathname: "/",
+              });
+            } else {
+              const tempArray = [];
+              tempArray.push(success.data);
+              dispatch(applicationDetailsFetchMemberSuccess(tempArray));
+              dispatch(applicationDetailsFetchSuccess(success.data));
+            }
+          },
+          // (error) => {
+          //   router.push({
+          //     pathname: "/",
+          //   });
+          // },
+        ),
+      );
+    }
+  }, [window?.location?.search]);
 
   const handleAddMember = (values) => {
     if (applicationDetails.category === "Visa") {

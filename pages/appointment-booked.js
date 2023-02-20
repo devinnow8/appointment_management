@@ -93,7 +93,11 @@ function AppointmentBooked() {
                   style={{ cursor: "pointer" }}
                   onClick={() =>
                     push(
-                      `reschedule-appointment/?appointmentId=${confirmOrder?.appointment_id}`,
+                      `reschedule-appointment/?appointmentId=${
+                        applicationDetails.appointmentId !== undefined
+                          ? applicationDetails.appointmentId
+                          : confirmOrder.appointment_id
+                      }`,
                     )
                   }
                 >
@@ -108,7 +112,7 @@ function AppointmentBooked() {
                     handlePrintSlip(
                       applicationDetails.appointmentId !== undefined
                         ? applicationDetails.appointmentId
-                        : confirmOrder.appointment_id
+                        : confirmOrder.appointment_id,
                     )
                   }
                 >

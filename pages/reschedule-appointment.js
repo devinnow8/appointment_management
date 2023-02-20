@@ -39,6 +39,7 @@ function RescheduleAppointment() {
         appointmentBookedDetailsRequest(
           appointmentIdParam,
           (success) => {
+            console.log(success, "success==>123");
             if (success.data.status === "Cancel") {
               push({
                 pathname: "/",
@@ -50,11 +51,11 @@ function RescheduleAppointment() {
               dispatch(applicationDetailsFetchSuccess(success.data));
             }
           },
-          (error) => {
-            push({
-              pathname: "/",
-            });
-          },
+          // (error) => {
+          //   push({
+          //     pathname: "/",
+          //   });
+          // },
         ),
       );
     }
@@ -90,11 +91,11 @@ function RescheduleAppointment() {
     );
   };
 
-  useEffect(() => {
-    if (!applicationDetails.applicationId) {
-      push("/");
-    }
-  }, [applicationDetails]);
+  // useEffect(() => {
+  //   if (!applicationDetails.applicationId) {
+  //     push("/");
+  //   }
+  // }, [applicationDetails]);
 
   return (
     <>
