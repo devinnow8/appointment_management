@@ -72,6 +72,7 @@ export default () => {
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
   const [updatedMembers, setUpdatedMembers] = useState([]);
 
+  console.log(applicationDetails, "applicationDetails12344", selectedDate);
   const totalAmount = serviceList.reduce((acc, obj) => {
     if (obj.per_person) return acc + obj.price * memberDetails.length;
     else return acc + obj.price;
@@ -139,7 +140,12 @@ export default () => {
       selectedCenterTemp = newCenterList[0];
     }
     setSelectedCenter(selectedCenterTemp);
-  }, [centerList, JSON.stringify(appointmentDetails)]);
+  }, [
+    centerList,
+    JSON.stringify(appointmentDetails),
+    applicationDetails.appointmentId,
+    window?.location?.search,
+  ]);
 
   useEffect(() => {
     if (applicationDetails.category !== "Visa") {
@@ -215,6 +221,7 @@ export default () => {
                 pathname: "/",
               });
             } else {
+              // setSelectedDate("");
               const tempArray = [];
               tempArray.push(success.data);
               dispatch(applicationDetailsFetchMemberSuccess(tempArray));
