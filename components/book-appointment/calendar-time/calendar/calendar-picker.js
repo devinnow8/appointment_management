@@ -106,7 +106,10 @@ const CalendarPicker = ({
   var nextMonth = moment.addRealMonth(moment());
 
   let defaultMonth = new Date();
-  if (applicationDetails.appointmentId) {
+  if(window.location?.search?.includes("appointmentId")) {
+    defaultMonth = new Date(applicationDetails.appointmentDate);
+  }
+  else if (applicationDetails.appointmentId) {
     defaultMonth = new Date(applicationDetails.appointmentDate);
   } else if (appointmentDetails?.applicantAppointment) {
     defaultMonth = new Date(appointmentDetails.applicantAppointment.date);

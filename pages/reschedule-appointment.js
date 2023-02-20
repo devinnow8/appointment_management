@@ -39,7 +39,6 @@ function RescheduleAppointment() {
         appointmentBookedDetailsRequest(
           appointmentIdParam,
           (success) => {
-            console.log(success, "success==>123");
             if (success.data.status === "Cancel") {
               push({
                 pathname: "/",
