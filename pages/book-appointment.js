@@ -510,7 +510,6 @@ export default () => {
         isAddMember={isAddMember}
         setIsAddMember={setIsAddMember}
       />
-      {}
       <DetailSection
         handleDeleteApplicant={handleDeleteApplicant}
         arrayTime={arrayTime}
