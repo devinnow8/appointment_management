@@ -35,6 +35,8 @@ export default () => {
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
+  const { details } = useSelector((state) => state.appointmentBooked);
+  console.log(details, "details=>");
   const { serviceList } = useSelector((state) => state.serviceList);
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
@@ -508,6 +510,15 @@ export default () => {
         isAddMember={isAddMember}
         setIsAddMember={setIsAddMember}
       />
+      {
+        <div>
+          {window.location?.search?.includes("appointmentId")
+            ? "Admin Reschedule"
+            : applicationDetails.appointmentId
+            ? "User Reschedule"
+            : ""}
+        </div>
+      }
       <DetailSection
         handleDeleteApplicant={handleDeleteApplicant}
         arrayTime={arrayTime}
