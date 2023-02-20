@@ -50,11 +50,11 @@ function RescheduleAppointment() {
               dispatch(applicationDetailsFetchSuccess(success.data));
             }
           },
-          // (error) => {
-          //   push({
-          //     pathname: "/",
-          //   });
-          // },
+          (error) => {
+            push({
+              pathname: "/",
+            });
+          },
         ),
       );
     }
@@ -90,11 +90,13 @@ function RescheduleAppointment() {
     );
   };
 
-  // useEffect(() => {
-  //   if (!applicationDetails.applicationId) {
-  //     push("/");
-  //   }
-  // }, [applicationDetails]);
+  useEffect(() => {
+    if(!window.location?.search?.includes("appointmentId")){
+      if(!applicationDetails.applicationId) {
+        push("/");
+      }
+    }
+  }, [applicationDetails,window.location?.search]);
 
   return (
     <>

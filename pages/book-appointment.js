@@ -35,8 +35,6 @@ export default () => {
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
-  const { details } = useSelector((state) => state.appointmentBooked);
-  console.log(details, "details=>");
   const { serviceList } = useSelector((state) => state.serviceList);
   const router = useRouter();
   const [slideToShow, setSlideToShow] = useState(0);
@@ -71,21 +69,18 @@ export default () => {
   const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
   const [isAppointmentDetail, setIsAppointmentDetail] = useState({});
   const [updatedMembers, setUpdatedMembers] = useState([]);
-
-  console.log(applicationDetails, "applicationDetails12344", selectedDate);
   const totalAmount = serviceList.reduce((acc, obj) => {
     if (obj.per_person) return acc + obj.price * memberDetails.length;
     else return acc + obj.price;
   }, 0);
 
-  // useEffect(() => {
-  //   if (
-  //     !applicationDetails.applicationId &&
-  //     !window.location?.search?.includes("appointmentId")
-  //   ) {
-  //     router.push("/");
-  //   }
-  // }, [applicationDetails]);
+  useEffect(() => {
+    if(!window.location?.search?.includes("appointmentId")){
+      if(!applicationDetails.applicationId) {
+        router.push("/");
+      }
+    }
+  }, [applicationDetails,window.location?.search]);
 
   useEffect(() => {
     let defaultSelectedCountry = "";
@@ -203,20 +198,16 @@ export default () => {
     applicantAppointment,
   ]);
 
-  console.log(applicationDetails, "applicationDetails==>");
   useEffect(() => {
     if (window.location?.search?.includes("appointmentId")) {
       const appointmentIdParam = window.location?.search
         .split("/")[0]
         .split("=")[1];
-      console.log(appointmentIdParam, "appointmentIdParam=>");
       dispatch(
         appointmentBookedDetailsRequest(
           appointmentIdParam,
           (success) => {
-            console.log(success, "success==>");
             if (success.data.status === "Cancel") {
-              console.log("In cancel");
               router.push({
                 pathname: "/",
               });
@@ -228,11 +219,11 @@ export default () => {
               setSelectedDate(new Date(success.data.appointmentDate));
             }
           },
-          // (error) => {
-          //   router.push({
-          //     pathname: "/",
-          //   });
-          // },
+          (error) => {
+            router.push({
+              pathname: "/",
+            });
+          },
         ),
       );
     }
