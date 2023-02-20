@@ -221,11 +221,11 @@ export default () => {
                 pathname: "/",
               });
             } else {
-              // setSelectedDate("");
               const tempArray = [];
               tempArray.push(success.data);
               dispatch(applicationDetailsFetchMemberSuccess(tempArray));
               dispatch(applicationDetailsFetchSuccess(success.data));
+              setSelectedDate(new Date(success.data.appointmentDate));
             }
           },
           // (error) => {
