@@ -423,8 +423,8 @@ export default () => {
       Object.keys(selectedCenter).length !== 0
     ) {
       Object.keys(selectedCenter).length > 0 &&
-        // dispatch(holidayListFetchRequest(selectedCenter?.centerId));
-        dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
+        dispatch(holidayListFetchRequest(selectedCenter?.centerId));
+      dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
     }
   }, [centerList, selectedCenter?.centerId]);
 
@@ -454,80 +454,82 @@ export default () => {
   }, [centerList, selectedCenter?.centerId, selectedDate]);
 
   useEffect(() => {
-    let filderdSlot = availableSlotList.Total.filter((item) => {
-      if (
-        Number(item.numberOfAppointments) -
-          Number(availableSlotList.Booked[item.fromTime] || 0) <=
-        memberDetails.length
-      ) {
-      } else {
-        // if (item.type === "day") {
-        //   console.log(
-        //     availableSlotList.Booked[item.fromTime],
-        //     "fromTimefromTime",
-        //   );
-        //   let day = moment(selectedDate).format("dddd");
-        //   if (item.day === day && item.centerId === selectedCenter?.centerId) {
-        //     return item;
-        //   }
-        // } else {
-        //   console.log(
-        //     availableSlotList.Booked[item.fromTime],
-        //     "fromTimefromTime 2",
-        //   );
-        //   let day = moment(selectedDate).format("DD/MM/YYYY");
-        //   if (
-        //     item.day === moment(selectedDate).format("YYYY-MM-DD") &&
-        //     item.centerId === selectedCenter?.centerId
-        //   ) {
-        //     return item;
-        //   }
-        // }
-
-        return item;
-      }
-    });
-    setArrayTime(filderdSlot);
-
-    if (filderdSlot.length) {
-      if (
-        !Object.keys(appointmentDetails).length &&
-        applicationDetails.appointmentId === undefined
-      ) {
-        setSlideToShow(0);
-      } else {
-        if (applicationDetails.appointmentId !== undefined) {
-          if (
-            moment(selectedDate).format("DD/MM/YYYY") ===
-            moment(applicationDetails.appointmentDate).format("DD/MM/YYYY")
-          ) {
-            if (filderdSlot.length > 0) {
-              const index = filderdSlot.findIndex(
-                (x) => x.fromTime === applicationDetails.appointmentTime,
-              );
-              setSlideToShow(index);
-            }
-          } else {
-            setSlideToShow(0);
-          }
+    if (Object.keys(availableSlotList).length > 0) {
+      let filderdSlot = availableSlotList?.Total?.filter((item) => {
+        if (
+          Number(item.numberOfAppointments) -
+            Number(availableSlotList.Booked[item.fromTime] || 0) <=
+          memberDetails.length
+        ) {
         } else {
-          if (Object.keys(appointmentDetails).length) {
+          // if (item.type === "day") {
+          //   console.log(
+          //     availableSlotList.Booked[item.fromTime],
+          //     "fromTimefromTime",
+          //   );
+          //   let day = moment(selectedDate).format("dddd");
+          //   if (item.day === day && item.centerId === selectedCenter?.centerId) {
+          //     return item;
+          //   }
+          // } else {
+          //   console.log(
+          //     availableSlotList.Booked[item.fromTime],
+          //     "fromTimefromTime 2",
+          //   );
+          //   let day = moment(selectedDate).format("DD/MM/YYYY");
+          //   if (
+          //     item.day === moment(selectedDate).format("YYYY-MM-DD") &&
+          //     item.centerId === selectedCenter?.centerId
+          //   ) {
+          //     return item;
+          //   }
+          // }
+
+          return item;
+        }
+      });
+      setArrayTime(filderdSlot);
+
+      if (filderdSlot?.length) {
+        if (
+          !Object.keys(appointmentDetails).length &&
+          applicationDetails.appointmentId === undefined
+        ) {
+          setSlideToShow(0);
+        } else {
+          if (applicationDetails.appointmentId !== undefined) {
             if (
               moment(selectedDate).format("DD/MM/YYYY") ===
-              moment(appointmentDetails.applicantAppointment.date).format(
-                "DD/MM/YYYY",
-              )
+              moment(applicationDetails.appointmentDate).format("DD/MM/YYYY")
             ) {
               if (filderdSlot.length > 0) {
                 const index = filderdSlot.findIndex(
-                  (x) =>
-                    x.fromTime ===
-                    appointmentDetails.applicantAppointment?.time,
+                  (x) => x.fromTime === applicationDetails.appointmentTime,
                 );
                 setSlideToShow(index);
               }
             } else {
               setSlideToShow(0);
+            }
+          } else {
+            if (Object.keys(appointmentDetails).length) {
+              if (
+                moment(selectedDate).format("DD/MM/YYYY") ===
+                moment(appointmentDetails.applicantAppointment.date).format(
+                  "DD/MM/YYYY",
+                )
+              ) {
+                if (filderdSlot.length > 0) {
+                  const index = filderdSlot.findIndex(
+                    (x) =>
+                      x.fromTime ===
+                      appointmentDetails.applicantAppointment?.time,
+                  );
+                  setSlideToShow(index);
+                }
+              } else {
+                setSlideToShow(0);
+              }
             }
           }
         }
