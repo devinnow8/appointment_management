@@ -9,3 +9,4 @@ export * from "./cancel-appointment";
 export * from "./appointment-booked";
 export * from "./service-list";
 export * from "./order-confirmation";
+export * from "./available-slot";

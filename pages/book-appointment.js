@@ -11,6 +11,7 @@ import {
 import { centerListFetchRequest } from "../redux/reducer/center-list";
 import { holidayListFetchRequest } from "../redux/reducer/holiday-list";
 import { appointmentSlotListFetchRequest } from "../redux/reducer/appointment-slot";
+import { availableSlotListFetchRequest } from "../redux/reducer/available-slot";
 import {
   applicationDetailsFetchRequest,
   applicationDetailsFetchMemberSuccess,
@@ -32,6 +33,7 @@ export default () => {
   const { appointmentSlotList, isLoadingSlot } = useSelector(
     (state) => state.appointmentSlotList,
   );
+  const { availableSlotList } = useSelector((state) => state.availableSlotList);
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
@@ -75,12 +77,12 @@ export default () => {
   }, 0);
 
   useEffect(() => {
-    if(!window.location?.search?.includes("appointmentId")){
-      if(!applicationDetails.applicationId) {
+    if (!window.location?.search?.includes("appointmentId")) {
+      if (!applicationDetails.applicationId) {
         router.push("/");
       }
     }
-  }, [applicationDetails,window.location?.search]);
+  }, [applicationDetails, window.location?.search]);
 
   useEffect(() => {
     let defaultSelectedCountry = "";
@@ -421,8 +423,8 @@ export default () => {
       Object.keys(selectedCenter).length !== 0
     ) {
       Object.keys(selectedCenter).length > 0 &&
-        dispatch(holidayListFetchRequest(selectedCenter?.centerId));
-      dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
+        // dispatch(holidayListFetchRequest(selectedCenter?.centerId));
+        dispatch(appointmentSlotListFetchRequest(selectedCenter?.centerId));
     }
   }, [centerList, selectedCenter?.centerId]);
 
@@ -440,20 +442,53 @@ export default () => {
   }, [selectedCenter?.centerId, applicationDetails]);
 
   useEffect(() => {
-    let filderdSlot = appointmentSlotList.filter((item) => {
-      if (item.type === "day") {
-        let day = moment(selectedDate).format("dddd");
-        if (item.day === day && item.centerId === selectedCenter?.centerId) {
-          return item;
-        }
+    if (selectedCenter !== undefined) {
+      let day = moment(selectedDate).format("dddd");
+      const details = {
+        id: selectedCenter?.centerId,
+        date: moment(selectedDate).format("YYYY-MM-DD"),
+        day: day,
+      };
+      dispatch(availableSlotListFetchRequest(details));
+    }
+  }, [centerList, selectedCenter?.centerId, selectedDate]);
+
+  useEffect(() => {
+    let filderdSlot = availableSlotList.Total.filter((item) => {
+      if (
+        Number(item.numberOfAppointments) -
+          Number(availableSlotList.Booked[item.fromTime] || 0) <=
+        memberDetails.length
+      ) {
       } else {
-        let day = moment(selectedDate).format("DD/MM/YYYY");
-        if (item.day === day && item.centerId === selectedCenter?.centerId) {
-          return item;
-        }
+        // if (item.type === "day") {
+        //   console.log(
+        //     availableSlotList.Booked[item.fromTime],
+        //     "fromTimefromTime",
+        //   );
+        //   let day = moment(selectedDate).format("dddd");
+        //   if (item.day === day && item.centerId === selectedCenter?.centerId) {
+        //     return item;
+        //   }
+        // } else {
+        //   console.log(
+        //     availableSlotList.Booked[item.fromTime],
+        //     "fromTimefromTime 2",
+        //   );
+        //   let day = moment(selectedDate).format("DD/MM/YYYY");
+        //   if (
+        //     item.day === moment(selectedDate).format("YYYY-MM-DD") &&
+        //     item.centerId === selectedCenter?.centerId
+        //   ) {
+        //     return item;
+        //   }
+        // }
+
+        return item;
       }
     });
     setArrayTime(filderdSlot);
+
     if (filderdSlot.length) {
       if (
         !Object.keys(appointmentDetails).length &&
@@ -498,7 +533,12 @@ export default () => {
         }
       }
     }
-  }, [selectedDate, selectedCenter?.centerId, appointmentSlotList]);
+  }, [
+    selectedDate,
+    selectedCenter?.centerId,
+    availableSlotList,
+    memberDetails,
+  ]);
 
   return (
     <>
