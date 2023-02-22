@@ -39,6 +39,7 @@ function RescheduleAppointment() {
         appointmentBookedDetailsRequest(
           appointmentIdParam,
           (success) => {
+            console.log(success, "success==>");
             if (success.data.status === "Cancel") {
               push({
                 pathname: "/",
@@ -91,12 +92,12 @@ function RescheduleAppointment() {
   };
 
   useEffect(() => {
-    if(!window.location?.search?.includes("appointmentId")){
-      if(!applicationDetails.applicationId) {
+    if (!window.location?.search?.includes("appointmentId")) {
+      if (!applicationDetails.applicationId) {
         push("/");
       }
     }
-  }, [applicationDetails,window.location?.search]);
+  }, [applicationDetails, window.location?.search]);
 
   return (
     <>
