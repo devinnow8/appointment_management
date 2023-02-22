@@ -36,7 +36,7 @@ input[type="number"] {
   &:hover {
     background: $primary-color;
     color: white;
-    opacity: 0.85;
+    opacity: 0.6;
     transition: 0.4s ease-in-out all;
   }
   @media (max-width: $xxLDesktop) {
@@ -55,7 +55,7 @@ input[type="number"] {
   &:hover {
     background: $primary-color;
     color: white;
-    opacity: 0.85;
+    opacity: 0.6;
     transition: 0.4s ease-in-out all;
   }
 }
@@ -71,7 +71,7 @@ input[type="number"] {
   &:hover {
     background: #787878;
     color: #fff;
-    opacity: 0.85;
+    opacity: 0.6;
     transition: 0.4s ease-in-out all;
   }
 }
