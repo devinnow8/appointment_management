@@ -1,9 +1,30 @@
 import "react-day-picker/dist/style.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useMemo } from "react";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import { DAYS_FORMAT } from "../../../../constants/index";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+
+// return [...Array(31)].reduce((result, _, index) => {
+//   let currentDateInstance = moment(currentNavigatedDate)
+//     .startOf('month')
+//     .add(index, 'days');
+//   let currentDate = currentDateInstance.format('YYYY-MM-DD');
+//   let currentDay = currentDateInstance.format('dddd');
+//   let isCurrendDayWeekend = holidayList.some(
+//     ({ day, type }) => type === 'weekend' && day === currentDay
+//   );
+//   if (isCurrendDayWeekend)
+//     return [
+//       ...result,
+//       {
+//         display: 'background',
+//         day: currentDay,
+//         date: currentDate
+//       }
+//     ];
+//   else return result;
+// }, []);
 
 const CalendarPicker = ({
   selectedDate,
@@ -15,9 +36,63 @@ const CalendarPicker = ({
 }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
   const [holidaysList, setHolidaysList] = useState([]);
+  const [weekendList, setWeekendList] = useState([]);
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
+  const [holidayListUpdate, setHolidayListUpdate] = useState([])
+
+  useEffect(() => {
+    let newHolidaylist =
+    holidayList.length > 0 &&
+    holidayList.map(item => {
+      return {
+        ...item,
+        title: item.description,
+        start: item.day,
+        end: item.day,
+        color: item.type === 'holiday' ? '#F69D9F' : '#d7d7d7'
+      };
+    });
+  if (newHolidaylist) {
+    setHolidayListUpdate(newHolidaylist);
+  }
+  }, [holidayList])
+
+  const getAllWeekendSlotsForEventsList = (
+    holidayList,
+    currentNavigatedDate
+  ) => {
+    return [...Array(31)].reduce((result, _, index) => {
+      let currentDateInstance = moment(currentNavigatedDate)
+        .startOf('month')
+        .add(index, 'days');
+        console.log(currentDateInstance, 'currentDateInstance==>');
+      let currentDate = currentDateInstance.format('YYYY-MM-DD');
+      let currentDay = currentDateInstance.format('dddd');
+      let isCurrendDayWeekend = holidayList.some(
+        ({ day, type }) => type === 'weekend' && day === currentDay
+      );
+      if (isCurrendDayWeekend)
+        return [
+          ...result,
+          {
+            display: 'background',
+            day: currentDay,
+            date: currentDate
+          }
+        ];
+      else return result;
+    }, []);
+  };
+
+  const allWeekendList = useMemo(
+    () => getAllWeekendSlotsForEventsList(holidayListUpdate, selectedDate),
+    [holidayListUpdate, selectedDate]
+  );
+
+  console.log(allWeekendList, 'allWeekendList=>',holidayListUpdate,selectedDate,weekendList);
+
   useEffect(() => {
     if (
       selectedCountry?.label !== undefined &&
@@ -41,8 +116,28 @@ const CalendarPicker = ({
         setSelectedDate("");
       }
       setHolidaysList(obtainedHoliday);
+
+      const obtainedHoliday1 = allWeekendList.map((list) => {
+        const date1 = new Date(list.date);
+        return new Date(date1.toUTCString().slice(0, -4));
+      });
+      const filteredDate1 = allWeekendList.filter((list) => {
+        const date1 = new Date(list.day);
+        const date2 = new Date(date1.toUTCString().slice(0, -4));
+        if (
+          moment(selectedDate).format("MM/DD/YYYY") ===
+          moment(date2).format("MM/DD/YYYY")
+        ) {
+          return list;
+        }
+      });
+      if (filteredDate1.length > 0) {
+        setSelectedDate("");
+      }
+      setWeekendList(obtainedHoliday1);
+
     }
-  }, [holidayList]);
+  }, [holidayList,allWeekendList]);
 
   const getSundays = (date) => {
     var d = date || new Date(),
@@ -64,7 +159,7 @@ const CalendarPicker = ({
     return sundays;
   };
   const weekends = getSundays();
-  const selectedDaysToDisable = holidaysList;
+  const selectedDaysToDisable = [...holidaysList, ...weekendList];
 
   const getModifierStyles = () => {
     return {
@@ -130,7 +225,7 @@ const CalendarPicker = ({
           },
           ...selectedDaysToDisable,
         ]}
-        modifiers={{ holidays: holidaysList }}
+        modifiers={{ holidays: holidaysList, weekend: weekendList }}
         modifiersStyles={getModifierStyles()}
         onDayClick={(day) => {
           handleSelectDate(day);
