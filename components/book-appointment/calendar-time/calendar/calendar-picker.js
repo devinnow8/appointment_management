@@ -105,22 +105,15 @@ const CalendarPicker = ({
 
   var nextMonth = moment.addRealMonth(moment());
 
-  let defaultMonth = "";
-  useEffect(() => {
-    if (window.location?.search?.includes("appointmentId")) {
-      defaultMonth = new Date(applicationDetails.appointmentDate);
-    } else if (applicationDetails.appointmentId) {
-      defaultMonth = new Date(applicationDetails.appointmentDate);
-    } else if (appointmentDetails?.applicantAppointment) {
-      defaultMonth = new Date(appointmentDetails.applicantAppointment.date);
-    } else {
-      defaultMonth = new Date();
-    }
-  }, [
-    window.location?.search,
-    applicationDetails.appointmentId,
-    appointmentDetails?.applicantAppointment,
-  ]);
+  let defaultMonth1 = "";
+  if (window.location?.search?.includes("appointmentId")) {
+    defaultMonth1 = new Date(applicationDetails.appointmentDate);
+  }
+  if (applicationDetails.appointmentId) {
+    defaultMonth1 = new Date(applicationDetails.appointmentDate);
+  } else if (appointmentDetails?.applicantAppointment) {
+    defaultMonth1 = new Date(appointmentDetails.applicantAppointment.date);
+  }
 
   return (
     <>
@@ -129,7 +122,7 @@ const CalendarPicker = ({
         max={60}
         className="calender-months"
         selected={selectedDate}
-        defaultMonth={defaultMonth}
+        defaultMonth={defaultMonth1}
         disabled={[
           { before: new Date() },
           {
