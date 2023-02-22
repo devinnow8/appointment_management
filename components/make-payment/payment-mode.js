@@ -11,6 +11,7 @@ import {
 } from "../../redux/reducer/order-conformation";
 import { appointmentDetailsFetchFailure } from "../../redux/reducer/appointment-details";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 const PaymentMode = ({ paymentType, handleType }) => {
   const { isLoading } = useSelector((state) => state.appointmentSchedule);
@@ -21,12 +22,14 @@ const PaymentMode = ({ paymentType, handleType }) => {
   );
   const { serviceList } = useSelector((state) => state.serviceList);
 
+  console.log(appointmentDetails, "appointmentDetails=>");
   const {
     applicationDetails,
     totalAmount,
     updatedMembers,
     currency,
     centerId,
+    applicantAppointment,
   } = appointmentDetails;
   const makePayment = async () => {
     const res = await initializeRazorpay();
@@ -42,6 +45,9 @@ const PaymentMode = ({ paymentType, handleType }) => {
       amount: totalAmount,
       appointment_details: updatedMembers,
       centerId: centerId,
+      date: moment(applicantAppointment?.date).format("YYYY-MM-DD"),
+      day: moment(applicantAppointment?.date).format("dddd"),
+      from_time: applicantAppointment.time,
     };
     dispatch(
       appointmentOrderRequest(obj, (success) => {
@@ -58,20 +64,24 @@ const PaymentMode = ({ paymentType, handleType }) => {
               signature: response.razorpay_signature,
             };
             dispatch(
-              confirmOrderRequest(data, (success) => {
-                if (success.status) {
-                  router.push({
-                    pathname: "/appointment-booked",
-                    query: {
-                      centreId: centerId,
-                    },
-                  });
-                  toast.success("Appointment Booked Successfully");
-                  dispatch(appointmentDetailsFetchFailure());
-                }
-              }, (error) => {
-                toast.error(error);
-              }),
+              confirmOrderRequest(
+                data,
+                (success) => {
+                  if (success.status) {
+                    router.push({
+                      pathname: "/appointment-booked",
+                      query: {
+                        centreId: centerId,
+                      },
+                    });
+                    toast.success("Appointment Booked Successfully");
+                    dispatch(appointmentDetailsFetchFailure());
+                  }
+                },
+                (error) => {
+                  toast.error(error);
+                },
+              ),
             );
           },
           prefill: {

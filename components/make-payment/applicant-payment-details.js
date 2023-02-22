@@ -43,17 +43,25 @@ const ApplicantPaymentDetails = () => {
             <p>{appointmentDetails.applicantAppointment?.time}</p>
           </div>
         </div>
-        {/* <div className="make-payment__details--flex">
-          <div className="make-payment__details--heading">
-            <h4>Application Fee</h4>
-          </div>
-          <div className="make-payment__details--value">
-            <p>
-              {appointmentDetails.applicantAppointment?.amount || "350"} /
-              member
-            </p>
-          </div>
-        </div> */}
+        {serviceList.length > 0 &&
+          serviceList.map((list) => {
+            return (
+              <>
+                <div className="make-payment__details--flex">
+                  <div className="make-payment__details--heading">
+                    <h4>{list.serviceName}</h4>
+                  </div>
+                  <div className="make-payment__details--value">
+                    <p>
+                      {list.per_person === true
+                        ? `${list.price} / Applicant`
+                        : list.price}
+                    </p>
+                  </div>
+                </div>
+              </>
+            );
+          })}
         <div className="make-payment__details--flex total-fee">
           <div className="make-payment__details--heading">
             <h4>Total Fee</h4>

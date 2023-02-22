@@ -6,6 +6,9 @@ export const appointmentOrderRequest = (details) => {
     currency: details.currency,
     amount: details.amount,
     appointment_details: details.appointment_details,
+    date: details.date,
+    day: details.day,
+    from_time: details.from_time,
   };
   const { path } = config.appointmentOrder;
   return postDataApi({

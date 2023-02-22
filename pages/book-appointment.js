@@ -23,6 +23,7 @@ import { rescheduleAppointmentFetchRequest } from "../redux/reducer/reschedule-a
 import { serviceListFetchRequest } from "../redux/reducer/service-list";
 import { appointmentScheduleFetchRequest } from "../redux/reducer/appointment";
 import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
+import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
 
 export default () => {
   const dispatch = useDispatch();
@@ -398,6 +399,7 @@ export default () => {
         updatedMembers,
         (success) => {
           router.push("/appointment-booked");
+          dispatch(appointmentDetailsFetchFailure());
         },
         (error) => {
           toast.error("Something Went Wrong");

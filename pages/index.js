@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import ApplicationForm from "../components/home/application-form";
 import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
 import { arrayTabs } from "../constants";
+import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -143,6 +144,10 @@ export default function Home() {
       setSelectedService(item);
     }
   }, [categoryServiceList]);
+
+  useEffect(() => {
+    dispatch(appointmentDetailsFetchFailure());
+  }, []);
 
   return (
     <>
