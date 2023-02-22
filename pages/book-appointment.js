@@ -156,6 +156,7 @@ export default () => {
           center_id: selectedCenter?.centerId,
           appointment_time:
             applicantAppointment !== undefined && applicantAppointment?.time,
+          appointment_day: moment(selectedDate).format("dddd"),
           applicant_fullname: member.name,
           category: member.category,
           service_type: member.category,
@@ -182,6 +183,7 @@ export default () => {
           center_id: selectedCenter?.centerId,
           appointment_time:
             applicantAppointment !== undefined && applicantAppointment?.time,
+          appointment_day: moment(selectedDate).format("dddd"),
           applicant_fullname: member.name,
           category: member.category,
           service_type: member.category,
@@ -398,7 +400,12 @@ export default () => {
       appointmentScheduleFetchRequest(
         updatedMembers,
         (success) => {
-          router.push("/appointment-booked");
+          router.push({
+            pathname: "/appointment-booked",
+            query: {
+              centreId: selectedCenter?.centerId,
+            },
+          });
           dispatch(appointmentDetailsFetchFailure());
         },
         (error) => {
