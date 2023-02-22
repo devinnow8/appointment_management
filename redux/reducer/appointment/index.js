@@ -24,7 +24,7 @@ export const appointmentScheduleSlice = createSlice({
       state.isLoading = false;
     },
     appointmentScheduleFetchFailure: (state) => {
-      state.appointment = [];
+      state.appointment = {};
       state.isLoading = false;
     },
   },

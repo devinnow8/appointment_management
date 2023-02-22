@@ -14,6 +14,7 @@ import ApplicationForm from "../components/home/application-form";
 import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-booked";
 import { arrayTabs } from "../constants";
 import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
+import { appointmentScheduleFetchFailure } from "../redux/reducer/appointment";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -59,7 +60,9 @@ export default function Home() {
               tempArray.push(success.data);
               dispatch(applicationDetailsFetchMemberSuccess(tempArray));
               dispatch(applicationDetailsFetchSuccess(success.data));
-              if (success.data.appointmentId) {
+              if (success.data.status === "Cancel") {
+                toast.error("This application is Cancelled");
+              } else if (success.data.appointmentId) {
                 router.push({
                   pathname: "/reschedule-appointment",
                 });
@@ -159,6 +162,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(appointmentDetailsFetchFailure());
+    dispatch(appointmentScheduleFetchFailure());
   }, []);
 
   return (

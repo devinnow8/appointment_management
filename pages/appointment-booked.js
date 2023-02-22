@@ -55,7 +55,11 @@ function AppointmentBooked() {
     window.onpopstate = function () {
       window.history.pushState(null, "", window.location.href);
     };
-  }, [confirmOrder.appointment_id, applicationDetails.appointmentId]);
+  }, [
+    confirmOrder.appointment_id,
+    applicationDetails.appointmentId,
+    appointment.appointment_id,
+  ]);
 
   useEffect(() => {
     if (!applicationDetails.applicationId) {
