@@ -50,49 +50,55 @@ const PaymentMode = ({ paymentType, handleType }) => {
       from_time: applicantAppointment.time,
     };
     dispatch(
-      appointmentOrderRequest(obj, (success) => {
-        var options = {
-          key: "rzp_test_bE836NuX2MOT7e", // Enter the Key ID generated from the Dashboard
-          name: applicationDetails.name,
-          currency: serviceList[0]?.currency_type,
-          amount: totalAmount,
-          order_id: success?.data?.order_id,
-          handler: function (response) {
-            let data = {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              signature: response.razorpay_signature,
-            };
-            dispatch(
-              confirmOrderRequest(
-                data,
-                (success) => {
-                  if (success.status) {
-                    router.push({
-                      pathname: "/appointment-booked",
-                      query: {
-                        centreId: centerId,
-                      },
-                    });
-                    toast.success("Appointment Booked Successfully");
-                    dispatch(appointmentDetailsFetchFailure());
-                  }
-                },
-                (error) => {
-                  toast.error(error);
-                },
-              ),
-            );
-          },
-          prefill: {
+      appointmentOrderRequest(
+        obj,
+        (success) => {
+          var options = {
+            key: "rzp_test_bE836NuX2MOT7e", // Enter the Key ID generated from the Dashboard
             name: applicationDetails.name,
-            email: applicationDetails.email,
-            contact: applicationDetails.phone_number,
-          },
-        };
-        const paymentObject = new window.Razorpay(options);
-        paymentObject.open();
-      }),
+            currency: serviceList[0]?.currency_type,
+            amount: totalAmount,
+            order_id: success?.data?.order_id,
+            handler: function (response) {
+              let data = {
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                signature: response.razorpay_signature,
+              };
+              dispatch(
+                confirmOrderRequest(
+                  data,
+                  (success) => {
+                    if (success.status) {
+                      router.push({
+                        pathname: "/appointment-booked",
+                        query: {
+                          centreId: centerId,
+                        },
+                      });
+                      toast.success("Appointment Booked Successfully");
+                      dispatch(appointmentDetailsFetchFailure());
+                    }
+                  },
+                  (error) => {
+                    toast.error(error);
+                  },
+                ),
+              );
+            },
+            prefill: {
+              name: applicationDetails.name,
+              email: applicationDetails.email,
+              contact: applicationDetails.phone_number,
+            },
+          };
+          const paymentObject = new window.Razorpay(options);
+          paymentObject.open();
+        },
+        (error) => {
+          toast.error(error);
+        },
+      ),
     );
   };
   const initializeRazorpay = () => {

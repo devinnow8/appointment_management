@@ -11,9 +11,9 @@ export const orderControllerSlice = createSlice({
   reducers: {
     appointmentOrderRequest: {
       reducer: (state) => {},
-      prepare: (details, success) => {
+      prepare: (details, success, error) => {
         return {
-          payload: { details, success },
+          payload: { details, success, error },
         };
       },
     },

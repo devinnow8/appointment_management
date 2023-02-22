@@ -22,6 +22,7 @@ export function* appointmentOrderRequest(action) {
       yield put(appointmentOrderFetchFailure());
     }
   } catch (e) {
+    action.payload.error(e.message);
     yield put(appointmentOrderFetchFailure());
   }
 }
