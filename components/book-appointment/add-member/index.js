@@ -13,6 +13,7 @@ import {
 import Select from "react-select";
 import { idType, countries } from "../../../constants";
 import Loader from "../../loader";
+import { useSelector } from "react-redux";
 
 const AddMember = ({
   handleAddMember,
@@ -21,6 +22,10 @@ const AddMember = ({
   isAddMember,
   isLoader,
 }) => {
+  const { applicationDetails, memberDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
+
   const formik = useFormik({
     initialValues: {
       name: details.name,
@@ -31,9 +36,19 @@ const AddMember = ({
       email: "",
     },
     onSubmit: (values, onSubmitProps) => {
-      handleAddMember(values);
-      onSubmitProps.resetForm();
-      //   setIsAddMember(false);
+      if (
+        !(memberDetails.length === 5) &&
+        !(applicationDetails.country !== values.nationality.label) &&
+        !(
+          memberDetails.filter((x) => x.applicationId === values.id_number)
+            .length > 0
+        )
+      ) {
+        handleAddMember(values);
+        onSubmitProps.resetForm();
+      } else {
+        handleAddMember(values);
+      }
     },
     validate: (values, props) => {
       const errors = {};
