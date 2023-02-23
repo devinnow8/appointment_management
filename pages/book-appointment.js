@@ -465,9 +465,17 @@ export default () => {
   useEffect(() => {
     if (Object.keys(availableSlotList).length > 0) {
       let filderdSlot = availableSlotList?.Total?.filter((item) => {
+        console.log(
+          "Total Appointments ==>",
+          Number(item.numberOfAppointments),
+          "Booked Appointments ==>",
+          Number(availableSlotList.Booked[item.fromTime]),
+          "Total Members ==>",
+          memberDetails.length,
+        );
         if (
           Number(item.numberOfAppointments) -
-            Number(availableSlotList.Booked[item.fromTime] || 0) <=
+            Number(availableSlotList.Booked[item.fromTime] || 0) <
           memberDetails.length
         ) {
         } else {
