@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Row } from "reactstrap";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 function Applicants({ handleDeleteApplicant }) {
   const { memberDetails, applicationDetails } = useSelector(
@@ -17,7 +18,7 @@ function Applicants({ handleDeleteApplicant }) {
               Reschedule Appointment
             </h2>
             <span className="date-time">
-              {applicationDetails?.appointmentDate}{" "}
+              {moment(applicationDetails?.appointmentDate).format("DD/MM/YYYY")}{" "}
               {applicationDetails?.appointmentTime}{" "}
               {applicationDetails?.center?.timeZone}
             </span>
