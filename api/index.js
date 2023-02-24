@@ -3,7 +3,7 @@ import axios from "axios";
 import { store } from "../redux/store";
 // const NEXT_APP_BASE_URL = 'https://ois-be.azurewebsites.net/admin/';
 // const NEXT_APP_BASE_URL = "https://f469-103-68-20-110.in.ngrok.io/user/";
-const NEXT_APP_BASE_URL = "https://in8apps.in:8443/user/";
+const NEXT_APP_BASE_URL = "https://in8apps.in:8444/user/";
 const customAxios = axios.create({
   baseURL: `${NEXT_APP_BASE_URL}`,
   headers: {
