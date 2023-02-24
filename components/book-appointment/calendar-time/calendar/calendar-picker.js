@@ -1,9 +1,10 @@
 import "react-day-picker/dist/style.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { LocaleUtils, DayPicker } from "react-day-picker";
 import { DAYS_FORMAT } from "../../../../constants/index";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import moment from "moment";
+import { addMonths } from "date-fns";
 
 const CalendarPicker = ({
   selectedDate,
@@ -14,10 +15,66 @@ const CalendarPicker = ({
   applicationDetails,
 }) => {
   const { holidayList } = useSelector((state) => state.holidayList);
-  const [holidaysList, setHolidaysList] = useState([]);
   const { appointmentDetails } = useSelector(
     (state) => state.appointmentDetails,
   );
+  const nextMonth1 = addMonths(new Date(), 0);
+  const [holidaysList, setHolidaysList] = useState([]);
+  const [weekendList, setWeekendList] = useState([]);
+  const [holidayListUpdate, setHolidayListUpdate] = useState([]);
+  const [month, setMonth] = useState(nextMonth1);
+
+  useEffect(() => {
+    let newHolidaylist =
+      holidayList.length > 0 &&
+      holidayList.map((item) => {
+        return {
+          ...item,
+          title: item.description,
+          start: item.day,
+          end: item.day,
+          color: item.type === "holiday" ? "#F69D9F" : "#d7d7d7",
+        };
+      });
+    if (newHolidaylist) {
+      setHolidayListUpdate(newHolidaylist);
+    } else {
+      setHolidayListUpdate([]);
+    }
+  }, [holidayList]);
+
+  const getAllWeekendSlotsForEventsList = (
+    holidayList,
+    currentNavigatedDate,
+  ) => {
+    return [...Array(31)].reduce((result, _, index) => {
+      let currentDateInstance = moment(currentNavigatedDate)
+        .startOf("month")
+        .add(index, "days");
+      console.log(currentDateInstance, "currentDateInstance==>");
+      let currentDate = currentDateInstance.format("YYYY-MM-DD");
+      let currentDay = currentDateInstance.format("dddd");
+      let isCurrendDayWeekend = holidayList.some(
+        ({ day, type }) => type === "weekend" && day === currentDay,
+      );
+      if (isCurrendDayWeekend)
+        return [
+          ...result,
+          {
+            display: "background",
+            day: currentDay,
+            date: currentDate,
+          },
+        ];
+      else return result;
+    }, []);
+  };
+
+  const allWeekendList = useMemo(
+    () => getAllWeekendSlotsForEventsList(holidayListUpdate, month),
+    [holidayListUpdate, month],
+  );
+
   useEffect(() => {
     if (
       selectedCountry?.label !== undefined &&
@@ -44,27 +101,28 @@ const CalendarPicker = ({
     }
   }, [holidayList]);
 
-  const getSundays = (date) => {
-    var d = date || new Date(),
-      month = d.getMonth(),
-      sundays = [];
-
-    d.setDate(1);
-
-    // Get the first Sunday in the month
-    while (d.getDay() !== 0) {
-      d.setDate(d.getDate() + 1);
+  useEffect(() => {
+    const obtainedHoliday1 = allWeekendList.map((list) => {
+      const date1 = new Date(list.date);
+      return new Date(date1.toUTCString().slice(0, -4));
+    });
+    const filteredDate1 = allWeekendList.filter((list) => {
+      const date1 = new Date(list.day);
+      const date2 = new Date(date1.toUTCString().slice(0, -4));
+      if (
+        moment(selectedDate).format("MM/DD/YYYY") ===
+        moment(date2).format("MM/DD/YYYY")
+      ) {
+        return list;
+      }
+    });
+    if (filteredDate1.length > 0) {
+      setSelectedDate("");
     }
-    // Get all the other Sundays in the month
-    while (d.getMonth() === month) {
-      sundays.push(new Date(d.getTime()));
-      d.setDate(d.getDate() + 7);
-    }
+    setWeekendList(obtainedHoliday1);
+  }, [allWeekendList]);
 
-    return sundays;
-  };
-  const weekends = getSundays();
-  const selectedDaysToDisable = holidaysList;
+  const selectedDaysToDisable = [...holidaysList, ...weekendList];
 
   const getModifierStyles = () => {
     return {
@@ -115,6 +173,15 @@ const CalendarPicker = ({
     defaultMonth1 = new Date(appointmentDetails.applicantAppointment.date);
   }
 
+  // useEffect(() => {
+  //   let date = new Date();
+  //   if (month.getMonth() === date.getMonth()) {
+  //     setSelectedDate(new Date());
+  //   } else {
+  //     setSelectedDate(month);
+  //   }
+  // }, [month]);
+
   return (
     <>
       <DayPicker
@@ -139,6 +206,7 @@ const CalendarPicker = ({
           ...LocaleUtils,
           formatWeekdayShort: getFormattedDayTitle,
         }}
+        onMonthChange={setMonth}
       />
     </>
   );
