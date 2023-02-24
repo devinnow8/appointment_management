@@ -48,7 +48,10 @@ const Calendar = ({
     const filteredCenterArray = centerList.filter(
       (centre) => selectedCountry.label === centre?.country,
     );
-    newCenterList.current = filteredCenterArray.map((centre) => {
+    const filteredArray = filteredCenterArray.filter(
+      (item) => item.isEnable === true || item.isEnable === null,
+    );
+    newCenterList.current = filteredArray.map((centre) => {
       return {
         ...centre,
         value: centre?.centerId,
