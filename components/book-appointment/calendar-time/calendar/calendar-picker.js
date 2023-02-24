@@ -96,6 +96,8 @@ const CalendarPicker = ({
       });
       if (filteredDate.length > 0) {
         setSelectedDate("");
+      } else {
+        setSelectedDate(new Date());
       }
       setHolidaysList(obtainedHoliday);
     }
@@ -107,7 +109,7 @@ const CalendarPicker = ({
       return new Date(date1.toUTCString().slice(0, -4));
     });
     const filteredDate1 = allWeekendList.filter((list) => {
-      const date1 = new Date(list.day);
+      const date1 = new Date(list.date);
       const date2 = new Date(date1.toUTCString().slice(0, -4));
       if (
         moment(selectedDate).format("MM/DD/YYYY") ===
@@ -118,6 +120,8 @@ const CalendarPicker = ({
     });
     if (filteredDate1.length > 0) {
       setSelectedDate("");
+    } else {
+      setSelectedDate(new Date());
     }
     setWeekendList(obtainedHoliday1);
   }, [allWeekendList]);
