@@ -714,6 +714,10 @@
             background-color: #ffafaf;
             border: none;
           }
+          &.weekend {
+            background-color: rgb(215, 215, 215);
+            border: none;
+          }
         }
         .status {
           @extend .calender-status__title;

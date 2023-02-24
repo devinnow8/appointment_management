@@ -171,6 +171,10 @@ const Calendar = ({
               <div className="box selected"></div>
               <p className="status">Selected</p>
             </div>
+            <div className="calender-status__box">
+              <div className="box weekend"></div>
+              <p className="status">Weekend</p>
+            </div>
           </div>
         </Col>
         <Col
