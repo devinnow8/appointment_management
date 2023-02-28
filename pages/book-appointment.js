@@ -376,12 +376,15 @@ export default () => {
     });
   };
 
+  console.log(applicationDetails, "applicationDetails=>");
   const handleRescheduleAppointment = () => {
     const details = {
       date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
       time: applicantAppointment?.time,
-      centerId: selectedCenter?.centerId,
       appointmentId: applicationDetails.appointmentId,
+      updated_by: applicationDetails.updated_date,
+      role: "",
+      email: applicationDetails.email,
     };
     dispatch(
       rescheduleAppointmentFetchRequest(details, (success) => {

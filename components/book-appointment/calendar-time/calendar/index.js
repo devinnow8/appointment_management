@@ -51,6 +51,7 @@ const Calendar = ({
     const filteredArray = filteredCenterArray.filter(
       (item) => item.isEnable === true || item.isEnable === null,
     );
+    console.log(filteredArray, "filteredArray==>");
     newCenterList.current = filteredArray.map((centre) => {
       return {
         ...centre,
