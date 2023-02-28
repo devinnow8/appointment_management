@@ -3,12 +3,9 @@ import { putDataApi } from "../ApiCaller";
 
 export const rescheduldeAppointment = (details) => {
   const request = Config(details).rescheduldeAppointment;
-  const dateTime = {
-    date: details.date,
-    time: details.time,
-  };
+  const { appointmentId, ...data } = details;
   return putDataApi({
     path: request.path,
-    data: dateTime,
+    data,
   });
 };

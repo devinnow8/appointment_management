@@ -13,9 +13,16 @@ function CancelModal({ isCancel, setIsCancel }) {
   );
 
   const handleCancel = () => {
+    // const details = {
+    //   centerId: applicationDetails?.center?.centerId,
+    //   appointmentId: applicationDetails?.appointmentId,
+    // };
     const details = {
-      centerId: applicationDetails?.center?.centerId,
+      status: "Cancel",
       appointmentId: applicationDetails?.appointmentId,
+      updated_by: applicationDetails?.updated_date,
+      role: "",
+      email: applicationDetails?.email,
     };
     dispatch(
       cancelAppointmentFetchRequest(details, (success) => {
