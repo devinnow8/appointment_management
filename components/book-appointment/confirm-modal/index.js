@@ -76,14 +76,14 @@ function ConfirmModal({
           ) : (
             <div
               className={
-                applicationDetails.category === "Visa"
+                applicationDetails.category.toLowerCase().includes("visa")
                   ? "confirm-modal__applicant--info visa-case"
-                  : applicationDetails.category !== "Visa"
+                  : !applicationDetails.category.toLowerCase().includes("visa")
                   ? "confirm-modal__applicant--info other-case"
                   : "confirm-modal__applicant--info"
               }
             >
-              {applicationDetails.category === "Visa" ? (
+              {applicationDetails.category.toLowerCase().includes("visa") ? (
                 <ApplicantVisa applicantDetail={applicantDetail} />
               ) : (
                 <ApplicantOthers applicantDetail={applicantDetail} />

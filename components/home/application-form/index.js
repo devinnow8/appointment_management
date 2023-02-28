@@ -73,7 +73,7 @@ function ApplicationForm({
                   </FormGroup>
                   <Row className="anim-row">
                     {!selectedService?.label ||
-                    selectedService?.label?.toLowerCase() === "visa" ? (
+                    selectedService?.label?.toLowerCase().includes("visa") ? (
                       <Visa
                         handleContinue={handleContinue}
                         isLoader={isLoader}

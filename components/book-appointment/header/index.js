@@ -23,7 +23,7 @@ const index = ({ handleAddMember, isLoader, isAddMember, setIsAddMember }) => {
           </Col>
           <Col md={11} lg={11} xl={11}>
             <div className="inner-header__member">
-              {applicationDetails.category === "Visa" ? (
+              {applicationDetails.category.toLowerCase().includes("visa") ? (
                 <Visa handleAddMember={handleAddMember} />
               ) : (
                 <Others

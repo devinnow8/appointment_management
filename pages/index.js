@@ -32,7 +32,7 @@ export default function Home() {
     if (appointment === "New Appointment") {
       setIsLoader(true);
       const details = {};
-      if (selectedService.label === "Visa") {
+      if (selectedService.label.toLowerCase().includes("visa")) {
         details.applicationId = values.application_id;
         details.dob = values.dob;
         details.serviceType = selectedService.label;
@@ -52,7 +52,16 @@ export default function Home() {
         applicationDetailsFetchRequest(
           details,
           (success) => {
-            if (success.data.category !== selectedService.label) {
+            if (
+              !selectedService.label.toLowerCase().includes("visa") &&
+              success.data.category !== selectedService.label
+            ) {
+              setIsLoader(false);
+              toast.error("Application not found");
+            } else if (
+              selectedService.label.toLowerCase().includes("visa") &&
+              !success.data.category.toLowerCase().includes("visa")
+            ) {
               setIsLoader(false);
               toast.error("Application not found");
             } else {
@@ -152,8 +161,8 @@ export default function Home() {
 
       setCategoryServiceOptions(filteredArray);
       let defaultSelectedService = filteredArray[0];
-      const item = obtainedList.find(
-        (item) => item.label.toLowerCase() === "visa",
+      const item = obtainedList.find((item) =>
+        item.label.toLowerCase().includes("visa"),
       );
       if (item) defaultSelectedService = defaultSelectedService;
       setSelectedService(item);

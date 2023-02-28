@@ -146,7 +146,7 @@ export default () => {
   ]);
 
   useEffect(() => {
-    if (applicationDetails.category !== "Visa") {
+    if (!applicationDetails.category.toLowerCase().includes("visa")) {
       const obtainedArray = memberDetails.map((member) => {
         return {
           application_id: member.id_number,
@@ -235,7 +235,7 @@ export default () => {
   }, [window?.location?.search]);
 
   const handleAddMember = (values) => {
-    if (applicationDetails.category === "Visa") {
+    if (applicationDetails.category.toLowerCase().includes("visa")) {
       if (memberDetails.length === 5) {
         toast.warn("You can't add more than 4 members ");
       } else if (

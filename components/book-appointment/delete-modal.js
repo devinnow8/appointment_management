@@ -45,14 +45,14 @@ function DeleteModal({
             <div className="confirm-modal__applicant--flex">
               <div className="confirm-modal__applicant--data">
                 <h5 className="confirm-modal__applicant--heading">
-                  {applicationDetails.category === "Visa"
+                  {applicationDetails.category.toLowerCase().includes("visa")
                     ? "Application ID"
                     : "ID Number"}
                 </h5>
               </div>
               <div className="confirm-modal__applicant--value">
                 <p className="confirm-modal__applicant-desc">
-                  {applicationDetails.category === "Visa"
+                  {applicationDetails.category.toLowerCase().includes("visa")
                     ? deleteMember.applicationId
                     : deleteMember.id_number}
                 </p>
@@ -61,14 +61,14 @@ function DeleteModal({
             <div className="confirm-modal__applicant--flex">
               <div className="confirm-modal__applicant--data">
                 <h5 className="confirm-modal__applicant--heading">
-                  {applicationDetails.category === "Visa"
+                  {applicationDetails.category.toLowerCase().includes("visa")
                     ? "Date of Birth (dd/mm/yyyy)"
                     : "Id Type"}
                 </h5>
               </div>
               <div className="confirm-modal__applicant--value">
                 <p className="confirm-modal__applicant-desc">
-                  {applicationDetails.category === "Visa"
+                  {applicationDetails.category.toLowerCase().includes("visa")
                     ? moment(deleteMember.dob).format("DD/MM/YYYY")
                     : deleteMember.id_type}
                 </p>

@@ -23,7 +23,7 @@ const SelectDropdowns = ({
           <Select
             options={countries}
             isDisabled={
-              applicationDetails.category === "Visa" ||
+              applicationDetails.category.toLowerCase().includes("visa") ||
               !!applicationDetails.appointmentId
             }
             isSearchable={false}

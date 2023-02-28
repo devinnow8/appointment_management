@@ -53,7 +53,9 @@ function Applicants({ handleDeleteApplicant }) {
                                 applicationDetails?.applicantFullName?.slice(1)}
                             </h4>
                           )}
-                          {applicationDetails.category === "Visa" ? (
+                          {applicationDetails.category
+                            .toLowerCase()
+                            .includes("visa") ? (
                             <div className="applicant-details__card--div">
                               <p className="applicant-details__card--text">
                                 Application ID
