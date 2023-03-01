@@ -412,7 +412,7 @@ export default () => {
           dispatch(appointmentDetailsFetchFailure());
         },
         (error) => {
-          toast.error("Something Went Wrong");
+          toast.error(error);
         },
       ),
     );
