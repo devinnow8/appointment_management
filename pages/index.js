@@ -71,10 +71,20 @@ export default function Home() {
               dispatch(applicationDetailsFetchSuccess(success.data));
               if (success.data.status === "Cancel") {
                 toast.error("This application is Cancelled");
-              } else if (success.data.appointmentId) {
+                setIsLoader(false);
+              } else if (
+                success.data.appointmentId &&
+                success.data.status === "Reschedule"
+              ) {
                 router.push({
                   pathname: "/reschedule-appointment",
                 });
+              } else if (
+                success.data.appointmentId &&
+                success.data.status === "Complete"
+              ) {
+                toast.warn("This application is Completed");
+                setIsLoader(false);
               } else {
                 if (success.status === 200) {
                   router.push({
@@ -108,6 +118,9 @@ export default function Home() {
             (success) => {
               if (success.data.status === "Cancel") {
                 toast.error("This Application is Cancelled");
+                setIsLoader(false);
+              } else if (success.data.status === "Complete") {
+                toast.warn("This application is Completed");
                 setIsLoader(false);
               } else {
                 if (success.data.appointmentId) {
