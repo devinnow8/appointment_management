@@ -74,7 +74,8 @@ export default function Home() {
                 setIsLoader(false);
               } else if (
                 success.data.appointmentId &&
-                success.data.status === "Reschedule"
+                (success.data.status === "Reschedule" ||
+                  success.data.status === "Pending")
               ) {
                 router.push({
                   pathname: "/reschedule-appointment",
