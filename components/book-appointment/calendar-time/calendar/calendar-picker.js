@@ -95,7 +95,7 @@ const CalendarPicker = ({
         }
       });
       if (filteredDate.length > 0) {
-        setSelectedDate("");
+        // setSelectedDate("");
       } else {
         setSelectedDate(new Date());
       }
@@ -119,7 +119,7 @@ const CalendarPicker = ({
       }
     });
     if (filteredDate1.length > 0) {
-      setSelectedDate("");
+      // setSelectedDate("");
     } else {
       setSelectedDate(new Date());
     }
