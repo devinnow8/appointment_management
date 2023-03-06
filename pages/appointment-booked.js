@@ -24,6 +24,7 @@ function AppointmentBooked() {
     const details = {
       centreId: id,
       serviceType: applicationDetails.category,
+      serviceName: applicationDetails?.service_type,
     };
     dispatch(
       appointmentBookedChecklistRequest(details, (success) => {
@@ -86,8 +87,13 @@ function AppointmentBooked() {
                   applicationDetails.appointmentId !== undefined
                     ? applicationDetails.appointmentId
                     : confirmOrder.appointment_id
-                    ? confirmOrder.appointment_id
-                    : appointment.appointment_id
+                    ? confirmOrder.appointment_ids.map((ids) => {
+                        return ids;
+                      })
+                    : appointment.appointment_id &&
+                      appointment.appointment_id.map((ids) => {
+                        return ids;
+                      })
                 }. A copy of the appointment slip and checklist have been
                 sent to your email (${
                   applicationDetails.email

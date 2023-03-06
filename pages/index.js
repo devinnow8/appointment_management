@@ -163,16 +163,8 @@ export default function Home() {
         };
       });
       const filteredArray = obtainedList.filter((item) => {
-        console.log(item, "item==>");
         return item.isEnable === true;
       });
-      console.log(
-        categoryServiceList,
-        "categoryServiceList==>",
-        filteredArray,
-        obtainedList,
-      );
-
       setCategoryServiceOptions(filteredArray);
       let defaultSelectedService = filteredArray[0];
       const item = obtainedList.find((item) =>

@@ -77,7 +77,8 @@ function RescheduleAppointment() {
   const printDocument = (id) => {
     const details = {
       centreId: id,
-      serviceType: applicationDetails.category,
+      serviceType: applicationDetails?.category,
+      serviceName: applicationDetails?.serviceType,
     };
     dispatch(
       appointmentBookedChecklistRequest(details, (success) => {
