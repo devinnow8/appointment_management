@@ -51,7 +51,6 @@ const CalendarPicker = ({
       let currentDateInstance = moment(currentNavigatedDate)
         .startOf("month")
         .add(index, "days");
-      console.log(currentDateInstance, "currentDateInstance==>");
       let currentDate = currentDateInstance.format("YYYY-MM-DD");
       let currentDay = currentDateInstance.format("dddd");
       let isCurrendDayWeekend = holidayList.some(
