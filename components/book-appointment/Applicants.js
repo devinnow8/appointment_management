@@ -34,7 +34,13 @@ function Applicants({ handleDeleteApplicant }) {
                   <>
                     <div
                       className={`applicant-details__card me-0 me-sm-3 ${
-                        data?.name?.length < 15 ? "width15" : "width-greater"
+                        data?.name
+                          ? data?.name?.length < 15
+                            ? "width15"
+                            : "width-greater"
+                          : applicationDetails?.applicantFullName?.length < 15
+                          ? "width15"
+                          : "width-greater"
                       }`}
                       key={index}
                     >

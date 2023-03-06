@@ -376,7 +376,6 @@ export default () => {
     });
   };
 
-  console.log(applicationDetails, "applicationDetails=>");
   const handleRescheduleAppointment = () => {
     const details = {
       date: moment(applicantAppointment.date).format("YYYY-MM-DD"),
@@ -468,14 +467,6 @@ export default () => {
   useEffect(() => {
     if (Object.keys(availableSlotList).length > 0) {
       let filderdSlot = availableSlotList?.Total?.filter((item) => {
-        console.log(
-          "Total Appointments ==>",
-          Number(item.numberOfAppointments),
-          "Booked Appointments ==>",
-          Number(availableSlotList.Booked[item.fromTime]),
-          "Total Members ==>",
-          memberDetails.length,
-        );
         if (
           Number(item.numberOfAppointments) -
             Number(availableSlotList.Booked[item.fromTime] || 0) <
