@@ -24,8 +24,10 @@ function AppointmentBooked() {
     const details = {
       centreId: id,
       serviceType: applicationDetails.category,
-      serviceName: applicationDetails?.service_type,
     };
+    if (applicationDetails.category.toLowerCase().includes("visa")) {
+      details.serviceName = applicationDetails?.service_type;
+    }
     dispatch(
       appointmentBookedChecklistRequest(details, (success) => {
         const file = new Blob([success.data], { type: "application/pdf" });
