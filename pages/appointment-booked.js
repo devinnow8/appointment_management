@@ -90,10 +90,11 @@ function AppointmentBooked() {
                     ? confirmOrder.appointment_ids.map((ids) => {
                         return ids;
                       })
-                    : appointment.appointment_id &&
-                      appointment.appointment_id.map((ids) => {
+                    : appointment?.appointment_id
+                    ? appointment?.appointment_id.map((ids) => {
                         return ids;
                       })
+                    : ""
                 }. A copy of the appointment slip and checklist have been
                 sent to your email (${
                   applicationDetails.email
