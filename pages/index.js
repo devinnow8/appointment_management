@@ -15,6 +15,7 @@ import { appointmentBookedDetailsRequest } from "../redux/reducer/appointment-bo
 import { arrayTabs } from "../constants";
 import { appointmentDetailsFetchFailure } from "../redux/reducer/appointment-details";
 import { appointmentScheduleFetchFailure } from "../redux/reducer/appointment";
+import { confirmOrderFetchFailure } from "../redux/reducer/order-conformation";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -178,6 +179,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(appointmentDetailsFetchFailure());
     dispatch(appointmentScheduleFetchFailure());
+    dispatch(confirmOrderFetchFailure());
   }, []);
 
   return (
