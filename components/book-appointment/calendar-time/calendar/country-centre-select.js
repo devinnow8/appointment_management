@@ -66,7 +66,12 @@ const SelectDropdowns = ({
         <label htmlFor="" className="service-label p-0">
           Service
         </label>
-        <p className="service-name mb-0">{applicationDetails.category}</p>
+        <p className="service-name mb-0">
+          {applicationDetails.category}{" "}
+          {!applicationDetails.appointmentId
+            ? `(${applicationDetails.service_type})`
+            : `(${applicationDetails.serviceType})`}
+        </p>
       </div>
     </div>
   );
