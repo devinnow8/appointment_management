@@ -13,6 +13,20 @@ const SelectDropdowns = ({
   setApplicantAppointment,
   applicationDetails,
 }) => {
+  const handleType = () => {
+    if (applicationDetails.category?.toLowerCase().includes("visa")) {
+      return (
+        <p className="service-name mb-0">
+          {applicationDetails.category}{" "}
+          {!applicationDetails.appointmentId
+            ? `(${applicationDetails.service_type})`
+            : `(${applicationDetails.serviceType})`}
+        </p>
+      );
+    } else {
+      return <p className="service-name mb-0">{applicationDetails.category}</p>;
+    }
+  };
   return (
     <div className="appointment-calender__center">
       <div className="appointment-calender__center--country">
@@ -66,12 +80,7 @@ const SelectDropdowns = ({
         <label htmlFor="" className="service-label p-0">
           Service
         </label>
-        <p className="service-name mb-0">
-          {applicationDetails.category}{" "}
-          {!applicationDetails.appointmentId
-            ? `(${applicationDetails.service_type})`
-            : `(${applicationDetails.serviceType})`}
-        </p>
+        {handleType()}
       </div>
     </div>
   );
