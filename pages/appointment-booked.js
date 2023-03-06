@@ -93,7 +93,7 @@ function AppointmentBooked() {
                         return ids;
                       })
                     : appointment?.appointment_id
-                    ? appointment?.appointment_id.map((ids) => {
+                    ? appointment?.appointment_ids.map((ids) => {
                         return ids;
                       })
                     : ""
