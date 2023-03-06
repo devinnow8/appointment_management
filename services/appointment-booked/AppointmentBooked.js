@@ -6,7 +6,10 @@ export const appointmentBookedPdf = (id) => {
   return getDownloadData({ path: path(id) });
 };
 export const appointmentBookedChecklist = (details) => {
-  const { path } = config.appointmentBookedChecklist;
+  let path = config.appointmentBookedChecklist.path;
+  if (details.serviceName) {
+    path = config.appointmentTypeBookedChecklist.path;
+  }
   return getDownloadData({ path: path(details) });
 };
 export const appointmentBookedDetails = (id) => {
