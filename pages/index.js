@@ -84,7 +84,7 @@ export default function Home() {
                 success.data.appointmentId &&
                 success.data.status === "Complete"
               ) {
-                toast.warn("This application is Completed");
+                toast.warn("This application is already completed");
                 setIsLoader(false);
               } else {
                 if (success.status === 200) {
