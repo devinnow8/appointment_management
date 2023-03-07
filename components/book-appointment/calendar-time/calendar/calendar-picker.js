@@ -94,13 +94,15 @@ const CalendarPicker = ({
         }
       });
       if (filteredDate.length > 0) {
-        // setSelectedDate("");
-      } else {
-        setSelectedDate(new Date());
+        const dateUpdated = moment(selectedDate).add(1, "days");
+        setSelectedDate(dateUpdated._d);
       }
+      // else {
+      //   setSelectedDate(new Date());
+      // }
       setHolidaysList(obtainedHoliday);
     }
-  }, [holidayList]);
+  }, [holidayList, selectedCenter]);
 
   useEffect(() => {
     const obtainedHoliday1 = allWeekendList.map((list) => {
@@ -118,12 +120,14 @@ const CalendarPicker = ({
       }
     });
     if (filteredDate1.length > 0) {
-      // setSelectedDate("");
-    } else {
-      setSelectedDate(new Date());
+      const dateUpdated = moment(selectedDate).add(1, "days");
+      setSelectedDate(dateUpdated._d);
     }
+    // else {
+    //   setSelectedDate(new Date());
+    // }
     setWeekendList(obtainedHoliday1);
-  }, [allWeekendList]);
+  }, [allWeekendList, selectedCenter]);
 
   const selectedDaysToDisable = [...holidaysList, ...weekendList];
 
