@@ -154,17 +154,18 @@ export default function Home() {
     if (categoryServiceList.length > 0) {
       const obtainedList = categoryServiceList.map((service) => {
         return {
+          ...service,
           value:
             service?.categoryName.charAt(0).toUpperCase() +
             service?.categoryName.slice(1),
           label:
             service?.categoryName.charAt(0).toUpperCase() +
             service?.categoryName.slice(1),
-          isEnable: service.isEnable,
+          enable: service.enable,
         };
       });
       const filteredArray = obtainedList.filter((item) => {
-        return item.isEnable === true;
+        return item.enable === true;
       });
       setCategoryServiceOptions(filteredArray);
       let defaultSelectedService = filteredArray[0];

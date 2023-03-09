@@ -82,6 +82,7 @@ function ApplicationForm({
                       <Others
                         handleContinue={handleContinue}
                         isLoader={isLoader}
+                        selectedService={selectedService}
                       />
                     )}
                   </Row>
