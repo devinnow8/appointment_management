@@ -1,11 +1,36 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Label, Input, Button } from "reactstrap";
 import Select from "react-select";
-import { idType, countries } from "../../../constants";
+import { countries } from "../../../constants";
 import AddMember from "../add-member";
+import { useSelector } from "react-redux";
 
 const Others = ({ handleAddMember, isLoader, isAddMember, setIsAddMember }) => {
+  const { categoryServiceList } = useSelector(
+    (state) => state.categoryServiceList,
+  );
+  const { applicationDetails } = useSelector(
+    (state) => state.applicationDetails,
+  );
+  const [idType, setIdType] = useState({});
+
+  useEffect(() => {
+    if (categoryServiceList.length > 0) {
+      const selectedService = categoryServiceList.find(
+        (list) =>
+          list.categoryName === applicationDetails.category?.toLowerCase(),
+      );
+      const idTypeObtained = selectedService?.idTypes?.map((type) => {
+        return {
+          label: type.name,
+          value: type.id,
+        };
+      });
+      setIdType(idTypeObtained);
+    }
+  }, [categoryServiceList, applicationDetails]);
+
   const [details, setDetails] = useState({});
   const formik = useFormik({
     initialValues: {
