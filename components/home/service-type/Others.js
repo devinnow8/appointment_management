@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { Col, Label, Input } from "reactstrap";
 import Select from "react-select";
 import { idType, countries } from "../../../constants/index";
 import Loader from "../../loader";
 
-const Others = ({ handleContinue, isLoader }) => {
+const Others = ({ handleContinue, isLoader, selectedService }) => {
+  const [idType, setIdType] = useState({});
+
+  useEffect(() => {
+    const idTypeObtained = selectedService.idTypes.map((type) => {
+      return {
+        label: type.name,
+        value: type.id,
+      };
+    });
+    setIdType(idTypeObtained);
+  }, [selectedService]);
+
   const formik = useFormik({
     initialValues: {
       name: "",
