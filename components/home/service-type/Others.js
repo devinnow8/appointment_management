@@ -8,16 +8,6 @@ import Loader from "../../loader";
 const Others = ({ handleContinue, isLoader, selectedService }) => {
   const [idType, setIdType] = useState({});
 
-  useEffect(() => {
-    const idTypeObtained = selectedService.idTypes.map((type) => {
-      return {
-        label: type.name,
-        value: type.id,
-      };
-    });
-    setIdType(idTypeObtained);
-  }, [selectedService]);
-
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -61,6 +51,17 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
       return errors;
     },
   });
+
+  useEffect(() => {
+    formik.values.id_type = "";
+    const idTypeObtained = selectedService.idTypes.map((type) => {
+      return {
+        label: type.name,
+        value: type.id,
+      };
+    });
+    setIdType(idTypeObtained);
+  }, [selectedService]);
 
   return (
     <>
