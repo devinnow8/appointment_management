@@ -68,7 +68,16 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
         });
         setIdType(idTypeObtained);
       } else {
-        setIdType([{ label: "Passport", value: "Passport" }]);
+        const idTypeObtained = selectedService.idTypes.map((type) => {
+          return {
+            label: type.name,
+            value: type.id,
+          };
+        });
+        const idTypeObtained1 = idTypeObtained.filter(
+          (type) => type.label === "Passport",
+        );
+        setIdType(idTypeObtained1);
       }
     } else {
       formik.values.id_type = "";
