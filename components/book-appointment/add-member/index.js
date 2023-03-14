@@ -73,9 +73,7 @@ const AddMember = ({
       }
       if (!values.phone) {
         errors.phone = "Required";
-      } else if (
-        !/^[+]{1}(?:[0-9\-\(\)\/\.]\s?){6, 15}[0-9]{1}$/.test(values.phone)
-      ) {
+      } else if (!/^\+?[0-9](?:[- ]?[0-9]){6,15}$/.test(values.phone)) {
         errors.phone = "Enter correct number with country code";
       }
       return errors;
