@@ -153,14 +153,18 @@ export default function Home() {
   useEffect(() => {
     if (categoryServiceList.length > 0) {
       const obtainedList = categoryServiceList.map((service) => {
+        // return {
+        //   ...service,
+        //   value:
+        //     service?.value.charAt(0).toUpperCase() + service?.value.slice(1),
+        //   label:
+        //     service?.value.charAt(0).toUpperCase() + service?.value.slice(1),
+        //   enable: service.enable,
+        // };
         return {
           ...service,
-          value:
-            service?.categoryName.charAt(0).toUpperCase() +
-            service?.categoryName.slice(1),
-          label:
-            service?.categoryName.charAt(0).toUpperCase() +
-            service?.categoryName.slice(1),
+          value: service?.value,
+          label: service?.value,
           enable: service.enable,
         };
       });
