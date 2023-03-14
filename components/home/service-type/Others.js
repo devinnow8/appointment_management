@@ -36,6 +36,8 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
         errors.phone = "Required";
       } else if (!/^\+?[0-9](?:[- ]?[0-9]){6,15}$/.test(values.phone)) {
         errors.phone = "Enter correct number with country code";
+      } else if (!values.phone.includes("+")) {
+        errors.phone = "Enter correct number with country code";
       }
       if (values.id_number == "") {
         errors.id_number = "Required";
@@ -100,7 +102,7 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
             id="name"
             name="name"
             type="text"
-            placeholder="eg: John Doe"
+            placeholder="John Doe"
             className="appointment-form__input"
             value={formik.values.name}
             onChange={formik.handleChange}
@@ -193,7 +195,7 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
             id="email"
             name="email"
             type="text"
-            placeholder="eg: @gmail.com"
+            placeholder="@gmail.com"
             className="appointment-form__input"
             value={formik.values.email}
             onChange={formik.handleChange}
@@ -215,7 +217,7 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
             id="phone"
             name="phone"
             type="text"
-            placeholder="eg: 646454104"
+            placeholder="+91 646454104"
             className="appointment-form__input"
             value={formik.values.phone}
             onChange={formik.handleChange}
