@@ -11,7 +11,7 @@ import {
   Row,
 } from "reactstrap";
 import Select from "react-select";
-import { idType, countries } from "../../../constants";
+import { countries } from "../../../constants";
 import Loader from "../../loader";
 import { useSelector } from "react-redux";
 
@@ -21,6 +21,7 @@ const AddMember = ({
   setIsAddMember,
   isAddMember,
   isLoader,
+  idType,
 }) => {
   const { applicationDetails, memberDetails } = useSelector(
     (state) => state.applicationDetails,
