@@ -47,7 +47,7 @@ export default function Home() {
         details.id_number = values.id_number;
         details.category = selectedService.label;
         details.email = values.email;
-        details.phone_number = parseInt(values.phone);
+        details.phone_number = values.phone;
       }
       dispatch(
         applicationDetailsFetchRequest(

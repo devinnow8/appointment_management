@@ -14,24 +14,8 @@ const Others = ({ handleAddMember, isLoader, isAddMember, setIsAddMember }) => {
     (state) => state.applicationDetails,
   );
   const [idType, setIdType] = useState({});
-
-  useEffect(() => {
-    if (categoryServiceList.length > 0) {
-      const selectedService = categoryServiceList.find(
-        (list) =>
-          list.categoryName === applicationDetails.category?.toLowerCase(),
-      );
-      const idTypeObtained = selectedService?.idTypes?.map((type) => {
-        return {
-          label: type.name,
-          value: type.id,
-        };
-      });
-      setIdType(idTypeObtained);
-    }
-  }, [categoryServiceList, applicationDetails]);
-
   const [details, setDetails] = useState({});
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -62,6 +46,57 @@ const Others = ({ handleAddMember, isLoader, isAddMember, setIsAddMember }) => {
       return errors;
     },
   });
+
+  const resultService = applicationDetails.category
+    .split(" ")
+    ?.filter((item) => item.toLowerCase() === "bvn");
+
+  useEffect(() => {
+    if (
+      categoryServiceList.length > 0 &&
+      resultService &&
+      resultService.length > 0
+    ) {
+      const selectedService = categoryServiceList.find(
+        (list) =>
+          list.categoryName === applicationDetails.category?.toLowerCase(),
+      );
+      if (formik.values.nationality.label === "Nigeria") {
+        const idTypeObtained = selectedService?.idTypes?.map((type) => {
+          return {
+            label: type.name,
+            value: type.id,
+          };
+        });
+        setIdType(idTypeObtained);
+      } else {
+        const idTypeObtained = selectedService.idTypes.map((type) => {
+          return {
+            label: type.name,
+            value: type.id,
+          };
+        });
+        const idTypeObtained1 = idTypeObtained.filter(
+          (type) => type.label === "Passport",
+        );
+        setIdType(idTypeObtained1);
+      }
+    } else {
+      formik.values.id_type = "";
+      const idTypeObtained = selectedService.idTypes.map((type) => {
+        return {
+          label: type.name,
+          value: type.id,
+        };
+      });
+      setIdType(idTypeObtained);
+    }
+  }, [
+    categoryServiceList,
+    applicationDetails,
+    formik.values.nationality.label,
+  ]);
+
   return (
     <>
       <div className="me-0 me-md-3 mb-0 mb-md-3">
@@ -152,6 +187,7 @@ const Others = ({ handleAddMember, isLoader, isAddMember, setIsAddMember }) => {
             setIsAddMember={setIsAddMember}
             details={details}
             isLoader={isLoader}
+            idType={idType}
           />
         </>
       )}
