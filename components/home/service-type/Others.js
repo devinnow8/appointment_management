@@ -35,9 +35,9 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
       if (!values.phone) {
         errors.phone = "Required";
       } else if (
-        !/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9])/.test(values.phone)
+        !/^[+]{1}(?:[0-9\-\(\)\/\.]\s?){6, 15}[0-9]{1}$/.test(values.phone)
       ) {
-        errors.phone = "Invalid Phone Number";
+        errors.phone = "Enter correct number with country code";
       }
       if (values.id_number == "") {
         errors.id_number = "Required";
@@ -52,16 +52,35 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
     },
   });
 
+  const resultService = selectedService?.value
+    .split(" ")
+    ?.filter((item) => item.toLowerCase() === "bvn");
+
   useEffect(() => {
-    formik.values.id_type = "";
-    const idTypeObtained = selectedService.idTypes.map((type) => {
-      return {
-        label: type.name,
-        value: type.id,
-      };
-    });
-    setIdType(idTypeObtained);
-  }, [selectedService]);
+    if (resultService && resultService.length > 0) {
+      if (formik.values.nationality.label === "Nigeria") {
+        formik.values.id_type = "";
+        const idTypeObtained = selectedService.idTypes.map((type) => {
+          return {
+            label: type.name,
+            value: type.id,
+          };
+        });
+        setIdType(idTypeObtained);
+      } else {
+        setIdType([{ label: "Passport", value: "Passport" }]);
+      }
+    } else {
+      formik.values.id_type = "";
+      const idTypeObtained = selectedService.idTypes.map((type) => {
+        return {
+          label: type.name,
+          value: type.id,
+        };
+      });
+      setIdType(idTypeObtained);
+    }
+  }, [formik.values.nationality.label, selectedService]);
 
   return (
     <>
@@ -110,31 +129,32 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
           )}
         </div>
       </Col>
-      <Col lg={6} xl={6}>
-        <div>
-          <Label for="id_type">
-            ID Type
-            <span className="star"> *</span>
-          </Label>
-          <Select
-            options={idType}
-            className="react-select-container"
-            classNamePrefix="react-select"
-            name="id_type"
-            value={formik.values.id_type}
-            onChange={(e) => {
-              formik.setFieldValue("id_type", e);
-            }}
-            onBlur={formik.handleBlur}
-          />
-          {formik.errors.id_type && formik.touched.id_type ? (
-            <div className="error-msg">{formik.errors.id_type}</div>
-          ) : (
-            <div className="no-error-msg"></div>
-          )}
-        </div>
-      </Col>
-
+      {
+        <Col lg={6} xl={6}>
+          <div>
+            <Label for="id_type">
+              ID Type
+              <span className="star"> *</span>
+            </Label>
+            <Select
+              options={idType}
+              className="react-select-container"
+              classNamePrefix="react-select"
+              name="id_type"
+              value={formik.values.id_type}
+              onChange={(e) => {
+                formik.setFieldValue("id_type", e);
+              }}
+              onBlur={formik.handleBlur}
+            />
+            {formik.errors.id_type && formik.touched.id_type ? (
+              <div className="error-msg">{formik.errors.id_type}</div>
+            ) : (
+              <div className="no-error-msg"></div>
+            )}
+          </div>
+        </Col>
+      }
       <Col lg={6} xl={6}>
         <div>
           <Label for="id_number">
@@ -187,7 +207,7 @@ const Others = ({ handleContinue, isLoader, selectedService }) => {
           <Input
             id="phone"
             name="phone"
-            type="number"
+            type="text"
             placeholder="eg: 646454104"
             className="appointment-form__input"
             value={formik.values.phone}

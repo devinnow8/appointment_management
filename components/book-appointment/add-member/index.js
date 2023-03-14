@@ -74,10 +74,9 @@ const AddMember = ({
       if (!values.phone) {
         errors.phone = "Required";
       } else if (
-        // !/^(?:(?:\+|0{0,2})(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$/.test(values.phone)
-        !/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9])/.test(values.phone)
+        !/^[+]{1}(?:[0-9\-\(\)\/\.]\s?){6, 15}[0-9]{1}$/.test(values.phone)
       ) {
-        errors.phone = "Invalid Phone Number";
+        errors.phone = "Enter correct number with country code";
       }
       return errors;
     },
@@ -212,7 +211,7 @@ const AddMember = ({
                 <Input
                   id="phone"
                   name="phone"
-                  type="number"
+                  type="text"
                   placeholder="eg: 646454104"
                   className="member-input"
                   value={formik.values.phone}
